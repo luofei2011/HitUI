@@ -14,6 +14,8 @@
 
 5. 克隆完代码后一定要更新自己本地的`.gitignore`文件,添加如下内容
 
+>
+
     .gitignore
     application/config/config.php
     application/config/database.php
