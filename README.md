@@ -11,3 +11,9 @@
 3. 需要在项目中添加文件需要在README中更新说明文档
 
 4. 开发通用的接口后需要完善说明文档
+
+5. 克隆完代码后一定要更新自己本地的`.gitignore`文件,添加如下内容
+
+    .gitignore
+    application/config/config.php
+    application/config/database.php
