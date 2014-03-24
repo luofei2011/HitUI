@@ -41,11 +41,16 @@
             </ul>
         </div>
     </header>
+    <!--网站整体部分-->
     <div id="main" class="clearfix gap-top">
+        <!--网站左边导航部分-->
         <div id="nav-tree" class="pull-left">
         </div>
+        <!--导航部分结束-->
+        <!--右边信息处理展示部分-->
         <div id="content" class="pull-right">
         </div>
+        <!--展示部分结束-->
     </div>
     <div id="footer">
         <p class="footer-txt">Copyright &copy; 2014 哈尔滨工业大学</p>
@@ -53,5 +58,6 @@
 </div>
 </body>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/load.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.resize.js');?>"></script>
 </html>

@@ -1,0 +1,15 @@
+.gr-container {
+    padding: 0 20px 0 20px;
+}
+.gr-table {
+    width: 900px;
+}
+.gr-toolbar {
+    padding: 2px;
+    border: solid 1px #909aa6;
+    background: #E7EAEE url(../../img/toolbar.png) repeat-x 0 0;
+    border-bottom: 0 none;
+}
+.gr-table table {
+    width: 100%;
+}
