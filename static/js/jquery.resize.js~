@@ -13,27 +13,26 @@
     /*
      * 浏览器缩放后的处理函数
      * */
-    ;(function resize() {
+    function resize() {
         var bW = $('body').width(),
             bH = $('body').height(),
-            mid_L_W = $('#nav-tree').width(),
 
             navTree = $('#nav-tree'),
             content = $('#content'),
 
-            midH = bH - headerH - footerH - 2 * gap - 3, // 3px为border的修正
-            mid_R_W = bW - mid_L_W - gap - 4; // 4px为border修正
+            midH = bH - headerH - footerH - 2 * gap;
 
         $(window).off('resize', resize);
 
         // 添加延迟功能，避免浏览器缩放过程中事件的多次触发
         setTimeout(function() {
             $(window).on('resize', resize);
-        }, 30);
+        }, 50);
 
         // 这里是具体的处理事件
         navTree.height(midH);
         content.height(midH);
-        content.width(mid_R_W);
-    })();
+    }
+
+    $(window).on('resize', resize);
 });

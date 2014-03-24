@@ -28,6 +28,7 @@ body {
     line-height: 29px;
     width: 100%;
     text-align: center;
+    border-top: 1px solid #ddd;
 }
 .pull-right {
     float: right;
@@ -141,11 +142,7 @@ a.hover, .hit-button-plain:hover {
 /*框体部分*/
 #nav-tree, #content {
     border: 1px solid #ddd;
-    height: 100px;
 }
 #nav-tree {
-    width: 19%;
-}
-#content {
-    width: 80%;
+    width: 180px;
 }
