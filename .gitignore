@@ -7,3 +7,10 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+
+.gitignore
+application/config/config.php
+application/config/database.php
+*.swp
+*.swo
+*.~
