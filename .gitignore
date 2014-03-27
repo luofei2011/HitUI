@@ -1,4 +1,8 @@
 .DS_Store
+.gitignore
+
+application/config/config.php
+application/config/database.php
 
 application/cache/*
 !application/cache/index.html
