@@ -1,8 +1,4 @@
 .DS_Store
-.gitignore
-
-application/config/config.php
-application/config/database.php
 
 application/cache/*
 !application/cache/index.html
@@ -11,8 +7,6 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-<<<<<<< HEAD
-=======
 
 .gitignore
 application/config/config.php
@@ -20,4 +14,7 @@ application/config/database.php
 *.swp
 *.swo
 *.~
->>>>>>> cea87d13b7588160e0a95deccebf860d0602beef
+
+#freemen's ignore part
+tags
+freetest*
