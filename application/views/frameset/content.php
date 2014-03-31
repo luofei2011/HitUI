@@ -24,5 +24,58 @@
                 </tr>
             </table>
         </div>
+        <div class="gr-border">
+            <div class="gr-d-grid-head">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td rowspan="2">1</td>
+                        <td colspan="2" style="text-align: left;">2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+                <div class="gr-d-grid-bg"></div>
+            </div>
+            <div class="gr-d-grid-body">
+                <table>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+// 表格标题配置信息
+var table = {
+    url: '',
+    rows: 2, // 目前默认最高只支持2行
+    msg: [
+        [
+            {
+                "name": '',
+                "align": '', // 取值center,left,right
+                "multiply": '', //是否占用多行
+                "colspan": '' // 若为多行，行数为多少
+            }
+        ],
+        [
+            {
+                "name": '',
+                "align": ''
+            }
+        ]
+    ]
+};
+
+// 解析配置数据并生成表格
+hit.load(table.url, '', function() {
+});
+</script>

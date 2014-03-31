@@ -13,3 +13,32 @@
 .gr-table table {
     width: 100%;
 }
+.gr-d-grid {
+    border: 1px solid #909aa6;
+}
+.gr-d-grid-head {
+    position: relative;
+}
+.gr-d-grid-head table {
+    position: relative;
+    z-index: 9;
+    text-align: center;
+}
+.gr-d-grid-head table tr td {
+    border-right: #A5ACB5 1px solid;
+    border-bottom: 1px solid #d2d2d2;
+}
+.gr-d-grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #e7ebef url(../../img/table/header.png) repeat-x 0 0;
+    height: 100%;
+    width: 900px;
+    z-index: 1;
+}
+.gr-border {
+    border: 1px solid #999;
+    overflow: hidden;
+    position: relative;
+}
