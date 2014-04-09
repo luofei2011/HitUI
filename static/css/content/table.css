@@ -86,3 +86,9 @@
     width: 100%;
     overflow: hidden;
 }
+.gr-d-grid-row-hover {
+    background: #ecedef; 
+}
+.gr-d-grid-row-selected {
+    background: #dfe8f6;
+}

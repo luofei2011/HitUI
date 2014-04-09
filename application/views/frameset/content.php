@@ -28,6 +28,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
 <script type="text/javascript">
 // 表格标题配置信息
 var table = {

@@ -44,12 +44,15 @@ var hit = {
             html = "", i = 0, len, arr = [], tmp = {}, _table = {};
 
         html += '<div class="gr-d-grid-head">';
-        _table = this.initTable(config.widthMsg, "auto-layout");
+        _table = this.initTable(config, "auto-layout");
         html += _table.html;
 
         // 循环定义表头信息
         for (len = config.headMsg.length, i = 0; i < len; i++) {
             html += '<tr>';
+
+            if (config.hasCheckBox && !i)
+                html += this.createCheckBox(true);
 
             for(arr in config.headMsg[i]) {
 
@@ -87,11 +90,14 @@ var hit = {
             _table = {};
 
         html += '<div class="gr-d-grid-body">';
-        _table = this.initTable(config.widthMsg);
+        _table = this.initTable(config);
         html += _table.html;
 
         for(tmp in data) {
-            html += '<tr>';
+            html += '<tr class="table-row-has-event">';
+
+            if (config.hasCheckBox) 
+                html += this.createCheckBox();
 
             for (var o in data[tmp]) {
                 if (o !== 'id')
@@ -106,8 +112,8 @@ var hit = {
         oTable.html(html);
         $('.' + targetNode).append(oTable);
     },
-    initTable: function(con, css) {
-        var i = 0, w = 0, html = "";
+    initTable: function(config, css) {
+        var i = 0, w = 0, html = "", con = config.widthMsg;
 
         // 对配置信息中宽度信息进行求和，得到表格宽度
         for (len = con.length; i < len; i++)
@@ -121,6 +127,9 @@ var hit = {
 
         html += ' cellPadding=0 cellSpacing=0 border=0 style="width: ' + w + 'px;"><tr style="height: 0px;">';
 
+        if (config.hasCheckBox)
+            html += '<td style="width: 30px;"></td>';
+
         for(i = 0; i < len; i++) {
             html += '<td style="width: ' + con[i] + 'px;"></td>';
         }
@@ -130,6 +139,26 @@ var hit = {
             html: html,
             width: w
         };
+    },
+    /*
+     * 创建checkbox
+     * */
+    createCheckBox: function(isRowSpan) {
+        var str = '<td style="width: 30px;"';
+
+        if (isRowSpan)
+            str += ' rowspan=2';
+        else 
+            str += ' class="gr-d-grid-cell"';
+
+        str += '><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox"'
+
+        if (isRowSpan)
+            str += ' id="check_all"';
+
+        str += '></div></td>';
+
+        return str;
     }
 };
 
