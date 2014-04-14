@@ -13,3 +13,82 @@
 .gr-table table {
     width: 100%;
 }
+.gr-d-grid {
+    border: 1px solid #909aa6;
+}
+.gr-d-grid-head {
+    position: relative;
+}
+.gr-d-grid-head table {
+    position: relative;
+    z-index: 9;
+    text-align: center;
+}
+.gr-d-grid-head table tr td {
+    border-right: #A5ACB5 1px solid;
+    border-bottom: 1px solid #d2d2d2;
+}
+.gr-d-grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #e7ebef url(../../img/table/header.png) repeat-x 0 0;
+    height: 100%;
+    width: 900px;
+    z-index: 1;
+}
+.gr-border {
+    border: 1px solid #999;
+    position: relative;
+    overflow: auto;
+}
+.gr-d-grid-cell {
+    overflow: hidden;
+    padding: 0px;
+    border: 0;
+    border-right: #d2d2d2 1px solid;
+    border-bottom: #d2d2d2 1px solid;
+    cursor: default;
+    text-align: left;
+    overflow: hidden;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.gr-d-grid-cell-inner {
+    font-size: 9pt;
+    font-family: Tahoma, Verdana, 宋体;
+    line-height: 18px;
+    padding: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-all;
+}
+.gr-d-grid-cell-nowrap {
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+}
+.auto-layout {
+    table-layout: auto;
+}
+.gr-d-grid-view {
+    width: 100%;
+    overflow: auto;
+    height: 300px;
+}
+.gr-d-grid-rowView {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.gr-d-grid-row-hover {
+    background: #ecedef; 
+}
+.gr-d-grid-row-selected {
+    background: #dfe8f6;
+}

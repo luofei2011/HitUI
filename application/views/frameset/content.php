@@ -24,5 +24,76 @@
                 </tr>
             </table>
         </div>
+        <div class="gr-border">
+        </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
+<script type="text/javascript">
+// 表格标题配置信息
+var table = {
+    url: "<?php echo base_url('load/get_data');?>",
+    rows: 2, // 目前默认最高只支持2行
+    widthMsg: [100, 120, 100, 100, 120, 100, 150, 200], // 每列占用的宽度信息
+    hasCheckBox: true, // 没行结果是否带有单选框
+    headMsg: [
+        [
+            {
+                "name": '员工帐号',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            },
+            {
+                "name": '姓名',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            },
+            {
+                "name": '工作信息',
+                "align": 'left', // 取值center,left,right
+                "multiply": true, //是否占用多行
+                "colspan": 2 // 若为多行，行数为多少
+            },
+            {
+                "name": '创建日期',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            },
+            {
+                "name": '性别',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            },
+            {
+                "name": '学院',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            },
+            {
+                "name": '专业',
+                "align": 'center', // 取值center,left,right
+                "multiply": false, //是否占用多行
+                "colspan": 1 // 若为多行，行数为多少
+            }
+        ],
+        [
+            {
+                "name": '所属部门',
+                "align": 'left'
+            },
+            {
+                "name": '职位',
+                "align": 'left'
+            }
+        ]
+    ]
+};
+
+// 解析配置数据并生成表格
+hit.load(table, '', 'gr-border');
+</script>

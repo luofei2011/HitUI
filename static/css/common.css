@@ -13,6 +13,22 @@ body {
     border: 0;
     overflow: hidden;
 }
+table {
+    position: relative;
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.text-center {
+    text-align: center;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
 .clearfix:after{content:".";display:block;height:-1;clear:both;visibility:hidden}
 #wrapper {
     position: relative;
@@ -155,6 +171,9 @@ a:hover.hit-button {
 /*框体部分*/
 #nav-tree, #content {
     border: 1px solid #a8a8a8;
+}
+#content {
+    overflow: auto;
 }
 #nav-tree {
     width: 180px;
