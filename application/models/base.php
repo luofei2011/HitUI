@@ -1,9 +1,23 @@
 <?php
 class Base extends CI_Model {
 
+    private $tableName = "test";
+
     public function __construct() {
         parent::__construct();
         $this->db = $this->load->database('default', true);
+    }
+
+    public function filter_target($in) {
+        $this->tableName = $in['db']['t'];
+        switch($in['op']) {
+            case "update":
+                return $this->dbUpdate($in['data']);
+            case "insert":
+                break;
+            default:
+                break;
+        }
     }
 
     public function test() {
@@ -46,9 +60,12 @@ class Base extends CI_Model {
      * );
      * */
     public function dbUpdate($arr) {
-        $q = $this->formatSQL($arr->data);
-        $sql = "UPDATE $arr->table SET $q WHERE id=$arr->id";
-        return $this->dbQuery($sql, false);
+        foreach($arr as $item) {
+            $sql = "UPDATE $this->tableName SET ". $item['q'] ." WHERE id=" . $item['id'] . "";
+            $this->dbQuery($sql, false);
+        }
+
+        return "";
     }
 
     /*
