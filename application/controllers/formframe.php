@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-//main.php 为界面的入口，从之前的设置数据中读取设置。
+//formframe.php 是数据表部分。
 
-class main extends CI_Controller {
+class formframe extends CI_Controller {
 
 	//先加载数据模型（数据库）
 	public function __construct()
@@ -22,25 +22,17 @@ class main extends CI_Controller {
 		$this->load->helper('url');
 	}
 	
-	//page(index)加载ID为index的页面
+	//page(index)
 	public function page($index = 0)
 	{
-		if( ! file_exists('application/views/templates/bodyframe.php'))
+		if( ! file_exists('application/views/templates/formframe.php'))
 		{
 			show_404();
 		}
 
-		$data['title'] = ucfirst($index);
+		$data['title'] = ucfirst($context);
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/bodyframe', $data);
-		$this->load->view('templates/footer', $data);
-	}
-
-	//current page 最近生成的页面
-	//貌似无法判断最近页面是什么
-	public function currentpage($context = 'hi')
-	{
+		$this->load->view('templates/formframe', $data);
 	}
 
 }
