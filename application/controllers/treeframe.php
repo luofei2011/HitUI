@@ -23,16 +23,22 @@ class treeframe extends CI_Controller {
 	}
 	
 	//page(index)
-	public function page($index = 0)
+	public function view($state = 0)
 	{
 		if( ! file_exists('application/views/templates/treeframe.php'))
 		{
 			show_404();
 		}
 
-		$data['title'] = ucfirst($context);
+		if ($this->input->post() )
+		{
+			$data['state'] = $this->input->post('state',true)+1;
+		}else{
+			$data['state'] = ucfirst($state);
+		}
 
-		$this->load->view('templates/treeframe', $data);
+		$buffer = $this->load->view('templates/treeframe', $data, true);
+		echo $buffer;
 	}
 
 }
