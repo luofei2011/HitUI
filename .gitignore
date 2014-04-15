@@ -13,4 +13,10 @@ application/config/config.php
 application/config/database.php
 *.swp
 *.swo
+*.swn
 *.~
+
+#freemen's ignore part
+
+tags
+freetest*
