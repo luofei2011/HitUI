@@ -12,13 +12,13 @@ class treeframe extends CI_Controller {
 		$config['hostname'] = 'localhost';
 		$config['username'] = 'root'; 
 		$config['password'] = 'f';
-		$config['database'] = 'freetestDB';//应该加载设置信息库
+		$config['database'] = 'hitData';//应该加载设置信息库
 		$config['dbdriver'] = 'mysql';
 		$config['dbprefix'] = '';
 		$config['pconnect'] = TRUE;
 		$config['db_debug'] = TRUE;
 		
-		$this->load->model('freetest_model', 'ftest', $config);
+		$this->load->model('loadData', 'ldata', $config);
 		$this->load->helper('url');
 	}
 	
@@ -36,6 +36,8 @@ class treeframe extends CI_Controller {
 		}else{
 			$data['state'] = -1;
 		}
+		$data['result'] = $this->ldata->getTreeData();
+		//$data['result'] = $this->ldata->setTreeInfo();
 
 		$buffer = $this->load->view('templates/treeframe', $data, true);
 		$jsonStr['html'] = $buffer;
