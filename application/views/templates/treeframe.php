@@ -26,7 +26,7 @@
 			$tree['son'] = array();
 			foreach($tem as $item){
 				if ($item['nodeId'] != null){
-					echo "<li>father:".$item['nodeId']." and the info: ".$item['nodeInfo']."</li>";
+					echo "<li nodeId=".$item['nodeId'].">".$item['nodeInfo']."</li>";
 				}
 				$temarray = array2jsontree($array, ($item['nodeId']), $item['nodeInfo']);
 				array_push($tree['son'], $temarray);	
@@ -43,4 +43,10 @@
 	$thetree = array2jsontree($content);
 	var_dump("<hr/>".json_encode($thetree));
 ?>
-
+<script type="text/javascript">
+	$('.treeframe ul>li').each(function(){
+		$(this).click(function(){
+			changeNowId($(this).attr('nodeId'));
+		});
+	});
+</script>

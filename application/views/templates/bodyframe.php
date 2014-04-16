@@ -9,6 +9,20 @@
 		formfun = function(){$('#formRefresh').click();}
 		treefun = function(){$('#treeRefresh').click();}
 		tabfun = function(){$('#tabRefresh').click();}
+		changeNowId = function(id){
+			$('.globalbody').attr('nowId', id);
+			formfun();
+			tabfun();
+		};
+		setNewId = function(id){
+			$('.globalbody').attr('nowId', id);
+			formfun();
+			tabfun();
+			treefun();
+		};
+		getNowId = function(){
+			return $('.globalbody').attr('nowId');
+		};
 		$('#globalRefresh').on('click', function(){
 			var formbody = $('.formbody');
 			var tabbody = $('.tabbody');
@@ -53,7 +67,7 @@
 					formbody.append(html);
 					//返回信息显示
 					var output = msg.output;
-					alert(output);
+					alert("form:"+output);
 				},
 				error: function(msg){
 					alert('error!');
@@ -89,14 +103,13 @@
 					treebody.append(treehtml);
 					//返回信息显示
 					var output = msg.output;
-					alert(output);
+					alert("tree:"+output);
 				},
 				error: function(msg){
 					alert('error!');
 				}
 			});
 		});
-
 	</script>
 	<script type="text/javascript" src="<?php ?>"></script>
 
@@ -125,7 +138,7 @@
 					tabbody.append(tabhtml);
 					//返回信息显示
 					var output = msg.output;
-					alert(output);
+					alert("tab"+output);
 				},
 				error: function(msg){
 					alert('error!');
