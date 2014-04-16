@@ -138,3 +138,86 @@
 .edited-and-error {
     background: #fee2f0;
 }
+
+/*分页区域*/
+.gr-pager {
+    width: auto;
+    height: 28px;
+    overflow: hidden;
+    font-size: 9pt;
+    font-family: Tahoma, Verdana;
+    position: relative;
+}
+.gr-pager-left, .gr-pager-right {
+    height: 25px;
+    line-height: 25px;
+}
+.gr-pager-left {
+    float: left;
+    padding-left: 5px;
+}
+.gr-pager-right {
+    float: right;
+    padding-right: 30px;
+}
+.gr-pager-first {
+    background: url(../../img/table/first.gif) no-repeat;
+}
+.gr-pager-prev {
+    background:url(../../img/table/prev.gif);
+}
+.gr-pager-next {
+    background:url(../../img/table/next.gif);
+}
+.gr-pager-last {
+    background:url(../../img/table/last.gif);
+}
+.gr-pager-reload {
+    background:url(../../img/table/reload.png);
+}
+.gr-btn-iconOnly {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 20px;
+    padding-left: 14px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+a:hover.gr-btn-disabled {
+    border: 1px solid #ccc;
+    color: #777;
+    background: #F8F9FA url(../../img/button/disabled.png) repeat-x 0 0;
+}
+.gr-btn-disabled, a:hover.gr-btn-disabled {
+    cursor: default;
+    opacity: .7;
+    -moz-opacity: .7;
+    filter: alpha(opacity=70);
+    cursor: default;
+    background: transparent;
+    border: 0 none;
+    padding: 1px;
+}
+.gr-grid-pager {
+    position: relative;
+    overflow: hidden;
+    background: #E7EAEE url(../../img/table/footer.png) repeat-x 0 0;
+    border: 1px solid #999;
+    border-top: 0 none;
+}
+.gr-pager-pages {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+}
+.separator {
+    display: inline-block;
+    border: 0;
+    border-left: solid 1px #adb3b9;
+    margin: 1px;
+    margin-top: 0px;
+    height: 18px;
+    vertical-align: middle;
+    margin-left: 8px;
+    margin-right: 8px;
+}

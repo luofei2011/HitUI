@@ -10,11 +10,12 @@ class Base extends CI_Model {
 
     public function filter_target($in) {
         $this->tableName = $in['db']['t'];
-        switch($in['op']) {
+        switch($in['op']['op']) {
             case "update":
                 return $this->dbUpdate($in['data']);
-            case "insert":
-                break;
+            case "select":
+                $con = $this->get_select_con($in['op']['con']);
+                return $this->dbSelect($con);
             default:
                 break;
         }
@@ -41,12 +42,38 @@ class Base extends CI_Model {
      * */
     public function dbInsert($arr) {
         $sql = "INSERT INTO $arr->table values()";
-        return $this->dbQuery($sql, false);
+        return $this->format_return_data($this->dbQuery($sql, false), '');
     }
 
     public function dbSelect($arr) {
-        $sql = "SELECT * FROM $arr->table";
-        return $this->dbQuery($sql);
+        $sql = "SELECT * FROM $this->tableName";
+
+        // 得到记录数量
+        $pages = $this->dbCountAllResult();
+
+        if (array_key_exists('order', $arr)) {
+            $order = explode(' ', $arr['order']);
+            $this->db->order_by("$order[0]", "$order[1]");
+        }
+
+        if (array_key_exists('limit', $arr))
+            $sql .= " LIMIT " . $arr['limit'];
+
+        if (array_key_exists('offset', $arr)) {
+            //var_dump($this->db->get($this->tableName, 50, 0)->result_array());
+            $offset = (int)$arr['offset'] * (int)$arr['limit'];
+            return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
+                'pages' => $pages,
+                'perNum' => $arr['limit'],
+                'cur' => $arr['offset'] + 1,
+            ));
+        }
+
+        return $this->format_return_data($this->dbQuery($sql), array(
+            'pages' => $pages,
+            'cur' => $arr['offset'] + 1,
+            'perNum' => $arr['limit'],
+        ));
     }
 
     /*
@@ -65,7 +92,7 @@ class Base extends CI_Model {
             $this->dbQuery($sql, false);
         }
 
-        return "";
+        return $this->format_return_data();
     }
 
     /*
@@ -103,6 +130,38 @@ class Base extends CI_Model {
         }
 
         return $result;
+    }
+
+    /*
+     * 获取类型为select时的条件
+     * */
+    private function get_select_con($str) {
+        $conArr = array();
+        $cons = explode(';', $str);
+
+        foreach($cons as $conStr) {
+            $arr = explode(',', $conStr);
+            $conArr[$arr[0]] = $arr[1];
+        }
+
+        return $conArr;
+    }
+
+    /*
+     * 获取表中的所有记录数
+     * */
+    private function dbCountAllResult() {
+        return $this->db->count_all_results($this->tableName);
+    }
+
+    /*
+     * 返回数据按照协议格式化
+     * */
+    private function format_return_data($data = "", $pager = "") {
+        return array(
+            "data" => $data,
+            "pager" => $pager
+        );
     }
 }
 ?>
