@@ -32,7 +32,7 @@ class treeframe extends CI_Controller {
 
 		if ($this->input->post() )
 		{
-			$data['state'] = (int)($this->input->post('input',true))+2;
+			$data['state'] = (int)($this->input->post('nowId',true))+2;
 		}else{
 			$data['state'] = -1;
 		}

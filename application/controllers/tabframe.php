@@ -32,7 +32,7 @@ class tabframe extends CI_Controller {
 
 		if ($this->input->post() )
         {
-        	$nodeId = $this->input->post('nodeId',true);	//载入的时候获得所需要载入的nodeID号
+        	$nodeId = $this->input->post('nowId',true);	//载入的时候获得所需要载入的nodeID号
         }else{
 			$nodeId = -1;			//nodId默认是-1
         }
@@ -41,9 +41,10 @@ class tabframe extends CI_Controller {
  
  		//内容信息数据传给view的tabframe去显示
          $buffer = $this->load->view('templates/tabframe', $data, true);
+
 		 //返回参数给bodyframe。php，根据改变内容控制界面状态
 		 $jsonStr['html'] = $buffer;
-		 $jsonStr['output'] = "default";//read db success = now nodeId, fail= error
+		 $jsonStr['output'] = $nodeId;//read db success = now nodeId, fail= error
 	     echo json_encode($jsonStr);
 
 	}
