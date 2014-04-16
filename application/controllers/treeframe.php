@@ -23,7 +23,7 @@ class treeframe extends CI_Controller {
 	}
 	
 	//page(index)
-	public function view($state = 0)
+	public function view($state= 0)
 	{
 		if( ! file_exists('application/views/templates/treeframe.php'))
 		{
@@ -32,13 +32,15 @@ class treeframe extends CI_Controller {
 
 		if ($this->input->post() )
 		{
-			$data['state'] = $this->input->post('state',true)+1;
+			$data['state'] = (int)($this->input->post('input',true))+2;
 		}else{
-			$data['state'] = ucfirst($state);
+			$data['state'] = -1;
 		}
 
 		$buffer = $this->load->view('templates/treeframe', $data, true);
-		echo $buffer;
+		$jsonStr['html'] = $buffer;
+		$jsonStr['output'] = $data['state'];
+		echo json_encode($jsonStr);
 	}
 
 }
