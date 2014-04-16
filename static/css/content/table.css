@@ -19,12 +19,15 @@
 .gr-d-grid-head {
     position: relative;
 }
+.gr-d-grid-outer-bg {
+    background: #e7ebef url(../../img/table/header.png) repeat-x 0 0;
+}
 .gr-d-grid-head table {
     position: relative;
     z-index: 9;
     text-align: center;
 }
-.gr-d-grid-head table tr td {
+.gr-d-grid-head-cell {
     border-right: #A5ACB5 1px solid;
     border-bottom: 1px solid #d2d2d2;
 }
@@ -43,6 +46,7 @@
     overflow: auto;
 }
 .gr-d-grid-cell {
+    position: relative;
     overflow: hidden;
     padding: 0px;
     border: 0;
@@ -51,8 +55,22 @@
     cursor: default;
     text-align: left;
     overflow: hidden;
+    /*
     padding-left: 4px;
     padding-right: 4px;
+    */
+}
+.error, .corect {
+    position: absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    top: 4px;
+    right: 3px;
+    background: url(../../img/table/error.png) no-repeat;
+}
+.corect {
+    background: url(../../img/table/corect.png) no-repeat;
 }
 .gr-d-grid-cell-inner {
     font-size: 9pt;
@@ -91,4 +109,32 @@
 }
 .gr-d-grid-row-selected {
     background: #dfe8f6;
+}
+.grid-cell-edit {
+    width: 100%;
+    display: none;
+}
+.hit-grid-sortIcon-desc, .hit-grid-sortIcon-asc {
+    width: 9px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 2px;
+    margin-left: 2px;
+    background: url(../../img/icons.png) no-repeat -19px -18px;
+}
+.hit-grid-sortIcon-desc {
+    background-position: -19px 0;
+}
+.edited-and-no-save {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 3px;
+    width: 10px;
+    height: 10px;
+    background: url(../../img/table/dirty.gif) no-repeat right 4px;
+}
+.edited-and-error {
+    background: #fee2f0;
 }

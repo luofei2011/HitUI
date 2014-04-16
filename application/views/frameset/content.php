@@ -8,16 +8,16 @@
                 <tr>
                     <td style="width:100%;">
                         <a href="" class="hit-button">
-                            <span class="hit-button-txt hit-button-icon icon-add">添加</span>
+                            <span class="hit-button-txt hit-button-icon icon-add" op="add">添加</span>
                         </a>
                         <a href="" class="hit-button">
-                            <span class="hit-button-txt hit-button-icon icon-add">编辑</span>
+                            <span class="hit-button-txt hit-button-icon icon-add" op="edit">编辑</span>
                         </a>
                         <a href="" class="hit-button">
-                            <span class="hit-button-txt hit-button-icon icon-remove">删除</span>
+                            <span class="hit-button-txt hit-button-icon icon-remove" op="delete">删除</span>
                         </a>
-                        <a href="" class="hit-button">
-                            <span class="hit-button-txt hit-button-icon icon-save">保存</span>
+                        <a href="javascript:void(0);" class="hit-button">
+                            <span class="hit-button-txt hit-button-icon icon-save" op="save">保存</span>
                         </a>
                     </td>
                     <td></td>
@@ -28,7 +28,10 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_test.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/lib/component.form.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
 <script type="text/javascript">
 // 表格标题配置信息
 var table = {
@@ -95,5 +98,11 @@ var table = {
 };
 
 // 解析配置数据并生成表格
-hit.load(table, '', 'gr-border');
+//hit.load(table, '', 'gr-border');
 </script>
+<script type="text/javascript">
+//hit._createTableHead(table_test, 'gr-border');
+hit.baseURL = "<?php echo base_url();?>";
+hit.load(table_test, '', 'gr-border');
+</script>
+<script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>

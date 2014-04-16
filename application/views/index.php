@@ -46,6 +46,11 @@
         <!--网站左边导航部分-->
         <div id="nav-tree" class="pull-left">
         </div>
+        <div class="spliter-handle">
+            <div class="spliter-handle-button">
+                <a href="" class="spliter-handle-icon-to-left"></a>
+            </div>
+        </div>
         <!--导航部分结束-->
         <!--右边信息处理展示部分-->
         <div id="content" class="pull-right">

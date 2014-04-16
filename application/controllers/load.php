@@ -12,6 +12,10 @@ class Load extends CI_Controller {
         echo json_encode($this->format_return_data($this->Base->test()));
     }
 
+    public function deal_data() {
+        echo json_encode($this->format_return_data($this->Base->filter_target($this->input->post('data', true))));
+    }
+
     public function insert_users() {
         $num = $this->input->post('num', true);
         $this->Base->insert_users($num);
