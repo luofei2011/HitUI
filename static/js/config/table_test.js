@@ -6,7 +6,7 @@
 
 // 命名请尽量已table开头，避免和全局的变量冲突引起程序的异常
 var table_test = {
-    url: "http://localhost/graduation-pro-2014/load/get_data",
+    url: "http://localhost/graduation-pro-2014/load/deal_data",
     rows: 2, // 目前默认最高只支持2行
     isShowPaging: true, // 是否显示分页功能
     pageNum: 50, // 每页默认显示的数据条数
@@ -57,7 +57,7 @@ var table_test = {
             {
                 'label': '创建日期', // 名字
                 'isFixed': false, // 是否可作为固定列
-                'isOrdered': true, // 是否可排序
+                'isOrdered': 'date', // 是否可排序
                 'align': 'center', // 对其方式：center，left，right
                 'multiply': false, // 是否会占用多行
                 'colspan': 2
@@ -200,7 +200,7 @@ var table_test = {
             'isKey': false, 
             'align': 'left',
             'isShow': true, 
-            'canEdit': true, 
+            'canEdit': false, 
             'type': 'text',  
             'valid': 'require',
             'sureValue': '', 

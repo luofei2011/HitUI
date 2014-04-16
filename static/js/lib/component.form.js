@@ -34,7 +34,7 @@ hit.COMPONENT = {
             return '<input class="grid-cell-edit Wdate" type="text" valid="' + valid + '" value="' + val + '">';
         },
         textarea: function(val, valid) {
-            return '<input class="grid-cell-edit" type="textarea" valid="' + valid + '" value="' + val + '">';
+            return '<textarea class="grid-cell-edit" valid="' + valid + '" value="' + val + '">';
         },
         password: function(val, valid) {
             return '<input class="grid-cell-edit" type="password" valid="' + valid + '" value="' + val + '">';

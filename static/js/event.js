@@ -84,8 +84,18 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
             // 数据库操作
             if (query.length) {
-                hit.query('load/deal_data', query, 'update', function() {
+                // 生成cover层
+                hit.COVER.init({
+                    tNode: $(this).closest('div.gr-toolbar').next(),
+                    status: 'wait'
+                });
+               
+                hit.query('load/deal_data', query, {
+                    op: 'update',
+                    con: ''
+                }, function() {
                     $('div.edited-and-no-save').hide();
+                    hit.COVER.removeNode();
                 });
             } else {
                 alert('未修改任何数据！');
@@ -116,8 +126,12 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
 // 表单单元双击可编辑
 $(document).on('dblclick', 'div.grid-cell-show', function() {
-    $(this).hide();
-    $(this).next().show().focus();
+    if ("textarea#input#select#".indexOf($(this).next()[0].nodeName.toLowerCase()) !== -1) {
+        $(this).hide();
+        $(this).next().show().focus();
+    } else {
+        return false;
+    }
 });
 
 // 不让双击选中文字
@@ -178,4 +192,91 @@ $(document).on('blur', '.grid-cell-edit', function() {
 // 日期选择插件事件
 $(document).on('click', '.Wdate', function() {
     WdatePicker();
+});
+
+// 排序事件
+$(document).on('click', 'span.grid-sort', function() {
+    var _q = $(this).attr('tField');
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $(this).closest('div.gr-border'),
+        status: 'wait'
+    });
+               
+    // 需要按升序重排--asc
+    if (this.className.indexOf('desc') !== -1) {
+        $(this).removeClass('hit-grid-sortIcon-desc').addClass('hit-grid-sortIcon-asc');
+        _q += ' ASC';
+    // 需要按降序重排--desc
+    } else if (this.className.indexOf('asc') !== -1) {
+        $(this).removeClass('hit-grid-sortIcon-asc').addClass('hit-grid-sortIcon-desc');
+        _q += ' DESC';
+    }
+
+    hit.query('load/deal_data', '', {
+        op: 'select',
+        con: 'offset,'+ ($('#selectPager').val() * 1 - 1) +';order,'+ _q +';limit,' + hit.conf.pageNum
+    }, function(data) {
+        hit.reDrawTableContent(data);
+        hit.COVER.removeNode();
+    });
+});
+
+// 分页事件
+$('div.gr-grid-pager a').on('click', function() {
+    if (!$(this).hasClass('gr-btn-disabled')) {
+        var _op = $('span', $(this)),
+            pager = $('#selectPager'),
+            cur = pager.val() * 1,
+            pages = $('span.gr-pager-pages').text().split(' ').pop() * 1;
+
+        if (_op.hasClass('gr-pager-first')) {
+            hit.changePagerCur('', 1);
+            hit.reloadPagerBtnStatus(1, pages);
+        } else if (_op.hasClass('gr-pager-last')) {
+            hit.changePagerCur('', pages);
+            hit.reloadPagerBtnStatus(pages, pages);
+        } else if (_op.hasClass('gr-pager-next')) {
+            hit.changePagerCur('', cur + 1);
+            hit.reloadPagerBtnStatus(cur + 1, pages);
+        } else if (_op.hasClass('gr-pager-prev')) {
+            hit.changePagerCur('', cur - 1);
+            hit.reloadPagerBtnStatus(cur - 1, pages);
+        } else if (_op.hasClass('gr-pager-reload')) {
+            hit.changePagerCur('', cur);
+        }
+
+        // 触发分页事件
+        $('#selectPager').change();
+    } 
+
+    return false;
+});
+
+// 分页事件
+$('#selectPager').on('change', function() {
+    var offset = this.value * 1 - 1;
+    console.log(offset);
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $('div.gr-border'),
+        status: 'wait'
+    });
+
+    // 更新数据
+    hit.query('load/deal_data', '', {
+        op: 'select',
+        con: 'offset,'+ offset +';limit,' + hit.conf.pageNum
+    }, function(data) {
+        hit.reDrawTableContent(data);
+        hit.COVER.removeNode();
+    });
+});
+
+// 更改显示数量事件
+$('#pageNumSetting').on('change', function() {
+    hit.conf.pageNum = this.value * 1;
+
+    hit.changePagerCur('', 1);
+    $('#selectPager').change();
 });

@@ -202,3 +202,22 @@ a:hover.hit-button {
 .spliter-handle-icon-to-right {
     background: url(../img/mini-right.gif) no-repeat;
 }
+
+/*通用弹层样式*/
+#hitPoup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .3);
+    z-index: 999;
+}
+.poup-in-loadding {
+    height: 55px;
+    width: 55px;
+    line-height: 55px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -27px;
+    margin-top: -27px;
+}

@@ -6,6 +6,11 @@ var hit = {
      * */
     dbCONF: {},
 
+    /*
+     * 加载用户的配置信息
+     * */
+    conf: {},
+
     // 存储当前的网站路径
     baseURL: "",
 
@@ -20,6 +25,7 @@ var hit = {
         $.ajax({
             url: this.baseURL + url,
             method: 'post',
+            cache: false,
             data: {
                 data: {
                     db: {
@@ -32,8 +38,12 @@ var hit = {
             },
             success: function(msg) {
                 var r = JSON.parse(msg);
-                if (r.status == "ok") 
-                    func(r.data);
+                //console.log(msg);
+                if (r.status == "ok") {
+                    if (r.data.pager)
+                        hit._resultPager(r.data.pager);
+                    func(r.data.data);
+                }
                 else
                     alert('响应失败!');
             }
@@ -48,7 +58,7 @@ var hit = {
      * @param {Object} data 请求数据
      * @param {HTML NODE} targetNode 目标节点
      * */
-    load: function(config, data, targetNode) {
+    load: function(config, targetNode) {
         // 首先初始化表头信息
         var _this = this;
         //this.initTableHead(config, targetNode);
@@ -60,7 +70,19 @@ var hit = {
         $.ajax({
             url: config.url,
             method: 'post',
-            data: data,
+            data: {
+                data: {
+                    db: {
+                        dbName: this.dbCONF.name,
+                        t: this.dbCONF.t
+                    },
+                    data: '',
+                    op: {
+                        op: 'select',
+                        con: 'limit,' + this.conf.pageNum + ";offset,0"
+                    }
+                }
+            },
             cache: false,
             success: function(msg) {
                 /*
@@ -68,13 +90,16 @@ var hit = {
                  * status：状态信息，ok为响应成功，err为失败
                  * data: 响应数据
                  * */
+                //console.log(msg);
                 var obj = JSON.parse(msg);
 
                 console.log(obj);
                 if (obj.status === "ok") {
                     if (obj.data) {
                         //_this.initTableContent(obj.data, config, targetNode);
-                        _this._createTableBody(obj.data, config);
+                        if (obj.data.pager)
+                            _this._resultPager(obj.data.pager);
+                        _this._createTableBody(obj.data.data, config);
                     }
                 } 
             }
@@ -118,7 +143,7 @@ var hit = {
 
                 // 是否可排序
                 if (tmp.isOrdered)
-                    html += '<span class="hit-grid-sortIcon-desc"></span>';
+                    html += '<span class="grid-sort hit-grid-sortIcon-desc" tField="' + tmp.isOrdered + '"></span>';
 
                 html += '</div></td>';
         }
@@ -136,7 +161,7 @@ var hit = {
 
                 // 是否可排序
                 if (tmp.isOrdered)
-                    html += '<span class="hit-grid-sortIcon-desc"></span>';
+                    html += '<span class="grid-sort hit-grid-sortIcon-desc" tField="' + tmp.isOrdered + '"></span>';
 
                 html += '</div></td>';
             }
@@ -418,6 +443,105 @@ var hit = {
         }
 
         return str;
+    },
+    
+    /*
+     * 根据新数据重绘表格
+     * */
+    reDrawTableContent: function(data) {
+        $('.gr-d-grid-body tbody tr').each(function(i) {
+            if (i) {
+                $(this).remove();
+            }
+        });
+        hit._createTableBody(data, hit.conf);
+    },
+
+    /*
+     * 分页功能
+     * */
+    _resultPager: function(pager) {
+        var _node = $('div.gr-grid-pager'),
+            p_idx = $('#selectPager'),
+            p_pages = $('span.gr-pager-pages', _node),
+            p_label = $('div.gr-pager-right', _node),
+            tmp = '',
+            pages = Math.ceil(pager.pages / pager.perNum);
+
+        // 重绘显示数量
+        $('#pageNumSetting option').each(function() {
+            if (this.value == hit.conf.pageNum) {
+                $(this).attr('selected', true);
+            } else {
+                $(this).attr('selected', false);
+            }
+        });
+
+        // 重绘所有的页码
+        p_idx.empty();
+        for(var i = 1; i <= pages; i++) {
+            tmp = '<option value="' + i + '"';
+
+            if (i == pager.cur)
+                tmp += ' selected';
+
+            tmp += '>' + i + '</option>';
+            p_idx.append(tmp);
+        }
+
+        // 刷新总数
+        p_pages.text('/ ' + pages);
+
+        // 刷新右边提示
+        p_label.text('每页' + pager.perNum + '条,共' + pager.pages + '条');
+
+        // 刷新按钮状态
+        this.reloadPagerBtnStatus(pager.cur, pages);
+    },
+
+    /*
+     * 刷新分页中按钮的状态
+     * */
+    reloadPagerBtnStatus: function(cur, pages) {
+        var _p = $('div.gr-grid-pager'),
+            _first = $('span.gr-pager-first', _p),
+            _last = $('span.gr-pager-last', _p),
+            _next = $('span.gr-pager-next', _p),
+            _prev = $('span.gr-pager-prev', _p);
+
+        // 上一页和首页功能禁止
+        if (cur <= 1) {
+            _first.parent().addClass('gr-btn-disabled');
+            _prev.parent().addClass('gr-btn-disabled');
+        } else {
+            _first.parent().removeClass('gr-btn-disabled');
+            _prev.parent().removeClass('gr-btn-disabled');
+        }
+
+        // 尾页和下一页功能
+        if (cur >= pages) {
+            _last.parent().addClass('gr-btn-disabled');
+            _next.parent().addClass('gr-btn-disabled');
+        } else {
+            _last.parent().removeClass('gr-btn-disabled');
+            _next.parent().removeClass('gr-btn-disabled');
+        }
+    },
+
+    /*
+     * 分页刷新
+     * */
+    changePagerCur: function(node, cur) {
+        var node = node | $('#selectPager');
+
+        $('option', node).each(function() {
+            if (this.value == cur) {
+                $(this).attr('selected', true);
+                return;
+            } else {
+                $(this).attr('selected', false);
+            }
+        });
     }
 };
 
