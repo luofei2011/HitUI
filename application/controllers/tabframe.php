@@ -23,16 +23,30 @@ class tabframe extends CI_Controller {
 	}
 	
 	//page(index)
-	public function page($index = 0)
+	public function view($nodeId= -1)
 	{
 		if( ! file_exists('application/views/templates/tabframe.php'))
 		{
 			show_404();
 		}
 
-		$data['title'] = ucfirst($context);
+		if ($this->input->post() )
+        {
+        	$nodeId = $this->input->post('nowId',true);	//载入的时候获得所需要载入的nodeID号
+        }else{
+			$nodeId = -1;			//nodId默认是-1
+        }
+		$data['nodeId'] = $nodeId;
+		//根据nodeId加载对应的的数据
+ 
+ 		//内容信息数据传给view的tabframe去显示
+         $buffer = $this->load->view('templates/tabframe', $data, true);
 
-		$this->load->view('templates/tabframe', $data);
+		 //返回参数给bodyframe。php，根据改变内容控制界面状态
+		 $jsonStr['html'] = $buffer;
+		 $jsonStr['output'] = $nodeId;//read db success = now nodeId, fail= error
+	     echo json_encode($jsonStr);
+
 	}
 
 }
