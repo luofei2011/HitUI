@@ -38,10 +38,18 @@ class formframe extends CI_Controller {
 		}
 		
 		$data['nodeId'] = $nodeId;
-		//根据nodeId加载对应的的数据页与内容
+
+		//根据nodeId加载对应的的数据页面
 		$contentData = $this->ldata->getContent($nodeId);
-		$data['result'] = json_encode($contentData);
+		$data['pages'] = $contentData; //json_encode($contentData);
 		
+		//载入每个页面的内容
+		$pageContent = array();
+		foreach ($contentData as $page){
+			$tem = $this->ldata->getData($page['pageId']);
+			array_push($pageContent, $tem);
+		}
+		$data['pageContent'] = $pageContent; //json_encode($pageContent);
 
 //内容信息数据传给view的tabframe去显示
  		$buffer = $this->load->view('templates/formframe', $data, true);

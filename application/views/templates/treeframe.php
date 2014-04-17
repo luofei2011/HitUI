@@ -1,6 +1,6 @@
 <?php
 	echo "<h1>".$state."</h1>";
-	$content = json_decode($result, true);
+	//$result = json_decode($result, true);
 ?>
 <hr/>
 <?php /*foreach($content->son as $i): ?>
@@ -40,7 +40,7 @@
 			return $tree;
 		}
 		
-	$thetree = array2jsontree($content);
+	$thetree = array2jsontree($result);
 	var_dump("<hr/>".json_encode($thetree));
 ?>
 <script type="text/javascript">
