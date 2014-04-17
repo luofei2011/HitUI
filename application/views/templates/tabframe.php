@@ -3,6 +3,8 @@
 <h1><strong><?="hi".$nodeId?></strong></h1>
 <hr/>
 <?=$result?>
+<hr/>
+<?=$pageContent?>
 <?php
 	
 ?>

@@ -33,8 +33,8 @@
 		public function getTreeData($treeId='-2'){
 			$this->setTreeInfo($treeId);
 			$oriData = $this->db->query('select * from TreeNode where treeId='.$treeId.' order by seq;');
-			$resultData = $oriData->result_array();
-			return json_encode($resultData);
+			return $oriData->result_array();
+			
 			//$treeData = $this->array2jsontree($resultData);
 			//$this->temtree['son'] = $treeData['son'];
 			//return json_encode($this->temtree);
@@ -42,16 +42,17 @@
 		
 		//获取NodeContent节点对应页面信息
 		public function getContent($nodeId = '-2'){
-			$sql = 'select * from NodeContent where nodeId='.$nodeId;
-			$query = $this->db->query($sql)->row_array();
-			return json_encode($query);
+			$sql = 'select * from NodeContent where nodeId='.$nodeId.' order by page';
+			$query = $this->db->query($sql);
+			return $query->result_array();
+			
 		}
 		
 		//获取页面内容信息
-		public function getData($dataId = "1"){
-			$query = $this->db->get_where("ContentData", array('dataId' => $dataId));
-			$query = $query->row_array();
-			return json_encode($query);
+		public function getData($pageId = '1'){
+			$sql = 'select * from ContentData where pageId='.$pageId;
+			$query = $this->db->query($sql);
+			return $query->result_array();
 		}
 
 	}

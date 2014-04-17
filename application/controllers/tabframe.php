@@ -38,7 +38,14 @@ class tabframe extends CI_Controller {
         }
 		$data['nodeId'] = $nodeId;
 		//根据nodeId加载对应的的数据页面
-		$data['result'] = $this->ldata->getContent($nodeId);
+		$contentData = $this->ldata->getContent($nodeId);
+		$data['result'] = json_encode($contentData);
+		$pageContent = array();
+		foreach ($contentData as $page){
+			$tem = $this->ldata->getData($page['pageId']);
+			array_push($pageContent, $tem);
+		}
+		$data['pageContent'] = json_encode($pageContent);
  
  		//内容信息数据传给view的tabframe去显示
          $buffer = $this->load->view('templates/tabframe', $data, true);

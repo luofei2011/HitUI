@@ -36,7 +36,8 @@ class treeframe extends CI_Controller {
 		}else{
 			$data['state'] = -1;
 		}
-		$data['result'] = $this->ldata->getTreeData();
+		$treeData = $this->ldata->getTreeData();
+		$data['result'] = json_encode($treeData);
 		//$data['result'] = $this->ldata->setTreeInfo();
 
 		$buffer = $this->load->view('templates/treeframe', $data, true);
