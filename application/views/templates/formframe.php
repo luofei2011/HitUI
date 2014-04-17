@@ -1,12 +1,9 @@
-
-
-
-<?=json_encode($content)?>
 <!--表格内容展示-->
 <fieldset>
-	<?php if(count($content)>0):?>
+	<?php if($isEmpty != 1):?>
+	<!--有的话，展示已有内容-->
 	<legend>
-		Group One:
+		Change Data
 	</legend>
 	<table>
 	<?php foreach($content as $item): ?>
@@ -14,8 +11,8 @@
 			<td class="dataName">
 				<?=$item['dataName']?>:
 			</td>
-			<td class="input">
-				<input type=""/>
+			<td class="input" valueId="<?=$item['Id']?>">
+				<input type="" value="<?=$item['value']?>" />
 			</td>
 			<td class="preData">
 				<?=$item['preData']?>
@@ -29,9 +26,36 @@
 	<input id="setup" type="button" value="Setup"/>
 	<input id="change" type="button" value="Changed" />
 	<input id="create" type="button" value="CreateNewOne" />
-
+	
+	<?php else: ?>
+	<!--空的话，提示新增内容-->
+	<legend>
+		Create new Data
+	</legend>
+	<table>
+		
+	</table>
+	
 	<?php endif; ?>
 </fieldset>
+
+<!--树的展示-->
+<fieldset>
+	<legend>
+		Change Tree Structure
+	</legend>
+	<table>
+		<tr>
+			<td>
+				父亲节点
+			</td>
+		</tr>
+	</table>
+	
+
+
+</fieldset>
+
 <script type="text/javascript">
 //上传数据
 dataUpload = function(){
@@ -39,8 +63,8 @@ dataUpload = function(){
 	var data ="[]";
 	data = eval('('+data+')');
 	$('.formframe tr').each(function(){
-		//将参数以json格式传递进去[{dataId: 值},{id: value}]
-		data.push("{ "+$(this).attr('dataId')+" : "+$(this).find(":input").val()+"}");
+		//将参数以json格式传递进去[{数据项的编号: 值},{Id: value}]
+		data.push({ id : $(this).find(".input").attr('valueId'), value :$(this).find(":input").val() } );
 	});
 	//data['d']='dd';
 	var result = 'hi';
@@ -62,13 +86,13 @@ dataUpload = function(){
 //结构更新
 formSet = function(){
 	dataUpload();
-	setNewId(-4);//回到初始
+	setNewId(-2);//回到初始nodeId
 };
 
 //当前页面数据更新
 function formChange(){
 	dataUpload();
-	var nowId = Number(getNowId()-1);
+	var nowId = Number(getNowId());
 	changeNowId(nowId);
 };
 

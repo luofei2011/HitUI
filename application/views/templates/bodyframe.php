@@ -1,6 +1,6 @@
 <!--主要的界面框架部分-->
 <div class="global">
-	<button style="display:" id="globalRefresh">refresh Needed</button>
+	<button style="display:none" id="globalRefresh">refresh Needed</button>
 	<!--全局刷新函数，根据比对结果，刷新结果不一样的（已经改变的）-->
 	<div class="globalbody" output="0" input="" nowId="-1">
 	</div>
@@ -48,7 +48,7 @@
 
 	<link rel="stylesheet" href="<?php echo base_url(''); ?>" />
 	<!--refresh the formframe and refresh the dependence part-->
-	<button style="display:" id="formRefresh">refresh</button>
+	<button style="display:none" id="formRefresh">refresh</button>
 	<div class="formbody" output="0" input="formDefault">
 	</div>
 	<script type="text/javascript">
@@ -83,7 +83,7 @@
 
 	<link rel="stylesheet" href="<?php echo base_url(''); ?>" />
 	<!--refresh the treeframe and refresh the dependence part-->
-	<button style="display:" id="treeRefresh">refresh</button>
+	<button style="display:none" id="treeRefresh">refresh</button>
 	<div class="treebody" nodeIdNow="0" input="treeDefault">
 	</div>
 	<script type="text/javascript">
@@ -117,7 +117,7 @@
 
 	<link rel="stylesheet" href="<?php echo base_url(''); ?>" />
 	<!--tab部分的刷新触发器-->
-	<button style="display:" id="tabRefresh">tab refresh</button>
+	<button style="display:none" id="tabRefresh">tab refresh</button>
 	<div class="tabbody" output="tabDefalut" input="tabDefault">
 	</div>
 	<script type="text/javascript">

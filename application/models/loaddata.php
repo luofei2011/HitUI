@@ -53,10 +53,17 @@
 			$query = $this->db->query($sql);
 			return $query->result_array();
 		}
-		public function getValue($recordNum='1'){
-			$sql = 'select Id, value from DataRecord where recordNum='.$recordNum;
+		public function getDataNValues($pageId='1', $recordNum='1'){
+			$sql = 'select Id, value, ContentData.dataId, pageId, dataName, dataType, preData, dataDescribe from DataRecord, ContentData where recordNum='.$recordNum.' and pageId='.$pageId.' and ContentData.dataId = DataRecord.dataId';
 			$query = $this->db->query($sql);
 			return $query->result_array();
+		}
+		
+		//set the value
+		public function setValue($Id, $value){
+			$sql = 'update DataRecord set value="'.$value.'" where Id='.$Id;
+			$query = $this->db->query($sql);
+			return true;//$this->db->affectd_rows();
 		}
 		
 	}

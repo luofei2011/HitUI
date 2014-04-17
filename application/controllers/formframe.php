@@ -43,23 +43,34 @@ class formframe extends CI_Controller {
 		$contentData = $this->ldata->getContent($nodeId);
 		//$data['pages'] = $contentData; //json_encode($contentData);
 		
+		$data['isEmpty'] = 1;
+		//节点有内容的话	
+		if (count($contentData) > 0){
+			$data['isEmpty'] = 0;
+		}
+		
 		//根据页面id载入每个页面的内容
 		$pageContent = array();
 		foreach ($contentData as $page){
-			$tempage = $this->ldata->getData($page['pageId']);	//get contentData according to the pageId
-			//提取页面每一项数据
+			$tempage = $this->ldata->getDataNValues($page['pageId']);	//get contentData and it's value according to the pageId
+			//提取页面每一项数据 统一放在一起
 			foreach($tempage as $item){
 				array_push($pageContent, $item);	
 			}
 		}
 		$data['content'] = $pageContent; //json_encode($pageContent);
 
-//内容信息数据传给view的tabframe去显示
+		//载入树的信息
+		$treeData = $this->ldata->getTreeData();
+		$data['treecontent'] = $treeData;
+
+		//---1---内容信息数据传给view的tabframe去显示
  		$buffer = $this->load->view('templates/formframe', $data, true);
   
-   		//返回参数给bodyframe。php，根据改变内容控制界面状态
+   		//---2---返回参数给bodyframe。php，根据改变内容控制界面状态
 	    $jsonStr['html'] = $buffer;
 	 	$jsonStr['output'] = $nodeId;//read db success = now nodeId, fail= error
+
 	  	echo json_encode($jsonStr);
 	}
 	
@@ -68,8 +79,13 @@ class formframe extends CI_Controller {
 	{
 		$newdata = $this->input->post('data',true);
 		//$newdata['state'] = 'success';
-
-		echo json_encode($newdata);
+		$hehe = array();
+		$he = array();
+		foreach($newdata as $setting){
+			$this->ldata->setValue($setting['id'], $setting['value']);	
+			array_push($he, $setting['value']);
+		}
+		echo json_encode($he);
 	}
 }
 

@@ -1,7 +1,3 @@
-<?php
-	echo "<h1>".$state."</h1>";
-?>
-<hr/>
 <?php /*foreach($content->son as $i): ?>
 	<li><?=$i->name?></li>
 	<?php if($i->son != null):?>
