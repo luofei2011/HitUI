@@ -1,5 +1,5 @@
 <!--表格内容展示-->
-<fieldset>
+<fieldset class="formfield">
 	<?php if($isEmpty != 1):?>
 	<!--有的话，展示已有内容-->
 	<legend>
@@ -40,7 +40,7 @@
 </fieldset>
 
 <!--树的展示-->
-<fieldset>
+<fieldset class="treefield">
 	<legend>
 		Change Tree Structure
 	</legend>
@@ -63,7 +63,7 @@ dataUpload = function(){
 	var data ="[]";
 	data = eval('('+data+')');
 	$('.formframe tr').each(function(){
-		//将参数以json格式传递进去[{数据项的编号: 值},{Id: value}]
+		//将参数以json格式传递进去[{数据项的编号: 值,Id: value},{}]
 		data.push({ id : $(this).find(".input").attr('valueId'), value :$(this).find(":input").val() } );
 	});
 	//data['d']='dd';
@@ -73,6 +73,7 @@ dataUpload = function(){
 		method: 'post',
 		data: {"data": data}, 
 		dataType: 'json',
+		async: false,		//不异步执行，等ajax执行结束才更新
 		success: function(msg){
 			alert(JSON.stringify(msg));
 		},
