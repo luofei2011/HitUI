@@ -67,10 +67,9 @@
 					formbody.append(html);
 					//返回信息显示
 					var output = msg.output;
-					alert("form:"+output);
 				},
 				error: function(msg){
-					alert('error!');
+					alert('formFrame error!');
 				}
 			});
 		});
@@ -103,10 +102,9 @@
 					treebody.append(treehtml);
 					//返回信息显示
 					var output = msg.output;
-					alert("tree:"+output);
 				},
 				error: function(msg){
-					alert('error!');
+					alert('treeFrame error!');
 				}
 			});
 		});
@@ -138,10 +136,9 @@
 					tabbody.append(tabhtml);
 					//返回信息显示
 					var output = msg.output;
-					alert("tab"+output);
 				},
 				error: function(msg){
-					alert('error!');
+					alert('tabFrame error!');
 				}	
 			});
 		});

@@ -22,7 +22,7 @@ class formframe extends CI_Controller {
 		$this->load->helper('url');
 	}
 	
-	//page(index)
+	//form/view传递界面代码
 	public function view()
 	{
 		if( ! file_exists('application/views/templates/formframe.php'))
@@ -41,15 +41,18 @@ class formframe extends CI_Controller {
 
 		//根据nodeId加载对应的的数据页面
 		$contentData = $this->ldata->getContent($nodeId);
-		$data['pages'] = $contentData; //json_encode($contentData);
+		//$data['pages'] = $contentData; //json_encode($contentData);
 		
-		//载入每个页面的内容
+		//根据页面id载入每个页面的内容
 		$pageContent = array();
 		foreach ($contentData as $page){
-			$tem = $this->ldata->getData($page['pageId']);
-			array_push($pageContent, $tem);
+			$tempage = $this->ldata->getData($page['pageId']);	//get contentData according to the pageId
+			//提取页面每一项数据
+			foreach($tempage as $item){
+				array_push($pageContent, $item);	
+			}
 		}
-		$data['pageContent'] = $pageContent; //json_encode($pageContent);
+		$data['content'] = $pageContent; //json_encode($pageContent);
 
 //内容信息数据传给view的tabframe去显示
  		$buffer = $this->load->view('templates/formframe', $data, true);
@@ -58,10 +61,16 @@ class formframe extends CI_Controller {
 	    $jsonStr['html'] = $buffer;
 	 	$jsonStr['output'] = $nodeId;//read db success = now nodeId, fail= error
 	  	echo json_encode($jsonStr);
-
-
 	}
+	
+	//form/upload更改数据
+	public function upload()
+	{
+		$newdata = $this->input->post('data',true);
+		//$newdata['state'] = 'success';
 
+		echo json_encode($newdata);
+	}
 }
 
 ?>
