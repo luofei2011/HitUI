@@ -2,17 +2,14 @@
 var hit = {
 
     /*
-     * 存储数据库配置信息
+     * 正式使用的时候需要配置网站的路径
      * */
-    dbCONF: {},
+    baseURL: '',
 
     /*
      * 加载用户的配置信息
      * */
     conf: {},
-
-    // 存储当前的网站路径
-    baseURL: "",
 
     /*
      * 封装的异步查询函数
@@ -29,8 +26,8 @@ var hit = {
             data: {
                 data: {
                     db: {
-                        dbName: this.dbCONF.name,
-                        t: this.dbCONF.t
+                        dbName: this.conf.db.name,
+                        t: this.conf.db.t
                     },
                     data: data,
                     op: op
@@ -53,6 +50,47 @@ var hit = {
     },
 
     /*
+     * 初始化功能区
+     * */
+    _createOp: function(con, tNode) {
+        var html = "", arr = con.funcArr, i = 0,
+            len = arr.length,
+            tNode = tNode || $('div.gr-toolbar');
+
+        console.time('createOp');
+
+        // 首先初始化表格的相关操作功能
+        for(; i < len; i++) {
+            html += '<a href="" class="hit-button gap-left"><span class="hit-button-txt hit-button-icon icon-' +
+                    arr[i] + '" op="' + arr[i] + '">' + funcNameMapping(arr[i]) + '</span></a>';
+        }
+
+        // TODO 是否需要添加表格的简单搜索功能
+        //
+        // 封装片段并渲染
+        html = '<table style="width: 100%;"><tr><td style="width: 100%;">' + html + '</td></tr></table>';
+        tNode.append(html);
+
+        console.timeEnd('createOp');
+
+        // 内部私有函数，用于做功能名的映射
+        function funcNameMapping(str) {
+            switch(str) {
+                case 'add':
+                    return "添加";
+                case 'delete':
+                    return "删除";
+                case 'edit':
+                    return "编辑";
+                case 'save':
+                    return "保存";
+                default:
+                    return "新功能，请到load.js中添加";
+            };
+        }
+    },
+
+    /*
      * 通用的ajax加载函数，返回标准的json格式数据
      * @param {String} url 请求地址
      * @param {Object} data 请求数据
@@ -61,11 +99,12 @@ var hit = {
     load: function(config, targetNode) {
         // 首先初始化表头信息
         var _this = this;
-        //this.initTableHead(config, targetNode);
-        this._createTableHead(config, targetNode);
 
-        // 存储数据库配置信息
-        this.dbCONF = config.db;
+        // 是否需要显示功能区
+        if (config.hasFunc)
+            this._createOp(config, '');
+
+        this._createTableHead(config, targetNode);
 
         $.ajax({
             url: config.url,
@@ -73,8 +112,8 @@ var hit = {
             data: {
                 data: {
                     db: {
-                        dbName: this.dbCONF.name,
-                        t: this.dbCONF.t
+                        dbName: this.conf.db.name,
+                        t: this.conf.db.t
                     },
                     data: '',
                     op: {
@@ -96,7 +135,6 @@ var hit = {
                 console.log(obj);
                 if (obj.status === "ok") {
                     if (obj.data) {
-                        //_this.initTableContent(obj.data, config, targetNode);
                         if (obj.data.pager)
                             _this._resultPager(obj.data.pager);
                         _this._createTableBody(obj.data.data, config);
@@ -108,6 +146,8 @@ var hit = {
 
     /*
      * 初始化表格头部信息
+     * @param {Object} con 配置信息
+     * @param {String} tNode 目标节点
      * */
     _createTableHead: function(con, tNode) {
         var _table = this._createTable(con),
@@ -182,50 +222,11 @@ var hit = {
     },
 
     /*
-     * 通用的表格头部函数
-     * @param {Object} config 表格头部配置信息
+     * 根据配置参数及获取到的数据渲染表格内容
+     * @param {Array} data 从数据库获取得到的内容
+     * @param {Object} con 用户的配置数据
+     * @param {String} tNode 节点
      * */
-    initTableHead: function(config, targetNode) {
-        // TODO 是否需要用户自定义表格每列的宽度
-        var oTable = $('<div class="gr-d-grid-outer-bg"></div>'),
-            html = "", i = 0, len, arr = [], tmp = {}, _table = {};
-
-        html += '<div class="gr-d-grid-rowView"><div class="gr-d-grid-head">';
-        _table = this.initTable(config);
-        html += _table.html;
-
-        // 循环定义表头信息
-        for (len = config.headMsg.length, i = 0; i < len; i++) {
-            html += '<tr>';
-
-            if (config.hasCheckBox && !i)
-                html += this.createCheckBox('', true);
-
-            for(arr in config.headMsg[i]) {
-
-                // 得到每列的配置信息(Object)
-                tmp = config.headMsg[i][arr];
-                html += '<td class="text-' + tmp.align + ' gr-d-grid-head-cell"'; // 文本对其方式
-                
-                // 是否显示多行
-                if (!i) {
-                    if (tmp.multiply && tmp.colspan > 1) 
-                        html += ' colspan=' + tmp.colspan;
-                    else 
-                        html += ' rowspan=2';
-                }
-
-                html += '><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap">' + tmp.name + '</div></td>';
-            }
-
-            html += '</tr>';
-        }
-
-        html += '</table><div class="gr-d-grid-bg" style="width: ' + _table.width + 'px;"></div></div></div>';
-        oTable.html(html);
-        $('.' + targetNode).append(oTable);
-    },
-
     _createTableBody: function(data, con, tNode) {
         var html = "", tmp = {}, i = 0, len,
             map = con.bodyContent, key = '';
@@ -301,40 +302,6 @@ var hit = {
     },
 
     /*
-     * 表格数据渲染函数, 分页渲染
-     * @param {Array} data json格式的数据
-     * */
-    initTableContent: function(data, config, targetNode) {
-        var oTable = $('<div class="gr-d-grid-view"></div>'),
-            html = "",
-            tmp = {},
-            _table = {};
-
-        html += '<div class="gr-d-grid-body">';
-        _table = this.initTable(config);
-        html += _table.html;
-
-        for(tmp in data) {
-            html += '<tr class="table-row-has-event">';
-
-            if (config.hasCheckBox) 
-                html += this.createCheckBox(data[tmp]['id']);
-
-            for (var o in data[tmp]) {
-                if (o !== 'id')
-                    html += '<td class="gr-d-grid-cell"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap grid-cell-show">' + data[tmp][o] + '</div><input type="text" value="' + data[tmp][o] + '" class="grid-cell-edit"></td>';
-            }
-
-            html += '</tr>';
-        }
-        html += '</table></div>';
-
-        // 渲染表格
-        oTable.html(html);
-        $('.' + targetNode).append(oTable);
-    },
-
-    /*
      * 返回表头宽度配置信息
      * @param {Object} con 配置信息
      * @return {String} html 拼接好的html片段
@@ -361,63 +328,26 @@ var hit = {
         };
     },
 
-    initTable: function(config) {
-        var i = 0, w = 0, html = "", con = config.widthMsg;
-
-        // 对配置信息中宽度信息进行求和，得到表格宽度
-        for (len = con.length; i < len; i++)
-            w += con[i];
-
-        if (config.hasCheckBox)
-            w += 30;
-
-        // 首先定义好表格的长度相关信息
-        html += '<table';
-        
-        html += ' cellPadding=0 cellSpacing=0 border=0 style="width: ' + w + 'px;"><tr style="height: 0px;">';
-
-        if (config.hasCheckBox)
-            html += '<td style="width: 30px;"></td>';
-
-        for(i = 0; i < len; i++) {
-            html += '<td style="width: ' + con[i] + 'px;"></td>';
-        }
-        html += '</tr>';
-
-        return {
-            html: html,
-            width: w
-        };
-    },
     /*
-     * 创建checkbox
+     * 系统中所有的ID都按照统一的格式进行生成，该函数用于
+     * 获取到ID中存储的有用信息
+     *
+     * ID生成规则:
+     *  String + $ + trueValue
+     *
+     * 即：任意的字母，以$分离，最后才是ID中的有用信息
      * */
-    createCheckBox: function(id, isRowSpan) {
-        var str = '<td style="width: 30px;"';
-
-        if (isRowSpan)
-            str += ' rowspan=2 class="gr-d-grid-head-cell"';
-        else 
-            str += ' class="gr-d-grid-cell"';
-
-        str += '><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox"'
-
-        if (isRowSpan)
-            str += ' id="check_all"';
-
-        str += '>';
-
-        if (id) {
-            str += '<input type="hidden" value="' + id + '">';
-        }
-
-        str += '</div></td>';
-
-        return str;
-    },
     filterID: function(str) {
         return str.split('$')[1];
     },
+
+    /*
+     * 把传递的数据库查询参数转变成可直接查询的sql片段
+     *  如：
+     *  {a:'a', b: 'b'} => "a='a', b='b'"
+     * @param {Array} arr 查询参数
+     * @return {Array} 返回带有可直接查询的sql片段
+     * */
     convertToSQL: function(arr) {
         var i = 0,
             len = arr.length,
@@ -432,6 +362,12 @@ var hit = {
 
         return re;
     },
+
+    /*
+     * 私有接口，供sql片段生成
+     * @param {Array} arr
+     * @return {String}  str
+     * */
     _convertArrToSQL: function(arr) {
         var i = 0, len = arr.length, str = "";
 
@@ -447,6 +383,7 @@ var hit = {
     
     /*
      * 根据新数据重绘表格
+     * @param {Object} data
      * */
     reDrawTableContent: function(data) {
         $('.gr-d-grid-body tbody tr').each(function(i) {
@@ -459,6 +396,7 @@ var hit = {
 
     /*
      * 分页功能
+     * @param {Object} pager
      * */
     _resultPager: function(pager) {
         var _node = $('div.gr-grid-pager'),
@@ -501,6 +439,8 @@ var hit = {
 
     /*
      * 刷新分页中按钮的状态
+     * @param {Number} cur 当前页
+     * @param {Number} pages 总的页数
      * */
     reloadPagerBtnStatus: function(cur, pages) {
         var _p = $('div.gr-grid-pager'),
@@ -530,6 +470,8 @@ var hit = {
 
     /*
      * 分页刷新
+     * @param {HTML-Object} node
+     * @param {Number} cur
      * */
     changePagerCur: function(node, cur) {
         var node = node | $('#selectPager');

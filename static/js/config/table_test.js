@@ -21,7 +21,7 @@ var table_test = {
 
     /***************功能区相关配置***************/
     hasFunc: true, // 是否显示功能区
-    funcArr: ['add', 'remove', 'save'], // add, remove, save, edit, search
+    funcArr: ['add', 'edit', 'delete', 'save'], // add, remove, save, edit, search
     /********************************************/
 
     /***************表头信息配置*****************/
