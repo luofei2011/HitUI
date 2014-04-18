@@ -2,13 +2,17 @@
 class Base extends CI_Model {
 
     private $tableName = "test";
+    private $db;
 
     public function __construct() {
         parent::__construct();
-        $this->db = $this->load->database('default', true);
+        //$this->db = $this->load->database('default', true);
     }
 
     public function filter_target($in) {
+        // 获取传递的数据库名, 并连接该数据库
+        $dbName = $in['db']['dbName'] ? $in['db']['dbName'] : 'default';
+        $this->db = $this->load->database($dbName, true);
         $this->tableName = $in['db']['t'];
         switch($in['op']['op']) {
             case "update":
@@ -16,6 +20,10 @@ class Base extends CI_Model {
             case "select":
                 $con = $this->get_select_con($in['op']['con']);
                 return $this->dbSelect($con);
+            case "delete":
+                return $this->dbDelete($in['data']);
+            case "insert":
+                return $this->dbInsert($in['data']);
             default:
                 break;
         }
@@ -41,13 +49,17 @@ class Base extends CI_Model {
      * );
      * */
     public function dbInsert($arr) {
-        $sql = "INSERT INTO $arr->table values()";
-        return $this->format_return_data($this->dbQuery($sql, false), '');
+        // 默认一次可插入多条数据
+        foreach($arr as $data) {
+            $tmp = $this->obj_to_array($data);
+            $tmp['id'] = '';
+            $this->db->insert($this->tableName, $tmp);
+        }
+
+        return $this->format_return_data();
     }
 
     public function dbSelect($arr) {
-        $sql = "SELECT * FROM $this->tableName";
-
         // 得到记录数量
         $pages = $this->dbCountAllResult();
 
@@ -56,23 +68,19 @@ class Base extends CI_Model {
             $this->db->order_by("$order[0]", "$order[1]");
         }
 
-        if (array_key_exists('limit', $arr))
-            $sql .= " LIMIT " . $arr['limit'];
-
-        if (array_key_exists('offset', $arr)) {
-            //var_dump($this->db->get($this->tableName, 50, 0)->result_array());
-            $offset = (int)$arr['offset'] * (int)$arr['limit'];
-            return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
-                'pages' => $pages,
-                'perNum' => $arr['limit'],
-                'cur' => $arr['offset'] + 1,
-            ));
+        if (array_key_exists('limit', $arr)) {
+            $limit = $arr['limit'] ? $arr['limit'] : 50;
         }
 
-        return $this->format_return_data($this->dbQuery($sql), array(
+        if (array_key_exists('offset', $arr)) {
+            $offset = (int)$arr['offset'] * (int)$arr['limit'];
+            $offset = $offset ? $offset : 0;
+        }
+
+        return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
             'pages' => $pages,
-            'cur' => $arr['offset'] + 1,
             'perNum' => $arr['limit'],
+            'cur' => $arr['offset'] + 1,
         ));
     }
 
@@ -88,8 +96,12 @@ class Base extends CI_Model {
      * */
     public function dbUpdate($arr) {
         foreach($arr as $item) {
-            $sql = "UPDATE $this->tableName SET ". $item['q'] ." WHERE id=" . $item['id'] . "";
-            $this->dbQuery($sql, false);
+            // 处理query里面的参数，变成关联数组
+            $q = $this->obj_to_array($item['q']);
+            //$sql = "UPDATE $this->tableName SET ". $item['q'] ." WHERE id=" . $item['id'] . "";
+            $this->db->where('id', $item['id']);
+            $this->db->update($this->tableName, $q);
+            //$this->dbQuery($sql, false);
         }
 
         return $this->format_return_data();
@@ -103,8 +115,12 @@ class Base extends CI_Model {
      * );
      * */
     public function dbDelete($arr) {
-        $sql = "DELETE FROM $arr->table WHERE id=$arr->id";
-        return $this->dbQuery($sql, false);
+        foreach($arr as $id) {
+            $this->db->where('id',$id);
+            $this->db->delete($this->tableName);
+        }
+
+        return $this->format_return_data();
     }
 
     /*
@@ -162,6 +178,18 @@ class Base extends CI_Model {
             "data" => $data,
             "pager" => $pager
         );
+    }
+
+    /*
+     * Update辅助函数
+     * */
+    private function obj_to_array($arr) {
+        $re = array();
+        foreach($arr as $item) {
+            $re[$item['name']] = $item['value'];
+        }
+
+        return $re;
     }
 }
 ?>

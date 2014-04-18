@@ -31,7 +31,7 @@ class Load extends CI_Controller {
 
     // 通用数据返回格式
     private function format_return_data($data = "") {
-        $r = [];
+        $r = array();
         $r['status'] = "ok";
         $r['data'] = $data;
         

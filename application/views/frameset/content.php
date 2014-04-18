@@ -51,6 +51,7 @@
             </div>
         </div>
         <!--分页结束-->
+        <div class="hit-resizer-trigger"></div>
     </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_test.js');?>"></script>
