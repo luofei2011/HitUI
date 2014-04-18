@@ -12,6 +12,11 @@ var hit = {
     conf: {},
 
     /*
+     * 监听全局的鼠标点击状态
+     * */
+    isMouseDown: false,
+
+    /*
      * 封装的异步查询函数
      * @param {String} url 请求地址
      * @param {Object} data 请求数据
@@ -154,7 +159,7 @@ var hit = {
 
             /*************表头信息部分*********************/
             oTable = $('<div class="gr-d-grid-outer-bg"></div>'),
-            html = "", i = 0, arr = [], tmp ={}, len;
+            html = "", i = 0, arr = [], tmp ={}, len, idIdx = 0;
 
         // LOG
         console.time('createTableHead');
@@ -174,18 +179,28 @@ var hit = {
                 html += '<td class="text-' + tmp.align + ' gr-d-grid-head-cell"'; // 文本对其方式
                 
                 // 是否显示多行
-                if (tmp.multiply && tmp.colspan > 1) 
+                if (tmp.multiply && tmp.colspan > 1)  {
                     html += ' colspan=' + tmp.colspan;
-                else 
+                    idIdx += (tmp.colspan * 1);
+                } else {
                     html += ' rowspan=2';
+                    idIdx += 1;
+                }
 
-                html += '><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap">' + tmp.label;
+                html += ' id="HEADCELL$'+ idIdx +'"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap">' + tmp.label;
 
                 // 是否可排序
                 if (tmp.isOrdered)
                     html += '<span class="grid-sort hit-grid-sortIcon-desc" tField="' + tmp.isOrdered + '"></span>';
 
-                html += '</div></td>';
+                html += '</div>';
+
+                // 是否可作为固定列
+                // TODO 默认只有第一行的数据能进行固定
+                if (!(tmp.multiply && tmp.colspan > 1) && tmp.isFixed)
+                    html += '<span class="caret fixed-col"></span>';
+
+                html += '</td>';
         }
         html += '</tr>';
 
@@ -229,11 +244,13 @@ var hit = {
      * */
     _createTableBody: function(data, con, tNode) {
         var html = "", tmp = {}, i = 0, len,
-            map = con.bodyContent, key = '';
+            map = con.bodyContent, key = '', idIdx = 0;
 
         console.time('createTableBody');
         key = this._searchKey(map);
         for (len = data.length; i < len; i++) {
+            // 重置索引
+            idIdx = 0;
             tmp = data[i];
             html += '<tr class="table-row-has-event" id="TABLEID$' + tmp[key] + '">';
 
@@ -242,7 +259,8 @@ var hit = {
 
             for (var o in tmp) {
                 if (map[o]['isShow']) {
-                    html += '<td class="gr-d-grid-cell" id="FIELD$' + o + '"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap grid-cell-show">' + tmp[o] + '</div>';
+                    idIdx++;
+                    html += '<td class="gr-d-grid-cell" id="'+ idIdx +'$FIELD$' + o + '"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap grid-cell-show">' + tmp[o] + '</div>';
 
                     if (map[o]['canEdit']) {
                         //html += '<input type="text" value="' + tmp[o] + '" class="grid-cell-edit">';
@@ -338,7 +356,7 @@ var hit = {
      * 即：任意的字母，以$分离，最后才是ID中的有用信息
      * */
     filterID: function(str) {
-        return str.split('$')[1];
+        return str.split('$').pop();
     },
 
     /*

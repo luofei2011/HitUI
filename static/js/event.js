@@ -1,3 +1,8 @@
+/******************全局事件绑定****************************/
+$(document).on('mouseup', function() {
+    hit.isMouseDown = false;
+});
+/**********************************************************/
 // 表格行hover事件
 $(document).on('mouseenter', 'tr.table-row-has-event', function() {
     $(this).addClass('gr-d-grid-row-hover');
@@ -279,4 +284,33 @@ $('#pageNumSetting').on('change', function() {
 
     hit.changePagerCur('', 1);
     $('#selectPager').change();
+});
+
+// 表格尺寸resize事件
+$('div.hit-resizer-trigger').on('mousedown', function() {
+    hit.isMouseDown = true;
+});
+
+// 固定列事件
+$(document).on('click', 'span.fixed-col', function() {
+    // 得到需要进行固定列的索引
+    var _idx = $(this).closest('td').attr('id').split('$').pop(),
+        _isFixed = $(this).attr('fixed');
+
+    $('td.gr-d-grid-cell', $('div.gr-d-grid-body')).each(function() {
+        // 首先找到固定的索引
+        if (this.id.split('$').shift() === _idx) {
+            // 再判断是否固定属性
+            if (!_isFixed)
+                $(this).addClass('fixed-col-bg');
+            else
+                $(this).removeClass('fixed-col-bg');
+        }
+    });
+
+    $(this).closest('td').toggleClass('fixed-col-bg');
+    if (!_isFixed)
+        $(this).attr('fixed', true);
+    else
+        $(this).attr('fixed', '');
 });
