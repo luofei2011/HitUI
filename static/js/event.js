@@ -84,7 +84,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
                     });
                 }
             });
-            query = hit.convertToSQL(query);
+            //query = hit.convertToSQL(query);
             console.log(query);
 
             // 数据库操作
