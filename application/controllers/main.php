@@ -37,10 +37,27 @@ class main extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 	}
 
-	//current page 最近生成的页面
-	//貌似无法判断最近页面是什么
-	public function currentpage($context = 'hi')
-	{
+	//Tongyongde routing function
+	public function load($page="index"){
+		$openpage = 'application/views/elements/' . $page . '.php';
+		if( ! file_exists( $openpage ))
+		{
+			show_404();
+		}
+		
+		if( $this->input->post() ){
+			$data["isPost"] = true;
+		}else{
+			$data["isPost"] = false;
+			$data["in"] = $this->getInputData($this->input->post( 'data' , true ));
+		}
+
+		$this->load->view( 'elements/' . $page, $data );
+	}
+	
+	//用于统一处理post进来的数据，数据都应该符合以下格式
+	private function getInputData( $in ){
+		return $in;
 	}
 
 }

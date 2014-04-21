@@ -1,4 +1,6 @@
-.tab .content>div{
+.tab .content div{
 	clear:left;
-	
+	color: white;
+	background-color: #663333
+	display:none;
 }

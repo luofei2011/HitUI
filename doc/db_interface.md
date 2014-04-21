@@ -1,4 +1,15 @@
-### 数据交互相关接口使用文档
+## 对数据库的数据交互相关接口使用文档
+
+#### 工作流程
+
+1. 在JS脚本中引入`static/js/load.js` + 对`hit.conf`配置数据库 + 往hit.query(`url`,`data`,`op`,`func`)中传递四个对应参数
+2. `url`赋值为'deal_data'后，将以AJAX方式Post到`controller/load.php`里面的`deal_data()`，专门负责数据库操作
+3. 在`deal_data()`中，调用数据模型`models/base.php`中的`filter_target($in)`来统一操作数据库
+4. 在`models/base.php`中，用`format_return_data($data, $pager)`来对返回数据进行封装，返回到`deal_data()`
+5. 在`deal_data()`中，调用本地函数`format_return_data($data)`对数据再次封装，最后以JSON格式返回给JS脚本的AJAX
+6. 在AJAX的返回数据处理函数中，调用最开始的参数`func`，处理数据库操作的返回数据
+
+总共涉及`static/js/load.js`、`controller/load.php`、`models/base.php`三个文件
 
 PS: 要使用该接口需要引入`static/js/load.js`文件
 

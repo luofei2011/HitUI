@@ -2,7 +2,7 @@
 <div class="global">
 	<button style="display:none" id="globalRefresh">refresh Needed</button>
 	<!--全局刷新函数，根据比对结果，刷新结果不一样的（已经改变的）-->
-	<div class="globalbody" output="0" input="" nowId="-1">
+	<div class="globalbody" nowId="-1">
 	</div>
 	<script type="text/javascript">
 		glofun = function(){$('#globalRefresh').click();}
@@ -46,7 +46,7 @@
 <!--数据表部分-->
 <div class="formframe">
 
-	<link rel="stylesheet" href="<?php echo base_url(''); ?>" />
+	<link rel="stylesheet" href="<?php echo base_url('static/css/content/tab.css'); ?>" />
 	<!--refresh the formframe and refresh the dependence part-->
 	<button style="display:none" id="formRefresh">refresh</button>
 	<div class="formbody" output="0" input="formDefault">
@@ -115,7 +115,7 @@
 <!--tab标签页框架-->
 <div class="tabframe">
 
-	<link rel="stylesheet" href="<?php echo base_url(''); ?>" />
+	<link rel="stylesheet" href="<?php echo base_url('static/css/content/tab.css'); ?>" />
 	<!--tab部分的刷新触发器-->
 	<button style="display:none" id="tabRefresh">tab refresh</button>
 	<div class="tabbody" output="tabDefalut" input="tabDefault">

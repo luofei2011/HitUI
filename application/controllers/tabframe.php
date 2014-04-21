@@ -45,7 +45,7 @@ class tabframe extends CI_Controller {
 		//载入每个页面的内容
 		$pageContent = array();
 		foreach ($contentData as $page){
-			$tem = $this->ldata->getData($page['pageId']);
+			$tem = $this->ldata->getDataNValues($page['pageId']);
 			array_push($pageContent, $tem);
 		}
 		$data['pageContent'] = $pageContent; //json_encode($pageContent);
