@@ -173,6 +173,19 @@ DEMO CODE：
 		'con': 'limit,50;offset,0;order,name'
 	}, func);
 	
+	// 查询参数data格式
+	[
+		{
+			name: '', // 进行like查询的字段名
+			value: '' // 需要进行查找的值
+		},
+		{
+			name: '', // 进行like查询的字段名
+			value: '' // 需要进行查找的值
+		}
+		...
+	]
+	
 `con`字段详解：
 
 该字段代表查询时的条件，包括三种情况：限制`limit`，偏移`offset`，排序`order`；不同条件用`;`隔开，条件的参数用`,`隔开。
