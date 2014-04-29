@@ -34,30 +34,61 @@ $(document).on('click', '#check_all', function() {
     });
 });
 
+// 为添加事件出来的按钮绑定提交事件
+$(document).on('click', 'a.new-field-sub', function() {
+    var _tr = $(this).closest('tr'),
+        _forms = $('input', _tr), _re = [];
+
+    _forms.each(function() {
+        _re.push({
+            name: this.name,
+            value: this.value
+        });
+    });
+
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $(this).closest('div.gr-border'),
+        status: 'wait'
+    });
+   
+    hit.query('load/deal_data', [_re], {
+        op: 'insert',
+        con: ''
+    }, function() {
+        $('div.edited-and-no-save').hide();
+        hit.COVER.removeNode();
+        _tr.remove();
+    });
+    return false;
+});
+
 // 所有的基本数据操作功能
 $(document).on('click', 'span.hit-button-icon', function() {
     var op= $(this).attr('op');
 
     switch(op) {
         case "add":
+            var _fTr = $('div.gr-d-grid-body tr').eq(1),
+                _fTds = _fTr.children(), i = 0,
+                len = _fTds.length,
+                _html = "<tr>";
+
+            for (; i < len; i++) {
+                if (_fTds[i].id) {
+                    // _field.push(_fTds[i].id.split('$').pop());
+                    _html += '<td class="gr-d-grid-cell">';
+                    _html += '<input type="text" name="' + _fTds[i].id.split('$').pop() + '"></td>';
+                } else {
+                    _html += '<td class="gr-d-grid-cell"><a href="#" class="new-field-sub"></a></td>';
+                }
+            }
+
+            _html += '</tr>';
+
+            $(_html).insertBefore(_fTr);
             break;
         case "save":
-            /*
-            var query = [];
-            $('div.gr-d-grid-body tr').each(function() {
-                var tmp = {}, isEdit = false;
-                $('input:not([type=checkbox])', $(this)).each(function(i) {
-                    if ($(this).css('display') !== 'none' || $(this).attr('type') === 'hidden') {
-                        if ($(this).css('display') !== 'none')
-                            isEdit = true;
-                        tmp[i] = $(this).val();
-                    }
-                });
-                if (isEdit)
-                    query.push(tmp);
-            });
-            console.log(query);
-            */
             var query = [];
             if ($('div.edited-and-error').length) {
                 alert('修改有误！请检查标记区域。');
@@ -84,8 +115,6 @@ $(document).on('click', 'span.hit-button-icon', function() {
                     });
                 }
             });
-            //query = hit.convertToSQL(query);
-            console.log(query);
 
             // 数据库操作
             if (query.length) {
@@ -107,6 +136,31 @@ $(document).on('click', 'span.hit-button-icon', function() {
             }
             break;
         case "delete":
+            var _q = get_checked_field(),
+                i = 0, _len = _q.node.length;
+
+            if (!_q.id.length) {
+                alert('未选中任何数据！');
+                return false;
+            }
+
+            // 生成cover层
+            hit.COVER.init({
+                tNode: $(this).closest('div.gr-toolbar').next(),
+                status: 'wait'
+            });
+           
+            hit.query('load/deal_data', _q.id, {
+                op: 'delete',
+                con: ''
+            }, function() {
+                hit.COVER.removeNode();
+
+                // 把记录从前端页面中删掉
+                for (; i < _len; i++) {
+                    _q.node[i].remove();
+                };
+            });
             break;
         case "edit":
             break;
@@ -125,6 +179,23 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
         return false;
     };
+
+    // 私有函数，得到选中的记录
+    function get_checked_field() {
+        var _re = {
+            id: [],
+            node: []
+        };
+        $('td.field-checkbox input[type=checkbox').each(function() {
+            var _tr = $(this).closest('tr');
+            if (this.checked) {
+                _re.id.push(_tr.attr('id').split('$').pop() * 1);
+                _re.node.push(_tr);
+            }
+        });
+
+        return _re;
+    }
 
     return false;
 });
@@ -162,6 +233,23 @@ $(document).on('mousedown', 'div.gr-d-grid-view', function() {
                 _oldH = $('div.gr-d-grid-rowView').width();
             $('div.gr-d-grid-rowView').width(_oldH - _gap);
         }
+    }
+});
+
+// 单元格编辑时的tab切换到下一单元事件
+$(document).on('keydown', '.grid-cell-edit', function(e) {
+    var _n = $(this).parent(), _f;
+    if (e.keyCode === 9) {
+        while(_n = _n.next()) {
+            _f = $('input, textarea, select', _n);
+            if (_f) {
+                _f.prev().hide();
+                _f.show().focus();
+                break;
+            }
+        }
+        e.preventDefault();
+        e.stopPropagation();
     }
 });
 
@@ -261,7 +349,7 @@ $('div.gr-grid-pager a').on('click', function() {
 // 分页事件
 $('#selectPager').on('change', function() {
     var offset = this.value * 1 - 1;
-    console.log(offset);
+
     // 生成cover层
     hit.COVER.init({
         tNode: $('div.gr-border'),
@@ -276,6 +364,41 @@ $('#selectPager').on('change', function() {
         hit.reDrawTableContent(data);
         hit.COVER.removeNode();
     });
+});
+
+// 查询事件
+$(document).on('click', '#query-btn', function() {
+    var _fields = $(this).closest('fieldset').find('input'), _re = [];
+
+    _fields.each(function() {
+        if (this.value)
+            _re.push({
+                name: this.name,
+                value: this.value
+            });
+    });
+
+    if (!_re.length) {
+        alert('未查询任何参数!');
+        return false;
+    }
+
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $('div.gr-border'),
+        status: 'wait'
+    });
+
+    // 更新数据
+    hit.query('load/deal_data', _re, {
+        op: 'select',
+        con: 'offset,'+ 0 +';limit,' + hit.conf.pageNum
+    }, function(data) {
+        hit.reDrawTableContent(data);
+        hit.COVER.removeNode();
+    });
+
+    return false;
 });
 
 // 更改显示数量事件

@@ -252,3 +252,28 @@ a:hover.gr-btn-disabled {
 .fixed-col-bg {
     background: rgba(0, 0, 0, .1);
 }
+.new-field-sub {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(../../img/icons/n_sub.png) no-repeat;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.gr-d-grid-cell:first-child {
+    text-align: center;
+}
+.gr-query {
+    margin-bottom: 10px;
+    width: 900px;
+}
+.gr-query fieldset {
+    border: solid 1px #909aa6;
+}
+.gr-query fieldset input, .gr-query fieldset select {
+    vertical-align: middle;
+}
+.q-field-item {
+    display: inline-block;
+    margin: 5px 10px;
+}
