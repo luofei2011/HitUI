@@ -4,7 +4,7 @@
 	if ( $isPost ){
 		echo "sth inside";
 	}else{
-		echo "here is nothing";
+		echo $in;
 	}
 ?>
 
