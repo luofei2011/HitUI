@@ -19,6 +19,24 @@ var table_test = {
     }
     /********************************************/
 
+    /****************查询参数配置****************/
+    hasQuery: false,
+    qParam: [
+        {
+            name: '', // 数据库中的字段名
+            label: '', // 显示的名字
+            type: '', // 类型
+            required: false // 是否允许为空
+        },
+        {
+            name: '',
+            label: '',
+            type: 'text',
+            required: false
+        }
+    ],
+    /********************************************/
+
     /***************功能区相关配置***************/
     hasFunc: true, // 是否显示功能区
     funcArr: ['add', 'remove', 'save'], // add, remove, save, edit, search

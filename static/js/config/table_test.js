@@ -19,6 +19,22 @@ var table_test = {
     },
     /********************************************/
 
+    hasQuery: true,
+    qParam: [
+        {
+            name: 'email', // 数据库中的字段名
+            label: '邮箱',
+            type: 'text', // 类型
+            required: true // 是否允许为空
+        },
+        {
+            name: 'name',
+            label: '姓名',
+            type: 'text',
+            required: false
+        }
+    ],
+
     /***************功能区相关配置***************/
     hasFunc: true, // 是否显示功能区
     funcArr: ['add', 'edit', 'delete', 'save'], // add, remove, save, edit, search

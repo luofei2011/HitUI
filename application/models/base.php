@@ -19,7 +19,7 @@ class Base extends CI_Model {
                 return $this->dbUpdate($in['data']);
             case "select":
                 $con = $this->get_select_con($in['op']['con']);
-                return $this->dbSelect($con);
+                return $this->dbSelect($con, $in['data']);
             case "delete":
                 return $this->dbDelete($in['data']);
             case "insert":
@@ -59,7 +59,23 @@ class Base extends CI_Model {
         return $this->format_return_data();
     }
 
-    public function dbSelect($arr) {
+    public function dbSelect($arr, $q = "") {
+        $this->db->from($this->tableName);
+        // 首先需要添加查询参数
+        if  ($q) {
+            $this->db->like($this->obj_to_array($q), 'none');
+            $result = $this->db->get();
+            $pages = $result->num_rows();
+
+            return $this->format_return_data($result->result_array(), array(
+                'pages' => $pages,
+                'perNum' => $arr['limit'],
+                'cur' => $arr['offset'] + 1,
+            ));
+        }
+
+        // var_dump($this->db->get()->result_array());
+        
         // 得到记录数量
         $pages = $this->dbCountAllResult();
 
@@ -70,11 +86,13 @@ class Base extends CI_Model {
 
         if (array_key_exists('limit', $arr)) {
             $limit = $arr['limit'] ? $arr['limit'] : 50;
+            // $this->db->limit($limit);
         }
 
         if (array_key_exists('offset', $arr)) {
             $offset = (int)$arr['offset'] * (int)$arr['limit'];
             $offset = $offset ? $offset : 0;
+            // $this->db->limit($limit, $offset);
         }
 
         return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
@@ -167,7 +185,7 @@ class Base extends CI_Model {
      * 获取表中的所有记录数
      * */
     private function dbCountAllResult() {
-        return $this->db->count_all_results($this->tableName);
+        return $this->db->count_all_results();
     }
 
     /*

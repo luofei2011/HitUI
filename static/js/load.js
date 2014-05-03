@@ -55,6 +55,34 @@ var hit = {
     },
 
     /*
+     * 初始化查询区域
+     */
+    _createQ: function(con) {
+        var i = 0, len = con.qParam.length,
+            tmp = {},
+            html = "";
+        if (!con.hasQuery || !len) {
+            $('div.gr-query').hide();
+            return false;
+        }
+
+        // 需要显示时
+        for (; i < len; i++) {
+            tmp = con.qParam[i];
+            html += '<div class="q-field-item"><label>' + tmp.label + '</label>';
+            switch(tmp.type) {
+                case "text":
+                case "select":
+                default:
+                    html += '<input type="text" name="' + tmp.name + '"></input></div>';
+                    break;
+            }
+        }
+
+        $('div.gr-query fieldset').prepend(html);
+    },
+
+    /*
      * 初始化功能区
      * */
     _createOp: function(con, tNode) {
@@ -104,6 +132,9 @@ var hit = {
     load: function(config, targetNode) {
         // 首先初始化表头信息
         var _this = this;
+
+        // 配置查询区域
+        this._createQ(config);
 
         // 是否需要显示功能区
         if (config.hasFunc)
@@ -255,7 +286,7 @@ var hit = {
             html += '<tr class="table-row-has-event" id="TABLEID$' + tmp[key] + '">';
 
             if (con.hasCheckBox)
-                html += '<td class="gr-d-grid-cell" style="width: 30px;"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox"></div></td>';
+                html += '<td class="gr-d-grid-cell field-checkbox" style="width: 30px;"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox"></div></td>';
 
             for (var o in tmp) {
                 if (map[o]['isShow']) {

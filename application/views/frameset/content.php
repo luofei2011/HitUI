@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="<?php echo base_url('static/css/content/table.css');?>" />
 <div class="gr-container">
     <h2>Datagrid 数据表格</h2>
+    <div class="gr-query">
+        <fieldset>
+            <legend>查询参数</legend>
+            <a class="hit-button pull-right" id="query-btn">
+                <span class="hit-button-txt">查询</span>
+            </a>
+        </fieldset>
+    </div>
     <div class="gr-table">
         <!--表格功能区-->
         <div class="gr-toolbar">
