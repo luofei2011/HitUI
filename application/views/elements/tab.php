@@ -13,26 +13,19 @@
 <script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script>
 <script type="text/javascript">
 	hit.baseURL = "<?=base_url()?>";	
-	hit.conf = {
-		'db': {
-			name: 'graduation',
-			t: 'testT'
-		}
-	};
-		console.log("a");
+	hit.setDB('menu', 'natservice');
+		console.time("dbQuery");
 	hit.query('load/deal_data', '', {
 		op : 'select',
 		con : 'limit,50'
 	}, function(data){
-	console.log(data);
-	//	dealData(data);
+		dealData(data);
 	});
+	console.timeEnd("dbQuery");
 	
 	dealData = function(data) {
-	/*
-		for (len = data.length; i < len; i++ ) {
-			console.time(data[i]);
+		for (len = data.length, i = 0; i < len; i++ ) {
+			console.log(data[i]);
 		}
-		*/
 	}
 </script>
