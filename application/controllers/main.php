@@ -11,7 +11,7 @@ class main extends CI_Controller {
 
 		$config['hostname'] = 'localhost';
 		$config['username'] = 'root'; 
-		$config['password'] = 'f';
+		$config['password'] = '';
 		$config['database'] = 'hitData';//应该加载设置信息库
 		$config['dbdriver'] = 'mysql';
 		$config['dbprefix'] = '';
@@ -47,9 +47,9 @@ class main extends CI_Controller {
 		
 		if( $this->input->post() ){
 			$data["isPost"] = true;
+			$data["in"] = $this->getInputData($this->input->post( 'data' , true ));
 		}else{
 			$data["isPost"] = false;
-			$data["in"] = $this->getInputData($this->input->post( 'data' , true ));
 		}
 
 		$this->load->view( 'elements/' . $page, $data );

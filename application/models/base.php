@@ -12,8 +12,12 @@ class Base extends CI_Model {
     public function filter_target($in) {
         // 获取传递的数据库名, 并连接该数据库
         $dbName = $in['db']['dbName'] ? $in['db']['dbName'] : 'default';
-        $this->db = $this->load->database($dbName, true);
+		//以DSN的方式传递设置
+		//TODO:该处只有数据库能作为参数传递，dbdriver、username&password、和域名都是固定的。
+		$dsn = 'mysql://root@localhost/'.$dbName;
+        $this->db = $this->load->database($dsn, true);
         $this->tableName = $in['db']['t'];
+		$query = $this->db->query("select * from ".$this->tableName);
         switch($in['op']['op']) {
             case "update":
                 return $this->dbUpdate($in['data']);
@@ -84,16 +88,17 @@ class Base extends CI_Model {
             $this->db->order_by("$order[0]", "$order[1]");
         }
 
+//TODO:下面两个地方都临时增加了else，处理没有条件的情况，这个也要麻烦你完善一下下咯
         if (array_key_exists('limit', $arr)) {
             $limit = $arr['limit'] ? $arr['limit'] : 50;
             // $this->db->limit($limit);
-        }
+        }else{ $arr['limit'] = 50; }
 
         if (array_key_exists('offset', $arr)) {
             $offset = (int)$arr['offset'] * (int)$arr['limit'];
             $offset = $offset ? $offset : 0;
             // $this->db->limit($limit, $offset);
-        }
+        }else{ $offset = 0; $arr['offset'] = 0; }
 
         return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
             'pages' => $pages,
@@ -170,6 +175,7 @@ class Base extends CI_Model {
      * 获取类型为select时的条件
      * */
     private function get_select_con($str) {
+	//TODO:该处有bug，若hit.query传递的条件con为空，则会出错。。。麻烦完善一下
         $conArr = array();
         $cons = explode(';', $str);
 
