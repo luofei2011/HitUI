@@ -64,6 +64,24 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+// 另一个数据库
+$db['inv']['hostname'] = 'localhost';
+$db['inv']['username'] = 'root';
+$db['inv']['password'] = '';
+$db['inv']['database'] = 'inv';
+$db['inv']['dbdriver'] = 'mysql';
+$db['inv']['dbprefix'] = '';
+$db['inv']['pconnect'] = TRUE;
+$db['inv']['db_debug'] = TRUE;
+$db['inv']['cache_on'] = FALSE;
+$db['inv']['cachedir'] = '';
+$db['inv']['char_set'] = 'utf8';
+$db['inv']['dbcollat'] = 'utf8_general_ci';
+$db['inv']['swap_pre'] = '';
+$db['inv']['autoinit'] = TRUE;
+$db['inv']['stricton'] = FALSE;
+
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

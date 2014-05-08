@@ -20,6 +20,14 @@ class Welcome extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
+
+        $uname = $this->input->cookie('uname', true);
+		$urole = $this->input->cookie('urole', true);
+		$uid = $this->input->cookie('uid', true);
+
+		if (!$uname || !$uid || !$urole) {
+			redirect('/login', 'refresh');
+		}
     }
 
 	public function index()

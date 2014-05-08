@@ -24,6 +24,8 @@ class Base extends CI_Model {
                 return $this->dbDelete($in['data']);
             case "insert":
                 return $this->dbInsert($in['data']);
+            case "where":
+                return $this->dbWhere($in['data']);
             default:
                 break;
         }
@@ -139,6 +141,13 @@ class Base extends CI_Model {
         }
 
         return $this->format_return_data();
+    }
+
+    public function dbWhere($arr) {
+        $this->db->from($this->tableName);
+        $this->db->where($arr);
+        $result = $this->db->get();
+        return $result->result_array();
     }
 
     /*
