@@ -5,6 +5,8 @@
  * */
 
 var treeDef = {
+	_treeNode: {},
+
 
 };
 

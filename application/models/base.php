@@ -11,9 +11,10 @@ class Base extends CI_Model {
 
     public function filter_target($in) {
         // 获取传递的数据库名, 并连接该数据库
+		// 每连接一个数据库，先在database.php用数据库的名字注册一个组
         $dbName = $in['db']['dbName'] ? $in['db']['dbName'] : 'default';
 		//以DSN的方式传递设置
-		//TODO:该处只有数据库能作为参数传递，dbdriver、username&password、和域名都是固定的。
+		//该处只有数据库能作为参数传递，dbdriver、username&password、和域名都是固定的。
 		// $dsn = 'mysql://root@localhost/'.$dbName;
         $this->db = $this->load->database($dbName, true);
         $this->tableName = $in['db']['t'];
