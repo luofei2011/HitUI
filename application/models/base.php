@@ -14,10 +14,9 @@ class Base extends CI_Model {
         $dbName = $in['db']['dbName'] ? $in['db']['dbName'] : 'default';
 		//以DSN的方式传递设置
 		//TODO:该处只有数据库能作为参数传递，dbdriver、username&password、和域名都是固定的。
-		$dsn = 'mysql://root@localhost/'.$dbName;
-        $this->db = $this->load->database($dsn, true);
+		// $dsn = 'mysql://root@localhost/'.$dbName;
+        $this->db = $this->load->database($dbName, true);
         $this->tableName = $in['db']['t'];
-		$query = $this->db->query("select * from ".$this->tableName);
         switch($in['op']['op']) {
             case "update":
                 return $this->dbUpdate($in['data']);
@@ -90,17 +89,21 @@ class Base extends CI_Model {
             $this->db->order_by("$order[0]", "$order[1]");
         }
 
-//TODO:下面两个地方都临时增加了else，处理没有条件的情况，这个也要麻烦你完善一下下咯
         if (array_key_exists('limit', $arr)) {
             $limit = $arr['limit'] ? $arr['limit'] : 50;
             // $this->db->limit($limit);
-        }else{ $arr['limit'] = 50; }
+        } else { 
+            $arr['limit'] = 50; 
+        }
 
         if (array_key_exists('offset', $arr)) {
             $offset = (int)$arr['offset'] * (int)$arr['limit'];
             $offset = $offset ? $offset : 0;
             // $this->db->limit($limit, $offset);
-        }else{ $offset = 0; $arr['offset'] = 0; }
+        } else { 
+            $offset = 0; 
+            $arr['offset'] = 0; 
+        }
 
         return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
             'pages' => $pages,
@@ -148,6 +151,11 @@ class Base extends CI_Model {
         return $this->format_return_data();
     }
 
+    /**
+     * 根据关联数组参数查询得到的结果
+     * @param  [Array] $arr [查询条件--关联数组]
+     * @return [Array]      [返回查询后的结果]
+     */
     public function dbWhere($arr) {
         $this->db->from($this->tableName);
         $this->db->where($arr);
