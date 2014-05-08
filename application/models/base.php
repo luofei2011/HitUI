@@ -23,27 +23,17 @@ class Base extends CI_Model {
                 return $this->dbUpdate($in['data']);
             case "select":
                 $con = $this->get_select_con($in['op']['con']);
-                return $this->dbSelect($con, $in['data']);
+                return $this->dbSelect($con);
             case "delete":
                 return $this->dbDelete($in['data']);
             case "insert":
                 return $this->dbInsert($in['data']);
             case "where":
                 return $this->dbWhere($in['data']);
+            case "like":
+                return $this->dbLike($this->get_select_con($in['op']['con']), $in['data']);
             default:
                 break;
-        }
-    }
-
-    public function test() {
-        $sql = "SELECT * FROM test";
-        return $this->dbQuery($sql);
-    }
-
-    public function insert_users($num) {
-        for ($i =0; $i < $num; $i ++) {
-            $sql = "INSERT INTO test values(NULL, 'test@gmail.com', '测试用户', '本科', '学生', '2013-08-04', '男', '计算机', '计算机')";
-            $this->dbQuery($sql, false);
         }
     }
 
@@ -65,23 +55,35 @@ class Base extends CI_Model {
         return $this->format_return_data();
     }
 
-    public function dbSelect($arr, $q = "") {
+    /*
+     * 对数据表进行like查询
+     */
+    public function dbLike($arr, $q) {
         $this->db->from($this->tableName);
-        // 首先需要添加查询参数
-        if  ($q) {
-            $this->db->like($this->obj_to_array($q), 'none');
-            $result = $this->db->get();
-            $pages = $result->num_rows();
-
-            return $this->format_return_data($result->result_array(), array(
-                'pages' => $pages,
-                'perNum' => $arr['limit'],
-                'cur' => $arr['offset'] + 1,
-            ));
+        $this->db->like($this->obj_to_array($q), 'none');
+        $result = $this->db->get();
+        $pages = $result->num_rows();
+        $limit = 50;
+        $offset = 0;
+        if (array_key_exists('limit', $arr)) {
+            $limit = $arr['limit'] | 50;
+        }
+        if (array_key_exists('offset', $arr)) {
+            $offset = $arr['offset'] | 0;
         }
 
-        // var_dump($this->db->get()->result_array());
-        
+        return $this->format_return_data($result->result_array(), array(
+            'pages' => $pages,
+            'perNum' => $limit,
+            'cur' => $offset + 1,
+        ));
+    }
+
+    /*
+     * 根据限制条件查询所有结果
+     */
+    public function dbSelect($arr) {
+        $this->db->from($this->tableName);
         // 得到记录数量
         $pages = $this->dbCountAllResult();
 
@@ -178,22 +180,9 @@ class Base extends CI_Model {
     }
 
     /*
-     * 通用的数据数据转成能到数据库中进行查询的格式
-     * */
-    private function formatSQL($arr) {
-        $result = "";
-        foreach($arr as $key => $value) {
-            $result .= "$key" . "=$value";
-        }
-
-        return $result;
-    }
-
-    /*
      * 获取类型为select时的条件
      * */
     private function get_select_con($str) {
-	//TODO:该处有bug，若hit.query传递的条件con为空，则会出错。。。麻烦完善一下
         $conArr = array();
         $cons = explode(';', $str);
 
