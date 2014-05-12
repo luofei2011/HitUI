@@ -81,6 +81,22 @@ $db['inv']['swap_pre'] = '';
 $db['inv']['autoinit'] = TRUE;
 $db['inv']['stricton'] = FALSE;
 
+// 用户和菜单数据库natservice
+$db['natservice']['hostname'] = 'localhost';
+$db['natservice']['username'] = 'root';
+$db['natservice']['password'] = '';
+$db['natservice']['database'] = 'natservice';
+$db['natservice']['dbdriver'] = 'mysql';
+$db['natservice']['dbprefix'] = '';
+$db['natservice']['pconnect'] = TRUE;
+$db['natservice']['db_debug'] = TRUE;
+$db['natservice']['cache_on'] = FALSE;
+$db['natservice']['cachedir'] = '';
+$db['natservice']['char_set'] = 'utf8';
+$db['natservice']['dbcollat'] = 'utf8_general_ci';
+$db['natservice']['swap_pre'] = '';
+$db['natservice']['autoinit'] = TRUE;
+$db['natservice']['stricton'] = FALSE;
 
 
 /* End of file database.php */
