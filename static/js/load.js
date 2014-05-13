@@ -564,7 +564,8 @@ var hit = {
     var options = [
             {
                'id': 'nav-tree',
-               'page': 'tree'
+               //'page': 'tree'
+			   'page': '../elements/tab'
             },
             {
                 'id': 'content',

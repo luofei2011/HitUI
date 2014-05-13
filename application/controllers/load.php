@@ -29,6 +29,13 @@ class Load extends CI_Controller {
         $this->load->view('frameset/' . $page);
     }
 
+    /*
+     * freemen的通用路由函数
+     * */
+    public function elements($page) {
+        $this->load->view('elements/' . $page);
+    }
+
     // 通用数据返回格式
     private function format_return_data($data = "") {
         $r = array();

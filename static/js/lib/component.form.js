@@ -4,8 +4,8 @@
  * @date: 2014-04-15
  * */
 
-hit.COMPONENT = {
-    form: {
+//hit.COMPONENT = {
+    temform= {
         text: function(val, valid) {
             return '<input class="grid-cell-edit" type="text" valid="' + valid + '" value="' + val + '">';
         },
@@ -43,4 +43,13 @@ hit.COMPONENT = {
             return '<input class="grid-cell-edit" type="hidden" valid="' + valid + '" value="' + val + '">';
         }
     }
-};
+//};
+
+if ( hit.COMPONENT ){
+	hit.COMPONENT.form = temform;
+} else {
+	hit.COMPONENT = {
+		form: temform
+	}
+}
+
