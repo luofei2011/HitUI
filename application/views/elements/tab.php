@@ -8,9 +8,26 @@
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.form.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.tree.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tree.js');?>"></script>
 <script type="text/javascript">
-	treeType = 'menu';
 	hit.baseURL = "<?=base_url()?>";	
+	var options = {
+		table: 'menu',
+		db: 'natservice',
+		conf: {
+			op: 'select',
+			con: 'limit, 50'
+		},
+		openNodes: []
+	};
+	options.openNodes.push('0103');
+	options.openNodes.push('0104');
+	options.openNodes.push('03');
+
+	hit.INTERFACES.tree.makeFromDB('menu', options);
+
+	/*
+	treeType = 'menu';
 	hit.setDB('menu', 'natservice');
 		console.time("dbQuery");
 	hit.query('load/deal_data', '', {
@@ -35,5 +52,6 @@
 	openList.push('03');
 	hit.COMPONENT.tree.setOpenNode(treeType, openList)
 	}
+	*/
 </script>
 </div>
