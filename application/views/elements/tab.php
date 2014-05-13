@@ -1,9 +1,7 @@
-<hr/>
-<h1>hello</h1>
+<link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
+<div class="tree-container">
+<h1>树</h1>
 <script type="text/javascript" src="<?=base_url('static/js/jquery.js');?>"></script>
-<script type="text/javascript">
-//document.write('<div class="tree-area"></div>');
-</script>
 <div class="tree-area"></div>
 
 <!--script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script-->
@@ -38,3 +36,4 @@
 	hit.COMPONENT.tree.setOpenNode(treeType, openList)
 	}
 </script>
+</div>
