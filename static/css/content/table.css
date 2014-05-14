@@ -19,9 +19,12 @@
 }
 .gr-d-grid-head {
     position: relative;
+    z-index: 1;
 }
 .gr-d-grid-outer-bg {
     background: #e7ebef url(../../img/table/header.png) repeat-x 0 0;
+    position: relative;
+    z-index: 1;
 }
 .gr-d-grid-head table {
     position: relative;
@@ -45,7 +48,7 @@
 .gr-border {
     border: 1px solid #999;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
 }
 .gr-d-grid-cell {
     position: relative;
@@ -100,6 +103,8 @@
     width: 100%;
     overflow: auto;
     height: 300px;
+    position: relative;
+    z-index: 5;
 }
 .gr-d-grid-rowView {
     position: relative;
@@ -250,7 +255,7 @@ a:hover.gr-btn-disabled {
     cursor: pointer;
 }
 .fixed-col-bg {
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, .2);
 }
 .new-field-sub {
     display: inline-block;
@@ -262,6 +267,10 @@ a:hover.gr-btn-disabled {
 }
 .gr-d-grid-cell:first-child {
     text-align: center;
+}
+.gr-d-grid-body {
+    position: relative;
+    z-index: 1;
 }
 .gr-query {
     margin-bottom: 10px;
@@ -276,4 +285,30 @@ a:hover.gr-btn-disabled {
 .q-field-item {
     display: inline-block;
     margin: 5px 10px;
+}
+.colPoup {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    border-spacing: 0;
+    z-index: 2;
+}
+.colPoup tr td div {
+    padding: 1px 2px 0 2px;
+    background: #CBCBCB;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #f1f1f1;
+}
+.colHead {
+    background: #CBCBCB;
+    position: absolute;
+    left: 30px;
+    top: 0;
+    z-index: 5;
+}
+.colHead div {
+    padding: 12px 0;
+    text-align: center;
 }
