@@ -23,6 +23,7 @@ $(document).on('click', '.tree-area .menu li', function() {
 				$(this).attr('select', 'Y').css('background-color', '#8ab');
 			} else {								
 			//already been choosen
+			//TODO:mention Global Setting & Global function
 				alert($(this).css('background-color'));
 			}
 		}
