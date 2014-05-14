@@ -223,8 +223,17 @@ $(document).on('mousedown', 'div.gr-d-grid-view', function() {
     // 保证只在该节点上绑定了一个scroll事件
     if (!$._data(this, 'events') || !$._data(this, 'events')['scroll']) {
         $(this).bind('scroll', function() {
-            var _sL = $(this).scrollLeft();
+            var _sL = $(this).scrollLeft(), _col = $('table.colPoup'), _colHead = $('div.colHead');
             $('div.gr-d-grid-rowView').scrollLeft(_sL);
+
+            if (_sL > 30 && _col) {
+                _col.css('left', _sL + 'px');
+                _colHead.css('left', _sL + 'px');
+
+            } else {
+                _col.css('left', '30px');
+                _colHead.css('left', '30px');
+            }
         });
 
         // 修正右滚动条带来的误差
@@ -391,7 +400,7 @@ $(document).on('click', '#query-btn', function() {
 
     // 更新数据
     hit.query('load/deal_data', _re, {
-        op: 'select',
+        op: 'like',
         con: 'offset,'+ 0 +';limit,' + hit.conf.pageNum
     }, function(data) {
         hit.reDrawTableContent(data);
@@ -418,22 +427,104 @@ $('div.hit-resizer-trigger').on('mousedown', function() {
 $(document).on('click', 'span.fixed-col', function() {
     // 得到需要进行固定列的索引
     var _idx = $(this).closest('td').attr('id').split('$').pop(),
-        _isFixed = $(this).attr('fixed');
+        _isFixed = $(this).attr('fixed'),
+        _pTr = $(this).closest('tr').prev(),
+        _tTD,tdIdx, _html = "", _width;
+
+    $('td', _pTr).each(function(i) {
+        var _id = this.id || "";
+        if (_id.split('$').pop() === _idx) {
+            _tTD = $(this);
+            tdIdx = i;
+            _width = _tTD.width();
+            $(this).attr('temp', _width).css('width', 0);
+        }
+    });
+    $(this).hide();
+
+    _html = '<tr><td style="width: '+ _width +'px"></td></tr>';
+    // _html += '<tr><td><div>' + $(this).closest('td')[0].children[0].innerHTML + '</div></td></tr>';
 
     $('td.gr-d-grid-cell', $('div.gr-d-grid-body')).each(function() {
         // 首先找到固定的索引
         if (this.id.split('$').shift() === _idx) {
             // 再判断是否固定属性
-            if (!_isFixed)
-                $(this).addClass('fixed-col-bg');
-            else
-                $(this).removeClass('fixed-col-bg');
+            // if (!_isFixed) {
+                // $(this).addClass('fixed-col-bg');
+                _html += '<tr><td><div>' + this.children[0].innerHTML + '</div></td></tr>';
+            // }  else {
+                // $(this).removeClass('fixed-col-bg');
+            // }
         }
     });
 
-    $(this).closest('td').toggleClass('fixed-col-bg');
-    if (!_isFixed)
-        $(this).attr('fixed', true);
-    else
-        $(this).attr('fixed', '');
+    // $(this).closest('td').toggleClass('fixed-col-bg');
+    // if (!_isFixed) {
+    //     $(this).attr('fixed', true);
+    // } else {
+    //     $(this).attr('fixed', '');
+    // }
+
+    $('<td style="width: ' + _width + 'px"></td>').insertAfter(_pTr.find('td').eq(0));
+    $('<td rowspan=2></td>').insertAfter($(this).closest('tr').find('td').eq(0));
+
+    // 插入一个空白结点
+    $('tr', $('div.gr-d-grid-body')).each(function(i) {
+        var _td;
+        if (i) {
+            _td = '<td></td>';
+        }  else {
+            _td = '<td style="width: ' + _width + 'px"></td>';
+            $(this).find('td').eq(tdIdx).css('width', 0);
+        }
+
+        $(_td).insertAfter($(this).find('td').eq(0));
+    });
+
+    // 创建table
+    var _table = $('<table class="colPoup"></table>');
+    _table.attr('id', _idx + '$INDEX$' + tdIdx);
+    _table.css('width', _width + 'px');
+    _table.append(_html);
+
+    $('div.gr-d-grid-view').append(_table);
+    $('div.gr-d-grid-rowView').append('<div class="colHead" style="width:'+_width+'px;height:'+$(this).closest('td').height()+'px;"><div>'+ $(this).prev()[0].innerHTML +'</div><span class="caret del-col"></span></div>');
+});
+
+// 撤掉冻结列
+$(document).on('click', 'span.del-col', function() {
+    var _col = $('table.colPoup'),
+        _head = $('div.colHead'),
+        _idx = _col[0].id.split('$').pop(),
+        _pos = _col[0].id.split('$').shift(),
+        _width,
+        _td;
+
+    _col.remove();
+    _head.remove();
+
+    // 删除插入的空白结点
+    $('div.gr-border tr').each(function() {
+        $(this).find('td').eq(1).remove();
+    });
+
+    // 删除头部
+    _td = $('div.gr-d-grid-head tr').eq(0).find('td').eq(_idx);
+    _width = _td.attr('temp');
+    _td.css('width', _width + 'px');
+    // 恢复头部的固定列按钮
+    $('div.gr-d-grid-head tr').eq(1).find('td').each(function() {
+        var _id = this.id || "";
+
+        if (_id.split('$').pop() === _pos) {
+            $(this).find('span.fixed-col').show();
+        }
+    });
+
+    // 删除复制的内容部分
+    _td = $('div.gr-d-grid-body tr').eq(0).find('td').eq(_idx).css('width', _width + 'px');
+
+    // TODO 某些操作过后数据的刷新，如：改变每页显示数量，更新操作。
+    
+    // TODO 只支持单列的固定，暂时不能支持多列固定，需要完善。
 });
