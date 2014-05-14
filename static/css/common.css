@@ -46,10 +46,10 @@ table {
     text-align: center;
     border-top: 1px solid #a8a8a8;
 }
-.pull-right {
+.pull-right, .pull-left {
     float: right;
 }
-.pull-left {
+.pull-left, .pull-left {
     float: left;
 }
 .gap-top {
@@ -172,7 +172,7 @@ a:hover.hit-button {
 #nav-tree, #content {
     border: 1px solid #a8a8a8;
 }
-#content {
+#nav-tree, #content {
     overflow: auto;
 }
 #nav-tree {
@@ -220,4 +220,10 @@ a:hover.hit-button {
     left: 50%;
     margin-left: -27px;
     margin-top: -27px;
+}
+#tree-container {
+	padding: 0 0 0 10px;
+}
+.tree-area {
+	padding: 0 0 0 18px;
 }
