@@ -64,5 +64,8 @@
 </body>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/load.js');?>"></script>
+<script type="text/javascript">
+	hit.baseURL = "<?=base_url()?>";
+</script>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.resize.js');?>"></script>
 </html>
