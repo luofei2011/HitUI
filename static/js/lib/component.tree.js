@@ -46,12 +46,6 @@ var treeDef = {
 		}
 	},
 
-	/*
-	 * _addSon is just for the initialization of the Tree
-	 * Dynamicaly adding function should be implemented through Database
-	 * 
-	 */
-	//_addSon: function( father, son ){}
 
 	/*
 	 *

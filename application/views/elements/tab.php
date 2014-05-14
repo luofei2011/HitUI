@@ -1,18 +1,12 @@
 <hr/>
 <h1>hello</h1>
-<?php
-	if ( $isPost ){
-		echo "sth inside";
-		echo $in;
-	}else{
-		echo "nothing post";
-	}
-?>
-<div class="tree-area">
-</div>
-
 <script type="text/javascript" src="<?=base_url('static/js/jquery.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script>
+<script type="text/javascript">
+//document.write('<div class="tree-area"></div>');
+</script>
+<div class="tree-area"></div>
+
+<!--script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script-->
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.form.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.tree.js');?>"></script>

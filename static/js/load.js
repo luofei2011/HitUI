@@ -564,7 +564,8 @@ var hit = {
     var options = [
             {
                'id': 'nav-tree',
-               'page': 'tree'
+               //'page': 'tree'
+			   'page': '../elements/tab'
             },
             {
                 'id': 'content',
@@ -573,9 +574,11 @@ var hit = {
         ], i = 0, len = options.length, o = {},
 
         base_url = 'http://localhost/graduation-pro-2014/';
+        base_url2 = 'http://localhost/webfreemen/graduation-pro-2014/';
 
     for (; i < len; i++) {
         o = options[i];
-        $('#' + o.id).load(base_url + "load/frameset/" + o.page);
+        $('#' + o.id).load(base_url2 + "load/frameset/" + o.page);
     }
+	console.log("static/js/load.js: len:" + len);
 });

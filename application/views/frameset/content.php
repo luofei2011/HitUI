@@ -71,6 +71,7 @@
 // 首先配置网站路径
 hit.baseURL = "<?php echo base_url();?>";
 // 然后导入配置参数
+table_test.url = "<?=base_url('load/deal_data')?>";
 hit.conf = table_test;
 // 渲染表格
 hit.load(table_test, 'gr-border');
