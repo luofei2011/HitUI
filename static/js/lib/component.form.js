@@ -4,8 +4,9 @@
  * @date: 2014-04-15
  * */
 
-//hit.COMPONENT = {
-    temform= {
+;(function() {
+// 不能随意构造全局变量
+var temform= {
         text: function(val, valid) {
             return '<input class="grid-cell-edit" type="text" valid="' + valid + '" value="' + val + '">';
         },
@@ -41,15 +42,24 @@
         },
         hidden: function(val, valid) {
             return '<input class="grid-cell-edit" type="hidden" valid="' + valid + '" value="' + val + '">';
+        },
+        /*
+         * 用于生成统一的弹出选择功能
+         * @param [String] val 传递的值
+         * @param [String] valid 合法性规则
+         * @param [String] url 异步加载的地址, 用于弹出层load的地址
+         * @return [String] 构造好的html片段
+         */
+        poup: function(val, valid, url) {
+            return '<span class="poup-select grid-cell-edit" url="'+url+'"> <span class="ps-border"><input type="text" class="ps-txt" value="'+val+'" valid="'+valid+'"><span class="ps-button"><span class="ps-btn-txt">...</span></span></span></span>';
         }
+    };
+
+    if ( hit.COMPONENT ){
+    	hit.COMPONENT.form = temform;
+    } else {
+    	hit.COMPONENT = {
+    		form: temform
+    	}
     }
-//};
-
-if ( hit.COMPONENT ){
-	hit.COMPONENT.form = temform;
-} else {
-	hit.COMPONENT = {
-		form: temform
-	}
-}
-
+})();
