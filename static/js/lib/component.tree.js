@@ -1,5 +1,5 @@
 /*
- * 树组件：树状导航结构
+ * lib/component.tree.js 树组件：树状导航结构
  * @author: freemen
  * @date: 2014-05-06
  * */
