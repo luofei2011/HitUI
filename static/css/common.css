@@ -227,3 +227,54 @@ a:hover.hit-button {
 .tree-area {
 	padding: 0 0 0 18px;
 }
+
+/*表单组件样式*/
+.poup-select {
+    display: inline-block;
+    height: 22px;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+}
+.ps-border {
+    border: 1px solid #A5ACB5;
+    background: #fff;
+    width: auto;
+    height: 20px;
+    padding: 0 22px 0 2px;
+    display: block;
+    overflow: hidden;
+}
+.ps-border:focus {
+    border-color: #808891;
+}
+.ps-txt {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 20px;
+}
+.ps-txt:focus {
+    border: 0;
+    outline: none;
+}
+.ps-button {
+    background: #EBEDF2 url(../img/button/button.png) repeat-x 0 0;
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 1px;
+    right: 1px;
+    text-align: center;
+    cursor: pointer;
+}
+.ps-button:hover {
+    background: #dde6fe url(../img/button/hover.png) repeat-x 0 0;
+}
+.ps-btn-txt {
+    position: relative;
+    top: -4px;
+    font-weight: bold;
+}

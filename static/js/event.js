@@ -202,7 +202,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
 // 表单单元双击可编辑
 $(document).on('dblclick', 'div.grid-cell-show', function() {
-    if ("textarea#input#select#".indexOf($(this).next()[0].nodeName.toLowerCase()) !== -1) {
+    if ("textarea#input#select#span".indexOf($(this).next()[0].nodeName.toLowerCase()) !== -1) {
         $(this).hide();
         $(this).next().show().focus();
     } else {

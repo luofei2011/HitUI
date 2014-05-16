@@ -354,6 +354,8 @@ var hit = {
                 return this.COMPONENT.form.hidden(value, valid);
             case "date":
                 return this.COMPONENT.form.date(value, valid);
+            case "poup": // 弹出选择组件
+                return this.COMPONENT.form.poup(value, valid, '');
             default: 
                 return this.COMPONENT.form.text(value, valid);
         }
