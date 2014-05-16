@@ -195,3 +195,42 @@ DEMO CODE：
 
 该字段代表查询时的条件，包括三种情况：限制`limit`，偏移`offset`，排序`order`；不同条件用`;`隔开，条件的参数用`,`隔开。
 其中`offset`字段默认为0就行，`order`字段如有排序需求，需要传递它在数据表中的字段名。
+
+#### 数据库`WHERE`接口
+
+DEMO CODE:
+
+	hit.query('deal_data', obj, {
+		'op': 'where',
+		'con': 'limit,50;offset,0;order,name'
+	}, func);
+	
+	// 限制条件`obj`格式：
+	{
+		name: 'value',
+		param2: 'value'
+	}
+	
+PS: 没有开发`js`接口，该接口面向PHP，有该需求的时候请告知开发者完善！
+	
+#### 数据库`LIKE`接口
+
+DEMO CODE:
+
+	hit.query('deal_data', arr, {
+		'op': 'like',
+		'con': 'limit,50;offset,0;order,name'
+	}, func);
+
+	// 查询参数arr格式
+	[
+		{
+			name: '', // 进行like查询的字段名
+			value: '' // 需要进行查找的值
+		},
+		{
+			name: '', // 进行like查询的字段名
+			value: '' // 需要进行查找的值
+		}
+		...
+	]
