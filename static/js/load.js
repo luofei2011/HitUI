@@ -16,6 +16,14 @@ var hit = {
      * */
     isMouseDown: false,
 
+    /*
+     * 监听鼠标移动事件的位置
+     */
+    mousePos: {
+        x: 0,
+        y: 0
+    },
+
 	/*
 	 *数据库设置
 	 *@param {String} table 访问的表名

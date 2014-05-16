@@ -278,3 +278,48 @@ a:hover.hit-button {
     top: -4px;
     font-weight: bold;
 }
+
+/*通用弹出层div样式*/
+.hit-panel {
+    position: fixed;
+    min-width: 600px;
+}
+.hit-panel-border {
+    border: 1px solid #999;
+    overflow: hidden;
+}
+.hit-panel-header {
+    background: #E3E6E8 url(../img/header.png) repeat-x 0 0;
+    position: relative;
+    -webkit-user-select: none;
+    border-bottom: 1px solid #bbb;
+}
+.hit-panel-header-mask {
+    width: 100%;
+    height: 100%;
+    cursor: move;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.hit-panel-header-title {
+    padding: 2px 0;
+    color: #201F35;
+    margin-left: 8px;
+}
+.close-btn {
+    background: url(../img/close.gif) no-repeat;
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    margin-top: -6px;
+    display: inline-block;
+    width: 15px;
+    height: 13px;
+    cursor: pointer;
+}
+.hit-panel-body {
+    padding: 2px;
+    height: 300px;
+    overflow: auto;
+}
