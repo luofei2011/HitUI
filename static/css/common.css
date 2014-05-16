@@ -282,7 +282,7 @@ a:hover.hit-button {
 /*通用弹出层div样式*/
 .hit-panel {
     position: fixed;
-    min-width: 600px;
+    width: 600px;
 }
 .hit-panel-border {
     border: 1px solid #999;

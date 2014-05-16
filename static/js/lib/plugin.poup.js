@@ -1,4 +1,4 @@
-/*
+﻿/*
  * 插件开发，弹出层选择
  * @author luofei
  * @date 2014-05-16
@@ -19,7 +19,8 @@ hit.PLUGIN.poup = {
 		hasCloseBtn: true,
 		left: '',
 		top: '',
-		label: '弹出层'
+		label: '弹出层',
+		db: {}
 	},
 	/*
 	 * 初始化
@@ -52,6 +53,11 @@ hit.PLUGIN.poup = {
 		$('#' + _id).find('div.hit-panel-body').css({
 			'height': option.height
 		});
+
+		this.load({
+			db: option.db,
+			tNode: $('#' + _id).find('div.hit-panel-body')
+		});
 	},
 	/*
 	 * 合并用户自定义的参数和默认参数
@@ -70,5 +76,41 @@ hit.PLUGIN.poup = {
 		}
 
 		return target;
+	},
+	/*
+	 * 根据url地址得到数据并拼接字符串
+	 */
+	load: function(con) {
+		var _tmpDB = hit.conf.db;
+
+		hit.setDB(con.db.t, con.db.name);
+		hit.query('load/deal_data', '', {
+		    op: 'select',
+		    con: 'offset,0;limit,50'
+		}, function(data) {
+			var _table = $('<div class="poupWrapper"></div>'),
+				_html = "", i = 0,
+				len = data.length,
+				tmp = {};
+
+			_html = '<table class="poupTable">';
+			for (; i < len; i++) {
+				_html += '<tr><td style="width:35px;"><div><input type="checkbox"></div></td>';
+
+				for (var o in data[i]) {
+					tmp = data[i][o];
+					_html += '<td><div>' + tmp + '</div></td>';
+				}
+				_html += '</tr>';
+			}
+			_html += '</table>';
+
+			_table.append(_html);
+			_html = '<div class="text-center gap-top gap-bottom"><a class="hit-button gap-right"><span class="hit-button-txt">确定</span></a><a class="hit-button gap-left"><span class="hit-button-txt">取消</span></a></div>';
+			con.tNode.append(_table).append(_html);
+		});
+
+		// 恢复之前的database配置
+		hit.conf.db = _tmpDB;
 	}
 }
