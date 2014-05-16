@@ -23,3 +23,5 @@
 			t: 'tableName'
 		}
 	});
+	
+3.可查看的demo：[localhost/graduation-pro-2014/load/frameset/demo](http://localhost/graduation-pro-2014/load/frameset/demo);
