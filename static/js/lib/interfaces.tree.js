@@ -3,7 +3,8 @@
  * @author: freemen
  * @date: 2014-05-13
  * */
-
+;(function() {
+//不乱加全局变量，嗯。
 var iTree = {
 	/*
 	 * some setting
@@ -12,7 +13,13 @@ var iTree = {
 
 
 	/*
-	 *
+	 * 构造树的数据 从数据库中获取
+	 * [Object] options 数据库的设置: {
+	 * 		[String] table 数据表名,
+	 *		[String] db 所在数据库名,
+	 *		[Object] conf 数据操作信息（接hit.query的通用接口）
+	 *		[Array] openNodes 设置打开的节点
+	 * }
 	 * */
 	makeFromDB: function( type, options ) {
 		treeType = type;
@@ -36,15 +43,9 @@ var iTree = {
 	},
 
 	/*
-	 *
+	 * 构造树的数据 从传进来的参数获取
 	 * */
-	makeFromConfig: function( type, config ) {
-	},
-
-	/*
-	 *
-	 * */
-	makeFromTest: function( type, Treedata ) {
+	makeFromData: function( type, Treedata ) {
 		hit.COMPONENT.tree.initTree( type );
 		var data = Treedata.data;
 		for (len = data.length, i = 0; i < len; i++ ) {
@@ -54,7 +55,19 @@ var iTree = {
 		}
 
 		hit.COMPONENT.tree.setOpenNode( type, Treedata.open );
-	}
+	},
+
+	/*
+	 * TODO:根据传进来的参数更改树节点结构 
+	 * [Object] this.config = {
+	 * 		[String] op 操作: create, add, del, changeName
+	 *		[String] method 方式: DB 根据配置从数据库获取, data 直接传进数据
+	 *		[Object] options 数据库配置,格式参考上方this.makeFromDB
+	 *		[Object] data 直接传的数据,格式参考config/tree_test.js
+
+	 * */
+	changeByConfig: function( type, config ) {
+	},
 
 };
 
@@ -65,3 +78,5 @@ if ( hit.INTERFACES ) {
 		tree: iTree
 	}
 }
+
+})();

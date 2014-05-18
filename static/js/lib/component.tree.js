@@ -4,12 +4,14 @@
  * @date: 2014-05-06
  * */
 
+;(function() {
+//好吧那我不随便添加全局变量了
 var treeDef = {
 	//the dataStructer definition of the tree
 	_treeNode: {},
 
 	/*
-	 *
+	 * TODO:treeType should be change into pageID/tabId
 	 */
 	initTree: function(treeType){
 		this._treeNode.type = treeType;
@@ -74,7 +76,11 @@ var treeDef = {
 		selectedNode.attr('select', 'Y');
 		selectedNode.css('background-color', '#8ab');
 		return selectedNode;
-	}
+	},
+	
+	dealWithNode: function( node ) {
+		alert( node.css('background-color') );
+	},
 
 };
 
@@ -88,3 +94,5 @@ if ( hit.COMPONENT ){
 		tree : treeDef
 	}
 }
+
+})();

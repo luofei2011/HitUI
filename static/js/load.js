@@ -575,8 +575,7 @@ var hit = {
             }
         ], i = 0, len = options.length, o = {},
 
-        base_url = hit.baseURL || 'http://localhost/graduation-pro-2014/';
-        // base_url2 = 'http://localhost/webfreemen/graduation-pro-2014/';
+        base_url = hit.baseURL; //|| 'http://localhost/graduation-pro-2014/';
 
     for (; i < len; i++) {
         o = options[i];

@@ -1,5 +1,5 @@
 /*
- * event.tree.js
+ * event.tree.js 处理关于树的点击事件
  *
  * */
 $(document).on('click', 'a', function() {
@@ -8,7 +8,7 @@ $(document).on('click', 'a', function() {
 /*
  * 设置树列表点击事件
  */
-$(document).on('click', '.tree-area .menu li', function() {
+$(document).on('click', '.tree-area li', function() {
 	if ($(this).attr('opened') == 'Y') {
 	// 打开的节点
 		$(this).removeAttr('opened');
@@ -23,12 +23,14 @@ $(document).on('click', '.tree-area .menu li', function() {
 		//leaf
 			if ( $(this).attr('select') != 'Y' ) {	
 			//haven't been choosen
-				$('.tree-area .menu [select="Y"]').removeAttr('select').css('background-color', '#FFF');
+				//TODO:tabid
+				//deselect other selected node in this tree
+				$(this).closest('.tree-area').find('[select="Y"]').removeAttr('select').css('background-color', '#FFF');
 				$(this).attr('select', 'Y').css('background-color', '#8ab');
 			} else {								
 			//already been choosen
 			//TODO:mention Global Setting & Global function
-				alert($(this).css('background-color'));
+				hit.COMPONENT.tree.dealWithNode( $(this) );
 			}
 		}
 	}
