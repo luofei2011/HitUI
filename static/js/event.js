@@ -528,3 +528,54 @@ $(document).on('click', 'span.del-col', function() {
     
     // TODO 只支持单列的固定，暂时不能支持多列固定，需要完善。
 });
+
+// 弹出层的可拖动事件
+$(document).on('mousemove', 'div.hit-panel-header-mask', function(e) {
+    var _diff = {},
+        _tNode = $(this).closest('.hit-window-drag');
+        _oldPos = _tNode.offset(),
+        _tNodeSize = {w: _tNode.width(), h: _tNode.height()},
+        _winSize = {w: $(window).width(), h: $(window).height()},
+        _targetPos = {};
+
+    if (hit.isMouseDown) {
+        _diff = {
+            x: e.clientX - hit.mousePos.x,
+            y: e.clientY - hit.mousePos.y
+        };
+
+        _targetPos.x = _oldPos.left + _diff.x;
+        _targetPos.y = _oldPos.top + _diff.y;
+
+        if (_winSize.w > _tNodeSize.w) {
+            if (_targetPos.x < 0)
+                _targetPos.x = 0;
+            if (_targetPos.x + _tNodeSize.w > _winSize.w)
+                _targetPos.x = _winSize.w - _tNodeSize.w;
+        }
+       
+        if (_winSize.h > _tNodeSize.h) {
+            if (_targetPos.y < 0)
+                _targetPos.y = 0;
+            if (_targetPos.y + _tNodeSize.h > _winSize.h)
+                _targetPos.y = _winSize.h - _tNodeSize.h;
+        }
+
+        _tNode.css('left', _targetPos.x + 'px');
+        _tNode.css('top', _targetPos.y + 'px');
+
+        hit.mousePos.x = e.clientX;
+        hit.mousePos.y = e.clientY;
+    }
+});
+$(document).on('mousedown', 'div.hit-panel-header-mask', function(e) {
+    hit.isMouseDown = true;
+    hit.mousePos = {
+        x: e.clientX,
+        y: e.clientY
+    };
+});
+// 弹出层关闭事件
+$(document).on('click', '.close-btn', function() {
+    $(this).closest('.hit-panel').remove();
+});

@@ -16,26 +16,35 @@ var hit = {
      * */
     isMouseDown: false,
 
-	/*
-	 *数据库设置
-	 *@param {String} table 访问的表名
-	 *@param {String} databse 选择的数据库, 默认为test
-	 * */
-	setDB: function(table, database) {
-		//设置database默认值, 保证参数有效
-		database = database ? database : 'test';
-		table = table ? table : 'testT';
-		//设置
-		if ( this.conf['db'] ) {
-			this.conf['db'].name = database;
-			this.conf['db'].t = table;
-		} else {
-			this.conf['db'] = {
-				name: database,
-				t: table
-			}
-		}
-	},
+    /*
+     * 监听鼠标移动事件的位置
+     */
+    mousePos: {
+        x: 0,
+        y: 0
+    },
+
+    /*
+    *数据库设置
+    *@param {String} table 访问的表名
+    *@param {String} databse 选择的数据库, 默认为test
+    * */
+    // TIPS 每次修改DB配置以后需要在完成以后恢复!!!
+    setDB: function(table, database) {
+        //设置database默认值, 保证参数有效
+        database = database || 'test';
+        table = table || 'testT';
+        //设置
+        if ( this.conf['db'] ) {
+            this.conf['db'].name = database;
+            this.conf['db'].t = table;
+        } else {
+            this.conf['db'] = {
+                name: database,
+                t: table
+            }
+        }
+    },
 
     /*
      * 封装的异步查询函数
