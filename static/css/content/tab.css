@@ -4,3 +4,29 @@
 	background-color: #663333
 	display:none;
 }
+
+div.tabtitle{
+	position: relative;
+	float: left;
+	width: 40px;
+	margin: 5px 0px 0px 3px;
+	border-right: 1px solid white;
+	background-color: #ee0088;
+}
+
+.tabtitle:hover,.tabtitle+.tabtitle:hover {
+	background-color: #ffa3c0;
+}
+
+.tabtitle[select='Y'] {
+	background-color: #e4e2eb;
+}
+
+.tabcontent {
+	position: relative;
+	float: left;
+	padding: 1px 3px 1px 3px;
+	margin: 0px 0px 0px 0px;
+	border-style: outset;
+
+}

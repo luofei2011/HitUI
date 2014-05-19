@@ -39,6 +39,7 @@
 			for (var i=0, len=tabNames.length; i<len; i++) {
 				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + '>' + tabNames[i].name + '</div>');
 			}
+			
 		},
 
 		/*

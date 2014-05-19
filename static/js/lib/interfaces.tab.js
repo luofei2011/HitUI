@@ -57,37 +57,6 @@
 							view: options.tabs[i].content, 
 							type: options.tabs[i].type
 						};
-
-					/*
-					if ( options.tabs[i].content ) {
-					//不为空，直接输出
-						var temObj = { 
-							id: options.tabs[i].id, 
-							view: options.tabs[i].content, 
-							type: options.tabs[i].type
-						};
-					} else {
-					//内容为空，让用户输入
-						//打印输入框，抽象出提交处理函数
-						if ( options.tabs[i].type == 'text' ) {
-						//如果是text属性，说明内容已经给出，直接打印即可
-							var temObj = { 
-								id: options.tabs[i].id, 
-								view: contentInput,
-								type: options.tabs[i].type
-							};
-						} else if ( options.tabs[i].type == 'page' ) {
-						//如果是page属性，说明内容在给定的链接里，需加载该链接
-						//TODO:ajax 加载，记得post layer
-							var temObj = { 
-								id: options.tabs[i].id, 
-								view: linkInput,
-								type: options.tabs[i].type
-							};
-						} else {
-						}
-					}
-					*/
 					contents.push(temObj);
 
 				}
@@ -107,6 +76,10 @@
 				for ( var i = 0, len = contents.length; i < len; i++ ) {
 					hit.COMPONENT.tab.fillContent(tabLayer, contents[i].id, contents[i].view, contents[i].type);
 				}
+				
+				var tabarea = $('.tab-area[layerid='+tabLayer+']');
+				tabarea.find('.tabtitle').first().attr('select','Y');
+				tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent').first().show();
 			}
 
 		},

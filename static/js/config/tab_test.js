@@ -12,11 +12,6 @@ var tab_test = {
 			type: 'text',
 			content: '<h1> hello world </h1><hr/><br/>囧<hr/><h4>你好世界</h4>',
 		},{
-			tabName: 'TAB3',
-			id: '3',
-			type: 'page',
-			content: 'load/elements/tab',
-		},{
 			tabName: 'TAB5',
 			id: '5',
 			type: 'text',
