@@ -8,6 +8,9 @@
 //不随便添加全局变量
 
 	var tabDef = {
+		_contentInput : '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-content">输入显示内容</button>', 
+		_linkInput : '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-link">输入页面地址</button>', 
+
 		/*
 		 * 用tabLayer初始化该层的tab-area
 		 * @param [String] tabLayer 
@@ -16,7 +19,7 @@
 			if ( tabLayer == '1' ) {
 				$('.tab-area').attr('layerId', '1' );
 			} else {
-				$('.tab-area[layerId=' + (Number(tabLayer)-1).toString() + ']').append('<div class="tab-area" layId=' + tabLayer + '></div>');
+				$('.tab-area[layerId=' + (Number(tabLayer)-1).toString() + ']').find('.tab-area').attr('layerId', tabLayer);
 			}
 		},
 
@@ -48,44 +51,68 @@
 		 * */
 		fillContent: function( layerId, tabId, content, type ) {
 			var theContentArea= $('.tab-area[layerId=' + layerId + '] .tabcontent-area');
-			switch( type ) {
-				case 'text':
-				case 'page': 
-					theContentArea.append('<div class=tabcontent tabId=' + tabId + '>' + content + '</div>');
-					break;
-				default:
-					break;
+			theContentArea.append('<div class=tabcontent tabId=' + tabId + '></div>');
+			var tabContent = theContentArea.find('.tabcontent[tabId='+tabId+']');
+			if ( content ) {
+			//如果有内容(不考虑其他特殊设置)
+				switch( type ) {
+					case 'text':
+						tabContent.append(content);
+						break;
+					case 'page': 
+						this._loadPage( layerId, tabContent, content);
+						break;
+					default:
+						break;
+				}
+			} else {
+			//无内容，打印输入框，等待输入
+				switch( type ) {
+					case 'text':
+						tabContent.append(this._contentInput);
+						break;
+					case 'page': 
+						tabContent.append(this._linkInput);
+						break;
+					default:
+						break;
+				}
 			}
 
 		},
 
-		refillContent: function( thelayerId, thecontent, content, type ) {
+		refillContent: function( theLayerId, thecontent, content, type ) {
 			switch( type ) {
 				case 'text':
-					thecontent.append(content);
+					thecontent.empty().append(content);
 					break;
 				case 'page':
 					//load the link
-					thecontent.load(content);
-					/*
-					thecontent.load(content, {layerId: thelayerId}, function( response, status) {
-						switch( status ) {
-							case 'success':
-								thecontent.append(response);
-								break;
-							case 'error':
-								alert('404!');
-								break;
-							default:
-								alert('err?');
-								break;
-						}
-				}); 
-						*/
+					//prevent to load base_url when nothing inputed
+					if (!content) {
+						break;
+					}
+					this._loadPage( theLayerId, thecontent, content );
 					break;
 				default:
 					break;
 			}
+		},
+
+		_loadPage: function( theLayerId, targetNode, link ) {
+			targetNode.load(link, {layerId: Number(theLayerId)+1}, function( response, status) {
+				switch( status ) {
+					case 'success':
+						break;
+					case 'error':
+						alert('404!');
+						break;
+					default:
+						alert('err?');
+						break;
+				}
+			}); 
+
 		},
 
 	};
@@ -100,3 +127,19 @@
 	};
 
 })();
+
+$(function() {
+	$('.upload-content').on('click', function() {
+	//alert($(this).closest('.tabcontent').attr('tabid'));
+		hit.COMPONENT.tab.refillContent($(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'text' );
+		return false;
+	});
+
+	$('.upload-link').on('click', function() {
+	//alert($(this).closest('.tabcontent').attr('tabid'));
+		hit.COMPONENT.tab.refillContent( $(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'page' );
+		return false;
+	});
+
+});
+

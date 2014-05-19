@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?=base_url('static/css/content/tab.css')?>" />
 <?php
 	$layerId = isset( $_POST['layerId'] ) ? $_POST['layerId'] : 1;
+	print_r($_POST);
 ?>
 <div class="tab-container">
 <h1>标签</h1>
@@ -13,7 +14,6 @@
 <script type="text/javascript" src="<?=base_url('static/js/config/tab_test.js');?>"></script>
 <script type="text/javascript">
 	var layerId = <?=$layerId?>;
-	alert(layerId);
 
 	hit.INTERFACES.tab.makeFromData( layerId , tab_test );
 

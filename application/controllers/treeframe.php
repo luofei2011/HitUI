@@ -11,7 +11,7 @@ class treeframe extends CI_Controller {
 
 		$config['hostname'] = 'localhost';
 		$config['username'] = 'root'; 
-		$config['password'] = 'f';
+		$config['password'] = '';
 		$config['database'] = 'hitData';//应该加载设置信息库
 		$config['dbdriver'] = 'mysql';
 		$config['dbprefix'] = '';

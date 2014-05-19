@@ -14,11 +14,11 @@ var tab_test = {
 		},{
 			tabName: 'TAB3',
 			id: '3',
-			type: 'text',
-			content: '',
+			type: 'page',
+			content: 'load/elements/tab',
 		},{
 			tabName: 'TAB5',
-			id: '4',
+			id: '5',
 			type: 'text',
 			content: '',
 		},

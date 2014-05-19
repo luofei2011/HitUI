@@ -16,17 +16,28 @@
 
 		/*
 		 * 根据设置配置tab
-		 * {Object} options { 
-		 * {Array} tabs 各个标签页的设置: [
-		 * 		{String} tabName 标签页名,
-		 *		{String} tabType 标签页类型,
-		 *		{String} content 
+		 * [Object] options { 
+		 * [Array] tabs 各个标签页的设置: [
+		 * 		[String] tabName 标签页名,
+		 *		[String] id ,
+		 *		[String] type 标签页类型,
+		 *		[String] content 
 		 * ]
+		 * 转换成component.tab的统一入口，格式如下
+		 * @output [Array] tabNames 标签页title的名字 [
+		 *				[String] name,
+		 *				[String] id,
+		 *			]
+		 * @output [Array] contents 标签页的内容 [
+		 *				[String] id,
+		 *				[String] view 加载的配置参数,
+		 *				[String] type 加载标签页内容的方式,
+		 *			]
 		 * }
 		 * */
 		makeFromData : function( tabLayer, options ) {
-			if ( Number(tabLayer) > 10 ){
-				alert("the tab layer could not be greater than 10");
+			if ( Number(tabLayer) > 5 ){
+				alert("the tab layer could not be greater than 5");
 			} else {
 				hit.COMPONENT.tab.init(tabLayer);
 				//create tab title
@@ -34,10 +45,20 @@
 				var contents = new Array();		//about tab content
 				for ( var i = 0, len = options.tabs.length; i < len; i++ ) {
 					// title
-					var temObj = { name: options.tabs[i].tabName, id: options.tabs[i].id };
+					var temObj = { 
+						name: options.tabs[i].tabName, 
+						id: options.tabs[i].id 
+					};
 					tabNames.push(temObj);
 
 					// content
+						var temObj = { 
+							id: options.tabs[i].id, 
+							view: options.tabs[i].content, 
+							type: options.tabs[i].type
+						};
+
+					/*
 					if ( options.tabs[i].content ) {
 					//不为空，直接输出
 						var temObj = { 
@@ -66,6 +87,7 @@
 						} else {
 						}
 					}
+					*/
 					contents.push(temObj);
 
 				}
@@ -102,20 +124,3 @@
 
 })();
 
-$(function() {
-	$('.upload-content').on('click', function() {
-	//alert($(this).closest('.tabcontent').attr('tabid'));
-		hit.COMPONENT.tab.refillContent($(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'text' );
-		return false;
-	});
-
-});
-
-$(function() {
-	$('.upload-link').on('click', function() {
-	//alert($(this).closest('.tabcontent').attr('tabid'));
-		hit.COMPONENT.tab.refillContent( $(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'page' );
-		return false;
-	});
-
-});
