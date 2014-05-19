@@ -204,7 +204,7 @@ class Base extends CI_Model {
     /*
      * 返回数据按照协议格式化
      * */
-    private function format_return_data($data = "", $pager = "") {
+    private function format_return_data($data = "", $pager = "", $fields = "") {
         return array(
             "data" => $data,
             "pager" => $pager
