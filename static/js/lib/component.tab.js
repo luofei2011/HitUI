@@ -26,6 +26,7 @@
 		 * @param [Object] tab tab标题{
 		 * 		@param [Array] ids 对应tab id
 		 * 		@param [Array] Names 对应tab title
+		 * 		TODO:@param [Array] Names 对应tab title
 		 * }
 		 * */
 		createTabNames: function( layerId, tabNames) {
@@ -42,14 +43,50 @@
 		 * @param [String] layerId 所操作层数 
 		 * @param [String] tabId 对应tab id 
 		 * @param [String] content 显示内容 
+		 * TODO:@param [String] content 显示内容 
 		 * }
 		 * */
-		fillContent: function( layerId, tabId, content ) {
-			var thecontent= $('.tab-area[layerId=' + layerId + '] .tabcontent-area');
-			thecontent.append('<div class=tabcontent tabId=' + tabId + '>' + content + '</div>');
+		fillContent: function( layerId, tabId, content, type ) {
+			var theContentArea= $('.tab-area[layerId=' + layerId + '] .tabcontent-area');
+			switch( type ) {
+				case 'text':
+				case 'page': 
+					theContentArea.append('<div class=tabcontent tabId=' + tabId + '>' + content + '</div>');
+					break;
+				default:
+					break;
+			}
 
 		},
 
+		refillContent: function( thelayerId, thecontent, content, type ) {
+			switch( type ) {
+				case 'text':
+					thecontent.append(content);
+					break;
+				case 'page':
+					//load the link
+					thecontent.load(content);
+					/*
+					thecontent.load(content, {layerId: thelayerId}, function( response, status) {
+						switch( status ) {
+							case 'success':
+								thecontent.append(response);
+								break;
+							case 'error':
+								alert('404!');
+								break;
+							default:
+								alert('err?');
+								break;
+						}
+				}); 
+						*/
+					break;
+				default:
+					break;
+			}
+		},
 
 	};
 

@@ -34,5 +34,6 @@ $(document).on('click', '.tree-area li', function() {
 			}
 		}
 	}
+	//避免冒泡事件
 	return false;
 });

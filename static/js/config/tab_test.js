@@ -11,6 +11,16 @@ var tab_test = {
 			id: '2',
 			type: 'text',
 			content: '<h1> hello world </h1><hr/><br/>囧<hr/><h4>你好世界</h4>',
+		},{
+			tabName: 'TAB3',
+			id: '3',
+			type: 'text',
+			content: '',
+		},{
+			tabName: 'TAB5',
+			id: '4',
+			type: 'text',
+			content: '',
 		},
 	],
 };

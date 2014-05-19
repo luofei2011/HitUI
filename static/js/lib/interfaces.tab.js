@@ -5,6 +5,8 @@
  * */
 ;(function() {
 	//不乱加全局变量，嗯。
+	var contentInput = '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-content">输入显示内容</button>';
+	var linkInput= '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-link">输入页面地址</button>';
 	var iTab = {
 		/*
 		 * some setting
@@ -34,33 +36,41 @@
 					// title
 					var temObj = { name: options.tabs[i].tabName, id: options.tabs[i].id };
 					tabNames.push(temObj);
+
 					// content
-					if ( options.tabs[i].type == 'text' ) {
-					//如果是text属性，说明内容已经给出，直接打印即可
-						if ( options.tabs[i].content ) {
-						//不为空，直接输出
-							var temObj = { id: options.tabs[i].id, view: options.tabs[i].content };
-							contents.push(temObj);
-						} else {
-						//内容为空，让用户输入
-						//TODO:打印输入框，记得抽象出内容展示函数
-
-						}
+					if ( options.tabs[i].content ) {
+					//不为空，直接输出
+						var temObj = { 
+							id: options.tabs[i].id, 
+							view: options.tabs[i].content, 
+							type: options.tabs[i].type
+						};
 					} else {
-					//如果是page属性，说明内容在给定的链接里，需加载该链接
-					//TODO:ajax 加载，记得post layer
-						if ( options.tabs[i].content ) {
-						//不为空，直接加载页面，输出
-
-							var temObj = { id: options.tabs[i].id, view: options.tabs[i].content };
-							//contents.push(temObj);
+					//内容为空，让用户输入
+						//打印输入框，抽象出提交处理函数
+						if ( options.tabs[i].type == 'text' ) {
+						//如果是text属性，说明内容已经给出，直接打印即可
+							var temObj = { 
+								id: options.tabs[i].id, 
+								view: contentInput,
+								type: options.tabs[i].type
+							};
+						} else if ( options.tabs[i].type == 'page' ) {
+						//如果是page属性，说明内容在给定的链接里，需加载该链接
+						//TODO:ajax 加载，记得post layer
+							var temObj = { 
+								id: options.tabs[i].id, 
+								view: linkInput,
+								type: options.tabs[i].type
+							};
 						} else {
-						//内容为空，让用户输入
-
 						}
 					}
+					contents.push(temObj);
+
 				}
 
+				//create tab title & framework
 				tabNames.sort( function(a,b) {
 					return a.id - b.id;
 				});
@@ -73,7 +83,7 @@
 				});
 
 				for ( var i = 0, len = contents.length; i < len; i++ ) {
-					hit.COMPONENT.tab.fillContent(tabLayer, contents[i].id, contents[i].view);
+					hit.COMPONENT.tab.fillContent(tabLayer, contents[i].id, contents[i].view, contents[i].type);
 				}
 			}
 
@@ -89,4 +99,23 @@
 		}
 	}
 
+
 })();
+
+$(function() {
+	$('.upload-content').on('click', function() {
+	//alert($(this).closest('.tabcontent').attr('tabid'));
+		hit.COMPONENT.tab.refillContent($(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'text' );
+		return false;
+	});
+
+});
+
+$(function() {
+	$('.upload-link').on('click', function() {
+	//alert($(this).closest('.tabcontent').attr('tabid'));
+		hit.COMPONENT.tab.refillContent( $(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'page' );
+		return false;
+	});
+
+});

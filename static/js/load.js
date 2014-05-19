@@ -29,7 +29,7 @@ var hit = {
     *@param {String} table 访问的表名
     *@param {String} databse 选择的数据库, 默认为test
     * */
-    // TIPS 每次修改DB配置以后需要在完成以后恢复!!!
+    // TIPS 每次修改DB配置以后需要在完成以后恢复!!!//freemen:什么意思啊？
     setDB: function(table, database) {
         //设置database默认值, 保证参数有效
         database = database || 'test';
