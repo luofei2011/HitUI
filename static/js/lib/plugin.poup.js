@@ -22,6 +22,7 @@ hit.PLUGIN.poup = {
 		label: '弹出层',
 		db: {}
 	},
+
 	/*
 	 * 初始化
 	 */
@@ -56,7 +57,8 @@ hit.PLUGIN.poup = {
 
 		this.load({
 			db: option.db,
-			tNode: $('#' + _id).find('div.hit-panel-body')
+			tNode: $('#' + _id).find('div.hit-panel-body'),
+			tID: _id
 		});
 	},
 	/*
@@ -81,12 +83,12 @@ hit.PLUGIN.poup = {
 	 * 根据url地址得到数据并拼接字符串
 	 */
 	load: function(con) {
-		var _tmpDB = hit.conf.db;
+		var _tmpDB = hit.conf.db,_this = this;
 
 		hit.setDB(con.db.t, con.db.name);
 		hit.query('load/deal_data', '', {
 		    op: 'select',
-		    con: 'offset,0;limit,50'
+		    con: 'offset,0;limit,50;fields,true'
 		}, function(data) {
 			var _table = $('<div class="poupWrapper"></div>'),
 				_html = "", i = 0,
@@ -99,18 +101,74 @@ hit.PLUGIN.poup = {
 
 				for (var o in data[i]) {
 					tmp = data[i][o];
-					_html += '<td><div>' + tmp + '</div></td>';
+					_html += '<td class="poup-table-fields"><div name="' + o + '">' + tmp + '</div></td>';
 				}
 				_html += '</tr>';
 			}
 			_html += '</table>';
 
 			_table.append(_html);
-			_html = '<div class="text-center gap-top gap-bottom"><a class="hit-button gap-right"><span class="hit-button-txt">确定</span></a><a class="hit-button gap-left"><span class="hit-button-txt">取消</span></a></div>';
+			_html = '<div class="text-center gap-top gap-bottom"><a class="hit-button gap-right poup-sure"><span class="hit-button-txt">确定</span></a><a class="hit-button gap-left poup-cancel"><span class="hit-button-txt">取消</span></a></div>';
 			con.tNode.append(_table).append(_html);
+
+			// 绑定事件
+			_this.addEvent(con);
 		});
 
 		// 恢复之前的database配置
 		hit.conf.db = _tmpDB;
+	},
+
+	/**
+	 * 绑定事件，最基本的。弹出层中的checkbox最多只能选择一个，且点击确定的时候应该做js验证
+	 * @param {Object} con [用户传递的配置信息]
+	 */
+	addEvent: function(con) {
+		var panel = $('#' + con.tID),
+		  	_inputs = $("#" + con.tID).find('input[type=checkbox]');
+
+		_inputs.on('click', function() {
+			var _this = this;
+			_inputs.each(function() {
+				if (this !== _this)
+					this.checked = false;
+			});
+
+			this.checked = this.checked ? true : false;
+		});
+
+		// 确定按钮事件
+		$('a.poup-sure', panel).on('click', function() {
+			var isChecked = false, i = 0, len = _inputs.length,
+				tmp, data = {};
+			
+			for (; i < len; i++) {
+				if (_inputs[i].checked) {
+					tmp = _inputs[i];
+					isChecked = true;
+					break;
+				}
+			}
+
+			if (!isChecked) {
+				alert('您未选择任何数据!');
+				return false;
+			} 
+
+			// 获得选择的数据
+			$(tmp).closest('tr').find('td.poup-table-fields div').each(function() {
+				data[$(this).attr('name')] = $(this).text();
+			});
+
+			console.log(data);
+
+			$(this).next().trigger('click');
+			return false;
+		});
+
+		// 取消按钮事件绑定
+		$('a.poup-cancel', panel).on('click', function() {
+			$(this).closest('.hit-panel').find('span.close-btn').trigger('click');
+		});
 	}
 }
