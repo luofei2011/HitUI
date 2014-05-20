@@ -3,7 +3,7 @@ var tab_test = {
 	tabs : [
 		{
 			tabName: 'TAB1', 
-			id: '1',
+			id: '6',
 			type: 'page', 
 			content: '',
 		},{
@@ -12,7 +12,7 @@ var tab_test = {
 			type: 'text',
 			content: '<h1> hello world </h1><hr/><br/>囧<hr/><h4>你好世界</h4>',
 		},{
-			tabName: 'TAB5',
+			tabName: 'TAB3',
 			id: '5',
 			type: 'text',
 			content: '',

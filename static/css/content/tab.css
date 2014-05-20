@@ -5,11 +5,18 @@
 	display:none;
 }
 
+div.tab-container {
+	margin: 2px 1px 0 2px;
+}
+
+div.tabtitle-area{
+	margin: 0 0 0 3px;
+}
 div.tabtitle{
 	position: relative;
 	float: left;
 	width: 40px;
-	margin: 5px 0px 0px 3px;
+	margin: 5px 0px 0px 0px;
 	border-right: 1px solid white;
 	background-color: #ee0088;
 }
@@ -22,11 +29,19 @@ div.tabtitle{
 	background-color: #e4e2eb;
 }
 
+div.tabcontent-area{
+	clear: both;
+}
+
 .tabcontent {
 	position: relative;
-	float: left;
+	float: both;
 	padding: 1px 3px 1px 3px;
 	margin: 0px 0px 0px 0px;
 	border-style: outset;
 
+}
+
+input {
+	width: 99%;
 }
