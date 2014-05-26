@@ -69,10 +69,11 @@ var treeDef = {
 				node.attr('opened', 'Y');
 			}
 		}
-		//hide the hiden, show the shown
+		//hide the hidden, show the shown
 		theTree.find('ul').hide();
 		theTree.find('li[opened="Y"]').children('ul').show();
 		//set selected
+		//TODO:deal with the selected
 		selectedNode.attr('select', 'Y');
 		selectedNode.css('background-color', '#8ab');
 		return selectedNode;

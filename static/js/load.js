@@ -575,12 +575,13 @@ var hit = {
     var options = [
             {
                'id': 'nav-tree',
-               //'page': 'tree'
-			   'page': '../elements/tab'
+               'page': '../elements/tree'
+			   //'page': '../elements/tab'
             },
             {
                 'id': 'content',
-                'page': 'content'
+                //'page': 'content'
+				'page': '../elements/tab'
             }
         ], i = 0, len = options.length, o = {},
 

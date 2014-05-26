@@ -27,6 +27,10 @@ $(document).on('click', '.tree-area li', function() {
 				//deselect other selected node in this tree
 				$(this).closest('.tree-area').find('[select="Y"]').removeAttr('select').css('background-color', '#FFF');
 				$(this).attr('select', 'Y').css('background-color', '#8ab');
+				options = hit.PARAMETER.global.getTreeOption();
+				options.openNodes = [$(this).attr('code')];
+				console.log(options);
+				hit.PARAMETER.global.setTreeOption(options);
 			} else {								
 			//already been choosen
 			//TODO:mention Global Setting & Global function
@@ -34,6 +38,5 @@ $(document).on('click', '.tree-area li', function() {
 			}
 		}
 	}
-	//避免冒泡事件
 	return false;
 });
