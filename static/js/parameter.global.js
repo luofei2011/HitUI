@@ -6,7 +6,6 @@
 
 ;(function() {
 	var gParameter = {
-//TODO:bug
 		/*
 		 * 数据存放格式，一般分为以下几项
 		 * @param {Object} _data {
@@ -21,11 +20,19 @@
 		 * 存读HTML5方式存放的本地数据
 		 * */
 		_loadData: function( storage ) {
+			console.log('_loadData');
+			console.log(storage['globalParameter']);
 			this._data = JSON.parse(storage['globalParameter']);
+			console.log(this._data);
 		},
 
 		_saveData: function( storage ) {
 			storage['globalParameter'] = JSON.stringify(this._data);
+		},
+
+		clearData: function( storage ) {
+			storage.removeItem('globalParameter');
+			console.log('globalParameter cleared!');
 		},
 
 		initPara: function() {
@@ -51,6 +58,8 @@
 			if (this._supportStorage) {
 				this._saveData( window.localStorage );
 			}
+			//通知tab切换到currentDataNode
+			hit.INTERFACES.tab.switch2Tab( dataNode );
 		},
 
 		//treeOption 树节点的配置信息
@@ -65,6 +74,54 @@
 			}
 		},
 
+		setTreeOpenNodes: function( openNodes ){
+			this._data.treeOption.openNodes = openNodes;
+			if (this._supportStorage) {
+				this._saveData( window.localStorage );
+			}
+		},
+
+		//tabOption 标签页节点的配置信息
+		getTabOption: function() {
+			return this._data.tabOption;
+		},
+
+		setTabOption: function( tabOption ) {
+			this._data.tabOption = tabOption;
+			if (this._supportStorage) {
+				this._saveData( window.localStorage );
+			}
+		},
+
+		addTabs: function( tabInfos ){
+			this._data.tabOption.tabs.push(tabInfos);
+			this._data.tabOption.tabNum = this._data.tabOption.tabs.length;
+			this._saveData( window.localStorage );
+		},
+		
+		rmTab: function( tabId ){
+
+		},
+
+		updateTabOption: function() {
+
+		},
+
+		/*
+		 * 根据currentDataNode，进行刷新
+		 *
+		 * */
+		updateCurrentDataNode: function( newDataNode ) {
+			
+		},
+		
+		/*
+		 * 根据变量状态，进行刷新
+		 *
+		 * */
+		update: function() {
+
+		},
 	};
 
 	if ( hit.PARAMETER ){

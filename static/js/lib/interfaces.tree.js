@@ -34,7 +34,7 @@ var iTree = {
 		dealDBData= function( type, data ) {
 			for (len = data.length, i = 0; i < len; i++ ) {
 				var tem = data[i];
-				console.log( tem );
+				//console.log( tem );
 				hit.COMPONENT.tree.addTreeNode(type, tem.menu_name, tem.menu_code, tem.menu_father, tem.menu_level, tem.menu_index, tem.leaf_flag, tem.task_flag);
 			}
 			hit.COMPONENT.tree.setOpenNode( treeType, options.openNodes );
@@ -50,7 +50,7 @@ var iTree = {
 		var data = Treedata.data;
 		for (len = data.length, i = 0; i < len; i++ ) {
 			var tem = data[i];
-			console.log( tem );
+			//console.log( tem );
 			hit.COMPONENT.tree.addTreeNode(type, tem.name, tem.code, tem.father, tem.level, tem.index, tem.leafFlag, tem.taskFlag);
 		}
 

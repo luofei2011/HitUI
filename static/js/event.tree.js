@@ -23,14 +23,16 @@ $(document).on('click', '.tree-area li', function() {
 		//leaf
 			if ( $(this).attr('select') != 'Y' ) {	
 			//haven't been choosen
-				//TODO:tabid
 				//deselect other selected node in this tree
+
+				//TODO:now选中哪一项应该由component来做，以便以后封装
 				$(this).closest('.tree-area').find('[select="Y"]').removeAttr('select').css('background-color', '#FFF');
 				$(this).attr('select', 'Y').css('background-color', '#8ab');
-				options = hit.PARAMETER.global.getTreeOption();
-				options.openNodes = [$(this).attr('code')];
-				console.log(options);
-				hit.PARAMETER.global.setTreeOption(options);
+				openNodes = [$(this).attr('code')];
+				hit.PARAMETER.global.setTreeOpenNodes( openNodes );
+				//TODO:now 选中后更新
+				hit.PARAMETER.global.setCurrentDataNode( $(this).attr('code') );
+				hit.PARAMETER.global.update();
 			} else {								
 			//already been choosen
 			//TODO:mention Global Setting & Global function
