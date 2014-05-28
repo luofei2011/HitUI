@@ -48,7 +48,7 @@ class Base extends CI_Model {
         // 默认一次可插入多条数据
         foreach($arr as $data) {
             $tmp = $this->obj_to_array($data);
-            $tmp['id'] = '';
+            // $tmp['id'] = '';
             $this->db->insert($this->tableName, $tmp);
         }
 
@@ -108,6 +108,8 @@ class Base extends CI_Model {
             $arr['offset'] = 0; 
         }
 
+        // return $this->format_return_data($this->get_table_keys("", $this->tableName));
+
         return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
             'pages' => $pages,
             'perNum' => $arr['limit'],
@@ -126,11 +128,18 @@ class Base extends CI_Model {
      * );
      * */
     public function dbUpdate($arr) {
+        # 之前默认的主键是id，这里做修改
+        $keys = $this->get_table_keys();
+        $key = "id";
+
+        if (count($keys))
+            $key = $keys[0];
+
         foreach($arr as $item) {
             // 处理query里面的参数，变成关联数组
             $q = $this->obj_to_array($item['q']);
             //$sql = "UPDATE $this->tableName SET ". $item['q'] ." WHERE id=" . $item['id'] . "";
-            $this->db->where('id', $item['id']);
+            $this->db->where($key, $item['id']);
             $this->db->update($this->tableName, $q);
             //$this->dbQuery($sql, false);
         }
@@ -146,8 +155,15 @@ class Base extends CI_Model {
      * );
      * */
     public function dbDelete($arr) {
+        # 之前默认的主键是id，这里做修改
+        $keys = $this->get_table_keys();
+        $key = "id";
+
+        if (count($keys))
+            $key = $keys[0];
+
         foreach($arr as $id) {
-            $this->db->where('id',$id);
+            $this->db->where($key, $id);
             $this->db->delete($this->tableName);
         }
 
@@ -164,6 +180,26 @@ class Base extends CI_Model {
         $this->db->where($arr);
         $result = $this->db->get();
         return $result->result_array();
+    }
+
+    /**
+     * 获取数据库中某张表的主键信息
+     * @param  string $db [数据库名]
+     * @param  string $t  [数据表名]
+     * @return Array     [主键信息]
+     */
+    private function get_table_keys($t = "") {
+        $t = $t | $this->tableName;
+        $sql = "describe " . $t;
+        $result = $this->db->query($sql)->result_array();
+        $keys = array();
+
+        foreach ($result as $r) {
+            if ($r['Key'] == "PRI")
+                array_push($keys, $r['Field']);
+        }
+
+        return $keys;
     }
 
     /*
@@ -204,7 +240,7 @@ class Base extends CI_Model {
     /*
      * 返回数据按照协议格式化
      * */
-    private function format_return_data($data = "", $pager = "", $fields = "") {
+    private function format_return_data($data = "", $pager = "") {
         return array(
             "data" => $data,
             "pager" => $pager

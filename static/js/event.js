@@ -325,6 +325,26 @@ $(document).on('click', 'span.grid-sort', function() {
 });
 
 // 分页事件
+$(document).on('change', '#selectPager', function() {
+    var offset = this.value * 1 - 1;
+
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $('div.gr-border'),
+        status: 'wait'
+    });
+
+    // 更新数据
+    hit.query('load/deal_data', '', {
+        op: 'select',
+        con: 'offset,'+ offset +';limit,' + hit.conf.pageNum
+    }, function(data) {
+        hit.reDrawTableContent(data);
+        hit.COVER.removeNode();
+    });
+});
+
+// 分页事件
 $('div.gr-grid-pager a').on('click', function() {
     if (!$(this).hasClass('gr-btn-disabled')) {
         var _op = $('span', $(this)),
@@ -348,31 +368,12 @@ $('div.gr-grid-pager a').on('click', function() {
             hit.changePagerCur('', cur);
         }
 
+        // console.log('a.click');
         // 触发分页事件
-        $('#selectPager').change();
+        $('#selectPager').trigger('change');
     } 
 
     return false;
-});
-
-// 分页事件
-$('#selectPager').on('change', function() {
-    var offset = this.value * 1 - 1;
-
-    // 生成cover层
-    hit.COVER.init({
-        tNode: $('div.gr-border'),
-        status: 'wait'
-    });
-
-    // 更新数据
-    hit.query('load/deal_data', '', {
-        op: 'select',
-        con: 'offset,'+ offset +';limit,' + hit.conf.pageNum
-    }, function(data) {
-        hit.reDrawTableContent(data);
-        hit.COVER.removeNode();
-    });
 });
 
 // 查询事件

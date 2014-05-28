@@ -95,6 +95,7 @@ hit.PLUGIN.poup = {
 				len = data.length,
 				tmp = {};
 
+			console.log(data);
 			_html = '<table class="poupTable">';
 			for (; i < len; i++) {
 				_html += '<tr><td style="width:35px;"><div><input type="checkbox"></div></td>';
