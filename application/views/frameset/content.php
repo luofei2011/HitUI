@@ -70,6 +70,7 @@
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/lib/interfaces.form.js');?>"></script>
 <script type="text/javascript">
 // 首先配置网站路径
 hit.baseURL = "<?php echo base_url();?>";

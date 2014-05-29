@@ -84,6 +84,14 @@ var hit = {
         return false;
     },
 
+	/*
+	 *	配置表单
+	 */
+	_setForm: function(con) {
+		hit.INTERFACES.form.createForm(con);
+		return false;
+	},
+
     /*
      * 初始化查询区域
      */
@@ -165,6 +173,7 @@ var hit = {
 
         // 配置查询区域
         this._createQ(config);
+		this._setForm(config);
 
         // 是否需要显示功能区
         if (config.hasFunc)
