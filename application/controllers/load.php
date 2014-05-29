@@ -24,19 +24,21 @@ class Load extends CI_Controller {
 
     public function auto_config() {
         $config_name = $this->input->post('config_name', true);
+        $db = $this->input->post('db', true);
+        $t = $this->input->post('t', true);
         $json = array();
+        $json['db'] = array(
+            'name' => $db,
+            't' => $t
+        );
+        $result = $this->Base->auto_config($db, $t);
         switch($config_name) {
             case 'table':
-                $result = $this->Base->auto_config('inv', 'inv_bill_main');
                 $json['url'] = base_url('load/deal_data');
                 $json['rows'] = 2;
                 $json['isShowPaging'] = true;
                 $json['pageNum'] = 50;
                 $json['hasCheckBox'] = true;
-                $json['db'] = array(
-                    'name' => 'inv',
-                    't' => 'inv_bill_main'
-                );
                 $json['hasQuery'] = true;
                 $json['qParam'] = array(
                     array(
@@ -84,11 +86,6 @@ class Load extends CI_Controller {
                 }
                 break;
             case 'poup':
-                $result = $this->Base->auto_config('inv', 'inv_warehouse');
-                $json['db'] = array(
-                    'name' => 'inv',
-                    't' => 'inv_warehouse'
-                );
                 $json['showFields'] = array();
                 $json['fieldMap'] = array();
                 foreach($result as $f) {

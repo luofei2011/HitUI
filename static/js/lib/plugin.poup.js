@@ -25,7 +25,7 @@ hit.PLUGIN.poup = {
 	/*
 	 * 初始化
 	 */
-	init: function(option, conf) {
+	init: function(option, conf, pNode) {
 		var _html = "", _poup,
 			_id = "POUP_" + (+new Date());
 
@@ -57,7 +57,8 @@ hit.PLUGIN.poup = {
 		this.load({
 			conf: conf,
 			tNode: $('#' + _id).find('div.hit-panel-body'),
-			tID: _id
+			tID: _id,
+            pNode: pNode
 		});
 	},
 	/*
@@ -82,7 +83,10 @@ hit.PLUGIN.poup = {
 	 * 根据url地址得到数据并拼接字符串
 	 */
 	load: function(con) {
-		var _tmpDB = hit.conf.db,_this = this,
+		var _tmpDB = {
+                name: hit.conf.db.name,
+                t: hit.conf.db.t
+            }, _this = this,
             conf = con.conf;
 
 		hit.setDB(conf.db.t, conf.db.name);
@@ -133,7 +137,7 @@ hit.PLUGIN.poup = {
 		});
 
 		// 恢复之前的database配置
-		hit.conf.db = _tmpDB;
+		hit.setDB(_tmpDB.t, _tmpDB.name);
 	},
 
 	/**
@@ -178,6 +182,9 @@ hit.PLUGIN.poup = {
 			});
 
 			$(this).next().trigger('click');
+
+            // 触发原来的自定义事件
+            con.pNode.trigger('select', data);
 			return false;
 		});
 

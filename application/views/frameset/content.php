@@ -74,7 +74,7 @@
 // 首先配置网站路径
 hit.baseURL = "<?php echo base_url();?>";
 // 然后导入配置参数
-table_test.url = "<?=base_url('load/deal_data')?>";
+hit.CONFIG.table_inv_bill_main.url = "<?=base_url('load/deal_data')?>";
 //hit.conf = table_test;
 hit.conf = hit.CONFIG.table_inv_bill_main;
 // 渲染表格
