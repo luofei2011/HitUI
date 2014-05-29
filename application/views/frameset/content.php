@@ -78,6 +78,7 @@ hit.CONFIG.table_inv_bill_main.url = "<?=base_url('load/deal_data')?>";
 //hit.conf = table_test;
 hit.conf = hit.CONFIG.table_inv_bill_main;
 // 渲染表格
+hit.CONFIG.table_inv_bill_main.url = "<?=base_url('load/deal_data')?>";
 hit.load(hit.CONFIG.table_inv_bill_main, 'gr-border');
 </script>
 <script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>

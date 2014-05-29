@@ -97,7 +97,7 @@
 		addTabs: function( tabLayer, tabInfos ) {
 			//get the max index of the tab
 			option = hit.PARAMETER.global.getTabOption();
-			tabNum = option.tabNum;
+			maxSeq = option.tabs[option.tabs.length - 1].seq;
 			var formatedInfos = [];			//about the formated tabInfos
 			var tabNames = new Array();		//about tab title
 			var contents = new Array();		//about tab content
@@ -108,7 +108,7 @@
 				formatedInfos[i].type = tabInfos[i].type;
 				formatedInfos[i].content = tabInfos[i].content;
 				formatedInfos[i].id = tabInfos[i].id;
-				formatedInfos[i].seq = tabNum + i;
+				formatedInfos[i].seq = maxSeq + i + 1;
 				// title
 				var temObj = { 
 					name: formatedInfos[i].tabName, 
@@ -125,7 +125,7 @@
 			//create tab title & framework
 			hit.COMPONENT.tab.createTabNames(tabLayer, tabNames);
 
-			//TODO:now 设置隐藏
+			//TODO:now 设置隐藏,和设置焦点一样，应该抽象出来
 			var tabarea = $('.tab-area[layerid='+tabLayer+']');
 			for(var i=0, len=tabNames.length; i<len; i++) {
 				tabarea.children('.tabcontent-area').children('.tabcontent[tabId='+tabNames[i].id+']').hide();
@@ -136,15 +136,14 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( id ) {
-		
+		rmTab: function( tabLayer , id ) {
+			//TODO:在tabtitle那儿增加x，点击关闭用	
 		},
 
-		switch2Tab: function( id ) {
+		switch2Tab: function( id, tabName ) {
 			var tem = [];
-			//不能没有Content
-			var asdf = { content:"", tabName:'asdf', type:'text', id: id };
-			tem.push(asdf);
+			var tabInfo = { content:"", tabName:tabName, type:'text', id: id};
+			tem.push(tabInfo);
 			this.addTabs(1, tem);	
 		},
 

@@ -24,7 +24,7 @@
 	if ( typeof option == 'undefined' ) {
 		option = tab_test[0];
 		//hit.PARAMETER.global.setTabOption(option);
-		alert('load the tab setting as default setting');
+		console.log('load the tab setting as default setting');
 	}
 
 	hit.INTERFACES.tab.makeFromData( layerId , option );
