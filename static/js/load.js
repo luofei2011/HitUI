@@ -618,8 +618,8 @@ var hit = {
             },
             {
                 'id': 'content',
-                'page': 'content'
-				//'page': '../elements/tab'
+                //'page': 'content'
+				'page': '../elements/tab'
             }
         ], i = 0, len = options.length, o = {},
 

@@ -1,11 +1,11 @@
 /*
- * lib/interfaces.tree.js, 负责控制tree的数据交互的接口
+ * lib/interfaces.form.js, 负责控制form的数据交互的接口
  * @author: freemen
  * @date: 2014-05-13
  * */
 ;(function() {
 //不乱加全局变量，嗯。
-var iTree = {
+var iForm= {
 	/*
 	 * some setting
 	 * */
@@ -69,17 +69,13 @@ var iTree = {
 	changeByConfig: function( type, config ) {
 	},
 
-	getInfoByCode: function( code ) {
-		return hit.COMPONENT.tree.getInfoByCode(code);
-	},
-
 };
 
 if ( hit.INTERFACES ) {
-	hit.INTERFACES.tree = iTree;
+	hit.INTERFACES.form = iForm;
 } else {
 	hit.INTERFACES = {
-		tree: iTree
+		form: iForm
 	}
 }
 

@@ -136,7 +136,7 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( id ) {
+		rmTab: function( layerId, id ) {
 		
 		},
 

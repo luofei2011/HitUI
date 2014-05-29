@@ -69,11 +69,10 @@ var treeDef = {
 				node.attr('opened', 'Y');
 			}
 		}
-		//hide the hidden, show the shown
+		//hide the hiden, show the shown
 		theTree.find('ul').hide();
 		theTree.find('li[opened="Y"]').children('ul').show();
 		//set selected
-		//TODO:deal with the selected
 		selectedNode.attr('select', 'Y');
 		selectedNode.css('background-color', '#8ab');
 		return selectedNode;
@@ -82,6 +81,15 @@ var treeDef = {
 	dealWithNode: function( node ) {
 		alert( node.css('background-color') );
 	},
+
+	getInfoByCode: function( code ) {
+	//TODO:tree 的 type 就暂时不管了
+		var theTree = $('.tree-area' );
+		var node = theTree.find('li[code=' + code + ']');
+		var info = {};
+		info.tabName = node.find('p').text();
+		return info;
+	}
 
 };
 

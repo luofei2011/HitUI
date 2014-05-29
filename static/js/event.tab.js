@@ -23,13 +23,13 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 
 //refill the content, use the COMPONENT function
 $(function() {
-	$('.upload-content').on('click', function() {
+	$(document).on('click', '.upload-content', function() {
 	//alert($(this).closest('.tabcontent').attr('tabid'));
 		hit.COMPONENT.tab.refillContent($(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'text' );
 		return false;
 	});
 
-	$('.upload-link').on('click', function() {
+	$(document).on('click', '.upload-link', function() {
 	//alert($(this).closest('.tabcontent').attr('tabid'));
 		hit.COMPONENT.tab.refillContent( $(this).closest('.tab-area').attr('layerid'), $(this).closest('.tabcontent'), $(this).siblings('.tabcontentin').val(), 'page' );
 		return false;

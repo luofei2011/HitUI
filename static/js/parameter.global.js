@@ -20,8 +20,6 @@
 		 * 存读HTML5方式存放的本地数据
 		 * */
 		_loadData: function( storage ) {
-			console.log('_loadData');
-			console.log(storage['globalParameter']);
 			this._data = JSON.parse(storage['globalParameter']);
 			console.log(this._data);
 		},
@@ -59,7 +57,8 @@
 				this._saveData( window.localStorage );
 			}
 			//通知tab切换到currentDataNode
-			hit.INTERFACES.tab.switch2Tab( dataNode );
+			info = hit.INTERFACES.tree.getInfoByCode( dataNode );
+			hit.INTERFACES.tab.switch2Tab( dataNode ,info.tabName );
 		},
 
 		//treeOption 树节点的配置信息

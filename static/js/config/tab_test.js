@@ -9,6 +9,12 @@ var tab_test = [
 				type: 'page', 
 				content: '',
 			},{
+				tabName: 'TABLE', 
+				id: 'table',
+				seq: 1,
+				type: 'page', 
+				content: 'load/frameset/content',
+			},{
 				tabName: 'TAB2',
 				id: '112',
 				seq: 2,
