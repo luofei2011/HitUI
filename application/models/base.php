@@ -37,6 +37,16 @@ class Base extends CI_Model {
         }
     }
 
+    /**
+     * 自动配置文件生成
+     */
+    public function auto_config($db = "", $t = "") {
+        $sql = "describe " . $t;
+        $this->db = $this->load->database($db, true);
+        $result = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
     /*
      * 根据参数插入数据库
      * $arr = array(
@@ -128,20 +138,14 @@ class Base extends CI_Model {
      * );
      * */
     public function dbUpdate($arr) {
-        # 之前默认的主键是id，这里做修改
-        $keys = $this->get_table_keys();
-        $key = "id";
-
-        if (count($keys))
-            $key = $keys[0];
-
         foreach($arr as $item) {
             // 处理query里面的参数，变成关联数组
             $q = $this->obj_to_array($item['q']);
-            //$sql = "UPDATE $this->tableName SET ". $item['q'] ." WHERE id=" . $item['id'] . "";
-            $this->db->where($key, $item['id']);
+            $keys = $this->obj_to_array($item['keys']);
+
+            // 根据多个属性的主键字段更新数据操作
+            $this->db->where($keys);
             $this->db->update($this->tableName, $q);
-            //$this->dbQuery($sql, false);
         }
 
         return $this->format_return_data();
@@ -162,8 +166,10 @@ class Base extends CI_Model {
         if (count($keys))
             $key = $keys[0];
 
-        foreach($arr as $id) {
-            $this->db->where($key, $id);
+        foreach($arr as $k) {
+            $keys = $this->obj_to_array($k);
+            //$this->db->where($key, $id);
+            $this->db->where($keys);
             $this->db->delete($this->tableName);
         }
 

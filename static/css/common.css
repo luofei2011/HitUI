@@ -284,6 +284,7 @@ a:hover.hit-button {
     position: fixed;
     width: 600px;
     background: #fff;
+    z-index: 999;
 }
 .hit-panel-border {
     border: 1px solid #999;

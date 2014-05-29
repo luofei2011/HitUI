@@ -63,17 +63,21 @@
     </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_test.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_bill_main.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_poup.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/component.form.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
 <script type="text/javascript">
 // 首先配置网站路径
 hit.baseURL = "<?php echo base_url();?>";
 // 然后导入配置参数
 table_test.url = "<?=base_url('load/deal_data')?>";
-hit.conf = table_test;
+//hit.conf = table_test;
+hit.conf = hit.CONFIG.table_inv_bill_main;
 // 渲染表格
-hit.load(table_test, 'gr-border');
+hit.load(hit.CONFIG.table_inv_bill_main, 'gr-border');
 </script>
 <script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>

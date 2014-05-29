@@ -95,25 +95,22 @@ $(document).on('click', 'span.hit-button-icon', function() {
                 return false;
             }
 
-            $('div.edited-and-no-save').filter(function() {
-                return $(this).css('display') !== 'none';
-            }).each(function() {
-                var _name = hit.filterID($(this).parent().attr('id')),
-                    _id = hit.filterID($(this).closest('tr').attr('id')),
-                    idx;
+            $('.gr-d-grid-body').find('tr[isEdited="true"]').each(function(i) {
+                query.push({
+                    keys: hit.findKeys($(this)),
+                    q: []
+                });
 
-                idx = idInArray(query, _id);
-                if (!idx) {
-                    query.push({
-                        id: _id * 1,
-                        q: [{value: $(this).prev().val(), name: _name}]
-                    });
-                } else {
-                    query[idx - 1].q.push({
+                // 得到当前记录的修改数据
+                $(this).find('div.edited-and-no-save').filter(function() {
+                    return $(this).css('display') !== 'none';
+                }).each(function() {
+                    var _name = hit.filterID($(this).parent().attr('id'));
+                    query[i].q.push({
                         value: $(this).prev().val(),
                         name: _name
                     });
-                }
+                });
             });
 
             // 数据库操作
@@ -187,9 +184,12 @@ $(document).on('click', 'span.hit-button-icon', function() {
             node: []
         };
         $('td.field-checkbox input[type=checkbox').each(function() {
-            var _tr = $(this).closest('tr');
+            var _tr = $(this).closest('tr'),
+                keys = hit.findKeys(_tr);
+
             if (this.checked) {
-                _re.id.push(_tr.attr('id').split('$').pop() * 1);
+                //_re.id.push(_tr.attr('id').split('$').pop() * 1);
+                _re.id.push(keys);
                 _re.node.push(_tr);
             }
         });
@@ -211,11 +211,9 @@ $(document).on('dblclick', 'div.grid-cell-show', function() {
 });
 
 // 不让双击选中文字
-/*
 document.onselectstart = function() {
     return false;
 };
-*/
 
 // 让表格的表头和表内容部分当滚动的时候能联动
 $(document).on('mousedown', 'div.gr-d-grid-view', function() {
@@ -265,14 +263,21 @@ $(document).on('keydown', '.grid-cell-edit', function(e) {
 // 单元格编辑时事件
 $(document).on('blur', '.grid-cell-edit', function() {
     var rule = [], i = 0,
-        len;
+        len,
+        val = this.value;
+
+    if ($(this).hasClass('poup-select')) {
+        val = $(this).find('input').val();
+    }
 
     // 恢复隐藏状态
-    if (this.value !== $(this).prev().text()) {
+    if (val !== $(this).prev().text()) {
         // 显示当前为修改状态
         $(this).next().show();
+        // 记录整条记录是否更新
+        $(this).closest('tr').attr('isEdited', 'true');
     }
-    $(this).hide().prev().text(this.value).show().height($(this).parent().height() - 4);
+    $(this).hide().prev().text(val).show().height($(this).parent().height() - 4);
 
     if ($(this).attr('valid')) {
         rule = $(this).attr('valid').split(';');
@@ -579,4 +584,16 @@ $(document).on('mousedown', 'div.hit-panel-header-mask', function(e) {
 // 弹出层关闭事件
 $(document).on('click', '.close-btn', function() {
     $(this).closest('.hit-panel').remove();
+});
+
+// 弹出层事件
+$(document).on('click', 'span.ps-button', function() {
+    var url = $(this).closest('.poup-select').attr('url'),
+        conf = hit.CONFIG[url];
+
+	hit.PLUGIN.poup.init({
+		left: 100,
+		top: 10,
+		label: '订单详情'
+	}, conf);
 });

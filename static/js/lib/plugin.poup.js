@@ -19,14 +19,13 @@ hit.PLUGIN.poup = {
 		hasCloseBtn: true,
 		left: '',
 		top: '',
-		label: '弹出层',
-		db: {}
+		label: '弹出层'
 	},
 
 	/*
 	 * 初始化
 	 */
-	init: function(option, url) {
+	init: function(option, conf) {
 		var _html = "", _poup,
 			_id = "POUP_" + (+new Date());
 
@@ -56,7 +55,7 @@ hit.PLUGIN.poup = {
 		});
 
 		this.load({
-			db: option.db,
+			conf: conf,
 			tNode: $('#' + _id).find('div.hit-panel-body'),
 			tID: _id
 		});
@@ -83,9 +82,10 @@ hit.PLUGIN.poup = {
 	 * 根据url地址得到数据并拼接字符串
 	 */
 	load: function(con) {
-		var _tmpDB = hit.conf.db,_this = this;
+		var _tmpDB = hit.conf.db,_this = this,
+            conf = con.conf;
 
-		hit.setDB(con.db.t, con.db.name);
+		hit.setDB(conf.db.t, conf.db.name);
 		hit.query('load/deal_data', '', {
 		    op: 'select',
 		    con: 'offset,0;limit,50;fields,true'
@@ -95,14 +95,16 @@ hit.PLUGIN.poup = {
 				len = data.length,
 				tmp = {};
 
-			console.log(data);
 			_html = '<table class="poupTable">';
 			for (; i < len; i++) {
 				_html += '<tr><td style="width:35px;"><div><input type="checkbox"></div></td>';
 
 				for (var o in data[i]) {
 					tmp = data[i][o];
-					_html += '<td class="poup-table-fields"><div name="' + o + '">' + tmp + '</div></td>';
+                    if (conf.showFields.indexOf(o) !== -1)
+					    _html += '<td class="poup-table-fields"><div name="' + find_map_field(o) + '">' + tmp + '</div></td>';
+                    else
+					    _html += '<td style="display:none;"><div name="' + find_map_field(o) + '">' + tmp + '</div></td>';
 				}
 				_html += '</tr>';
 			}
@@ -114,6 +116,20 @@ hit.PLUGIN.poup = {
 
 			// 绑定事件
 			_this.addEvent(con);
+
+            // 私有函数，找到映射的字段名
+            function find_map_field(name) {
+                var i, len,
+                    obj = conf.fieldMap;
+
+                for (i = 0, len = obj.length; i < len; i++) {
+                    if (obj[i].origin == name) {
+                        return obj[i].target;
+                    }
+                }
+
+                return name;
+            }
 		});
 
 		// 恢复之前的database配置
@@ -160,8 +176,6 @@ hit.PLUGIN.poup = {
 			$(tmp).closest('tr').find('td.poup-table-fields div').each(function() {
 				data[$(this).attr('name')] = $(this).text();
 			});
-
-			console.log(data);
 
 			$(this).next().trigger('click');
 			return false;

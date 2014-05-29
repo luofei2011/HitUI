@@ -21,7 +21,7 @@ hit.VALIDATE = {
 
         return true;
     },
-    require: function(ele) {
+    required: function(ele) {
         return ele.value ? true : false;
     },
     int: function(ele) {

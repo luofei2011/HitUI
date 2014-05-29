@@ -305,19 +305,19 @@ var hit = {
      * */
     _createTableBody: function(data, con, tNode) {
         var html = "", tmp = {}, i = 0, len,
-            map = con.bodyContent, key = '', idIdx = 0;
+            map = con.bodyContent, idIdx = 0;
 
         console.time('createTableBody');
-        key = this._searchKey(map);
         for (len = data.length; i < len; i++) {
             // 重置索引
             idIdx = 0;
             tmp = data[i];
-            html += '<tr class="table-row-has-event" id="TABLEID$' + tmp[key] + '">';
+            html += '<tr class="table-row-has-event">';
 
             if (con.hasCheckBox)
                 html += '<td class="gr-d-grid-cell field-checkbox" style="width: 30px;"><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox"></div></td>';
 
+            //console.log(tmp);
             for (var o in tmp) {
                 if (map[o]['isShow']) {
                     idIdx++;
@@ -325,11 +325,27 @@ var hit = {
 
                     if (map[o]['canEdit']) {
                         //html += '<input type="text" value="' + tmp[o] + '" class="grid-cell-edit">';
-                        html += this._createFormByType(tmp[o], map[o]['type'], map[o]['valid'], map[o]['sureValue']);
-                        html += '<div class="edited-and-no-save"></div>'
+                        html += this._createFormByType(map[o]['type'], {
+                            value: tmp[o],
+                            valid: map[o]['valid'],
+                            vals: map[o]['sureValue'], // select的option值
+                            url: typeof map[o]['url'] === 'undefined' ? '' : map[o]['url']
+                        });
+                        html = html.substr(0, html.length - 1);
+
+                        if (map[o]['isKey'])
+                            html += ' key="true" name="' + o + '"';
+                        html += '><div class="edited-and-no-save"></div>'
                     }
                     
                     html += '</td>';
+                // HACK 数据配置中不显示的字段也应该在页面中出现，为后面的更新操作服务
+                } else {
+                    html += '<td class="gr-d-grid-cell" style="display:none;"><input type="hidden" value="'+ tmp[o] +'" name="'+ o +'"';
+                    if (map[o]['isKey'])
+                        html += ' key="true"';
+
+                    html += '></td>';
                 }
             }
             html += '</tr>';
@@ -342,31 +358,34 @@ var hit = {
     /*
      *  根据type返回设定好的表单信息
      *  @param {String} value
-     *  @param {String} type
-     *  @param {String} valid
-     *  @param {Array} vals 如果类型为select时需要的值
+     *  @param [Object] o
+     *  o: {
+     *  value: '' 
+     *  valid: '' // 验证规则
+     *  vals: []
+     *  }
      *  @return {String} html
      * */
-    _createFormByType: function(value, type, valid, vals) {
+    _createFormByType: function(type, o) {
         switch(type) {
             case "select":
-                return this.COMPONENT.form.select(value, valid, vals);
+                return this.COMPONENT.form.select(o);
             case "textarea":
-                return this.COMPONENT.form.textarea(value, valid);
+                return this.COMPONENT.form.textarea(o);
             case "radio":
-                return this.COMPONENT.form.radio(value, valid);
+                return this.COMPONENT.form.radio(o);
             case "checkbox":
-                return this.COMPONENT.form.checkbox(value, valie);
+                return this.COMPONENT.form.checkbox(o);
             case "password":
-                return this.COMPONENT.form.password(value, valid);
+                return this.COMPONENT.form.password(o);
             case "hidden":
-                return this.COMPONENT.form.hidden(value, valid);
+                return this.COMPONENT.form.hidden(o);
             case "date":
-                return this.COMPONENT.form.date(value, valid);
+                return this.COMPONENT.form.date(o);
             case "poup": // 弹出选择组件
-                return this.COMPONENT.form.poup(value, valid, '');
+                return this.COMPONENT.form.poup(o);
             default: 
-                return this.COMPONENT.form.text(value, valid);
+                return this.COMPONENT.form.text(o);
         }
     },
 
@@ -565,6 +584,25 @@ var hit = {
                 $(this).attr('selected', false);
             }
         });
+    },
+
+    /**
+     *
+     */
+    findKeys: function(tNode) {
+        var _input = tNode.find('input[key=true]'),
+            keys = [];
+
+        _input.each(function() {
+            if ($(this).attr('key') === 'true') {
+                keys.push({
+                    name: $(this).attr('name'),
+                    value: this.value
+                });
+            }
+        });
+
+        return keys;
     }
 };
 
@@ -580,8 +618,8 @@ var hit = {
             },
             {
                 'id': 'content',
-                //'page': 'content'
-				'page': '../elements/tab'
+                'page': 'content'
+				//'page': '../elements/tab'
             }
         ], i = 0, len = options.length, o = {},
 
