@@ -202,6 +202,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
 // 表单单元双击可编辑
 $(document).on('dblclick', 'div.grid-cell-show', function() {
+    // TODO 不能编辑的表单域应该使用hidden文本框，便于之后的选择更新
     if ("textarea#input#select#span".indexOf($(this).next()[0].nodeName.toLowerCase()) !== -1) {
         $(this).hide();
         $(this).next().show().focus();
@@ -588,12 +589,29 @@ $(document).on('click', '.close-btn', function() {
 
 // 弹出层事件
 $(document).on('click', 'span.ps-button', function() {
-    var url = $(this).closest('.poup-select').attr('url'),
+    var pNode = $(this).closest('.poup-select'),
+        url = pNode.attr('url'),
         conf = hit.CONFIG[url];
 
 	hit.PLUGIN.poup.init({
 		left: 100,
 		top: 10,
 		label: '订单详情'
-	}, conf);
+	}, conf, pNode);
+});
+
+// 在弹出选择组件上绑定自定义事件
+$(document).on('select', 'span.poup-select', function() {
+    var map = arguments[1], 
+        tr = $(this).closest('tr');
+
+    $('input:not([type=checkbox]), textarea, select', tr).each(function() {
+        var td = $(this).closest('td'),
+            name = td.attr('id') ? td.attr('id').split('$').pop() : $(this).attr('name');
+
+        if (map[name]) {
+            this.value = map[name];
+            $(this).trigger('blur');
+        }
+    });
 });
