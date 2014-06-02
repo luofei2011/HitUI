@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
 <div class="tree-container">
-<script type="text/javascript" src="<?=base_url('static/js/jquery.js');?>"></script>
 <div class="tree-area"></div>
 
-<!--script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script-->
 <!--下面两个应该是放在全局那儿的-->
 <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>

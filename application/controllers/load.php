@@ -77,7 +77,7 @@ class Load extends CI_Controller {
                         'isShow' => true, 
                         'align' => 'left',
                         'canEdit' => true, 
-                        'type' => 'text',  
+                        'type' => $f['Type'] == 'date' ? 'date' : 'text',  
                         'valid' => $f['Null'] == 'NO' ? 'required' : '',
                         'sureValue' => '',
                         'minLen' => '',

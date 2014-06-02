@@ -92,7 +92,7 @@ hit.PLUGIN.poup = {
 		hit.setDB(conf.db.t, conf.db.name);
 		hit.query('load/deal_data', '', {
 		    op: 'select',
-		    con: 'offset,0;limit,50;fields,true'
+		    con: 'offset,0;limit,50;fields,true;pager,false'
 		}, function(data) {
 			var _table = $('<div class="poupWrapper"></div>'),
 				_html = "", i = 0,

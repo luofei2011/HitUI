@@ -1,11 +1,4 @@
 /*
- * event.tab.js 处理关于tab的点击事件
- *
- * */
-$(document).on('click', 'a', function() {
-});
-
-/*
  * 设置tab列表点击事件
  */
 $(document).on('click', '.tabtitle-area>.tabtitle', function() {

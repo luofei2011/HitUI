@@ -1,9 +1,3 @@
-/*
- * event.tree.js 处理关于树的点击事件
- *
- * */
-$(document).on('click', 'a', function() {
-});
 
 /*
  * 设置树列表点击事件
