@@ -1,4 +1,4 @@
-.gr-container {
+﻿.gr-container {
     padding: 0 20px 0 20px;
 }
 .gr-table {
@@ -32,7 +32,6 @@
     text-align: center;
 }
 .gr-d-grid-head-cell {
-    display: block;
     border-right: #A5ACB5 1px solid;
     border-bottom: 1px solid #d2d2d2;
     position: relative;
