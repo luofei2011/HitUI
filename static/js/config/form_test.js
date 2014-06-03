@@ -1,40 +1,79 @@
-var tab_test = [
-	{
-		tabNum : 2,
-		tabs : [
-			{
-				tabName: 'TAB1', 
-				id: 'x6',
-				seq: 6,
-				type: 'page', 
-				content: '',
-			},{
-				tabName: 'TABLE', 
-				id: 'table',
-				seq: 1,
-				type: 'page', 
-				content: 'load/frameset/content',
-			},{
-				tabName: 'TAB2',
-				id: '112',
-				seq: 2,
-				type: 'text',
-				content: '<h1> hello world </h1><hr/><br/>囧<hr/><h4>你好世界</h4>',
-			},{
-				tabName: 'TAB3',
-				id: '53',
-				seq: 5,
-				type: 'text',
-				content: '',
-			},{
-				tabName: 'delData',
-				id: '3',
-				seq: 3,
-				type: 'text',
-				content: '<div class="clear-global-parameter">clearData</div>',
-			},
-		],
-	},{
-	
-	},
-];
+if (typeof hit === 'undefined')
+    hit = {};
+if (typeof hit.CONFIG === 'undefined')
+    hit.CONFIG = {};
+
+hit.CONFIG.form_test = {
+	formName: 'Test_Form',
+	groups: [
+		{
+			groupName: 'Login Infomation',
+			showFrame: true,
+			items: [
+				{
+					name: '110',
+					label: 'Name',
+					type: 'text',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: 'input ur name here',
+				},{
+					name: '123',
+					label: 'Password',
+					type: 'password',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: 'input ur password here',
+				},{
+					name: '111',
+					label: 'Nation',
+					type: 'selection',
+					required: false,
+					sizeLevel: 2,
+					defaultValue: 0,
+					selections: [
+						'China',
+						'Amarica',
+						'Japan',
+						'Korea',
+						'Brazil',
+					],
+				},{
+					name: '10',
+					label: 'location',
+					type: 'list',
+					required: false,
+					sizeLevel: 2,
+					defaultValue: 0,
+					selections: [
+						'China',
+						'Amarica',
+						'Japan',
+						'Korea',
+						'Brazil',
+					],
+				},
+			],
+		},{
+			groupName: 'stupid Group',
+			showFrame: true,
+			items: [
+				{
+					name: '99',
+					label: 'Name',
+					type: 'text',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: 'input ur name here',
+				},{
+					name: '999',
+					label: 'Name',
+					type: 'text',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: 'input ur name here',
+				},
+			],
+		},
+	],
+};

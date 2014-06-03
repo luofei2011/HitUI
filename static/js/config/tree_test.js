@@ -1,4 +1,9 @@
-var tree_test = {
+if (typeof hit === 'undefined')
+    hit = {};
+if (typeof hit.CONFIG === 'undefined')
+    hit.CONFIG = {};
+
+hit.CONFIG.tree_test = {
 	open: [
 		'0102',
 	],

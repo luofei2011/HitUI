@@ -8,27 +8,27 @@
 var iForm= {
 
 	//create default form
-	create: function() {
+	create: function( formID ) {
 		html = "";
 		html += '<h1> Hi! It\'s me again! </h1>';
-		$('.form-area').empty().append(html);
+		$('.form-area#'+formID).empty().append(html);
 	},
 
 	/*
 	 * create form by table configuration
 	 * */
-	createFromTable: function( con ) {
+	createFromTable: function( con, formID ) {
 		html = "";
-		html += '<h1> Hi! me again! </h1>';
-		html += con;
-		$('.form-area').empty().append(html);
+		html += '<h1> Hi! me again! the table config is in the log</h1>';
+		console.log(con);
+		$('.form-area#'+formID).empty().append(html);
 	},
 
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
-	createFromConfig: function( config ) {
-
+	createFromConfig: function( config, formID ) {
+		hit.COMPONENT.theform.createFromConfig( config, formID );
 	},
 
 	/*

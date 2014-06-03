@@ -1,15 +1,8 @@
 <link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
 <div class="tree-container">
 <div class="tree-area"></div>
+</div>
 
-<!--下面两个应该是放在全局那儿的-->
-<!--
-<script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
--->
-<script type="text/javascript" src="<?=base_url('static/js/event.tree.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tree.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/config/tree_test.js');?>"></script>
 <script type="text/javascript">
 	hit.baseURL = "<?=base_url()?>";
@@ -35,7 +28,6 @@
 	}
 
 	hit.INTERFACES.tree.makeFromDB('menu', options);
-//	hit.INTERFACES.tree.makeFromData( 'menu', tree_test );
+//	hit.INTERFACES.tree.makeFromData( 'menu', hit.CONFIG.tree_test );
 
 </script>
-</div>

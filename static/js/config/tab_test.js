@@ -1,4 +1,9 @@
-var tab_test = [
+if (typeof hit === 'undefined')
+    hit = {};
+if (typeof hit.CONFIG === 'undefined')
+    hit.CONFIG = {};
+
+hit.CONFIG.tab_test = [
 	{
 		tabNum : 2,
 		tabs : [
@@ -11,15 +16,15 @@ var tab_test = [
 			},{
 				tabName: 'TABLE', 
 				id: 'table',
-				seq: 1,
+				seq: 2,
 				type: 'page', 
 				content: 'load/frameset/content',
 			},{
-				tabName: 'TAB2',
-				id: '112',
-				seq: 2,
-				type: 'text',
-				content: '<h1> hello world </h1><hr/><br/>囧<hr/><h4>你好世界</h4>',
+				tabName: 'form',
+				id: 'form',
+				seq: 1,
+				type: 'page',
+				content: 'load/elements/form',
 			},{
 				tabName: 'TAB3',
 				id: '53',

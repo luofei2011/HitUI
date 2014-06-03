@@ -122,9 +122,10 @@
 
 		},
 
-		//统一给每一个界面component增加comID做标识
+		//TODO:统一给每一个界面component增加comID做标识
+		//往global里注册组件，并分配comID
 		registerComponent: function( type ) {
-			return ;
+			return type + (+new Date()) + '_' + Math.floor(Math.random() * 10);
 		}
 	};
 

@@ -16,6 +16,21 @@
     <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>
+    <!--tab-->
+    <script type="text/javascript" src="<?=base_url('static/js/event.tab.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/lib/component.tab.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tab.js');?>"></script>
+    <!--tree-->
+    <script type="text/javascript" src="<?=base_url('static/js/event.tree.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tree.js');?>"></script>
+    <!--form-->
+    <!--
+    <script type="text/javascript" src="<?=base_url('static/js/event.form.js');?>"></script>
+    -->
+    <script type="text/javascript" src="<?=base_url('static/js/lib/component.theform.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.form.js');?>"></script>
+    <!--global parameter-->
     <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
     <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
 </head>
