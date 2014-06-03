@@ -3,9 +3,10 @@
 <div class="tree-area"></div>
 
 <!--下面两个应该是放在全局那儿的-->
+<!--
 <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
-
+-->
 <script type="text/javascript" src="<?=base_url('static/js/event.tree.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tree.js');?>"></script>
@@ -21,7 +22,7 @@
 			db: 'natservice',
 			conf: {
 				op: 'select',
-				con: 'limit, 50'
+				con: 'limit, 51;pager,false'
 			},
 			openNodes: []
 		};

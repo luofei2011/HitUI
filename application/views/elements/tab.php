@@ -7,9 +7,10 @@
 <div class="tab-area"></div>
 
 <!--下面两个应该是放在全局那儿的-->
+<!--
 <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
-
+-->
 <script type="text/javascript" src="<?=base_url('static/js/event.tab.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.tab.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tab.js');?>"></script>

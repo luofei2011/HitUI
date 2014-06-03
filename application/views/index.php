@@ -15,8 +15,9 @@
     <script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('static/js/lib/interfaces.form.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
+    <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
 </head>
 <body>
 <div id="wrapper">

@@ -4,19 +4,19 @@
 	$conJson = json_encode($tableCon);
 ?>
 <div class="form-container">
-<script type="text/javascript" src="<?=base_url('static/js/jquery.js');?>"></script>
 <div class="form-area"></div>
 
 <!--
 <script type="text/javascript" src="<?=base_url('static/js/load.js');?>"></script>
 -->
 <!--下面两个应该是放在全局那儿的-->
+<!--
 <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
-<!--
 <script type="text/javascript" src="<?=base_url('static/js/event.form.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.theform.js');?>"></script>
 -->
+
 <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.form.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/config/form_test.js');?>"></script>
 <script type="text/javascript">

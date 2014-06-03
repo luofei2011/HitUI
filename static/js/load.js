@@ -72,7 +72,7 @@ var hit = {
                 var r = JSON.parse(msg);
                 //console.log(msg);
                 if (r.status == "ok") {
-                    if (r.data.pager)
+                    if (r.data.pager && !(r.data.pager instanceof Array))
                         hit._resultPager(r.data.pager);
                     func(r.data.data);
                 }
