@@ -71,8 +71,9 @@ var hit = {
             success: function(msg) {
                 var r = JSON.parse(msg);
                 //console.log(msg);
+                console.log(r);
                 if (r.status == "ok") {
-                    if (r.data.pager)
+                    if (r.data.pager && !(r.data.pager instanceof Array))
                         hit._resultPager(r.data.pager);
                     func(r.data.data);
                 }
@@ -260,7 +261,6 @@ var hit = {
                 //console.log(msg);
                 var obj = JSON.parse(msg);
 
-                console.log(obj);
                 if (obj.status === "ok") {
                     if (obj.data) {
                         if (obj.data.pager)
