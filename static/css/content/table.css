@@ -1,4 +1,4 @@
-.gr-container {
+﻿.gr-container {
     padding: 0 20px 0 20px;
 }
 .gr-table {
@@ -148,7 +148,6 @@
 
 /*分页区域*/
 .gr-pager {
-    width: auto;
     height: 28px;
     overflow: hidden;
     font-size: 9pt;
@@ -207,6 +206,7 @@ a:hover.gr-btn-disabled {
 }
 .gr-grid-pager {
     position: relative;
+    width: 900px;
     overflow: hidden;
     background: #E7EAEE url(../../img/table/footer.png) repeat-x 0 0;
     border: 1px solid #999;

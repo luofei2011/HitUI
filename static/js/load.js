@@ -107,12 +107,12 @@ var hit = {
     /*
      * 初始化查询区域
      */
-    _createQ: function(con) {
+    _createQ: function(con, pNode) {
         var i = 0, len = con.qParam.length,
             tmp = {},
             html = "";
         if (!con.hasQuery || !len) {
-            $('div.gr-query').hide();
+            pNode.hide();
             return false;
         }
 
@@ -129,7 +129,7 @@ var hit = {
             }
         }
 
-        $('div.gr-query fieldset').prepend(html);
+        $('fieldset', pNode).prepend(html);
     },
 
     /*
@@ -179,33 +179,86 @@ var hit = {
      * @param {Object} data 请求数据
      * @param {HTML NODE} targetNode 目标节点
      * */
-    load: function(config, targetNode) {
+    load: function(name, targetNode) {
         // 首先初始化表头信息
-        var _this = this;
+        var _this = this,
+            tmpDB = {
+                name: this.conf.db.name,
+                t: this.conf.db.t
+            }, pNode = targetNode || $('div.gr'), tmp, pager, html = "",
+            config = this.CONFIG[name],
+            id;
+
+        this.setDB(config.db.t, config.db.name);
+
+        tmp = $('<div class="gr-container"></div>');
+        // 记录当前配置路径
+        tmp.attr('url', name);
+        id = 'GR_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
+        tmp.attr('id', id);
+
+        pNode.append(tmp);
+
+        pNode = tmp;
 
         // 配置查询区域
-        this._createQ(config);
+        tmp = $('<div class="gr-query"></div>');
+        tmp.append('<fieldset><legend>查询参数</legend><a class="hit-button pull-right query-btn"><span class="hit-button-txt">查询</span></a></fieldset>');
+        pNode.append(tmp);
+        this._createQ(config, tmp);
+
 		this._setForm(config);
 
-        // 是否需要显示功能区
-        if (config.hasFunc)
-            this._createOp(config, '');
+        // 表格区域
+        tmp = $('<div class="gr-table"></div>');
+        pNode.append(tmp);
 
-        this._createTableHead(config, targetNode);
+        // 表格分页信息
+        pager = $('<div class="gr-grid-pager"></div>');
+        pager.attr('target', id);
+        pNode.append(pager);
+        html += '<div class="gr-pager clearfix"><div class="gr-pager-left"><select name="" class="hit-button pageNumSetting">' +
+                '<option value="10">10</option><option value="20">20</option><option value="30">30</option><option value="50">50</option><option value="100">100</option><option value="200">200</option></select>' +
+                '<span class="separator"></span><a href="javascript:void(0);" class="hit-button hit-button-plain" title="首页"><span class="hit-button-txt gr-btn-iconOnly gr-pager-first"></span></a>' +
+                '<a href="javascript:void(0);" class="hit-button hit-button-plain" title="上一页"><span class="hit-button-txt gr-btn-iconOnly gr-pager-prev"></span></a><select name="" class="hit-button selectPager"><option value="1">1</option><option value="2">2</option></select>' +
+                '<span><span class="gr-pager-pages">/ 2</span></span><a href="javascript:void(0);" class="hit-button hit-button-plain" title="下一页"><span class="hit-button-txt gr-btn-iconOnly gr-pager-next"></span></a>' +
+                '<a href="javascript:void(0);" class="hit-button hit-button-plain" title="尾页"><span class="hit-button-txt gr-btn-iconOnly gr-pager-last"></span></a><span class="separator"></span><a href="javascript:void(0);" class="hit-button hit-button-plain" title="刷新"><span class="hit-button-txt gr-btn-iconOnly gr-pager-reload"></span></a>' +
+                '</div><div class="gr-pager-right">每页10条, 共19条</div></div>';
+
+        pager.append(html);
+
+        // 拖拽区域
+        pNode.append('<div class="hit-resizer-trigger"></div>');
+
+        pNode = tmp;
+
+        // 是否需要显示功能区
+        if (config.hasFunc) {
+            tmp = $('<div class="gr-toolbar"></div>');
+            pNode.append(tmp);
+            this._createOp(config, tmp);
+        }
+
+        tmp = $('<div class="gr-border"></div>');
+        pNode.append(tmp);
+
+        // 表格头部区域
+        this._createTableHead(config, tmp);
 
         $.ajax({
-            url: config.url,
+            url: this.baseURL + 'load/deal_data',
             method: 'post',
             data: {
                 data: {
                     db: {
-                        dbName: this.conf.db.name,
-                        t: this.conf.db.t
+                        dbName: config.db.name,
+                        t: config.db.t
                     },
                     data: '',
                     op: {
                         op: 'select',
-                        con: 'limit,' + this.conf.pageNum + ";offset,0"
+                        con: 'limit,' + config.pageNum + ";offset,0;target," + id
+                        //con: 'limit,10;offset,0'
                     }
                 }
             },
@@ -224,11 +277,13 @@ var hit = {
                     if (obj.data) {
                         if (obj.data.pager)
                             _this._resultPager(obj.data.pager);
-                        _this._createTableBody(obj.data.data, config);
+                        _this._createTableBody(obj.data.data, config, tmp);
                     }
                 } 
             }
         });
+
+        this.setDB(tmpDB.t, tmpDB.name);
     },
 
     /*
@@ -253,7 +308,7 @@ var hit = {
         html += '<tr>';
 
         if (con.hasCheckBox)
-            html += '<td class="gr-d-grid-head-cell" style="width: 30px;" rowspan=2><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox" id="check_all"></div></td>';
+            html += '<td class="gr-d-grid-head-cell" style="width: 30px;" rowspan=2><div class="gr-d-grid-cell-inner gr-d-grid-cell-nowrap"><input type="checkbox" class="check_all"></div></td>';
 
         for (len = arr.length; i < len; i++) {
                 // 得到每列的配置信息(Object)
@@ -313,7 +368,7 @@ var hit = {
         html += '<div class="gr-d-grid-view"><div class="gr-d-grid-body">' + _table.html + '</table></div></div>';
 
         // 渲染结果
-        $('.' + tNode).append(html);
+        $(tNode).append(html);
         // LOG
         console.timeEnd('createTableHead');
     },
@@ -372,7 +427,7 @@ var hit = {
             html += '</tr>';
         }
 
-        $('.gr-d-grid-body tbody').append(html);
+        $('.gr-d-grid-body tbody', tNode).append(html);
         console.timeEnd('createTableBody');
     },
 
@@ -506,30 +561,33 @@ var hit = {
      * 根据新数据重绘表格
      * @param {Object} data
      * */
-    reDrawTableContent: function(data) {
-        $('.gr-d-grid-body tbody tr').each(function(i) {
+    reDrawTableContent: function(data, tNode) {
+        $('.gr-d-grid-body tbody tr', tNode).each(function(i) {
             if (i) {
                 $(this).remove();
             }
         });
-        hit._createTableBody(data, hit.conf);
+        hit._createTableBody(data, hit.CONFIG[tNode.attr('url')]);
     },
 
     /*
      * 分页功能
      * @param {Object} pager
      * */
-    _resultPager: function(pager) {
-        var _node = $('div.gr-grid-pager'),
-            p_idx = $('#selectPager'),
-            p_pages = $('span.gr-pager-pages', _node),
-            p_label = $('div.gr-pager-right', _node),
+    _resultPager: function(pager, tNode) {
+        var pNode = tNode ? $('#' + tNode.attr('target')) : $('#' + pager.target),
+            p_idx = $('.selectPager', pNode),
+            p_pages = $('span.gr-pager-pages', pNode),
+            p_label = $('div.gr-pager-right', pNode),
             tmp = '',
-            pages = Math.ceil(pager.pages / pager.perNum);
+            pages = Math.ceil(pager.pages / pager.perNum),
+            conf = pNode.attr('url');
+
+        conf = this.CONFIG[conf];
 
         // 重绘显示数量
-        $('#pageNumSetting option').each(function() {
-            if (this.value == hit.conf.pageNum) {
+        $('.pageNumSetting option', pNode).each(function() {
+            if (this.value == conf.pageNum) {
                 $(this).attr('selected', true);
             } else {
                 $(this).attr('selected', false);
@@ -555,7 +613,7 @@ var hit = {
         p_label.text('每页' + pager.perNum + '条,共' + pager.pages + '条');
 
         // 刷新按钮状态
-        this.reloadPagerBtnStatus(pager.cur, pages);
+        this.reloadPagerBtnStatus(pager.cur, pages, tNode);
     },
 
     /*
@@ -563,9 +621,8 @@ var hit = {
      * @param {Number} cur 当前页
      * @param {Number} pages 总的页数
      * */
-    reloadPagerBtnStatus: function(cur, pages) {
-        var _p = $('div.gr-grid-pager'),
-            _first = $('span.gr-pager-first', _p),
+    reloadPagerBtnStatus: function(cur, pages, _p) {
+        var _first = $('span.gr-pager-first', _p),
             _last = $('span.gr-pager-last', _p),
             _next = $('span.gr-pager-next', _p),
             _prev = $('span.gr-pager-prev', _p);
@@ -650,5 +707,4 @@ var hit = {
         o = options[i];
         $('#' + o.id).load(base_url + "load/frameset/" + o.page);
     }
-	console.log("static/js/load.js: len:" + len);
 });

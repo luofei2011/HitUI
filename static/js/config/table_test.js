@@ -5,7 +5,7 @@
  * */
 
 // 命名请尽量已table开头，避免和全局的变量冲突引起程序的异常
-var table_test = {
+hit.CONFIG.table_test = {
     url: "http://localhost/graduation-pro-2014/load/deal_data",
     rows: 2, // 目前默认最高只支持2行
     isShowPaging: true, // 是否显示分页功能
@@ -14,7 +14,7 @@ var table_test = {
     
     /**************数据库相关配置****************/
     db: {
-        name: '',
+        name: 'default',
         t: 'test'
     },
     /********************************************/

@@ -10,7 +10,7 @@ hit.CONFIG.table_inv_bill_main = {
 	"url": "http://localhost/graduation-pro-2014/load/deal_data",
 	"rows": 2,
 	"isShowPaging": true,
-	"pageNum": 50,
+	"pageNum": 10,
 	"hasCheckBox": true,
 	"db": {
 		"name": "inv",
@@ -27,17 +27,17 @@ hit.CONFIG.table_inv_bill_main = {
 	"funcArr": ["add", "edit", "delete", "save"],
 	"widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
 	"headContent": [[{
-		"label": "",
-		"isFixed": false,
+		"label": "订单号",
+		"isFixed": true,
 		"isOrdered": false,
 		"align": "center",
 		"multiply": false,
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "订单日期",
 		"isFixed": false,
-		"isOrdered": false,
+		"isOrdered": 'Make_date',
 		"align": "center",
 		"multiply": false,
 		"colspan": 2
@@ -219,7 +219,7 @@ hit.CONFIG.table_inv_bill_main = {
 			"isShow": true,
 			"align": "left",
 			"canEdit": true,
-			"type": "text",
+			"type": "date",
 			"valid": "required",
 			"sureValue": "",
 			"minLen": "",

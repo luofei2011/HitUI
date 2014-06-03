@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <title>管理系统</title>
     <link rel="stylesheet" href="<?php echo base_url('static/css/common.css');?>" />
+    <link rel="stylesheet" href="<?php echo base_url('static/css/content/table.css');?>" />
+    <script type="text/javascript" src="<?php echo base_url('static/js/jquery.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/load.js');?>"></script>
+    <script type="text/javascript">
+        hit.baseURL = "<?=base_url()?>";
+    </script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/jquery.resize.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/lib/component.form.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/lib/interfaces.form.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('static/js/plugin/My97DatePicker/WdatePicker.js');?>"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -62,10 +75,5 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="<?php echo base_url('static/js/jquery.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('static/js/load.js');?>"></script>
-<script type="text/javascript">
-	hit.baseURL = "<?=base_url()?>";
-</script>
-<script type="text/javascript" src="<?php echo base_url('static/js/jquery.resize.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
 </html>

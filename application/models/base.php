@@ -27,7 +27,7 @@ class Base extends CI_Model {
             case "delete":
                 return $this->dbDelete($in['data']);
             case "insert":
-                return $this->dbInsert($in['data']);
+                return $this->dbInsert($in['data'], $in['op']['con']);
             case "where":
                 return $this->dbWhere($in['data']);
             case "like":
@@ -54,15 +54,45 @@ class Base extends CI_Model {
      *  'data' => array(),
      * );
      * */
-    public function dbInsert($arr) {
+    public function dbInsert($arr, $con = false) {
         // 默认一次可插入多条数据
         foreach($arr as $data) {
             $tmp = $this->obj_to_array($data);
-            // $tmp['id'] = '';
+
+            if ($con) {
+                $k = $this->auto_create_key($tmp, $con);
+                $tmp[$k['name']] = $k['value'];
+            }
             $this->db->insert($this->tableName, $tmp);
         }
 
         return $this->format_return_data();
+    }
+
+    private function auto_create_key($data, $con) {
+        $uid = $this->input->cookie('uid', true);
+        $len = 20;
+        $key = "IW00" . strtoupper($uid) . "0";
+        switch($con) {
+            case "Bill_num":
+                $date = str_replace('-', '', $data['Make_date']) | date('Ymd');
+                $key .= $date;
+                $this->db->where('Make_date', $data['Make_date']);
+                $this->db->from('inv_bill_main');
+                $num = $this->db->count_all_results() + 1;
+
+                for ($i = 0, $l = $len - strlen($key) - 1; $i < $l; $i++)
+                    $key .= '0';
+
+                $key .= $num;
+                $field = "Bill_num";
+                break;
+        }
+
+        return array(
+            'name' => $field,
+            'value' => $key,
+        );
     }
 
     /*
@@ -118,13 +148,23 @@ class Base extends CI_Model {
             $arr['offset'] = 0; 
         }
 
+        if (array_key_exists('pager', $arr) && $arr['pager'] == 'false') {
+            $re = array();
+        } else {
+            $re = array(
+                'pages' => $pages,
+                'perNum' => $arr['limit'],
+                'cur' => $arr['offset'] + 1,
+            );
+
+            if (array_key_exists('target', $arr)) {
+                $re['target'] = $arr['target'];
+            }
+        }
+
         // return $this->format_return_data($this->get_table_keys("", $this->tableName));
 
-        return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), array(
-            'pages' => $pages,
-            'perNum' => $arr['limit'],
-            'cur' => $arr['offset'] + 1,
-        ));
+        return $this->format_return_data($this->db->get($this->tableName, $arr['limit'], $offset)->result_array(), $re);
     }
 
     /*
