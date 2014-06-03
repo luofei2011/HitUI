@@ -121,6 +121,11 @@
 		update: function() {
 
 		},
+
+		//统一给每一个界面component增加comID做标识
+		registerComponent: function( type ) {
+			return ;
+		}
 	};
 
 	if ( hit.PARAMETER ){

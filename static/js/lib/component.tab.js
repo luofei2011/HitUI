@@ -132,7 +132,7 @@
 		 *
 		 * */
 		addTab: function( options ) {
-		
+			
 		},
 
 		/*
