@@ -108,6 +108,9 @@
 			}
 		},
 
+		/*
+		 * 异步加载页面，并传送数据
+		 */
 		_loadPage: function( theLayerId, targetNode, link ) {
 			targetNode.load(link, {layerId: Number(theLayerId)+1}, function( response, status) {
 				switch( status ) {

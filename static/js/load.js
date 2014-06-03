@@ -88,8 +88,20 @@ var hit = {
 	 *	配置表单
 	 */
 	_setForm: function(con) {
-		hit.INTERFACES.form.createForm(con);
-		return false;
+		formurl = 'load/elements/form';
+		url = hit.baseURL + formurl;
+		// $('div.gr-query fieldset').load( url, {tableCon: con}, function(response, status) {
+        $('div.gr-query fieldset').load( url, '', function(response, status) {
+			switch( status ) {
+				case 'success':
+					break;
+				case 'error':
+					$(this).prepend('<h2>404!</h2>');
+				default:
+					$(this).prepend('<h1>ERROR!!!</h1>');
+					break;
+			}
+		});
 	},
 
     /*

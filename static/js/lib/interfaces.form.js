@@ -7,16 +7,27 @@
 //不乱加全局变量，嗯。
 var iForm= {
 
-	createForm: function( config ) {
+	//create default form
+	create: function() {
 		html = "";
 		html += '<h1> Hi! It\'s me again! </h1>';
-		$('div.gr-query fieldset').empty().append(html);
+		$('.form-area').empty().append(html);
+	},
+
+	/*
+	 * create form by table configuration
+	 * */
+	createFromTable: function( con ) {
+		html = "";
+		html += '<h1> Hi! me again! </h1>';
+		html += con;
+		$('.form-area').empty().append(html);
 	},
 
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
-	linkForm: function( config ) {
+	createFromConfig: function( config ) {
 
 	},
 
