@@ -1,6 +1,7 @@
 <?php
 	$tableCon = isset( $_POST['tableCon'] ) ? $_POST['tableCon'] : ""; 
 	$conJson = json_encode($tableCon);
+	
 ?>
 <div class="form-container">
 <div class="form-area" id="now"></div>

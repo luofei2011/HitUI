@@ -76,4 +76,5 @@ hit.CONFIG.form_test = {
 			],
 		},
 	],
+	returnURL: '',
 };
