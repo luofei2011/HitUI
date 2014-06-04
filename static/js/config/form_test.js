@@ -41,10 +41,10 @@ hit.CONFIG.form_test = {
 				},{
 					name: '10',
 					label: 'location',
-					type: 'radio',
+					type: 'list',
 					required: false,
 					sizeLevel: 2,
-					defaultValue: 0,
+					defaultValue: 3,
 					selections: [
 						'China',
 						'Amarica',
@@ -72,6 +72,13 @@ hit.CONFIG.form_test = {
 					required: true,
 					sizeLevel: 2,
 					defaultValue: 'input ur name here',
+					selections: [
+						'China',
+						'Amarica',
+						'Japan',
+						'Korea',
+						'Brazil',
+					],
 				},
 			],
 		},

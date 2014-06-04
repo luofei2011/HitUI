@@ -81,6 +81,9 @@ var temform= {
                 case 'radio':
                     html += this.radio( item );
                     break;
+                case 'list':
+                    html += this.list( item );
+                    break;
                 default:
                     break;
             };
@@ -89,7 +92,21 @@ var temform= {
         },
 
         text: function( item ) {
-            return '<input class="form-item" type="text" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            var html = '<input class="form-item" type="text" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" ';
+            var len = 0;
+            if ( item.selections != null ) {
+                len = item.selections.length;
+            }
+            if (len > 0) {
+                html += (' list="l_' + item.name + '" /><datalist id="l_' + item.name + '"><select>' );
+                for (var i=0; i<len; i++) {
+                    html += ('<option value="' + item.selections[i] + '"></option>' );
+                }
+                html += '</select></datalist>'
+            } else {
+                html += ' />';
+            }
+            return html;
         },
 
         password: function( item ) {
@@ -106,7 +123,7 @@ var temform= {
                         return x == i;
                     }) ) {
                     //TODO: how to selected a checkbox by default
-                    //focus = " select='select'"
+                    focus = " selected='selected' "
                 }
                 html += '<input class="form-item" type="checkbox" name=' + item.name + ' id="c_' + item.selections[i] + '" ' + focus + ' />' + '<label for="c_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
             }
@@ -120,24 +137,24 @@ var temform= {
                 var focus = "";
                 if( i == item.defaultValue ) {
                     //TODO: how to selected a checkbox by default
-                    //focus = " select='select'"
+                    focus = " selected='selected' "
                 }
                 html += '<input class="form-item" type="radio" name=' + item.name + ' id="r_' + item.selections[i] + '" ' + focus + ' />' + '<label for="r_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
             }
             return html;
         },
 
-        list: function( item ) {
+        list: function( item ) {            
             var html = "", i=0, len=item.selections.length;
-            //TODO: deal with the checkboxs when it is required
+            html += '<select class="form-item" id=' + item.name + ' >';
             for(; i<len; i++) {
                 var focus = "";
                 if( i == item.defaultValue ) {
-                    //TODO: how to selected a checkbox by default
-                    //focus = " select='select'"
+                    focus = " selected='selected' "
                 }
-                html += '<input class="form-item" type="radio" name=' + item.name + ' id="r_' + item.selections[i] + '" ' + focus + ' />' + '<label for="r_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
+                html += '<option class="selectoption" value="' + item.selections[i] + '"' + focus + ' >' + item.selections[i] + '</option>';
             }
+            html += '</select>';
             return html;
         },
 
