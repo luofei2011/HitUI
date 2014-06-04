@@ -33,8 +33,10 @@
 ####component.theform
 
 * selected checkbox by default
-* deal with the datas and return
-* create a interface for setting the data's configuration of this FORM
+* deal with the checkboxs when they are required
+
+* *deal with the datas and return*
+* *create a interface for setting the data's configuration of this FORM*
 
 
 ##global parameters

@@ -41,7 +41,7 @@ hit.CONFIG.form_test = {
 				},{
 					name: '10',
 					label: 'location',
-					type: 'list',
+					type: 'radio',
 					required: false,
 					sizeLevel: 2,
 					defaultValue: 0,

@@ -55,17 +55,19 @@ var temform= {
 
         _itemConf2html: function( item ) {
             var html = "";
+            // set the attr of the <div> around the item
             switch (item.type) {
                 case 'checkbox':
                 case 'radio':
                 case 'richtext':
-                    html = '<div name=' + item.name + ' divsize="wholeline" ><label for=' + item.name + '>' + item.label + '</label>' ;
+                    html = '<div name=' + item.name + ' divsize="wholeline" required aria-required="true" ><label for=' + item.name + ' type="selection">' + item.label + '</label>' ;
                     break;
                 default:
                     html = '<div name=' + item.name + ' ><label for=' + item.name + '>' + item.label + '</label>' ;
                     break;
             }
             //html = '<div name=' + item.name + ' divsizeLevel=' + item.sizeLevel + ' ><label for=' + item.name + '>' + item.label + '</label>' ;
+            //create the item's html code through various item type
             switch (item.type) {
                 case 'text':
                     html += this.text( item );
@@ -76,6 +78,9 @@ var temform= {
                 case 'checkbox':
                     html += this.checkbox( item );
                     break;
+                case 'radio':
+                    html += this.radio( item );
+                    break;
                 default:
                     break;
             };
@@ -84,15 +89,16 @@ var temform= {
         },
 
         text: function( item ) {
-            return '<input class="form-item" type="text" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="text" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         password: function( item ) {
-            return '<input class="form-item" type="password" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="password" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         checkbox: function( item ) {
             var html = "", i=0, len=item.selections.length;
+            //TODO: deal with the checkboxs when it is required
             for(; i<len; i++) {
                 var focus = "";
                 if( item.defaultValue.some(
@@ -102,25 +108,53 @@ var temform= {
                     //TODO: how to selected a checkbox by default
                     //focus = " select='select'"
                 }
-                html += '<input class="form-item" type="checkbox" name=' + item.name + ' value="' + item.selections[i] + '" required aria-required="true" ' + focus + ' />' + item.selections[i] ;
+                html += '<input class="form-item" type="checkbox" name=' + item.name + ' id="c_' + item.selections[i] + '" ' + focus + ' />' + '<label for="c_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
+            }
+            return html;
+        },
+
+        radio: function( item ) {
+            var html = "", i=0, len=item.selections.length;
+            //TODO: deal with the checkboxs when it is required
+            for(; i<len; i++) {
+                var focus = "";
+                if( i == item.defaultValue ) {
+                    //TODO: how to selected a checkbox by default
+                    //focus = " select='select'"
+                }
+                html += '<input class="form-item" type="radio" name=' + item.name + ' id="r_' + item.selections[i] + '" ' + focus + ' />' + '<label for="r_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
+            }
+            return html;
+        },
+
+        list: function( item ) {
+            var html = "", i=0, len=item.selections.length;
+            //TODO: deal with the checkboxs when it is required
+            for(; i<len; i++) {
+                var focus = "";
+                if( i == item.defaultValue ) {
+                    //TODO: how to selected a checkbox by default
+                    //focus = " select='select'"
+                }
+                html += '<input class="form-item" type="radio" name=' + item.name + ' id="r_' + item.selections[i] + '" ' + focus + ' />' + '<label for="r_' + item.selections[i] + '">' + item.selections[i] + '</label>' ;
             }
             return html;
         },
 
         number: function( item ) {
-            return '<input class="form-item" type="number" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="number" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         date: function( item ) {
-            return '<input class="form-item" type="date" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="date" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         time: function( item ) {
-            return '<input class="form-item" type="time" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="time" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         testitem: function( item ) {
-            return '<input class="form-item" type="pig" name=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="pig" id=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
     };
