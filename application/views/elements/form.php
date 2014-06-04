@@ -19,8 +19,7 @@
 		hit.INTERFACES.form.createFromTable( tableCon, formareaID );
 		console.log('here with table Configuration');
 	} else {
-		html = hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
-		$('.form-area#'+formareaID).empty().append(html);
+		hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test, formareaID);
 		console.log('here without table con');
 	}
 
