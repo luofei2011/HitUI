@@ -10,16 +10,16 @@
 <script type="text/javascript" src="<?=base_url('static/js/config/form_test.js');?>"></script>
 <script type="text/javascript">
 	//设置区域ID
-	var formID = hit.PARAMETER.global.registerComponent('form');
-	$('div#now').attr('id', formID);
+	var formareaID = hit.PARAMETER.global.registerComponent('formarea');
+	$('div#now').attr('id', formareaID);
 
 	//若有post设置，则按post的创建，若没有，则使用默认的设置
 	tableCon = JSON.parse('<?=$conJson?>');
 	if (tableCon != "") {
-		hit.INTERFACES.form.createFromTable( tableCon, formID );
+		hit.INTERFACES.form.createFromTable( tableCon, formareaID );
 		console.log('here with table Configuration');
 	} else {
-		hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formID);
+		hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
 		console.log('here without table con');
 	}
 
