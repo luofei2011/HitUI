@@ -99,7 +99,7 @@ hit.CONFIG.form_test = {
 					type: 'number',
 					required: false,
 					sizeLevel: 4,
-					defaultValue: 'input ur name here',
+					defaultValue: 3,
 					selections: [
 						16,
 						60,

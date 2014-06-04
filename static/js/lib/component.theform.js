@@ -101,7 +101,7 @@ var temform= {
 
         text: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            var html = '<input class="form-item" type="text" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req;
+            var html = '<input class="form-item" type="text" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req;
             var len = 0;
             if ( item.selections != null ) {
                 len = item.selections.length;
@@ -120,7 +120,7 @@ var temform= {
 
         password: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="password" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="password" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
         },
 
         checkbox: function( item ) {
@@ -133,7 +133,7 @@ var temform= {
                         return x == i;
                     }) ) {
                     //TODO: how to selected a checkbox by default
-                    focus = " selected='selected' "
+                    focus = " checked=true "
                 }
                 html += '<input class="form-item" type="checkbox" name=' + item.name + ' id="c_' + item.selections[i] + '" ' + focus + ' />' + '<label for="c_' + item.selections[i] + '" type="item">' + item.selections[i] + '</label>' ;
             }
@@ -147,7 +147,7 @@ var temform= {
                 var focus = "";
                 if( i == item.defaultValue ) {
                     //TODO: how to selected a checkbox by default
-                    focus = " selected='selected' "
+                    focus = " checked= true "
                 }
                 html += '<input class="form-item" type="radio" name=' + item.name + ' id="r_' + item.selections[i] + '" ' + focus + ' />' + '<label for="r_' + item.selections[i] + '" type="item">' + item.selections[i] + '</label>' ;
             }
@@ -171,31 +171,29 @@ var temform= {
 
         number: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="number" id=' + item.name + ' placeholder="' + item.defaultValue +  '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + '/>' ;
+            return '<input class="form-item" type="number" id=' + item.name + ' value="' + item.defaultValue +  '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + '/>' ;
         },
 
         date: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="date" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="date" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
         },
 
         time: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="time" id=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="time" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
         },
 
         testitem: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="pig" id=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="pig" id=' + item.name + ' value=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + req + ' />' ;
         },
 
         getFromInfo: function( formareaID ) {
             var items = $('.form-area#' + formareaID + ' div.form-item'),
                 data = [], itemdata;
-                console.log(items);
             //get all the items to read their value
             items.each(function(i) {
-                console.log($(this).attr('item-type'));
                 // different type of item need various operation
                 switch ( $(this).attr('item-type') ) {
                     case 'checkbox':
