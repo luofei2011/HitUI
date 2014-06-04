@@ -1,0 +1,52 @@
+.form-area {
+	width: 600px ;
+}
+
+[sizeLevel='4'] {
+	width: 12% ;
+	margin-right: 0%;
+}
+
+[sizeLevel='2'] {
+	width: 34% ;
+	margin-right: 3%;
+}
+
+[sizeLevel='1'] {
+	width: 85% ;
+	margin-right: 2%;
+}
+
+.form-group label[type='text'] {
+	width: 10%;
+	padding-right: 2%; 
+	display: inline-block;
+	text-align: right;
+}
+
+.form-group label[type='selection'] {
+	width: 10%;
+	padding-right: 2%; 
+	display: inline-block;
+	text-align: right;
+}
+
+.form-group label[type='item'] {
+	width: 7%;
+	padding: 0 2% 0 1%; 
+	display: inline-block;
+	text-align: middle;
+}
+
+.form-group div {
+	display: inline;
+}
+
+.form-group div[divsize='wholeline'] {
+	display: block;
+}
+
+input[type='checkbox'], input[type='radio'] {
+	1margin: 0 0 0 0;
+	width: inherit;
+}

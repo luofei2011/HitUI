@@ -38,6 +38,10 @@ var iForm= {
 		//hit.COMPONENT.theform.createFromConfig( config, formareaID );
 	},
 
+	getFromInfo: function( formareaID ) {
+		console.log(hit.COMPONENT.theform.getFromInfo( formareaID ));
+	},
+
 };
 
 if ( hit.INTERFACES ) {
