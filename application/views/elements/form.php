@@ -1,4 +1,3 @@
-<!--link rel="stylesheet" href="<?=base_url('static/css/content/form.css')?>" /-->
 <?php
 	$tableCon = isset( $_POST['tableCon'] ) ? $_POST['tableCon'] : ""; 
 	$conJson = json_encode($tableCon);

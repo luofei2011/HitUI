@@ -27,10 +27,10 @@ hit.CONFIG.form_test = {
 				},{
 					name: '111',
 					label: 'Nation',
-					type: 'selection',
+					type: 'checkbox',
 					required: false,
 					sizeLevel: 2,
-					defaultValue: 0,
+					defaultValue: [1,2],
 					selections: [
 						'China',
 						'Amarica',

@@ -28,7 +28,13 @@
 
 ####Any
 
-* implement the interfaces first
+* ~~implement the interfaces first~~
+
+####component.theform
+
+* selected checkbox by default
+* deal with the datas and return
+* create a interface for setting the data's configuration of this FORM
 
 
 ##global parameters

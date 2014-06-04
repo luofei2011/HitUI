@@ -25,6 +25,7 @@
     <script type="text/javascript" src="<?=base_url('static/js/lib/component.tree.js');?>"></script>
     <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.tree.js');?>"></script>
     <!--form-->
+    <link rel="stylesheet" href="<?=base_url('static/css/content/theform.css')?>" />
     <!--
     <script type="text/javascript" src="<?=base_url('static/js/event.form.js');?>"></script>
     -->

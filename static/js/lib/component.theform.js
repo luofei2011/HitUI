@@ -54,13 +54,27 @@ var temform= {
         },
 
         _itemConf2html: function( item ) {
-            html = '<div name=' + item.name + '><label for=' + item.name + '>' + item.label + '</label>' ;
+            var html = "";
+            switch (item.type) {
+                case 'checkbox':
+                case 'radio':
+                case 'richtext':
+                    html = '<div name=' + item.name + ' divsize="wholeline" ><label for=' + item.name + '>' + item.label + '</label>' ;
+                    break;
+                default:
+                    html = '<div name=' + item.name + ' ><label for=' + item.name + '>' + item.label + '</label>' ;
+                    break;
+            }
+            //html = '<div name=' + item.name + ' divsizeLevel=' + item.sizeLevel + ' ><label for=' + item.name + '>' + item.label + '</label>' ;
             switch (item.type) {
                 case 'text':
                     html += this.text( item );
                     break;
                 case 'password':
                     html += this.password( item );
+                    break;
+                case 'checkbox':
+                    html += this.checkbox( item );
                     break;
                 default:
                     break;
@@ -70,15 +84,43 @@ var temform= {
         },
 
         text: function( item ) {
-            return '<input class="form-item" type="text" id=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="text" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         password: function( item ) {
-            return '<input class="form-item" type="password" id=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="password" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+        },
+
+        checkbox: function( item ) {
+            var html = "", i=0, len=item.selections.length;
+            for(; i<len; i++) {
+                var focus = "";
+                if( item.defaultValue.some(
+                    function(x) {
+                        return x == i;
+                    }) ) {
+                    //TODO: how to selected a checkbox by default
+                    //focus = " select='select'"
+                }
+                html += '<input class="form-item" type="checkbox" name=' + item.name + ' value="' + item.selections[i] + '" required aria-required="true" ' + focus + ' />' + item.selections[i] ;
+            }
+            return html;
+        },
+
+        number: function( item ) {
+            return '<input class="form-item" type="number" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+        },
+
+        date: function( item ) {
+            return '<input class="form-item" type="date" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+        },
+
+        time: function( item ) {
+            return '<input class="form-item" type="time" name=' + item.name + ' placeholder="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
         testitem: function( item ) {
-            return '<input class="form-item" type="pig" id=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
+            return '<input class="form-item" type="pig" name=' + item.name + ' placeholder=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + ' required aria-required="true" />' ;
         },
 
     };
