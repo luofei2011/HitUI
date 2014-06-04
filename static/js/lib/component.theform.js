@@ -7,6 +7,7 @@
 ;(function() {
 // 不能随意构造全局变量
 var temform= {
+
         createFromConfig: function( config, formareaID ) {
             html = "";
             //register this form
@@ -46,11 +47,13 @@ var temform= {
             }
 
             //set the submit(return) button
-            html += '<input type="submit" href="#" onclick="" /> '
+            //html += '<input type="submit" href="#" onclick="" /> '
 
             html += '</fieldset></form>';
+            console.log('COMPONENT.theform\'s config');
             console.log(config);
-            $('.form-area#'+formareaID).empty().append(html);
+            return html;
+            //$('.form-area#'+formareaID).empty().append(html);
         },
 
         _itemConf2html: function( item ) {

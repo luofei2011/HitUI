@@ -1,7 +1,7 @@
 <?php
 	$tableCon = isset( $_POST['tableCon'] ) ? $_POST['tableCon'] : ""; 
 	$conJson = json_encode($tableCon);
-	
+
 ?>
 <div class="form-container">
 <div class="form-area" id="now"></div>
@@ -19,7 +19,8 @@
 		hit.INTERFACES.form.createFromTable( tableCon, formareaID );
 		console.log('here with table Configuration');
 	} else {
-		hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
+		html = hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
+		$('.form-area#'+formareaID).empty().append(html);
 		console.log('here without table con');
 	}
 

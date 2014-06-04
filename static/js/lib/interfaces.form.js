@@ -28,7 +28,7 @@ var iForm= {
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
 	createFromConfig: function( config, formareaID ) {
-		hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		return hit.COMPONENT.theform.createFromConfig( config, formareaID );
 	},
 
 	/*
