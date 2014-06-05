@@ -23,11 +23,20 @@
 ##tree
 
 * ~~为每棵树注册独立ID~~
-* 设置数据输入输出接口
+* ~~设置数据输入~~输出接口
 
 ####css
 
 * icon!!!!
+
+####component.tree
+
+* set the default focus
+
+####interfaces.tree
+
+* 设置通过简单变量生成树的函数（如输入name, code, father, 自动生成level, leafFlag和index ）,或者图形界面
+
 
 ##form
 

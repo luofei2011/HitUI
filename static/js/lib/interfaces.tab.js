@@ -143,7 +143,7 @@
 		switch2Tab: function( id, tabName ) {
 			//TODO:先判断页面是否存在，再判断切换还是添加
 			var tem = [];
-			var tabInfo = { content:"", tabName:tabName, type:'text', id: id};
+			var tabInfo = { content:"", tabName:tabName, type:'page', id: id};
 			tem.push(tabInfo);
 			this.addTabs(1, tem);
 			//TODO: 切换标签页，并设置当前显示页

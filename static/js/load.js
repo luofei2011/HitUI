@@ -91,8 +91,8 @@ var hit = {
 	_setForm: function(con) {
 		formurl = 'load/elements/form';
 		url = hit.baseURL + formurl;
-		$('div.gr-query fieldset').load( url, {tableCon: con}, function(response, status) {
-        //$('div.gr-query fieldset').load( url, '', function(response, status) {
+		//$('div.gr-query fieldset').load( url, {tableCon: con}, function(response, status) {
+        $('div.gr-query fieldset').load( url, '', function(response, status) {
 			switch( status ) {
 				case 'success':
 					break;

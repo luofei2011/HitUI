@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?=base_url('static/css/content/tab.css')?>" />
 <?php
 	$layerId = isset( $_POST['layerId'] ) ? $_POST['layerId'] : 1;
 //	print_r($_POST);

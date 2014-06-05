@@ -75,7 +75,6 @@ var treeDef = {
 		theTree.find('li[opened="Y"]').children('ul').show();
 		//set selected
 		selectedNode.attr('select', 'Y');
-		selectedNode.css('background-color', '#8ab');
 		return selectedNode;
 	},
 	
@@ -92,8 +91,11 @@ var treeDef = {
 
 	getInfoByNode: function( node ) {
 		var info = {};
-		info.tabName = node.find('p').text();
+		info.name = node.find('p').text();
 		info.code = node.attr('code');
+		info.father = node.closest('ul').attr('code');
+		info.index = node.prevAll('li').length + 1;
+		info.leafFlag = (node.find('ul').length > 0) ? 'N' : 'Y';
 		return info;
 	},
 

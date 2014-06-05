@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
 <div class="tree-container">
 <div class="tree-area" id='now'></div>
 </div>

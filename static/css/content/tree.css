@@ -1,3 +1,11 @@
 .tree-list {
 	padding: 0 0 0 18px
 }
+
+.tree-list li {
+	background-color: white;
+}
+
+.tree-list li[select='Y'] {
+	background-color: #8ab ;
+}

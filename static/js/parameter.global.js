@@ -59,7 +59,7 @@
 				this._saveData( window.localStorage );
 			}
 			//通知tab切换到currentDataNode
-			hit.INTERFACES.tab.switch2Tab( info.code ,info.tabName );
+			hit.INTERFACES.tab.switch2Tab( info.code ,info.name );
 		},
 
 		//treeOption 树节点的配置信息
