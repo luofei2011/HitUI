@@ -51,14 +51,15 @@
 			return this._data.currentDataNode;
 		},
 
-		setCurrentDataNode: function( dataNode ) {
-			this._data.currentDataNode = dataNode;
+		setCurrentDataNode: function( node ) {
+			info = hit.INTERFACES.tree.getInfoByNode( node );
+			console.log(info);
+			this._data.currentDataNode = info.code;
 			if (this._supportStorage) {
 				this._saveData( window.localStorage );
 			}
 			//通知tab切换到currentDataNode
-			info = hit.INTERFACES.tree.getInfoByCode( dataNode );
-			hit.INTERFACES.tab.switch2Tab( dataNode ,info.tabName );
+			hit.INTERFACES.tab.switch2Tab( info.code ,info.tabName );
 		},
 
 		//treeOption 树节点的配置信息
@@ -122,11 +123,43 @@
 
 		},
 
+		_reg: [],
+
+		/**
+		 * get the register information of the components
+		 * @return {Array} regComponent[
+		 *         		{
+		 *         			{String} component
+		 *         			{String} id
+		 *         			{Object} info; more information
+		 *         		}
+		 *         ]
+		 */
+		getRegInfo: function( type ) {
+
+		},
+
+		_saveRegInfo: function( component ) {
+
+		},
+
 		//TODO:统一给每一个界面component增加comID做标识
 		//往global里注册组件，并分配comID
-		registerComponent: function( type ) {
-			return type + '_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
-		}
+		registerComponent: function( component, type ) {
+			id = type + '_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
+			var com = {
+				component: component,
+				id: id,
+			};
+			this._saveRegInfo( com );
+			return id;
+		},
+
+		clearRegInfo: function() {
+
+		},
+
+
 	};
 
 	if ( hit.PARAMETER ){

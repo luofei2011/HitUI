@@ -32,6 +32,10 @@ var iForm= {
 		$('.form-area#'+formareaID).empty().append(html);
 	},
 
+	appendForm2: function( node, html ) {
+		node.append(html);
+	},
+
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */

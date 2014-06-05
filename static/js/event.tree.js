@@ -25,7 +25,7 @@ $(document).on('click', '.tree-area li', function() {
 				openNodes = [$(this).attr('code')];
 				hit.PARAMETER.global.setTreeOpenNodes( openNodes );
 				//TODO:now 选中后更新
-				hit.PARAMETER.global.setCurrentDataNode( $(this).attr('code') );
+				hit.PARAMETER.global.setCurrentDataNode( $(this) );
 				hit.PARAMETER.global.update();
 			} else {								
 			//already been choosen

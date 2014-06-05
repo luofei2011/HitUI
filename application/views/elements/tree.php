@@ -1,11 +1,14 @@
 <link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
 <div class="tree-container">
-<div class="tree-area"></div>
+<div class="tree-area" id='now'></div>
 </div>
 
 <script type="text/javascript" src="<?=base_url('static/js/config/tree_test.js');?>"></script>
 <script type="text/javascript">
-	hit.baseURL = "<?=base_url()?>";
+	//设置区域ID
+	var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+	$('div#now').attr('id', treeID);
+
 	hit.PARAMETER.global.initPara();
 
 	var options = hit.PARAMETER.global.getTreeOption();
@@ -27,7 +30,7 @@
 		console.log('load the tree setting from default');
 	}
 
-	hit.INTERFACES.tree.makeFromDB('menu', options);
-//	hit.INTERFACES.tree.makeFromData( 'menu', hit.CONFIG.tree_test );
+	// hit.INTERFACES.tree.makeFromDB(treeID, options);
+	hit.INTERFACES.tree.makeFromData( treeID, hit.CONFIG.tree_test );
 
 </script>

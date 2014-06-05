@@ -13,17 +13,17 @@ var treeDef = {
 	/*
 	 * TODO:treeType should be change into pageID/tabId
 	 */
-	initTree: function(treeType){
-		this._treeNode.type = treeType;
-		$('.tree-area').append('<ul class='+treeType+' code=treeroot><li code=root level=0 class=tree-node ></li></ul>');
+	initTree: function(treeID){
+		$('.tree-area#' + treeID).append('<ul class=treeroot code=treeroot><li code=root level=0 class=tree-node ></li></ul>');
 	},
 
 	/*
 	 * 初始化时 添加树节点
 	 */
-	addTreeNode: function(type, name, code, father, level, index, leafFlag, taskFlag, task) {
+	addTreeNode: function( treeID, name, code, father, level, index, leafFlag, taskFlag, task) {
 		//--get this tree according to the type
-		var theTree = $('.tree-area .' + type);
+		//var theTree = $('.tree-area .' + type);
+		var theTree = $('.tree-area#' + treeID + ' ul.treeroot');
 
 		//--Father Node
 		var father_ul= theTree.find('ul[code=' + father + ']');
@@ -52,9 +52,10 @@ var treeDef = {
 	/*
 	 *
 	 */
-	setOpenNode: function(type, nodes) {
+	setOpenNode: function(treeID, nodes) {
 		//--get this tree according to the type
-		var theTree = $('.tree-area .' + type);
+		//var theTree = $('.tree-area .' + type);
+		var theTree = $('.tree-area#' + treeID + ' ul.treeroot');
 
 		//set the open list
 		var selectedNode = theTree;
@@ -82,14 +83,19 @@ var treeDef = {
 		alert( node.css('background-color') );
 	},
 
-	getInfoByCode: function( code ) {
+	getInfoByCode: function( treeID, code ) {
 	//TODO:tree 的 type 就暂时不管了
-		var theTree = $('.tree-area' );
+		var theTree = $('.tree-area#' + treeID );
 		var node = theTree.find('li[code=' + code + ']');
+		return this.getInfoByNode( node );
+	},
+
+	getInfoByNode: function( node ) {
 		var info = {};
 		info.tabName = node.find('p').text();
+		info.code = node.attr('code');
 		return info;
-	}
+	},
 
 };
 
