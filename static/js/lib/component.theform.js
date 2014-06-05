@@ -47,7 +47,7 @@ var temform= {
             }
 
             //set the submit(return) button
-            html += '<input type="submit" href="#" onclick="" /> '
+            //html += '<input type="submit" href="#" onclick="" /> '
 
             html += '</fieldset></form>';
             console.log('COMPONENT.theform\'s config');
@@ -223,8 +223,10 @@ var temform= {
                         break;
                 }
                 //save the data
-                var name = $(this).attr('name');
-                data.push( { name : itemdata } );
+                var obj = {};
+                obj[$(this).attr('name')] = itemdata;
+                data.push( obj );
+                // data.push( { tname : itemdata } );
             });
             return data;
         },

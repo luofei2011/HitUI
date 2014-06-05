@@ -31,7 +31,7 @@
 
 ####component.tree
 
-* set the default focus
+* ~~set the default focus~~
 
 ####interfaces.tree
 

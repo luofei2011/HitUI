@@ -82,6 +82,14 @@ var treeDef = {
 		alert( node.css('background-color') );
 	},
 
+//RETURN DATA
+	
+	getSelectedInfo: function( treeID ) {
+		var theTree = $('.tree-area#' + treeID );
+		var node = theTree.find('li[select="Y"]');
+		return this.getInfoByNode( node );
+	},
+	
 	getInfoByCode: function( treeID, code ) {
 	//TODO:tree 的 type 就暂时不管了
 		var theTree = $('.tree-area#' + treeID );

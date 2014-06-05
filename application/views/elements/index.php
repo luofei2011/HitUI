@@ -56,9 +56,6 @@
 		});*/
 
 		hit.INTERFACES.tree.makeFromData(treeID, {
-			open: [
-				'aa',
-			],
 			data: [
 			{
 				name: 'NODE1',
