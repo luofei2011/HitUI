@@ -20,6 +20,8 @@ var iForm= {
 	createFromTable: function( con, formareaID ) {
 		html = "";
 		html += '<h1> Hi! me again! the table config is in the log</h1>';
+		console.log(formareaID);
+		console.log($('.form-area#'+formareaID).attr('id'));
 		console.log(con);
 		$('.form-area#'+formareaID).empty().append(html);
 	},

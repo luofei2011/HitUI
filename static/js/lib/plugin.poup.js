@@ -152,16 +152,19 @@ hit.PLUGIN.poup = {
 
 	append: function(con) {
 		var wrapper = $('<div class="poupWrapper"></div>'),
-			formareaID = hit.PARAMETER.global.registerComponent('formarea');
+			formareaID = hit.PARAMETER.global.registerComponent('form', 'formarea');
 
-		wrapper.attr('id', formareaID);
+		node = $('<div class="form-area" id=' + formareaID + '></div>');
+		wrapper.append(node);
 
 		//若有post设置，则按post的创建，若没有，则使用默认的设置
 		tableCon = con.conf;
 		if (tableCon != "") {
-			hit.INTERFACES.form.createFromTable( tableCon, formareaID );
+			html = hit.INTERFACES.form.createFromConfig( tableCon, formareaID);
+			hit.INTERFACES.form.appendForm2(node, html);
 		} else {
-			hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test, formareaID);
+			html = hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
+			hit.INTERFACES.form.appendForm2(node, html);
 		}
 
 		con.tNode.append(wrapper).append(this.createBtn());
