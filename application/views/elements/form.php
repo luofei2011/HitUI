@@ -19,8 +19,7 @@
 		console.log('here with table Configuration');
 	} else {
 		theform = $('.form-area#'+formareaID)
-		html = hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
-		hit.INTERFACES.form.appendForm2( theform, html);
+		hit.INTERFACES.form.appendForm2( theform, hit.CONFIG.form_test, formareaID);
 		console.log('here without table con');
 	}
 

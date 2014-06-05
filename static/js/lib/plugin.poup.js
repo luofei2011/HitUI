@@ -160,11 +160,9 @@ hit.PLUGIN.poup = {
 		//若有post设置，则按post的创建，若没有，则使用默认的设置
 		tableCon = con.conf;
 		if (tableCon != "") {
-			html = hit.INTERFACES.form.createFromConfig( tableCon, formareaID);
-			hit.INTERFACES.form.appendForm2(node, html);
+			hit.INTERFACES.form.appendForm2(node, tableCon, formareaID);
 		} else {
-			html = hit.INTERFACES.form.createFromConfig(hit.CONFIG.form_test, formareaID);
-			hit.INTERFACES.form.appendForm2(node, html);
+			hit.INTERFACES.form.appendForm2(node, hit.CONFIG.form_test, formareaID);
 		}
 
 		con.tNode.append(wrapper).append(this.createBtn());

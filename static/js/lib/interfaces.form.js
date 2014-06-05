@@ -34,8 +34,8 @@ var iForm= {
 		$('.form-area#'+formareaID).empty().append(html);
 	},
 
-	appendForm2: function( node, html ) {
-		node.append(html);
+	appendForm2: function( node, config, formareaID ) {
+		node.append(hit.COMPONENT.theform.createFromConfig( config, formareaID ));
 	},
 
 	/*
