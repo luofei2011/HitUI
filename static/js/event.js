@@ -97,6 +97,47 @@ $(document).on('click', 'span.hit-button-icon', function() {
     hit.setDB(conf.db.t, conf.db.name);
 
     switch(op) {
+        case "add_poup":
+            var fields = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0).children(),
+                i = 0, len = fields.length, config = {},tmp;
+
+            config.formName = "添加";
+            config.groups = [{
+                groupName: 'one',
+                showFrame: false,
+                items: []
+            }];
+            for (; i < len; i++) {
+                if (fields[i].id) {
+                    tmp = fields.eq(i).find('.poup-select');
+
+                    if (tmp.length) {
+                       
+                    } else {
+                        tmp = fields.eq(i).find('input:not([type=hidden]), select, textarea');
+                        if (tmp.length) {
+
+                        } else {
+
+                        }
+                    }
+                    config.groups[0].items.push({
+                        name: fields[i].id.split('$').pop(),
+                        label: 'Name',
+                        type: 'text',
+                        required: true,
+                        sizeLevel: 2,
+                        defaultValue: '',
+                    });
+                }
+            }
+
+            hit.PLUGIN.poup.init({
+                left: 100,
+                top: 10,
+                label: '添加'
+            }, config, $(this), "poup");
+            break;
         case "add":
             var _fTr = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0),
                 _fTds = _fTr.children(), i = 0,
@@ -718,4 +759,42 @@ $(document).on('select', 'span.poup-select', function() {
             $(this).trigger('blur');
         }
     });
+});
+
+// 弹出新建事件
+$(document).on('select', '.icon-add_poup', function() {
+    var data = arguments[1],
+        pNode = $(this).closest('.gr-container'),
+        conf = pNode.attr('url'),
+        conf = hit.CONFIG[conf],
+        con = "",
+        tmpDB = {
+            name: hit.conf.db.name,
+            t: hit.conf.db.t
+        };
+
+    hit.setDB(conf.db.t, conf.db.name);
+
+    // 得到主键信息
+    keys = data.keys;
+    for (var i = 0, len = keys.length; i < len; i++) {
+        if (i) 
+            con += ';';
+        con += keys[i].name;
+    }
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $(this).closest('div.gr-border'),
+        status: 'wait'
+    });
+   
+    hit.query('load/deal_data', [data.data], {
+        op: 'insert',
+        con: con
+    }, function() {
+        hit.COVER.removeNode();
+    });
+    hit.setDB(tmpDB.t, tmpDB.name);
+
+    return false;
 });

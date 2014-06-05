@@ -162,6 +162,8 @@ var hit = {
             switch(str) {
                 case 'add':
                     return "添加";
+                case 'add_poup':
+                    return "添加"
                 case 'delete':
                     return "删除";
                 case 'edit':

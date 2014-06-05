@@ -24,7 +24,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"required": false
 	}],
 	"hasFunc": true,
-	"funcArr": ["add", "edit", "delete", "save"],
+	"funcArr": ["add", "edit", "delete", "save", "add_poup"],
 	"widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
 	"headContent": [[{
 		"label": "订单号",

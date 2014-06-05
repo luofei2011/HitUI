@@ -25,9 +25,10 @@ hit.PLUGIN.poup = {
 	/*
 	 * 初始化
 	 */
-	init: function(option, conf, pNode) {
+	init: function(option, conf, pNode, type) {
 		var _html = "", _poup,
-			_id = "POUP_" + (+new Date());
+			_id = "POUP_" + (+new Date()),
+			type = type || 'select';
 
 		option = this.extend({}, this.default, option);
 
@@ -54,12 +55,21 @@ hit.PLUGIN.poup = {
 			'height': option.height
 		});
 
-		this.load({
-			conf: conf,
-			tNode: $('#' + _id).find('div.hit-panel-body'),
-			tID: _id,
-            pNode: pNode
-		});
+		if (type === 'select') {
+			this.load({
+				conf: conf,
+				tNode: $('#' + _id).find('div.hit-panel-body'),
+				tID: _id,
+	            pNode: pNode
+			});
+		} else if (type === 'poup') {
+			this.append({
+				conf: conf, // 该conf为html字符串
+				tNode:  $('#' + _id).find('div.hit-panel-body'),
+				tID: _id,
+				pNode: pNode
+			});
+		}
 	},
 	/*
 	 * 合并用户自定义的参数和默认参数
@@ -115,11 +125,11 @@ hit.PLUGIN.poup = {
 			_html += '</table>';
 
 			_table.append(_html);
-			_html = '<div class="text-center gap-top gap-bottom"><a class="hit-button gap-right poup-sure"><span class="hit-button-txt">确定</span></a><a class="hit-button gap-left poup-cancel"><span class="hit-button-txt">取消</span></a></div>';
+			_html = _this.createBtn();
 			con.tNode.append(_table).append(_html);
 
 			// 绑定事件
-			_this.addEvent(con);
+			_this.addEvent_poup(con);
 
             // 私有函数，找到映射的字段名
             function find_map_field(name) {
@@ -140,11 +150,75 @@ hit.PLUGIN.poup = {
 		hit.setDB(_tmpDB.t, _tmpDB.name);
 	},
 
+	append: function(con) {
+		var wrapper = $('<div class="poupWrapper"></div>'),
+			formareaID = hit.PARAMETER.global.registerComponent('formarea');
+
+		wrapper.attr('id', formareaID);
+
+		//若有post设置，则按post的创建，若没有，则使用默认的设置
+		tableCon = con.conf;
+		if (tableCon != "") {
+			hit.INTERFACES.form.createFromTable( tableCon, formareaID );
+		} else {
+			hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test, formareaID);
+		}
+
+		con.tNode.append(wrapper).append(this.createBtn());
+
+		this.addEvent_select(con);
+	},
+
+	createBtn: function() {
+		return '<div class="text-center gap-top gap-bottom"><a class="hit-button gap-right poup-sure"><span class="hit-button-txt">确定</span></a><a class="hit-button gap-left poup-cancel"><span class="hit-button-txt">取消</span></a></div>';
+	},
+
+	addEvent_select: function(con) {
+		var panel = $('#' + con.tID);
+
+		// 确定按钮事件
+		$('a.poup-sure', panel).on('click', function() {
+			var isChecked = false, 
+				_inputs = panel.find('input, textarea, select'),
+				data = {
+					data: [],
+					keys: []
+				};
+
+			_inputs.each(function() {
+				if ($(this).attr('name')) {
+					data.data.push({
+						name: $(this).attr('name'),
+						value: $(this).val()
+					});
+				}
+
+				if ($(this).attr('key') == 'true') {
+					data.keys.push({
+						name: $(this).attr('name'),
+						value: ''
+					});
+				}
+			});
+
+			$(this).next().trigger('click');
+
+            // 触发原来的自定义事件
+            con.pNode.trigger('select', data);
+			return false;
+		});
+
+		// 取消按钮事件绑定
+		$('a.poup-cancel', panel).on('click', function() {
+			$(this).closest('.hit-panel').find('span.close-btn').trigger('click');
+		});
+	},
+
 	/**
 	 * 绑定事件，最基本的。弹出层中的checkbox最多只能选择一个，且点击确定的时候应该做js验证
 	 * @param {Object} con [用户传递的配置信息]
 	 */
-	addEvent: function(con) {
+	addEvent_poup: function(con) {
 		var panel = $('#' + con.tID),
 		  	_inputs = $("#" + con.tID).find('input[type=checkbox]');
 
