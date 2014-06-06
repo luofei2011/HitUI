@@ -187,9 +187,10 @@ hit.PLUGIN.poup = {
 				};
 
 			_inputs.each(function() {
-				if ($(this).attr('name')) {
+				var p = $(this).closest('div');
+				if (p.attr('name')) {
 					data.data.push({
-						name: $(this).attr('name'),
+						name: p.attr('name'),
 						value: $(this).val()
 					});
 				}

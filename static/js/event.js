@@ -98,6 +98,39 @@ $(document).on('click', 'span.hit-button-icon', function() {
 
     switch(op) {
         case "add_poup":
+            var config = {
+                    formName: "添加",
+                    groups: [{
+                        groupName: '表单数据',
+                        showFrame: false,
+                        items: []
+                    }]
+                }, fields = conf.bodyContent, o, s, tmp, idx = 0;
+
+
+            for (o in fields) {
+                s = fields[o];
+
+                if (s.isShow) {
+                    // tmp = hit._createFormByType(s.type, {
+                    //     value: '',
+                    //     valid: s.valid,
+                    //     vals: s.sureValue,
+                    //     url: typeof s.url === 'undefined' ? '' : s.url
+                    // });
+                    config.groups[0].items.push({
+                        name: o,
+                        label: find_label_in_config(conf, idx),
+                        type: 'text',
+                        required: s.valid.indexOf('required') !== -1 ? true : false,
+                        sizeLevel: 2,
+                        defaultValue: '',
+                    });
+
+                    idx++;
+                }
+            }
+        /*
             var fields = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0).children(),
                 i = 0, len = fields.length, config = {},tmp;
 
@@ -131,6 +164,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
                     });
                 }
             }
+            */
 
             hit.PLUGIN.poup.init({
                 left: 100,
@@ -259,6 +293,31 @@ $(document).on('click', 'span.hit-button-icon', function() {
         default:
             break;
     };
+
+    // 私有函数，找出配置文件中显示表单域的label值
+    function find_label_in_config(config, idx) {
+        var i, len, tmp, label = 0, pointer = 0, len_2;
+
+        for (i = 0, len = config.headContent[0].length; i < len; i++) {
+            tmp = config.headContent[0][i];
+            if (label === idx && !tmp.multiply) {
+                return tmp.label;
+            } 
+
+            if (tmp.multiply) {
+                for (len_2 = pointer + 2; pointer < len_2; pointer++) {
+                    tmp = config.headContent[1][pointer];
+
+                    if (label === idx) {
+                        return tmp.label;
+                    }                    
+                    label ++;
+                }
+            } else {
+                label ++;
+            }
+        }
+    }
 
     function idInArray(arr, id) {
         var i = 0,
