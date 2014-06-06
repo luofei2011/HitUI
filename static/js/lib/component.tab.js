@@ -19,8 +19,14 @@
 			if ( tabLayer == '1' ) {
 				$('.tab-area').attr('layerId', '1' );
 			} else {
-				$('.tab-area[layerId=' + (Number(tabLayer)-1).toString() + ']').find('.tab-area').attr('layerId', tabLayer);
+				var parent = $('.tab-area[layerId=' + (Number(tabLayer)-1).toString() + ']');
+				if ( parent.width() >= 600 ) {
+					parent.find('.tab-area').attr('layerId', tabLayer);
+				} else {
+					return false;
+				}
 			}
+			return true;
 		},
 
 		/*

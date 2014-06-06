@@ -29,7 +29,7 @@
 		console.log('load the tree setting from default');
 	}
 
-	// hit.INTERFACES.tree.makeFromDB(treeID, options);
-	hit.INTERFACES.tree.makeFromData( treeID, hit.CONFIG.tree_test );
+	hit.INTERFACES.tree.makeFromDB(treeID, options);
+	// hit.INTERFACES.tree.makeFromData( treeID, hit.CONFIG.tree_test );
 
 </script>
