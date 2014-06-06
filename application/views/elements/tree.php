@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	//设置区域ID
 	var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
-	$('div#now').attr('id', treeID);
+	$('.tree-area#now').attr('id', treeID);
 
 	hit.PARAMETER.global.initPara();
 

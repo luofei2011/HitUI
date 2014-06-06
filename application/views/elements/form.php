@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	//设置区域ID
 	var formareaID = hit.PARAMETER.global.registerComponent('form', 'formarea');
-	$('div#now').attr('id', formareaID);
+	$('.form-area#now').attr('id', formareaID);
 	//若有post设置，则按post的创建，若没有，则使用默认的设置
 	tableCon = JSON.parse('<?=$conJson?>');
 	if (tableCon != "") {

@@ -15,23 +15,24 @@
 		 * 用tabLayer初始化该层的tab-area
 		 * @param [String] tabLayer 
 		 * */
-		init: function( tabLayer ){
+/*		init: function( tabLayer ){
 			if ( tabLayer == '1' ) {
-				$('.tab-area').attr('layerId', '1' );
+				$('.tab-area').attr('tabID', '1' );
 			} else {
-				var parent = $('.tab-area[layerId=' + (Number(tabLayer)-1).toString() + ']');
+				var parent = $('.tab-area[tabID=' + (Number(tabLayer)-1).toString() + ']');
+				console.log(parent.width());
 				if ( parent.width() >= 600 ) {
-					parent.find('.tab-area').attr('layerId', tabLayer);
+					parent.find('.tab-area').attr('tabID', tabLayer);
 				} else {
 					return false;
 				}
 			}
 			return true;
 		},
-
+*/
 		/*
 		 * 用createTabNames
-		 * @param [String] layerId 所操作层数 
+		 * @param [String] tabID 所操作层数 
 		 * @param [Object] tab tab标题{
 		 * 		@param [Array] ids 对应tab id
 		 * 		TODO:@param [Array] seq 对应tab id
@@ -39,29 +40,34 @@
 		 * 		TODO:@param [Array] Names 对应tab title
 		 * }
 		 * */
-		createTabNames: function( layerId, tabNames) {
-			var thetab = $('.tab-area[layerId=' + layerId + ']');
+		createTabNames: function( tabID, tabNames) {
+			var thetab = $('.tab-area#' + tabID );
+			// avoid recurse too deep
+			if (thetab.width() <= 600 ) {
+				return false;
+			}
 			var tabtitles = thetab.find('.tabtitle-area');
 			if ( tabtitles.length <= 0 ) {
+				//do not have any tab titilarea in this tab-area before, then we create one
 				thetab.append('<div class=tabtitle-area></div><div class=tabcontent-area></div>');
 				var tabtitles = thetab.find('.tabtitle-area');
 			}
 			for (var i=0, len=tabNames.length; i<len; i++) {
 				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '</div>');
 			}
-			
+			return true;
 		},
 
 		/*
 		 * 用fillContent增加内容
-		 * @param [String] layerId 所操作层数 
+		 * @param [String] tabID 所操作层数 
 		 * @param [String] tabId 对应tab id 
 		 * @param [String] content 显示内容 
 		 * TODO:@param [String] content 显示内容 
 		 * }
 		 * */
-		fillContent: function( layerId, seq, tabId, content, type ) {
-			var theContentArea= $('.tab-area[layerId=' + layerId + '] .tabcontent-area');
+		fillContent: function( tabID, seq, tabId, content, type ) {
+			var theContentArea= $('.tab-area#' + tabID + ' .tabcontent-area');
 			var tabContent = theContentArea.find('.tabcontent[tabId='+tabId+']');
 			if( tabContent.length <= 0 ) {
 				theContentArea.append('<div class=tabcontent tabId=' + tabId + '></div>');
@@ -74,7 +80,7 @@
 						tabContent.append(content);
 						break;
 					case 'page': 
-						this._loadPage( layerId, tabContent, content);
+						this._loadPage( tabID, tabContent, content);
 						break;
 					default:
 						break;
@@ -117,8 +123,9 @@
 		/*
 		 * 异步加载页面，并传送数据
 		 */
-		_loadPage: function( theLayerId, targetNode, link ) {
-			targetNode.load(link, {layerId: Number(theLayerId)+1}, function( response, status) {
+		_loadPage: function( tabID, targetNode, link ) {
+			// targetNode.load(link, {tabID: Number(theLayerId)+1}, function( response, status) {
+			targetNode.load(link, '', function( response, status) {
 				switch( status ) {
 					case 'success':
 						break;
@@ -145,7 +152,7 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( layerId, id ) {
+		rmTab: function( tabID, id ) {
 		
 		},
 

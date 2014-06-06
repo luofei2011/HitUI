@@ -37,55 +37,58 @@
 		 *			]
 		 * }
 		 * */
-		makeFromData : function( tabLayer, options ) {
-			if ( Number(tabLayer) > 5 ){
-				alert("the tab layer could not be greater than 5");
-			} else {
-				hit.COMPONENT.tab.init(tabLayer);
-				//sort
-				options.tabs.sort( function(a,b) {
-					return a.seq - b.seq;
-				});
-				var tabNames = new Array();		//about tab title
-				var contents = new Array();		//about tab content
-				for ( var i = 0, len = options.tabs.length; i < len; i++ ) {
-					//---将tab杂乱的seq整理为整齐的seq
-					options.tabs[i].seq = Number(i)+1;
+		makeFromData : function( tabID, options ) {
+			// hit.COMPONENT.tab.init(tabID);
 
-					// title
+			//将tab杂乱的seq整理为整齐的seq排好序再保存下来,为了显示时候能按序号显示
+			options.tabs.sort( function(a,b) {
+				return a.seq - b.seq;
+			});
+			var tabNames = new Array();		//about tab title
+			var contents = new Array();		//about tab content
+			for ( var i = 0, len = options.tabs.length; i < len; i++ ) {
+				//---将tab杂乱的seq整理为整齐的seq
+				options.tabs[i].seq = Number(i)+1;
+
+				// title
+				var temObj = { 
+					name: options.tabs[i].tabName, 
+					seq: options.tabs[i].seq,
+					id: options.tabs[i].id, 
+				};
+				tabNames.push(temObj);
+
+				// content
 					var temObj = { 
-						name: options.tabs[i].tabName, 
-						seq: options.tabs[i].seq,
+						seq: options.tabs[i].seq, 
 						id: options.tabs[i].id, 
+						view: options.tabs[i].content, 
+						type: options.tabs[i].type
 					};
-					tabNames.push(temObj);
+				contents.push(temObj);
 
-					// content
-						var temObj = { 
-							seq: options.tabs[i].seq, 
-							id: options.tabs[i].id, 
-							view: options.tabs[i].content, 
-							type: options.tabs[i].type
-						};
-					contents.push(temObj);
-
-				}
-				//---将tab杂乱的seq整理为整齐的seq,并保存下来
-				options.tabNum = options.tabs.length;
-				hit.PARAMETER.global.setTabOption(options);
-
-				//create tab title & framework
-				hit.COMPONENT.tab.createTabNames(tabLayer, tabNames);
-
-				//create tab content
-				for ( var i = 0, len = contents.length; i < len; i++ ) {
-					hit.COMPONENT.tab.fillContent(tabLayer, contents[i].seq, contents[i].id, contents[i].view, contents[i].type);
-				}
-				
-				var tabarea = $('.tab-area[layerid='+tabLayer+']');
-				tabarea.find('.tabtitle').first().attr('select','Y');
-				tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent').first().show();
 			}
+			//---将整理整齐的tab setting 保存下来
+			options.tabNum = options.tabs.length;
+			hit.PARAMETER.global.setTabOption(options);
+
+			//create tab title & framework
+			if ( !(hit.COMPONENT.tab.createTabNames(tabID, tabNames)) ){
+				//TODO: if not good for creating tabs( maybe recurse too much), show error
+				$('.tab-area#' + tabID).append("<h1>you get into too deep!</h1>");
+				return false;
+			}
+
+			//create tab content
+			for ( var i = 0, len = contents.length; i < len; i++ ) {
+				hit.COMPONENT.tab.fillContent(tabID, contents[i].seq, contents[i].id, contents[i].view, contents[i].type);
+			}
+			
+			//TODO:set focus
+			var tabarea = $('.tab-area#'+tabID);
+			tabarea.find('.tabtitle').first().attr('select','Y');
+			tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent').first().show();
+			
 
 		},
 
@@ -94,7 +97,7 @@
 		 * [Array] tabInfos 标签页的信息（类似上面的options，但seq是自动分配的
 		 * 	:[	[String]id, [String]tabName, [String]type, [String]content  ]
 		 * */
-		addTabs: function( tabLayer, tabInfos ) {
+		addTabs: function( tabID, tabInfos ) {
 			//get the max index of the tab
 			option = hit.PARAMETER.global.getTabOption();
 			maxSeq = option.tabs[option.tabs.length - 1].seq;
@@ -118,15 +121,15 @@
 				tabNames.push(temObj);
 
 				// content
-				hit.COMPONENT.tab.fillContent(tabLayer, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
+				hit.COMPONENT.tab.fillContent(tabID, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
 
 				hit.PARAMETER.global.addTabs(formatedInfos[i]);
 			}
 			//create tab title & framework
-			hit.COMPONENT.tab.createTabNames(tabLayer, tabNames);
+			hit.COMPONENT.tab.createTabNames(tabID, tabNames);
 
 			//TODO:now 设置隐藏,和设置焦点一样，应该抽象出来
-			var tabarea = $('.tab-area[layerid='+tabLayer+']');
+			var tabarea = $('.tab-area[layerid='+tabID+']');
 			for(var i=0, len=tabNames.length; i<len; i++) {
 				tabarea.children('.tabcontent-area').children('.tabcontent[tabId='+tabNames[i].id+']').hide();
 			}
@@ -136,7 +139,7 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( tabLayer , id ) {
+		rmTab: function( tabID , id ) {
 			//TODO:在tabtitle那儿增加x，点击关闭用	
 		},
 

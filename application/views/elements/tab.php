@@ -1,14 +1,11 @@
-<?php
-	$layerId = isset( $_POST['layerId'] ) ? $_POST['layerId'] : 1;
-//	print_r($_POST);
-?>
 <div class="tab-container">
-<div class="tab-area"></div>
+<div class="tab-area" id='now'></div>
 </div>
 
 <script type="text/javascript" src="<?=base_url('static/js/config/tab_test.js');?>"></script>
 <script type="text/javascript">
-	var layerId = <?=$layerId?>;
+	tabID = hit.PARAMETER.global.registerComponent('tab','tab');
+	$('.tab-area#now').attr('id', tabID);
 
 	hit.PARAMETER.global.initPara();
 	var option = hit.PARAMETER.global.getTabOption();
@@ -18,6 +15,6 @@
 		console.log('load the tab setting as default setting');
 	}
 
-	hit.INTERFACES.tab.makeFromData( layerId , option );
+	hit.INTERFACES.tab.makeFromData( tabID , option );
 
 </script>
