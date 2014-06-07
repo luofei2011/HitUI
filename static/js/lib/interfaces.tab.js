@@ -37,8 +37,8 @@
 		 *			]
 		 * }
 		 * */
-		makeFromData : function( tabID, options ) {
-			// hit.COMPONENT.tab.init(tabID);
+		makeFromData : function( tabareaID, options ) {
+			// hit.COMPONENT.tab.init(tabareaID);
 
 			//将tab杂乱的seq整理为整齐的seq排好序再保存下来,为了显示时候能按序号显示
 			options.tabs.sort( function(a,b) {
@@ -73,19 +73,19 @@
 			hit.PARAMETER.global.setTabOption(options);
 
 			//create tab title & framework
-			if ( !(hit.COMPONENT.tab.createTabNames(tabID, tabNames)) ){
+			if ( !(hit.COMPONENT.tab.createTabNames(tabareaID, tabNames)) ){
 				//TODO: if not good for creating tabs( maybe recurse too much), show error
-				$('.tab-area#' + tabID).append("<h1>you get into too deep!</h1>");
+				$('.tab-area#' + tabareaID).append("<h1>you get into too deep!</h1>");
 				return false;
 			}
 
 			//create tab content
 			for ( var i = 0, len = contents.length; i < len; i++ ) {
-				hit.COMPONENT.tab.fillContent(tabID, contents[i].seq, contents[i].id, contents[i].view, contents[i].type);
+				hit.COMPONENT.tab.fillContent(tabareaID, contents[i].seq, contents[i].id, contents[i].view, contents[i].type);
 			}
 			
 			//TODO:set focus
-			var tabarea = $('.tab-area#'+tabID);
+			var tabarea = $('.tab-area#'+tabareaID);
 			tabarea.find('.tabtitle').first().attr('select','Y');
 			tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent').first().show();
 			
@@ -97,7 +97,7 @@
 		 * [Array] tabInfos 标签页的信息（类似上面的options，但seq是自动分配的
 		 * 	:[	[String]id, [String]tabName, [String]type, [String]content  ]
 		 * */
-		addTabs: function( tabID, tabInfos ) {
+		addTabs: function( tabareaID, tabInfos ) {
 			//get the max index of the tab
 			option = hit.PARAMETER.global.getTabOption();
 			maxSeq = option.tabs[option.tabs.length - 1].seq;
@@ -121,15 +121,15 @@
 				tabNames.push(temObj);
 
 				// content
-				hit.COMPONENT.tab.fillContent(tabID, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
+				hit.COMPONENT.tab.fillContent(tabareaID, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
 
 				hit.PARAMETER.global.addTabs(formatedInfos[i]);
 			}
 			//create tab title & framework
-			hit.COMPONENT.tab.createTabNames(tabID, tabNames);
+			hit.COMPONENT.tab.createTabNames(tabareaID, tabNames);
 
 			//TODO:now 设置隐藏,和设置焦点一样，应该抽象出来
-			var tabarea = $('.tab-area[layerid='+tabID+']');
+			var tabarea = $('.tab-area[layerid='+tabareaID+']');
 			for(var i=0, len=tabNames.length; i<len; i++) {
 				tabarea.children('.tabcontent-area').children('.tabcontent[tabId='+tabNames[i].id+']').hide();
 			}
@@ -139,7 +139,7 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( tabID , id ) {
+		rmTab: function( tabareaID , id ) {
 			//TODO:在tabtitle那儿增加x，点击关闭用	
 		},
 

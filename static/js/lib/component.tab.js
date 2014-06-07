@@ -17,12 +17,12 @@
 		 * */
 /*		init: function( tabLayer ){
 			if ( tabLayer == '1' ) {
-				$('.tab-area').attr('tabID', '1' );
+				$('.tab-area').attr('tabareaID', '1' );
 			} else {
-				var parent = $('.tab-area[tabID=' + (Number(tabLayer)-1).toString() + ']');
+				var parent = $('.tab-area[tabareaID=' + (Number(tabLayer)-1).toString() + ']');
 				console.log(parent.width());
 				if ( parent.width() >= 600 ) {
-					parent.find('.tab-area').attr('tabID', tabLayer);
+					parent.find('.tab-area').attr('tabareaID', tabLayer);
 				} else {
 					return false;
 				}
@@ -32,7 +32,7 @@
 */
 		/*
 		 * 用createTabNames
-		 * @param [String] tabID 所操作层数 
+		 * @param [String] tabareaID 所操作层数 
 		 * @param [Object] tab tab标题{
 		 * 		@param [Array] ids 对应tab id
 		 * 		TODO:@param [Array] seq 对应tab id
@@ -40,8 +40,8 @@
 		 * 		TODO:@param [Array] Names 对应tab title
 		 * }
 		 * */
-		createTabNames: function( tabID, tabNames) {
-			var thetab = $('.tab-area#' + tabID );
+		createTabNames: function( tabareaID, tabNames) {
+			var thetab = $('.tab-area#' + tabareaID );
 			// avoid recurse too deep
 			if (thetab.width() <= 1100 ) {
 				return false;
@@ -60,43 +60,33 @@
 
 		/*
 		 * 用fillContent增加内容
-		 * @param [String] tabID 所操作层数 
+		 * @param [String] tabareaID 所操作层数 
 		 * @param [String] tabId 对应tab id 
 		 * @param [String] content 显示内容 
 		 * TODO:@param [String] content 显示内容 
 		 * }
 		 * */
-		fillContent: function( tabID, seq, tabId, content, type ) {
-			var theContentArea= $('.tab-area#' + tabID + ' .tabcontent-area');
-			var tabContent = theContentArea.find('.tabcontent[tabId='+tabId+']');
+		fillContent: function( tabareaID, seq, tabId, content, type ) {
+			var theContentArea= $('.tab-area#' + tabareaID + ' .tabcontent-area');
+			var tabContent = theContentArea.find('.tabcontent[tabid='+tabId+']');
 			if( tabContent.length <= 0 ) {
-				theContentArea.append('<div class=tabcontent tabId=' + tabId + '></div>');
-				var tabContent = theContentArea.find('.tabcontent[tabId='+tabId+']');
+				theContentArea.append('<div class=tabcontent tabid=' + tabId + ' tabtype=' + type + '></div>');
+				var tabContent = theContentArea.find('.tabcontent[tabid='+tabId+']');
 			}
-			if ( content ) {
-			//如果有内容(不考虑其他特殊设置)
-				switch( type ) {
-					case 'text':
+			switch( type ) {
+				case 'text':
+					if ( content ) {
 						tabContent.append(content);
-						break;
-					case 'page': 
-						this._loadPage( tabID, tabContent, content);
-						break;
-					default:
-						break;
-				}
-			} else {
-			//无内容，打印输入框，等待输入
-				switch( type ) {
-					case 'text':
+					} else {
 						tabContent.append(this._contentInput);
-						break;
-					case 'page': 
-						tabContent.append(this._linkInput);
-						break;
-					default:
-						break;
-				}
+					}
+					break;
+				case 'page': 
+					tabContent.attr('url', content);
+					this._loadPage( tabareaID, tabContent, content);
+					break;
+				default:
+					break;
 			}
 
 		},
@@ -123,21 +113,53 @@
 		/*
 		 * 异步加载页面，并传送数据
 		 */
-		_loadPage: function( tabID, targetNode, link ) {
-			// targetNode.load(link, {tabID: Number(theLayerId)+1}, function( response, status) {
-			targetNode.load(link, '', function( response, status) {
-				switch( status ) {
-					case 'success':
-						break;
-					case 'error':
-						alert('404!');
-						break;
-					default:
-						alert('err?');
-						break;
-				}
-			}); 
+		_loadPage: function( tabareaID, targetNode, link ) {
+			if ( link ) {
+				// targetNode.load(link, {tabareaID: Number(theLayerId)+1}, function( response, status) {
+				targetNode.load(link, '', function( response, status) {
+					switch( status ) {
+						case 'success':
+							break;
+						case 'error':
+							alert('404!');
+							break;
+						default:
+							alert('err?');
+							break;
+					}
+				}); 
+			} else {
+				//do not have link to load
+				targetNode.append(this._linkInput);
+			}
+		},
 
+		getTabInfo: function( node ) {
+			theTab = node.closest('.tab-area');
+			tabid = node.attr('tabid');
+			var tabContent = theTab.find('.tabcontent[tabid='+tabid+']')
+			,type = tabContent.attr('tabtype')
+			,content;
+			switch( type ) {
+				case 'text':
+					content = tabContent.html();
+					break;
+				case 'page':
+					content = tabContent.attr('url')
+					break;
+				default:
+					break;
+			}
+			info = {
+				tabName: node.html(),
+				id: tabid,
+				seq: (node.prevAll('.tabtitle').length + 1),
+				type: type,
+				content: content,
+			};
+			console.log('Tab Info');
+			console.log(info);
+			return info;
 		},
 
 		/*
@@ -152,7 +174,7 @@
 		 * remove tab by id
 		 *
 		 * */
-		rmTab: function( tabID, id ) {
+		rmTab: function( tabareaID, id ) {
 		
 		},
 
