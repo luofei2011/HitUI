@@ -59,15 +59,17 @@ var treeDef = {
 
 		//set the open list
 		var selectedNode = theTree;
-		for (len = nodes.length, i = 0; i < len; i++) {
-			var node = theTree.find('li[code=' + nodes[i] + ']');
-			//set all it's parent as open node
-			node.parentsUntil(theTree, 'li').attr('opened', 'Y');
-			//if openNode is leaf then select it
-			if(node.attr('leaf') == 'Y') {
-				selectedNode = node;	//only the last one node could be choosen
-			} else {
-				node.attr('opened', 'Y');
+			if ( nodes!= null ){
+			for (len = nodes.length, i = 0; i < len; i++) {
+				var node = theTree.find('li[code=' + nodes[i] + ']');
+				//set all it's parent as open node
+				node.parentsUntil(theTree, 'li').attr('opened', 'Y');
+				//if openNode is leaf then select it
+				if(node.attr('leaf') == 'Y') {
+					selectedNode = node;	//only the last one node could be choosen
+				} else {
+					node.attr('opened', 'Y');
+				}
 			}
 		}
 		//hide the hiden, show the shown

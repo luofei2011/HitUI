@@ -34,6 +34,7 @@
 ####component.tree
 
 * ~~set the default focus~~
+* ~~when there is no default focus, it will notice errors that `openNode` does not have length~~
 
 ####interfaces.tree
 
@@ -64,5 +65,11 @@
 
 #### parameter.global
 
+## requirement
+
 *往global里注册组件，并分配comID
 
+* jibenzujian use luofei's
+
+* tree demo  bumen dingyi(add by myself)
+* yonghudingyi  <!-- jiaosedingyi -->  caidandingyi (grid)

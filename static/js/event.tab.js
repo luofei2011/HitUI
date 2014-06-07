@@ -8,6 +8,7 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 		$(this).parent().children('.tabtitle[select="Y"]').removeAttr('select');
 		$(this).attr('select', 'Y');
 
+		// $(this).parent().parent().children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent#'+$(this).attr('id')).show();
 		$(this).parent().parent().children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid='+$(this).attr('tabid')+']').show();
 	}
 	//避免冒泡事件

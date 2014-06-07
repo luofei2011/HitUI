@@ -43,7 +43,7 @@
 		createTabNames: function( tabID, tabNames) {
 			var thetab = $('.tab-area#' + tabID );
 			// avoid recurse too deep
-			if (thetab.width() <= 600 ) {
+			if (thetab.width() <= 1100 ) {
 				return false;
 			}
 			var tabtitles = thetab.find('.tabtitle-area');
