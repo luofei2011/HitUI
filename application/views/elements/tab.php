@@ -7,13 +7,13 @@
 	tabID = hit.PARAMETER.global.registerComponent('tab','tab');
 	$('.tab-area#now').attr('id', tabID);
 
-	hit.PARAMETER.global.initPara();
-	var option = hit.PARAMETER.global.getTabOption();
-	if ( typeof option == 'undefined' ) {
+	// hit.PARAMETER.global.initPara();
+	// var option = hit.PARAMETER.global.getTabOption();
+	// if ( typeof option == 'undefined' ) {
 		option = hit.CONFIG.tab_test[0];
 		//hit.PARAMETER.global.setTabOption(option);
-		console.log('load the tab setting as default setting');
-	}
+	// 	console.log('load the tab setting as default setting');
+	// }
 
 	hit.INTERFACES.tab.makeFromData( tabID , option );
 

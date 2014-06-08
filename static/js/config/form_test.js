@@ -3,7 +3,9 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
-hit.CONFIG.form_test = {
+hit.CONFIG.form_test = [
+	{
+	// first form
 	formName: 'Test_Form',
 	groups: [
 		{
@@ -116,4 +118,61 @@ hit.CONFIG.form_test = {
 		},
 	],
 	returnURL: '',
-};
+
+	//end form
+	}, 
+	{
+	//second form
+	formName: 'SMALL_Test_Form',
+	groups: [
+		{
+			groupName: 'simple form',
+			showFrame: true,
+			items: [
+				{
+					name: '00001',
+					label: 'Name',
+					type: 'text',
+					required: true,
+					sizeLevel: 1,
+					defaultValue: 'I AM THE HELLO WORLD',
+				},{
+					name: '00002',
+					label: 'Age',
+					type: 'number',
+					required: true,
+					sizeLevel: 4,
+					defaultValue: '4',
+					selections: [
+						16,
+						60,
+					],
+				},{
+					name: '00003',
+					label: 'Date',
+					type: 'date',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: '1992-01-05',
+					selections: [
+						'1992-02-20',
+						'2014-06-08',
+					],
+				},{
+					name: '00004',
+					label: 'time',
+					type: 'time',
+					required: true,
+					sizeLevel: 4,
+					defaultValue: '19:04',
+					selections: [
+						'03:11',
+						'04:02',
+					],
+				},
+			],
+		},
+	],
+	//end second form
+	}
+];

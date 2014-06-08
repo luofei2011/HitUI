@@ -24,7 +24,7 @@ hit.CONFIG.tab_test = [
 				id: 'form',
 				seq: 1,
 				type: 'page',
-				content: 'load/elements/tab',
+				content: 'load/elements/index',
 			},{
 				tabName: 'TAB3',
 				id: '53',
@@ -40,6 +40,21 @@ hit.CONFIG.tab_test = [
 			},
 		],
 	},{
-	
+		// tab setting 2
+		tabs : [
+			{
+				tabName: 'TEST', 
+				id: '001',
+				seq: 2,
+				type: 'default', 
+				content: '',
+			},{
+				tabName: 'tab_test', 
+				id: '010',
+				seq: 1,
+				type: 'page', 
+				content: 'load/elements/tab',
+			},
+		],
 	},
 ];

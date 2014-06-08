@@ -94,6 +94,12 @@ var temform= {
                     break;
                 case 'number':
                     html += this.number( item );
+                    break;                
+                case 'date':
+                    html += this.date( item );
+                    break;                
+                case 'time':
+                    html += this.time( item );
                     break;
                 default:
                     break;
@@ -179,12 +185,12 @@ var temform= {
 
         date: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="date" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="date" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
         },
 
         time: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item" type="time" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + req + ' />' ;
+            return '<input class="form-item" type="time" id=' + item.name + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
         },
 
         testitem: function( item ) {

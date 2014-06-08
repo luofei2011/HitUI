@@ -1,34 +1,17 @@
 <div class="abc">
 
 <script type="text/javascript" src="<?=base_url('static/js/config/tree_test.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('static/js/config/form_test.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('static/js/config/tab_test.js');?>"></script>
 <script type="text/javascript">
 
+//Tree test
+/***********************************************/
+
 	var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+
 	$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
-	/*//设置区域ID
-	$('div#now').attr('id', treeID);
 
-	hit.PARAMETER.global.initPara();
-
-	var options = hit.PARAMETER.global.getTreeOption();
-	if ( typeof options == 'undefined' ) {
-		var options = {
-			table: 'menu',
-			db: 'natservice',
-			conf: {
-				op: 'select',
-				con: 'limit, 51;pager,false'
-			},
-			openNodes: []
-		};
-		options.openNodes.push('0103');
-		options.openNodes.push('0104');
-		options.openNodes.push('03');	
-		
-		hit.PARAMETER.global.setTreeOption(options);
-		console.log('load the tree setting from default');
-	}
-*/
 	 hit.INTERFACES.tree.makeFromDB(treeID, {
 			table: 'menu',
 			db: 'natservice',
@@ -38,22 +21,12 @@
 			},
 			openNodes: ['03']
 		});
-	//hit.INTERFACES.tree.makeFromData( treeID, hit.CONFIG.tree_test );
 
+/***********************************************/
 
 		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
 
 		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
-/*		
-		hit.INTERFACES.tree.makeFromDB(treeID, {
-			table: 'menu',
-			db: 'natservice',
-			conf: {
-				op: 'select',
-				con: 'limit, 51;pager,false'
-			},
-			openNodes: ['02']
-		});*/
 
 		hit.INTERFACES.tree.makeFromData(treeID, {
 			data: [
@@ -92,4 +65,43 @@
 			}
 			],
 		});
+
+/***********************************************/
+
+		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+
+		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
+
+		hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
+
+//Form test
+/***********************************************/
+
+	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
+
+	$('div.abc').append('<div class="form-area" id='+ formID + '></div>');
+
+	hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test[1], formID);
+
+//Tab test
+/***********************************************/
+
+	var tabID = hit.PARAMETER.global.registerComponent('tab', 'tab');
+
+	$('div.abc').append('<div class="tab-area" id='+ tabID + '></div>');
+
+	hit.INTERFACES.tab.makeFromData( tabID, hit.CONFIG.tab_test[1]);
+
+
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+/***********************************************/
+
 </script>
