@@ -103,6 +103,7 @@
 					if (!content) {
 						break;
 					}
+					thecontent.attr('url', content);
 					this._loadPage( theLayerId, thecontent, content );
 					break;
 				default:
