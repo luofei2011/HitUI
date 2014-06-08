@@ -103,7 +103,6 @@
 					if (!content) {
 						break;
 					}
-					thecontent.attr('url', content);
 					this._loadPage( theLayerId, thecontent, content );
 					break;
 				default:
@@ -116,6 +115,7 @@
 		 */
 		_loadPage: function( tabareaID, targetNode, link ) {
 			if ( link ) {
+				targetNode.attr('url', link);
 				// targetNode.load(link, {tabareaID: Number(theLayerId)+1}, function( response, status) {
 				targetNode.load(link, '', function( response, status) {
 					switch( status ) {
