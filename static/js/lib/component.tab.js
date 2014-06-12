@@ -53,7 +53,7 @@
 				var tabtitles = thetab.find('.tabtitle-area');
 			}
 			for (var i=0, len=tabNames.length; i<len; i++) {
-				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '</div>');
+				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '<div class="littletabxx"></div></div>');
 			}
 			return true;
 		},
@@ -135,6 +135,32 @@
 			}
 		},
 
+		focusTab: function( tabareaID, id ) {
+			var tabarea = $('.tab-area#'+tabareaID);
+			tabarea.find('.tabtitle[tabid=' + id + ']').attr('select','Y');
+			tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid=' + id + ']').show();
+			
+		},
+
+		/*
+		 * remove tab by id
+		 *
+		 * */
+		rmTab: function( tabareaID, id ) {
+			
+		},
+
+		removeTab: function( titleNode ) {
+			thetab = titleNode.closest('.tab-area');
+			tabareaID = thetab.attr('id');
+			tabid = titleNode.attr('tabid');
+			contentNode = thetab.find('.tabcontent-area .tabcontent[tabid=' + tabid + ']');
+			titleNode.remove();
+			contentNode.remove();
+			firstid = thetab.find('.tabtitle').first().attr('tabid');
+			this.focusTab(tabareaID, firstid);
+		},
+
 		getTabInfo: function( node ) {
 			theTab = node.closest('.tab-area');
 			tabid = node.attr('tabid');
@@ -159,22 +185,6 @@
 				content: content,
 			};
 			return info;
-		},
-
-		/*
-		 * add tab
-		 *
-		 * */
-		addTab: function( options ) {
-			
-		},
-
-		/*
-		 * remove tab by id
-		 *
-		 * */
-		rmTab: function( tabareaID, id ) {
-		
 		},
 
 	};

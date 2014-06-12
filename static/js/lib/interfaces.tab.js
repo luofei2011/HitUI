@@ -85,10 +85,7 @@
 			}
 			
 			//TODO:set focus
-			var tabarea = $('.tab-area#'+tabareaID);
-			tabarea.find('.tabtitle').first().attr('select','Y');
-			tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent').first().show();
-			
+			hit.COMPONENT.tab.focusTab(tabareaID, $('.tab-area#' + tabareaID).find('.tabtitle').first().attr('tabid'));
 
 		},
 

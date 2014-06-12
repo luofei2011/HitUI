@@ -18,6 +18,12 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 	return false;
 });
 
+$(document).on('click', '.tabtitle .littletabxx', function() {
+	thetitle = $(this).parent('.tabtitle');
+	hit.COMPONENT.tab.removeTab(thetitle);
+	return false;
+});
+
 //refill the content, use the COMPONENT function
 $(function() {
 	$(document).on('click', '.upload-content', function() {
