@@ -210,7 +210,7 @@ var hit = {
         pNode.append(tmp);
         this._createQ(config, tmp);
 
-		this._setForm(config);
+		//this._setForm(config);
 
         // 表格区域
         tmp = $('<div class="gr-table"></div>');

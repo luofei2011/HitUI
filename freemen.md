@@ -65,6 +65,10 @@
 
 #### parameter.global
 
+#### others
+
+* del or abstract the parameter.global function on other components' interfaces
+
 ## requirement
 
 *往global里注册组件，并分配comID

@@ -10,8 +10,8 @@
 
 	hit.PARAMETER.global.initPara();
 
-	var options = hit.PARAMETER.global.getTreeOption();
-	if ( typeof options == 'undefined' ) {
+	// var options = hit.PARAMETER.global.getTreeOption();
+	// if ( typeof options == 'undefined' ) {
 		var options = {
 			table: 'menu',
 			db: 'natservice',
@@ -25,9 +25,9 @@
 		options.openNodes.push('0104');
 		options.openNodes.push('03');	
 		
-		hit.PARAMETER.global.setTreeOption(options);
+		// hit.PARAMETER.global.setTreeOption(options);
 		console.log('load the tree setting from default');
-	}
+	// }
 
 	hit.INTERFACES.tree.makeFromDB(treeID, options);
 	// hit.INTERFACES.tree.makeFromData( treeID, hit.CONFIG.tree_test );
