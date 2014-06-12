@@ -33,7 +33,7 @@ li.tree-node[leaf='Y']{
 	background: #EBEDF2 url(../../img/tree/button.png) repeat-x 0 0
 }
 
-.tree-list li p:hover {
+.treeroot li p:hover {
 	border: 1px solid #A9ACB5;
 	background: #E1E8FD url(../../img/hover.png) repeat-x 0 0;
 }
