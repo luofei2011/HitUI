@@ -143,12 +143,12 @@
 			//TODO:在tabtitle那儿增加x，点击关闭用	
 		},
 
-		switch2Tab: function( id, tabName ) {
+		switch2Tab: function( tabareaID, id, tabName ) {
 			//TODO:先判断页面是否存在，再判断切换还是添加
 			var tem = [];
 			var tabInfo = { content:"", tabName:tabName, type:'page', id: id};
 			tem.push(tabInfo);
-			this.addTabs(1, tem);
+			this.addTabs(tabareaID, tem);
 			//TODO: 切换标签页，并设置当前显示页
 		},
 

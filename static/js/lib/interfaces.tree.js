@@ -76,6 +76,16 @@ var iTree = {
 		return hit.COMPONENT.tree.getInfoByNode( node );
 	},
 
+	setTarget: function( treeID, tabID, fun ){
+		$('#'+treeID).attr({targetID: tabID, targetFun: fun});
+	},
+
+	funs: {
+		switch2tab : function( tabID, info ) {
+			hit.INTERFACES.tab.switch2Tab(tabID, info.code, info.name);
+		},
+	},
+
 };
 
 if ( hit.INTERFACES ) {

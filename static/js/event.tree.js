@@ -20,13 +20,22 @@ $(document).on('click', '.tree-area li', function() {
 				//deselect other selected node in this tree
 
 				//TODO:now选中哪一项应该由component来做，以便以后封装
-				$(this).closest('.tree-area').find('[select="Y"]').removeAttr('select');//.css('background-color', '#FFF');
+				thetree = $(this).closest('.tree-area');
+				thetree.find('[select="Y"]').removeAttr('select');//.css('background-color', '#FFF');
 				$(this).attr('select', 'Y');//.css('background-color', '#8ab');
 				openNodes = [$(this).attr('code')];
-				hit.PARAMETER.global.setTreeOpenNodes( openNodes );
-				//TODO:now 选中后更新
-				hit.PARAMETER.global.setCurrentDataNode( $(this) );
-				hit.PARAMETER.global.update();
+				info = hit.COMPONENT.tree.getInfoByNode( $(this) );
+
+				//TODO:make a new interfaces function like setTarget
+				target = thetree.attr('targetID');
+				fun = thetree.attr('targetFun');
+				console.log('targetID:'+target+"\ntargetFun:"+fun);
+				if( target!= null && target.length >0 )
+					hit.INTERFACES.tree.funs[fun](target, info);
+				// hit.PARAMETER.global.setTreeOpenNodes( openNodes );
+				// //TODO:now 选中后更新
+				// hit.PARAMETER.global.setCurrentDataNode( $(this) );
+				// hit.PARAMETER.global.update();
 			} else {								
 			//already been choosen
 			//TODO:mention Global Setting & Global function

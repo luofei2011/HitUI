@@ -66,13 +66,6 @@
 			],
 		});
 
-/***********************************************/
-
-		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
-
-		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
-
-		hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
 
 //Form test
 /***********************************************/
@@ -83,6 +76,14 @@
 
 	hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test[1], formID);
 
+/***********************************************/
+
+		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+
+		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
+
+		hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
+
 //Tab test
 /***********************************************/
 
@@ -92,7 +93,7 @@
 
 	hit.INTERFACES.tab.makeFromData( tabID, hit.CONFIG.tab_test[1]);
 
-
+	hit.INTERFACES.tree.setTarget(treeID, tabID, 'switch2tab');
 /***********************************************/
 /***********************************************/
 /***********************************************/
