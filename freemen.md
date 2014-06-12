@@ -11,7 +11,7 @@
 
 * 各种数据清除
 * 各种接口
-* maybe we can let the tab lazy-load
+* ~~maybe we can let the tab lazy-load~~
 
 ####interfaces.tab
 
@@ -29,7 +29,7 @@
 
 ####css
 
-* icon!!!!
+* ~~icon!!!!~~
 
 ####component.tree
 

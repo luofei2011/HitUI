@@ -103,26 +103,6 @@
 
 		},
 
-		updateTabOption: function() {
-
-		},
-
-		/*
-		 * 根据currentDataNode，进行刷新
-		 *
-		 * */
-		updateCurrentDataNode: function( newDataNode ) {
-			
-		},
-		
-		/*
-		 * 根据变量状态，进行刷新
-		 *
-		 * */
-		update: function() {
-
-		},
-
 		_reg: [],
 
 		/**
@@ -157,6 +137,30 @@
 
 		clearRegInfo: function() {
 
+		},
+
+		send2Target: function( targetID, targetFun, info ) {
+			console.log('targetID:'+targetID+"\ntargetFun:"+targetFun);
+			if( typeof(targetID) != undefined  && targetID!= null ) {
+				this.additionalFuns[targetFun](targetID, info);
+			}
+		},
+
+		sendInfo: function( thisNode, info ) {
+			targetID = thisNode.attr('targetID');
+			targetFun = thisNode.attr('targetFun');
+			this.send2Target(targetID, targetFun, info);
+		},
+
+		additionalFuns: {
+			switch2tab : function( tabID, info ) {
+				hit.INTERFACES.tab.switch2Tab(tabID, info.code, info.name);
+			},
+
+			changeTreeName: function(treeID, info) {
+				console.log('here is to '+treeID);
+				console.log(info);
+			},
 		},
 
 

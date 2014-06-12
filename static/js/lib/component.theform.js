@@ -47,7 +47,7 @@ var temform= {
             }
 
             //set the submit(return) button
-            //html += '<input type="submit" href="#" onclick="" /> '
+            html += '<input type="submit" href="#" onclick="" /> '
 
             html += '</fieldset></form>';
             console.log('COMPONENT.theform\'s config');

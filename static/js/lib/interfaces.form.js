@@ -29,7 +29,7 @@ var iForm= {
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
-	createFromConfigNow: function( config, formareaID ) {
+	createFromConfigNow: function( formareaID, config ) {
 		html = hit.COMPONENT.theform.createFromConfig( config, formareaID );
 		$('.form-area#'+formareaID).empty().append(html);
 	},
@@ -41,7 +41,7 @@ var iForm= {
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
-	createFromConfig: function( config, formareaID ) {
+	createFromConfig: function( formareaID, config ) {
 		return hit.COMPONENT.theform.createFromConfig( config, formareaID );
 	},
 
@@ -53,7 +53,11 @@ var iForm= {
 	},
 
 	getFromInfo: function( formareaID ) {
-		console.log(hit.COMPONENT.theform.getFromInfo( formareaID ));
+		return hit.COMPONENT.theform.getFromInfo( formareaID );
+	},
+
+	setTarget: function( formID, targetID, targetFun ) {
+		$('#'+formID).attr({targetID: targetID, targetFun: targetFun});
 	},
 
 };

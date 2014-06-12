@@ -1,3 +1,7 @@
+.treeroot {
+	padding: 10px 0 0 6px;
+}
+
 .tree-list {
 	padding: 0 0 0 18px
 }
@@ -6,6 +10,30 @@
 	background-color: white;
 }
 
-.tree-list li[select='Y'] {
-	background-color: #8ab ;
+li.tree-node[leaf='N']{
+	list-style-image: url('../../img/tree/plus1.ico');
+
+}
+
+li.tree-node[opened='Y']{
+	list-style-image: url('../../img/tree/minus1.ico');
+}
+
+li.tree-node[leaf='Y']{
+	list-style-image: none;
+	list-style-type: circle;
+}
+
+.tree-list li p {
+	display: inline-block;
+}
+
+.tree-list li[select='Y'] p{
+	border: 1px solid #A9ACB5;
+	background: #EBEDF2 url(../../img/tree/button.png) repeat-x 0 0
+}
+
+.tree-list li p:hover {
+	border: 1px solid #A9ACB5;
+	background: #E1E8FD url(../../img/hover.png) repeat-x 0 0;
 }

@@ -158,8 +158,6 @@
 				type: type,
 				content: content,
 			};
-			console.log('Tab Info');
-			console.log(info);
 			return info;
 		},
 

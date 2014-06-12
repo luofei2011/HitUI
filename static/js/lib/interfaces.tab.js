@@ -152,6 +152,10 @@
 			//TODO: 切换标签页，并设置当前显示页
 		},
 
+		setTarget: function( tabID, targetID, targetFun ) {
+			$('#'+tabID).attr({targetID: targetID, targetFun: targetFun});
+		},
+
 	};
 
 	if ( hit.INTERFACES ) {

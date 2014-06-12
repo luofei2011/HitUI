@@ -74,7 +74,7 @@
 
 	$('div.abc').append('<div class="form-area" id='+ formID + '></div>');
 
-	hit.INTERFACES.form.createFromConfigNow(hit.CONFIG.form_test[1], formID);
+	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
 
 /***********************************************/
 

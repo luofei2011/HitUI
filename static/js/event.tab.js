@@ -10,7 +10,9 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 
 		$(this).parent().parent().children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid='+$(this).attr('tabid')+']').show();
 
-		hit.COMPONENT.tab.getTabInfo( $(this) );
+		thetab = $(this).closest('.tab-area');
+		info = hit.COMPONENT.tab.getTabInfo( $(this) );
+		hit.PARAMETER.global.sendInfo(thetab, info);
 	}
 	//避免冒泡事件
 	return false;

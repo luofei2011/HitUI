@@ -10,23 +10,28 @@ div.tab-container {
 }
 
 div.tabtitle-area{
-	margin: 0 0 0 3px;
+	overflow: hidden;
+	margin: 0 0 0 0px;
+	border-bottom: 1px solid #999;
 }
 div.tabtitle{
 	position: relative;
 	float: left;
-	width: 40px;
-	margin: 5px 0px 0px 0px;
-	border-right: 1px solid white;
-	background-color: #ee0088;
+	margin: 5px 0px 0px 3px;
+	padding: 3px 10px;
+	border: 1px solid #999;
+	background: #EBEBEE url(../../img/tab.png) repeat-x 0 0;
+	top: 1px;
 }
 
 .tabtitle:hover,.tabtitle+.tabtitle:hover {
-	background-color: #ffa3c0;
+	background: #E1E8FD url(../../img/hover.png) repeat-x 0 0;
 }
 
 .tabtitle[select='Y'] {
-	background-color: #e4e2eb;
+	background: none;
+	background-color: white;
+	border-bottom: 1px solid white;
 }
 
 div.tabcontent-area{
@@ -36,9 +41,10 @@ div.tabcontent-area{
 .tabcontent {
 	position: relative;
 	float: both;
-	padding: 1px 3px 1px 3px;
+	padding: 0px 3px 1px 3px;
 	margin: 0px 0px 0px 0px;
-	border-style: outset;
+	border: 1px solid #999;
+	border-top: 0px; 
 
 }
 

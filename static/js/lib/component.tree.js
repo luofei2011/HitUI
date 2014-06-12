@@ -38,13 +38,20 @@ var treeDef = {
 
 		//--Children Node
 		var child_li = theTree.find('li[code=' + code + ']');
+		var prehtml = "";
+		for(var i=0; i<level; i++){
+			prehtml += "<div class='tree-indent'></div>";
+		}
+		prehtml += "<div class='tree-pre'></div>";
 		//若存在此code，则更新内容
 		if ( child_li.length ) {
-			child_li.prepend('<p>' + name + '</p>');
+			//TODO: here only root node will do it
+			child_li.attr('leaf', leafFlag);
+			child_li.prepend(prehtml + '<p>' + name + '</p>');
 		} else {
 			//在father列表（ul）底下增加子列表项
 			//TODO: 增加的时候还需考虑顺序
-			father_ul.append('<li code=' + code + ' level=' + level + ' leaf=' + leafFlag + ' class=tree-node ><p>'+name+'</p></li>');	
+			father_ul.append('<li code=' + code + ' level=' + level + ' leaf=' + leafFlag + ' class=tree-node >'+prehtml+'<p>'+name+'</p></li>');	
 		}
 	},
 
