@@ -95,40 +95,46 @@
 		 * 	:[	[String]id, [String]tabName, [String]type, [String]content  ]
 		 * */
 		addTabs: function( tabareaID, tabInfos ) {
-			//get the max index of the tab
-			option = hit.PARAMETER.global.getTabOption();
-			maxSeq = option.tabs[option.tabs.length - 1].seq;
-			var formatedInfos = [];			//about the formated tabInfos
-			var tabNames = new Array();		//about tab title
-			var contents = new Array();		//about tab content
-			for(var i=0, len = tabInfos.length; i<len; i++) {
-				//formate the info to save
-				formatedInfos[i] = {};
-				formatedInfos[i].tabName = tabInfos[i].tabName;
-				formatedInfos[i].type = tabInfos[i].type;
-				formatedInfos[i].content = tabInfos[i].content;
-				formatedInfos[i].id = tabInfos[i].id;
-				formatedInfos[i].seq = maxSeq + i + 1;
-				// title
-				var temObj = { 
-					name: formatedInfos[i].tabName, 
-					id: formatedInfos[i].id,
-					seq: formatedInfos[i].seq,
-				};
-				tabNames.push(temObj);
+			//judge if already have the tab
+			tabids = hit.COMPONENT.tab.getAllTabId( tabareaID );
+			if (tabids.indexOf(tabInfos.id) !== -1) {
+				hit.COMPONENT.tab.focusTab(tabareaID, tabInfos.id)
+				} else {
+				//get the max index of the tab
+				option = hit.PARAMETER.global.getTabOption();
+				maxSeq = option.tabs[option.tabs.length - 1].seq;
+				var formatedInfos = [];			//about the formated tabInfos
+				var tabNames = new Array();		//about tab title
+				var contents = new Array();		//about tab content
+				for(var i=0, len = tabInfos.length; i<len; i++) {
+					//formate the info to save
+					formatedInfos[i] = {};
+					formatedInfos[i].tabName = tabInfos[i].tabName;
+					formatedInfos[i].type = tabInfos[i].type;
+					formatedInfos[i].content = tabInfos[i].content;
+					formatedInfos[i].id = tabInfos[i].id;
+					formatedInfos[i].seq = maxSeq + i + 1;
+					// title
+					var temObj = { 
+						name: formatedInfos[i].tabName, 
+						id: formatedInfos[i].id,
+						seq: formatedInfos[i].seq,
+					};
+					tabNames.push(temObj);
 
-				// content
-				hit.COMPONENT.tab.fillContent(tabareaID, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
+					// content
+					hit.COMPONENT.tab.fillContent(tabareaID, formatedInfos[i].seq, formatedInfos[i].id, formatedInfos[i].content, formatedInfos[i].type);
 
-				hit.PARAMETER.global.addTabs(formatedInfos[i]);
-			}
-			//create tab title & framework
-			hit.COMPONENT.tab.createTabNames(tabareaID, tabNames);
+					hit.PARAMETER.global.addTabs(formatedInfos[i]);
+				}
+				//create tab title & framework
+				hit.COMPONENT.tab.createTabNames(tabareaID, tabNames);
 
-			//TODO:now 设置隐藏,和设置焦点一样，应该抽象出来
-			var tabarea = $('.tab-area[layerid='+tabareaID+']');
-			for(var i=0, len=tabNames.length; i<len; i++) {
-				tabarea.children('.tabcontent-area').children('.tabcontent[tabId='+tabNames[i].id+']').hide();
+				//TODO:now 设置隐藏,和设置焦点一样，应该抽象出来
+				var tabarea = $('.tab-area[layerid='+tabareaID+']');
+				for(var i=0, len=tabNames.length; i<len; i++) {
+					tabarea.children('.tabcontent-area').children('.tabcontent[tabId='+tabNames[i].id+']').hide();
+				}
 			}
 		},
 

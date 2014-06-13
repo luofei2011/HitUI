@@ -57,5 +57,9 @@ input {
 	height: 13px;
 	display: inline-block;
 	margin-left: 8px;
-	background: url(../../img/icons/close.gif) no-repeat 50% 50%;
+	background: url(../../img/close.gif) no-repeat 50% 50%;
+}
+
+.tabtitle .littletabxx:hover {
+	background: url(../../img/table/error.png) no-repeat 50% 50%;
 }
