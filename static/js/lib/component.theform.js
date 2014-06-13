@@ -61,7 +61,10 @@ var temform= {
             }
 
             //set the submit(return) button
-            html += '<input type="submit" href="#" onclick="" /> '
+            for (i=0, len=config.buttons?config.buttons.length:0 ; i<len; i++) {
+                btn = config.buttons[i];
+                html += '<input type="' + btn.type + '" name="' + btn.name + '" btnid="' + btn.id + '" href="#" onclick="" /> '
+            }
 
             html += '</fieldset></form>';
             console.log('COMPONENT.theform\'s config');

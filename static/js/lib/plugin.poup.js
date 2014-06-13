@@ -171,6 +171,7 @@ hit.PLUGIN.poup = {
 			}
 		} else {
 			hit.INTERFACES.form.appendForm2(node, hit.CONFIG.form_test[0], formareaID);
+			
 		}
 
 		con.tNode.append(wrapper).append(this.createBtn());

@@ -4,7 +4,7 @@
  $(document).on('click', '[type="submit"]', function() {
     //TODO:check if it's good
  	console.log('get the form-area id is ' + $(this).closest('.form-area').attr('id'));
-    info = hit.COMPONENT.theform.getFromInfo($(this).closest('.form-area').attr('id'));
+    info = hit.COMPONENT.theform.getFormInfo($(this).closest('.form-area').attr('id'));
     theform = $(this).closest('.form-area');
     hit.PARAMETER.global.sendInfo(theform, info);
  	return false;
