@@ -113,10 +113,10 @@ class Base extends CI_Model {
         $offset = 0;
 
         if (array_key_exists('limit', $arr)) {
-            $limit = $arr['limit'] | 50;
+            $limit = $arr['limit'];
         } 
         if (array_key_exists('offset', $arr)) {
-            $offset = $arr['offset'] | 0;
+            $offset = $arr['offset'];
         }
 
         $re = array(
