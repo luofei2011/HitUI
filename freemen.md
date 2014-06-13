@@ -5,7 +5,7 @@
 	id = 'GR_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
 
 * 根据id设置关联关系（主控与被控、父子关系），并在操作时候加入id来控制
-> 如：如何在嵌套的情况下正确获取自己的父节点
+> ~~如：如何在嵌套的情况下正确获取自己的父节点~~<-use closest
 
 ##tab
 
@@ -15,7 +15,7 @@
 
 ####interfaces.tab
 
-* 先判断页面是否存在，再判断切换还是添加
+* ~~先判断页面是否存在，再判断切换还是添加~~
 * ~~切换标签页，并设置当前显示页~~
 * ~~在tabtitle那儿增加x，点击关闭用~~
 * ~~set focus~~
@@ -77,3 +77,18 @@
 * tree demo  bumen dingyi(add by myself)
 
 * yonghudingyi  <!-- jiaosedingyi -->  caidandingyi (grid)
+
+----
+////
+
+# FROM June, 13rd: demo time
+
+## component
+#### complete the interfaces
+* add tabs
+
+## DEMO
+#### combine the tree and the form
+
+## structure
+#### `parameter.globle` is so ugly..

@@ -142,6 +142,7 @@ hit.CONFIG.form_test = [
 					required: true,
 					sizeLevel: 1,
 					defaultValue: 'I AM THE HELLO WORLD',
+					key: true,
 				},{
 					name: '00002',
 					label: 'Age',
@@ -153,6 +154,7 @@ hit.CONFIG.form_test = [
 						16,
 						60,
 					],
+					key: false,
 				},{
 					name: '00003',
 					label: 'Date',
@@ -175,6 +177,14 @@ hit.CONFIG.form_test = [
 						'03:11',
 						'04:02',
 					],
+				},{
+					name: '00006',
+					label: 'POUP',
+					type: 'poup',
+					required: true,
+					sizeLevel: 2,
+					defaultValue: '',
+					selections: [],
 				},
 			],
 		},
