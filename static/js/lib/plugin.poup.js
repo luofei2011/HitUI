@@ -161,7 +161,11 @@ hit.PLUGIN.poup = {
 		tableCon = con.conf;
 		if (tableCon != "") {
 			try {
-				hit.INTERFACES.form.appendForm2(node, tableCon, formareaID);
+				if (tableCon.length) {
+					for (var i = 0, len = tableCon.length; i < len; i++) {
+						hit.INTERFACES.form.appendForm2(node, tableCon[i], formareaID);
+					}
+				}
 			} catch(e) {
 				console.log(e);
 			}
@@ -184,32 +188,43 @@ hit.PLUGIN.poup = {
 		// 确定按钮事件
 		$('a.poup-sure', panel).on('click', function() {
 			var isChecked = false, 
-				_inputs = panel.find('input, textarea, select'),
-				data = {
-					data: [],
-					keys: []
+				forms = panel.find('form'),
+				data = [];
+
+			forms.each(function() {
+				var obj = {
+						data: [],
+						keys: []
+					},
+					_inputs = $(this).find('input, textarea, select');
+
+				obj.db = {
+					name: $(this).attr('dbname'),
+					t: $(this).attr('dbtable')
 				};
+				_inputs.each(function() {
+					var p = $(this).closest('div');
+					if (p.attr('name')) {
+						obj.data.push({
+							name: p.attr('name'),
+							value: $(this).val()
+						});
+					}
 
-			_inputs.each(function() {
-				var p = $(this).closest('div');
-				if (p.attr('name')) {
-					data.data.push({
-						name: p.attr('name'),
-						value: $(this).val()
-					});
-				}
+					if ($(this).attr('key') == 'true') {
+						obj.keys.push({
+							name: $(this).attr('name'),
+							value: ''
+						});
+					}
+				});
 
-				if ($(this).attr('key') == 'true') {
-					data.keys.push({
-						name: $(this).attr('name'),
-						value: ''
-					});
-				}
+				data.push(obj);
 			});
-
 			$(this).next().trigger('click');
 
             // 触发原来的自定义事件
+            console.log(data);
             con.pNode.trigger('select', data);
 			return false;
 		});

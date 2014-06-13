@@ -98,13 +98,25 @@ class Load extends CI_Controller {
                 }
                 break;
             case 'form':
-                $json['showFrame'] = true;
-                $json['groupName'] = '';
-                $json['items'] = array();
+                unset($json['db']);
+                $json['formName'] = '';
+                $json['groups'] = array();
+                $json['returnURL'] = array(
+                    'type' => 'DB',
+                    'config' => array(
+                        'dbName' => $db,
+                        'dbTable' => $t
+                        )
+                    );
+                array_push($json['groups'], array(
+                    'groupName' => '',
+                    'showFrame' => true,
+                    'items' => array(),
+                    ));
                 foreach($result as $f) {
-                    array_push($json['items'], array(
+                    array_push($json['groups'][0]['items'], array(
                         'name' => $f['Field'],
-                        'label' => 'Name',
+                        'label' => $f['Field'],
                         'type' => 'text',
                         'required' => true,
                         'sizeLevel' => 2,

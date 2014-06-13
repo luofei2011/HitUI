@@ -167,10 +167,11 @@ $(document).on('click', 'span.hit-button-icon', function() {
             */
 
             hit.PLUGIN.poup.init({
+                width: 800,
                 left: 100,
                 top: 10,
                 label: '添加'
-            }, hit.CONFIG.form_test[0], $(this), "poup");
+            }, hit.CONFIG.form_storage, $(this), "poup");
             break;
         case "add":
             var _fTr = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0),
@@ -305,6 +306,42 @@ $(document).on('click', 'span.hit-button-icon', function() {
                     q: [{
                         name: 'Bill_state',
                         value: 'R'
+                    }]
+                });
+            }
+            // 生成cover层
+            hit.COVER.init({
+                tNode: $(this).closest('div.gr-toolbar').next(),
+                status: 'wait'
+            });
+           
+            hit.query('load/deal_data', q, {
+                op: 'update',
+                con: ''
+            }, function(data) {
+                // hit.reDrawTableContent(data, pNode);
+                hit.COVER.removeNode();
+                // 把记录从前端页面中删掉
+                for (i = 0; i < len; i++) {
+                    d.node[i].remove();
+                };
+            });
+            break;
+        case 'order_deal':
+            var d = get_checked_field(),q = [],
+                i = 0, len;
+
+            if (!d.id.length) {
+                alert('未选中任何数据！');
+                return false;
+            }
+
+            for (len = d.id.length; i < len; i++) {
+                q.push({
+                    keys: d.id[i],
+                    q: [{
+                        name: 'Bill_state',
+                        value: 'F'
                     }]
                 });
             }
@@ -858,37 +895,39 @@ $(document).on('select', 'span.poup-select', function() {
 
 // 弹出新建事件
 $(document).on('select', '.icon-add_poup', function() {
-    var data = arguments[1],
-        pNode = $(this).closest('.gr-container'),
+    var pNode = $(this).closest('.gr-container'),
         conf = pNode.attr('url'),
         conf = hit.CONFIG[conf],
         con = "",
         tmpDB = {
             name: hit.conf.db.name,
             t: hit.conf.db.t
-        };
+        }, i = 1, len, data;
 
-    hit.setDB(conf.db.t, conf.db.name);
+    for (len = arguments.length; i < len; i++) {
+        data = arguments[i];
+        hit.setDB(data.db.t, data.db.name);
 
-    // 得到主键信息
-    keys = data.keys;
-    for (var i = 0, len = keys.length; i < len; i++) {
-        if (i) 
-            con += ';';
-        con += keys[i].name;
+        // 得到主键信息
+        keys = data.keys;
+        for (var i = 0, len = keys.length; i < len; i++) {
+            if (i) 
+                con += ';';
+            con += keys[i].name;
+        }
+        // 生成cover层
+        hit.COVER.init({
+            tNode: $(this).closest('div.gr-border'),
+            status: 'wait'
+        });
+       
+        hit.query('load/deal_data', [data.data], {
+            op: 'insert',
+            con: con
+        }, function() {
+            hit.COVER.removeNode();
+        });
     }
-    // 生成cover层
-    hit.COVER.init({
-        tNode: $(this).closest('div.gr-border'),
-        status: 'wait'
-    });
-   
-    hit.query('load/deal_data', [data.data], {
-        op: 'insert',
-        con: con
-    }, function() {
-        hit.COVER.removeNode();
-    });
     hit.setDB(tmpDB.t, tmpDB.name);
 
     return false;

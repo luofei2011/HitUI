@@ -49,7 +49,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "仓库号",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -57,7 +57,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "仓库名",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -65,7 +65,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "Bin_id",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -73,7 +73,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "Bin_name",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -81,7 +81,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "仓库管理员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -89,7 +89,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "仓库管理员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -97,7 +97,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "添加人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -105,7 +105,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "添加人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -113,7 +113,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "审批人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -121,7 +121,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "审批人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -129,7 +129,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "过账人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -137,7 +137,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "过账人员",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -145,7 +145,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "供应商",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -153,7 +153,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "应用商id",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -161,7 +161,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "应用商名",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -169,7 +169,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "订单验证状态",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -177,7 +177,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "订单状态",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -185,7 +185,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "IO类型",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -193,7 +193,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "流程",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
@@ -201,7 +201,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"colspan": 2
 	},
 	{
-		"label": "",
+		"label": "备注",
 		"isFixed": false,
 		"isOrdered": false,
 		"align": "center",
