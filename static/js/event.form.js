@@ -1,5 +1,5 @@
 /*
- * event.parameter.js 处理全局变量的控制事件
+ * event.form.js 处理form的控制事件
  * */
  $(document).on('click', '[type="submit"]', function() {
     //TODO:check if it's good
@@ -9,6 +9,32 @@
     hit.PARAMETER.global.sendInfo(theform, info);
  	return false;
  });
+
+ $(document).on('click', '.form-item.poup', function() {
+    // var pNode = $(this).closest('.poup-select'),
+        // url = pNode.attr('url'),
+        var url = $(this).attr('url')
+        , conf = hit.CONFIG[url];
+
+    // pNode.trigger('blur');
+
+    hit.PLUGIN.poup.init({
+        left: 100,
+        top: 10,
+        label: '订单详情'
+    }, conf, $(this));
+    // }, conf, pNode);
+ });
+
+ $(document).on('select', '.form-item.poup', function() {
+    var map = arguments[1]
+    , name = $(this).closest('div.form-item').attr('name');
+    if( map ) {
+        if(map[name]) {
+            $(this).attr('value',map[name]);
+        }
+    }
+ }),
 
  $(document).on('blur', 'input.form-item', function() {
     var rule = [], i = 0,
@@ -45,5 +71,5 @@
     }
 
     // 若验证都通过了，则移除提示框
-    $(this).prev().removeClass('edited-and-error');
+    $(this).removeClass('edited-and-error');
 });
