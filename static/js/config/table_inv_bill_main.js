@@ -24,9 +24,9 @@ hit.CONFIG.table_inv_bill_main = {
 	],
 	"hasQuery": true,
 	"qParam": [{
-		"name": "",
-		"label": "",
-		"type": "",
+		"name": "Make_date",
+		"label": "订单日期",
+		"type": "text",
 		"required": false
 	}],
 	"hasFunc": true,
