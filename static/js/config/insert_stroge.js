@@ -5,19 +5,20 @@ if (typeof hit.CONFIG === 'undefined')
 
 hit.CONFIG.form_storage = [
 {
-	"formName": "主表信息",
+	"formName": "入库单信息",
 	"groups": [{
 		"groupName": "",
-		"showFrame": true,
+		"showFrame": false,
 		"items": [
-		// {
-		// 	"name": "Bill_num",
-		// 	"label": "订单号",
-		// 	"type": "text",
-		// 	"required": true,
-		// 	"sizeLevel": 2,
-		// 	"defaultValue": []
-		// },
+		{
+			"name": "Bill_num",
+			"label": "订单号",
+			"type": "text",
+			"required": true,
+			"sizeLevel": 2,
+			"defaultValue": [],
+			key: true
+		},
 		{
 			"name": "Make_date",
 			"label": "订单日期",
@@ -154,14 +155,14 @@ hit.CONFIG.form_storage = [
 			"sizeLevel": 2,
 			"defaultValue": []
 		},
-		// {
-		// 	"name": "Bill_state",
-		// 	"label": "Bill_state",
-		// 	"type": "text",
-		// 	"required": true,
-		// 	"sizeLevel": 2,
-		// 	"defaultValue": []
-		// },
+		{
+			"name": "Bill_state",
+			"label": "Bill_state",
+			"type": "text",
+			"required": true,
+			"sizeLevel": 2,
+			"defaultValue": 'E'
+		},
 		{
 			"name": "IO_type",
 			"label": "IO_type",
@@ -196,18 +197,20 @@ hit.CONFIG.form_storage = [
 	}
 },
 {
-	"formName": "",
+	"formName": "物料信息",
 	"groups": [{
 		"groupName": "",
-		"showFrame": true,
-		"items": [{
-			"name": "Bill_num",
-			"label": "订单号",
-			"type": "text",
-			"required": true,
-			"sizeLevel": 2,
-			"defaultValue": []
-		},
+		"showFrame": false,
+		"items": [
+		// {
+		// 	"name": "Bill_num",
+		// 	"label": "订单号",
+		// 	"type": "text",
+		// 	"required": true,
+		// 	"sizeLevel": 2,
+		// 	"defaultValue": [],
+		// 	key: true
+		// },
 		{
 			"name": "Serial_num",
 			"label": "类型号",

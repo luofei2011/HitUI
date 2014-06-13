@@ -56,6 +56,7 @@ class Base extends CI_Model {
      * );
      * */
     public function dbInsert($arr, $con = false) {
+        $key = '';
         // 默认一次可插入多条数据
         foreach($arr as $data) {
             $tmp = $this->obj_to_array($data);
@@ -63,11 +64,15 @@ class Base extends CI_Model {
             if ($con) {
                 $k = $this->auto_create_key($tmp, $con);
                 $tmp[$k['name']] = $k['value'];
+                $key = array(
+                    'name' => $k['name'],
+                    'value' => $k['value']
+                    );
             }
             $this->db->insert($this->tableName, $tmp);
         }
 
-        return $this->format_return_data();
+        return $this->format_return_data($key);
     }
 
     private function auto_create_key($data, $con) {

@@ -84,7 +84,7 @@ $(document).on('click', 'a.new-field-sub', function() {
 });
 
 // 所有的基本数据操作功能
-$(document).on('click', 'span.hit-button-icon', function() {
+$(document).on('click', 'span.hit-button-icon', function(e) {
     var op= $(this).attr('op'),
         pNode = $(this).closest('.gr-container'),
         conf = pNode.attr('url'),
@@ -165,11 +165,10 @@ $(document).on('click', 'span.hit-button-icon', function() {
                 }
             }
             */
-
             hit.PLUGIN.poup.init({
                 width: 800,
-                left: 100,
-                top: 10,
+                left: e.clientX - 200,
+                top: e.clientY - 50,
                 label: '添加'
             }, hit.CONFIG.form_storage, $(this), "poup");
             break;
@@ -880,10 +879,12 @@ $(document).on('click', 'span.ps-button', function() {
 // 在弹出选择组件上绑定自定义事件
 $(document).on('select', 'span.poup-select', function() {
     var map = arguments[1], 
-        tr = $(this).closest('tr');
+        tr = $(this).closest('tr'),
+        tr = tr.length ? tr : $(this).closest('form');
 
     $('input:not([type=checkbox]), textarea, select', tr).each(function() {
         var td = $(this).closest('td'),
+            td = td.length ? td : $(this).closest('div'),
             name = td.attr('id') ? td.attr('id').split('$').pop() : $(this).attr('name');
 
         if (map[name]) {
@@ -902,32 +903,52 @@ $(document).on('select', '.icon-add_poup', function() {
         tmpDB = {
             name: hit.conf.db.name,
             t: hit.conf.db.t
-        }, i = 1, len, data;
+        }, i = 1, len, data,
+        args = arguments;
 
-    for (len = arguments.length; i < len; i++) {
-        data = arguments[i];
-        hit.setDB(data.db.t, data.db.name);
+    // for (len = arguments.length; i < len; i++) {
+    data = arguments[1];
+    // console.log(data);
+    hit.setDB(data.db.t, data.db.name);
 
-        // 得到主键信息
-        keys = data.keys;
-        for (var i = 0, len = keys.length; i < len; i++) {
-            if (i) 
-                con += ';';
-            con += keys[i].name;
-        }
-        // 生成cover层
-        hit.COVER.init({
-            tNode: $(this).closest('div.gr-border'),
-            status: 'wait'
-        });
-       
-        hit.query('load/deal_data', [data.data], {
-            op: 'insert',
-            con: con
-        }, function() {
-            hit.COVER.removeNode();
-        });
+    // 得到主键信息
+    keys = data.keys;
+    for (var i = 0, len = keys.length; i < len; i++) {
+        if (i) 
+            con += ';';
+        con += keys[i].name;
     }
+    // 生成cover层
+    hit.COVER.init({
+        tNode: $(this).closest('div.gr-border'),
+        status: 'wait'
+    });
+   
+    hit.query('load/deal_data', [data.data], {
+        op: 'insert',
+        con: con
+    }, function(msg) {
+        if (typeof args[2] !== undefined) {
+            data = args[2];
+            hit.setDB(data.db.t, data.db.name);
+
+            data.data.push(msg);
+            // 得到主键信息
+            keys = data.keys;
+            for (var i = 0, len = keys.length; i < len; i++) {
+                if (i) 
+                    con += ';';
+                con += keys[i].name;
+            }
+            hit.query('load/deal_data', [data.data], {
+                op: 'insert',
+                con: ''
+            }, function() {
+                hit.COVER.removeNode();
+            });
+        }
+    });
+    // }
     hit.setDB(tmpDB.t, tmpDB.name);
 
     return false;

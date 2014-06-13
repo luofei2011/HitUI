@@ -214,7 +214,7 @@ hit.PLUGIN.poup = {
 
 					if ($(this).attr('key') == 'true') {
 						obj.keys.push({
-							name: $(this).attr('name'),
+							name: p.attr('name'),
 							value: ''
 						});
 					}
@@ -225,7 +225,6 @@ hit.PLUGIN.poup = {
 			$(this).next().trigger('click');
 
             // 触发原来的自定义事件
-            console.log(data);
             con.pNode.trigger('select', data);
 			return false;
 		});
