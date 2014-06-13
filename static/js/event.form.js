@@ -21,19 +21,27 @@
     hit.PLUGIN.poup.init({
         left: 100,
         top: 10,
-        label: '订单详情'
+        label: '子表信息'
     }, conf, $(this));
     // }, conf, pNode);
  });
 
  $(document).on('select', '.form-item.poup', function() {
-    var map = arguments[1]
-    , name = $(this).closest('div.form-item').attr('name');
-    if( map ) {
-        if(map[name]) {
-            $(this).attr('value',map[name]);
-        }
-    }
+    // var map = arguments[1]
+    // , name = $(this).closest('div.form-item').attr('name');
+    // if( map ) {
+    //     if(map[name]) {
+    //         $(this).attr('value',map[name]);
+    //     }
+    // }
+    var map = arguments[1],
+        fields = $(this).closest('form').find('input, textarea, select');
+
+    fields.each(function() {
+        var name = $(this).closest('div.form-item').attr('name');
+        if (map[name])
+            $(this).val(map[name]);
+    });
  }),
 
  $(document).on('blur', 'input.form-item', function() {
