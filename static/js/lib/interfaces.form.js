@@ -52,8 +52,8 @@ var iForm= {
 		//hit.COMPONENT.theform.createFromConfig( config, formareaID );
 	},
 
-	getFromInfo: function( formareaID ) {
-		return hit.COMPONENT.theform.getFromInfo( formareaID );
+	getFormInfo: function( formareaID ) {
+		return hit.COMPONENT.theform.getFormInfo( formareaID );
 	},
 
 	setTarget: function( formID, targetID, targetFun ) {

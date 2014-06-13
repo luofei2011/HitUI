@@ -117,7 +117,13 @@ hit.CONFIG.form_test = [
 			],
 		},
 	],
-	returnURL: '',
+	returnURL: {
+		type: 'DB',
+		config: {
+			dbName: '',
+			dbTable: '',
+		},
+	},
 
 	//end form
 	}, 
@@ -173,6 +179,13 @@ hit.CONFIG.form_test = [
 			],
 		},
 	],
+	returnURL: {
+		type: 'DB',
+		config: {
+			dbName: '',
+			dbTable: '',
+		},
+	},
 	//end second form
 	}
 ];

@@ -11,8 +11,22 @@ var temform= {
         createFromConfig: function( config, formareaID ) {
             html = "";
             //register this form
-            var formID = hit.PARAMETER.global.registerComponent('form');
-            html += ('<form id=' + formID + '><fieldset><legend ');
+            var formID = hit.PARAMETER.global.registerComponent('form','form');
+            html += ('<form id=' + formID)
+            if (config.returnURL != null && typeof(config.returnURL) != undefined) {
+                html += (' returnType=' + config.returnURL.type);
+                switch (config.returnURL.type) {
+                    case 'DB':
+                        html += (' dbName="' + config.returnURL.config.dbName + '" dbTable="' + config.returnURL.config.dbTable + '" ');
+                        break;
+                    case 'url':
+                        html += (' link="' + config.returnURL.config.link +'" ');
+                        break;
+                    default:
+                        break;
+                }
+            }
+            html += '><fieldset><legend ';
             // make the <legend> of the <fieldset>
             if( config.formName == '' || config.formName == null ) {
                 html += '></legend>';
@@ -198,7 +212,7 @@ var temform= {
             return '<input class="form-item" type="pig" id=' + item.name + ' value=' + item.defaultValue + ' sizeLevel=' + item.sizeLevel + req + ' />' ;
         },
 
-        getFromInfo: function( formareaID ) {
+        getFormInfo: function( formareaID ) {
             var items = $('.form-area#' + formareaID + ' div.form-item'),
                 data = [], itemdata;
             //get all the items to read their value
