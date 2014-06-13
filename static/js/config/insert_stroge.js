@@ -231,10 +231,11 @@ hit.CONFIG.form_storage = [
 		{
 			"name": "Item_name",
 			"label": "类别名称",
-			"type": "text",
+			"type": "poup",
 			"required": true,
 			"sizeLevel": 2,
-			"defaultValue": []
+			"defaultValue": [],
+			selections: ['poup_2']
 		},
 		{
 			"name": "Item_type",

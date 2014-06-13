@@ -8,6 +8,46 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
+hit.CONFIG.poup_2 = {
+	"db": {
+		"name": "inv",
+		"t": "inv_item"
+	},
+	"showFields": ["Item_code", "Item_name", "Item_type", "Item_unit", "Item_spec", "Item_texture", "Item_gb", "Item_plan_price"],
+	"fieldMap": [{
+		"origin": "Item_code",
+		"target": "Item_code"
+	},
+	{
+		"origin": "Item_name",
+		"target": "Item_name"
+	},
+	{
+		"origin": "Item_type",
+		"target": "Item_type"
+	},
+	{
+		"origin": "Item_unit",
+		"target": "Item_unit"
+	},
+	{
+		"origin": "Item_spec",
+		"target": "Item_spec"
+	},
+	{
+		"origin": "Item_texture",
+		"target": "Item_texture"
+	},
+	{
+		"origin": "Item_gb",
+		"target": "Item_gb"
+	},
+	{
+		"origin": "Item_plan_price",
+		"target": "Item_price"
+	}]
+};
+
 hit.CONFIG.poup_1 = {
 	"db": {
 		"name": "inv",
