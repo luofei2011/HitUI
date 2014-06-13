@@ -179,6 +179,13 @@ hit.CONFIG.form_test = [
 			],
 		},
 	],
+	buttons: [
+		{
+			name: '提交',
+			id: 'submit',
+			type: 'submit',
+		},
+	],
 	returnURL: {
 		type: 'DB',
 		config: {

@@ -43,7 +43,7 @@
 		createTabNames: function( tabareaID, tabNames) {
 			var theTab = $('.tab-area#' + tabareaID );
 			// avoid recurse too deep
-			if (theTab.width() <= 1000 ) {
+			if (theTab.width() <= 1100 ) {
 				return false;
 			}
 			var tabtitles = theTab.children('.tabtitle-area');
@@ -138,6 +138,7 @@
 
 		focusTab: function( tabareaID, id ) {
 			var theTab = $('.tab-area#'+tabareaID);
+			theTab.children('.tabtitle-area').children('.tabtitle').removeAttr('select');
 			theTab.children('.tabtitle-area').children('.tabtitle[tabid=' + id + ']').attr('select','Y');
 			theTab.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid=' + id + ']').show();
 			

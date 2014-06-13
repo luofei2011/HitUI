@@ -97,12 +97,13 @@
 		addTabs: function( tabareaID, tabInfos ) {
 			//judge if already have the tab
 			tabids = hit.COMPONENT.tab.getAllTabId( tabareaID );
-			if (tabids.indexOf(tabInfos.id) !== -1) {
-				hit.COMPONENT.tab.focusTab(tabareaID, tabInfos.id)
-				} else {
+			if (tabids.indexOf(tabInfos[0].id) !== -1) {
+				hit.COMPONENT.tab.focusTab(tabareaID, tabInfos[0].id);
+			} else {
 				//get the max index of the tab
 				option = hit.PARAMETER.global.getTabOption();
-				maxSeq = option.tabs[option.tabs.length - 1].seq;
+				// maxSeq = option.tabs[option.tabs.length - 1].seq;
+				maxSeq = tabInfos.length;
 				var formatedInfos = [];			//about the formated tabInfos
 				var tabNames = new Array();		//about tab title
 				var contents = new Array();		//about tab content

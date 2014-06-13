@@ -24,7 +24,7 @@ hit.CONFIG.tab_test = [
 				id: 'form',
 				seq: 1,
 				type: 'page',
-				content: 'load/elements/form',
+				content: 'load/elements/index',
 			},{
 				tabName: 'TAB3',
 				id: '53',
@@ -36,7 +36,7 @@ hit.CONFIG.tab_test = [
 				id: '3',
 				seq: 3,
 				type: 'text',
-				content: '<div class="clear-global-parameter">clearData</div><br><h4>load/elements/index</h4>',
+				content: '<div class="clear-global-parameter">clearData</div>',
 			},
 		],
 	},{
@@ -53,7 +53,7 @@ hit.CONFIG.tab_test = [
 				id: '010',
 				seq: 1,
 				type: 'page', 
-				content: 'load/elements/tab',
+				// content: 'load/elements/tab',
 			},
 		],
 	},
