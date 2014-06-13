@@ -23,7 +23,8 @@ class Base extends CI_Model {
                 return $this->dbUpdate($in['data']);
             case "select":
                 $con = $this->get_select_con($in['op']['con']);
-                return $this->dbSelect($con);
+                $data = array_key_exists('data', $in) ? $in['data'] : '';
+                return $this->dbSelect($con, $data);
             case "delete":
                 return $this->dbDelete($in['data']);
             case "insert":
@@ -131,10 +132,21 @@ class Base extends CI_Model {
     /*
      * 根据限制条件查询所有结果
      */
-    public function dbSelect($arr) {
+    public function dbSelect($arr, $con = "") {
         $this->db->from($this->tableName);
+
+        if ($con && is_array($con) && count($con)) {
+            $condition = $this->obj_to_array($con);
+            $this->db->where($condition);
+        }
         // 得到记录数量
-        $pages = $this->dbCountAllResult();
+        // $pages = $this->dbCountAllResult();
+        $pages = $this->db->count_all_results();
+
+        if ($con && is_array($con) && count($con)) {
+            $condition = $this->obj_to_array($con);
+            $this->db->where($condition);
+        }
 
         if (array_key_exists('order', $arr)) {
             $order = explode(' ', $arr['order']);

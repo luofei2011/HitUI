@@ -23,6 +23,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"type": "",
 		"required": false
 	}],
+	condition: [],
 	"hasFunc": true,
 	"funcArr": ["add", "edit", "delete", "save"],
 	"widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],

@@ -39,6 +39,7 @@ class Load extends CI_Controller {
                 $json['isShowPaging'] = true;
                 $json['pageNum'] = 50;
                 $json['hasCheckBox'] = true;
+                $json['condition'] = array();
                 $json['hasQuery'] = true;
                 $json['qParam'] = array(
                     array(

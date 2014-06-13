@@ -16,6 +16,12 @@ hit.CONFIG.table_inv_bill_main = {
 		"name": "inv",
 		"t": "inv_bill_main"
 	},
+	"condition": [
+		{
+			name: 'Bill_state',
+			value: 'E'
+		}
+	],
 	"hasQuery": true,
 	"qParam": [{
 		"name": "",
@@ -24,7 +30,7 @@ hit.CONFIG.table_inv_bill_main = {
 		"required": false
 	}],
 	"hasFunc": true,
-	"funcArr": ["add", "edit", "delete", "save", "add_poup"],
+	"funcArr": ["add", "edit", "delete", "save", "add_poup", "order_check"],
 	"widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
 	"headContent": [[{
 		"label": "订单号",

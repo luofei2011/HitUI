@@ -290,6 +290,42 @@ $(document).on('click', 'span.hit-button-icon', function() {
             break;
         case "edit":
             break;
+        case "order_check":
+            var d = get_checked_field(),q = [],
+                i = 0, len;
+
+            if (!d.id.length) {
+                alert('未选中任何数据！');
+                return false;
+            }
+
+            for (len = d.id.length; i < len; i++) {
+                q.push({
+                    keys: d.id[i],
+                    q: [{
+                        name: 'Bill_state',
+                        value: 'R'
+                    }]
+                });
+            }
+            // 生成cover层
+            hit.COVER.init({
+                tNode: $(this).closest('div.gr-toolbar').next(),
+                status: 'wait'
+            });
+           
+            hit.query('load/deal_data', q, {
+                op: 'update',
+                con: ''
+            }, function(data) {
+                // hit.reDrawTableContent(data, pNode);
+                hit.COVER.removeNode();
+                // 把记录从前端页面中删掉
+                for (i = 0; i < len; i++) {
+                    d.node[i].remove();
+                };
+            });
+            break;
         default:
             break;
     };
@@ -495,7 +531,7 @@ $(document).on('click', 'span.grid-sort', function() {
         _q += ' DESC';
     }
 
-    hit.query('load/deal_data', '', {
+    hit.query('load/deal_data', JSON.parse(pNode.attr('data-con')), {
         op: 'select',
         con: 'offset,'+ ($(this).closest('.gr-container').find('.selectPager').val() * 1 - 1) +';order,'+ _q +';limit,' + con.pageNum
     }, function(data) {
@@ -526,7 +562,7 @@ $(document).on('change', '.selectPager', function() {
     });
 
     // 更新数据
-    hit.query('load/deal_data', '', {
+    hit.query('load/deal_data', JSON.parse(pNode.attr('data-con')), {
         op: 'select',
         con: 'offset,'+ offset +';limit,' + con.pageNum + ';target,' + $(this).closest('.gr-container').attr('id')
     }, function(data) {
