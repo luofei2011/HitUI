@@ -178,7 +178,7 @@ hit.CONFIG.form_test = [
 						'04:02',
 					],
 				},{
-					name: '00006',
+					name: '00005',
 					label: 'POUP',
 					type: 'poup',
 					required: true,
