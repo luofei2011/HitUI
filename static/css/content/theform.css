@@ -51,6 +51,11 @@ input[type='checkbox'], input[type='radio'] {
 	width: inherit;
 }
 
-divd.form-item[item-type='poup'] span.poup-select {
-	display: inherit;
+.form-area fieldset {
+	margin: 10px 20px;
+	border: 1px solid #888;
+}
+
+.form-area .form-group fieldset {
+	border: 1px solid #999;
 }

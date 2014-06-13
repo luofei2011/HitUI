@@ -16,5 +16,5 @@
 	// }
 
 	hit.INTERFACES.tab.makeFromData( tabID , option );
-
+	hit.GLOBAL.function.initLink();
 </script>

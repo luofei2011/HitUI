@@ -142,7 +142,11 @@
 		send2Target: function( targetID, targetFun, info ) {
 			console.log('targetID:'+targetID+"\ntargetFun:"+targetFun);
 			if( typeof(targetID) != undefined  && targetID!= null ) {
-				this.additionalFuns[targetFun](targetID, info);
+				try{
+					this.additionalFuns[targetFun](targetID, info);
+				}catch(e){
+					console.log(e);
+				}
 			}
 		},
 

@@ -86,6 +86,9 @@
 ## component
 #### complete the interfaces
 * add tabs
+* checkbox required
+* tab num max? or drawer
+* open empty tab...default
 
 ## DEMO
 #### combine the tree and the form
