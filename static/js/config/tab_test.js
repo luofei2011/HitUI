@@ -36,7 +36,7 @@ hit.CONFIG.tab_test = [
 				id: '3',
 				seq: 3,
 				type: 'text',
-				content: '<div class="clear-global-parameter">clearData</div>',
+				content: '<div class="clear-global-parameter">clearData</div><br><h4>load/elements/index</h4>',
 			},
 		],
 	},{

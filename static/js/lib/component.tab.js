@@ -41,17 +41,18 @@
 		 * }
 		 * */
 		createTabNames: function( tabareaID, tabNames) {
-			var thetab = $('.tab-area#' + tabareaID );
+			var theTab = $('.tab-area#' + tabareaID );
 			// avoid recurse too deep
-			if (thetab.width() <= 1100 ) {
+			if (theTab.width() <= 1000 ) {
 				return false;
 			}
-			var tabtitles = thetab.find('.tabtitle-area');
+			var tabtitles = theTab.children('.tabtitle-area');
 			if ( tabtitles.length <= 0 ) {
 				//do not have any tab titilarea in this tab-area before, then we create one
-				thetab.append('<div class=tabtitle-area></div><div class=tabcontent-area></div>');
-				var tabtitles = thetab.find('.tabtitle-area');
+				theTab.append('<div class=tabtitle-area></div><div class=tabcontent-area></div>');
+				var tabtitles = theTab.children('.tabtitle-area');
 			}
+			console.log(tabtitles);
 			for (var i=0, len=tabNames.length; i<len; i++) {
 				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '<div class="littletabxx"></div></div>');
 			}
@@ -68,10 +69,10 @@
 		 * */
 		fillContent: function( tabareaID, seq, tabId, content, type ) {
 			var theContentArea= $('.tab-area#' + tabareaID + ' .tabcontent-area');
-			var tabContent = theContentArea.find('.tabcontent[tabid='+tabId+']');
+			var tabContent = theContentArea.children('.tabcontent[tabid='+tabId+']');
 			if( tabContent.length <= 0 ) {
 				theContentArea.append('<div class=tabcontent tabid=' + tabId + ' tabtype=' + type + '></div>');
-				var tabContent = theContentArea.find('.tabcontent[tabid='+tabId+']');
+				var tabContent = theContentArea.children('.tabcontent[tabid='+tabId+']');
 			}
 			switch( type ) {
 				case 'text':
@@ -136,9 +137,9 @@
 		},
 
 		focusTab: function( tabareaID, id ) {
-			var tabarea = $('.tab-area#'+tabareaID);
-			tabarea.find('.tabtitle[tabid=' + id + ']').attr('select','Y');
-			tabarea.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid=' + id + ']').show();
+			var theTab = $('.tab-area#'+tabareaID);
+			theTab.children('.tabtitle-area').children('.tabtitle[tabid=' + id + ']').attr('select','Y');
+			theTab.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid=' + id + ']').show();
 			
 		},
 
@@ -151,20 +152,26 @@
 		},
 
 		removeTab: function( titleNode ) {
-			thetab = titleNode.closest('.tab-area');
-			tabareaID = thetab.attr('id');
+			theTab = titleNode.closest('.tab-area');
+			tabareaID = theTab.attr('id');
 			tabid = titleNode.attr('tabid');
-			contentNode = thetab.find('.tabcontent-area .tabcontent[tabid=' + tabid + ']');
+			contentNode = theTab.children('.tabcontent-area').children('.tabcontent[tabid=' + tabid + ']');
 			titleNode.remove();
 			contentNode.remove();
-			firstid = thetab.find('.tabtitle').first().attr('tabid');
+			// default focus on the first tab
+			firstid = theTab.find('.tabtitle').first().attr('tabid');
 			this.focusTab(tabareaID, firstid);
 		},
 
+		/**
+		 * getTabInfo 根据标签页抬头节点，获取标签页信息
+		 * @param  {jQueryDOM} node 标签页抬头节点
+		 * @return {Object} info 标签页信息,格式同interfaces.tab标准接口参数
+		 */
 		getTabInfo: function( node ) {
 			theTab = node.closest('.tab-area');
 			tabid = node.attr('tabid');
-			var tabContent = theTab.find('.tabcontent[tabid='+tabid+']')
+			var tabContent = theTab.children('.tabcontent-area').children('.tabcontent[tabid='+tabid+']')
 			,type = tabContent.attr('tabtype')
 			,content;
 			switch( type ) {
@@ -185,6 +192,24 @@
 				content: content,
 			};
 			return info;
+		},
+
+		/**
+		 * getAllTabId 根据标签区域id获取区域下的标签页id
+		 * @param  {String} tabareaID 标签区域id
+		 * @return {Array} tabids 区域下All标签页id
+		 */
+		getAllTabId: function( tabareaID ) {
+			var theTab = $('.tab-area#' + tabareaID)
+			, tabtitle = theTab.children('.tabtitle-area').children('.tabtitle')
+			, i = 0, len = tabtitle.length
+			, tabids = [];
+			console.log(tabtitle[1]);
+			console.log(len);
+			for(; i<len; i++) {
+				tabids.push(tabtitle.eq(i).attr('tabid'));
+			}
+			return tabids;
 		},
 
 	};

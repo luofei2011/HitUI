@@ -162,7 +162,7 @@ hit.PLUGIN.poup = {
 		if (tableCon != "") {
 			hit.INTERFACES.form.appendForm2(node, tableCon, formareaID);
 		} else {
-			hit.INTERFACES.form.appendForm2(node, hit.CONFIG.form_test, formareaID);
+			hit.INTERFACES.form.appendForm2(node, hit.CONFIG.form_test[0], formareaID);
 		}
 
 		con.tNode.append(wrapper).append(this.createBtn());
