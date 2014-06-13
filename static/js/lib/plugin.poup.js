@@ -160,7 +160,11 @@ hit.PLUGIN.poup = {
 		//若有post设置，则按post的创建，若没有，则使用默认的设置
 		tableCon = con.conf;
 		if (tableCon != "") {
-			hit.INTERFACES.form.appendForm2(node, tableCon, formareaID);
+			try {
+				hit.INTERFACES.form.appendForm2(node, tableCon, formareaID);
+			} catch(e) {
+				console.log(e);
+			}
 		} else {
 			hit.INTERFACES.form.appendForm2(node, hit.CONFIG.form_test[0], formareaID);
 			

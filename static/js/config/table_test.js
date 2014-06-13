@@ -35,6 +35,7 @@ hit.CONFIG.table_test = {
         }
     ],
 
+    condition: [],
     /***************功能区相关配置***************/
     hasFunc: true, // 是否显示功能区
     funcArr: ['add', 'edit', 'delete', 'save', 'add_poup'], // add, remove, save, edit, search

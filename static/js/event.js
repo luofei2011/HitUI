@@ -170,7 +170,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
                 left: 100,
                 top: 10,
                 label: '添加'
-            }, config, $(this), "poup");
+            }, hit.CONFIG.form_test[0], $(this), "poup");
             break;
         case "add":
             var _fTr = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0),
@@ -289,6 +289,42 @@ $(document).on('click', 'span.hit-button-icon', function() {
             });
             break;
         case "edit":
+            break;
+        case "order_check":
+            var d = get_checked_field(),q = [],
+                i = 0, len;
+
+            if (!d.id.length) {
+                alert('未选中任何数据！');
+                return false;
+            }
+
+            for (len = d.id.length; i < len; i++) {
+                q.push({
+                    keys: d.id[i],
+                    q: [{
+                        name: 'Bill_state',
+                        value: 'R'
+                    }]
+                });
+            }
+            // 生成cover层
+            hit.COVER.init({
+                tNode: $(this).closest('div.gr-toolbar').next(),
+                status: 'wait'
+            });
+           
+            hit.query('load/deal_data', q, {
+                op: 'update',
+                con: ''
+            }, function(data) {
+                // hit.reDrawTableContent(data, pNode);
+                hit.COVER.removeNode();
+                // 把记录从前端页面中删掉
+                for (i = 0; i < len; i++) {
+                    d.node[i].remove();
+                };
+            });
             break;
         default:
             break;
@@ -495,7 +531,7 @@ $(document).on('click', 'span.grid-sort', function() {
         _q += ' DESC';
     }
 
-    hit.query('load/deal_data', '', {
+    hit.query('load/deal_data', JSON.parse(pNode.attr('data-con')), {
         op: 'select',
         con: 'offset,'+ ($(this).closest('.gr-container').find('.selectPager').val() * 1 - 1) +';order,'+ _q +';limit,' + con.pageNum
     }, function(data) {
@@ -526,7 +562,7 @@ $(document).on('change', '.selectPager', function() {
     });
 
     // 更新数据
-    hit.query('load/deal_data', '', {
+    hit.query('load/deal_data', JSON.parse(pNode.attr('data-con')), {
         op: 'select',
         con: 'offset,'+ offset +';limit,' + con.pageNum + ';target,' + $(this).closest('.gr-container').attr('id')
     }, function(data) {
@@ -603,7 +639,7 @@ $(document).on('click', '.query-btn', function() {
     // 更新数据
     hit.query('load/deal_data', _re, {
         op: 'like',
-        con: 'offset,'+ 0 +';limit,' + con.pageNum
+        con: 'offset,'+ 0 +';limit,' + con.pageNum + ';target,' + pNode.attr('id')
     }, function(data) {
         hit.reDrawTableContent(data, pNode);
         hit.COVER.removeNode();
@@ -854,6 +890,20 @@ $(document).on('select', '.icon-add_poup', function() {
         hit.COVER.removeNode();
     });
     hit.setDB(tmpDB.t, tmpDB.name);
+
+    return false;
+});
+
+// 控制查询区域的显示或者隐藏
+$(document).on('click', 'a.toggle-query-field', function() {
+    var tNode = $(this).closest('.gr-container').find('div.gr-query');
+    if ($(this).text() === '隐藏查询区域') {
+        tNode.hide();
+        $(this).text('展开查询区域');
+    } else {
+        tNode.show();
+        $(this).text('隐藏查询区域');
+    }
 
     return false;
 });

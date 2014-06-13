@@ -152,7 +152,7 @@ var hit = {
         // TODO 是否需要添加表格的简单搜索功能
         //
         // 封装片段并渲染
-        html = '<table style="width: 100%;"><tr><td style="width: 100%;">' + html + '</td></tr></table>';
+        html = '<table style="width: 100%;" class="auto-layout"><tr><td style="width: 100%;">' + html + '</td><td><a href="#" class="toggle-query-field">隐藏查询区域</a></tr></table>';
         tNode.append(html);
 
         console.timeEnd('createOp');
@@ -170,6 +170,8 @@ var hit = {
                     return "编辑";
                 case 'save':
                     return "保存";
+                case 'order_check':
+                    return "入库单审核";
                 default:
                     return "新功能，请到load.js中添加";
             };
@@ -199,6 +201,7 @@ var hit = {
         tmp.attr('url', name);
         id = 'GR_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
         tmp.attr('id', id);
+        tmp.attr('data-con', JSON.stringify(config.condition));
 
         pNode.append(tmp);
 
@@ -257,7 +260,7 @@ var hit = {
                         dbName: config.db.name,
                         t: config.db.t
                     },
-                    data: '',
+                    data: config.condition,
                     op: {
                         op: 'select',
                         con: 'limit,' + config.pageNum + ";offset,0;target," + id
@@ -569,7 +572,7 @@ var hit = {
                 $(this).remove();
             }
         });
-        hit._createTableBody(data, hit.CONFIG[tNode.attr('url')]);
+        hit._createTableBody(data, hit.CONFIG[tNode.attr('url')], tNode);
     },
 
     /*
@@ -615,7 +618,7 @@ var hit = {
         p_label.text('每页' + pager.perNum + '条,共' + pager.pages + '条');
 
         // 刷新按钮状态
-        this.reloadPagerBtnStatus(pager.cur, pages, tNode);
+        this.reloadPagerBtnStatus(pager.cur, pages, pNode);
     },
 
     /*

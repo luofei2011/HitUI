@@ -39,6 +39,7 @@ class Load extends CI_Controller {
                 $json['isShowPaging'] = true;
                 $json['pageNum'] = 50;
                 $json['hasCheckBox'] = true;
+                $json['condition'] = array();
                 $json['hasQuery'] = true;
                 $json['qParam'] = array(
                     array(
@@ -94,6 +95,21 @@ class Load extends CI_Controller {
                         'origin' => $f['Field'],
                         'target' => $f['Field'],
                     ));
+                }
+                break;
+            case 'form':
+                $json['showFrame'] = true;
+                $json['groupName'] = '';
+                $json['items'] = array();
+                foreach($result as $f) {
+                    array_push($json['items'], array(
+                        'name' => $f['Field'],
+                        'label' => 'Name',
+                        'type' => 'text',
+                        'required' => true,
+                        'sizeLevel' => 2,
+                        'defaultValue' => array(),
+                        ));
                 }
                 break;
         }

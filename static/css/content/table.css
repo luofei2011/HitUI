@@ -334,3 +334,8 @@ a:hover.gr-btn-disabled {
     padding: 2px 4px;
     white-space: nowrap;
 }
+.toggle-query-field {
+    white-space: nowrap;
+    color: #333;
+    text-decoration: none;
+}

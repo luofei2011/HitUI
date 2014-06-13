@@ -23,7 +23,8 @@ class Base extends CI_Model {
                 return $this->dbUpdate($in['data']);
             case "select":
                 $con = $this->get_select_con($in['op']['con']);
-                return $this->dbSelect($con);
+                $data = array_key_exists('data', $in) ? $in['data'] : '';
+                return $this->dbSelect($con, $data);
             case "delete":
                 return $this->dbDelete($in['data']);
             case "insert":
@@ -105,27 +106,47 @@ class Base extends CI_Model {
         $pages = $result->num_rows();
         $limit = 50;
         $offset = 0;
+
         if (array_key_exists('limit', $arr)) {
             $limit = $arr['limit'] | 50;
-        }
+        } 
         if (array_key_exists('offset', $arr)) {
             $offset = $arr['offset'] | 0;
         }
 
-        return $this->format_return_data($result->result_array(), array(
+        $re = array(
             'pages' => $pages,
             'perNum' => $limit,
             'cur' => $offset + 1,
-        ));
+            );
+
+        if (array_key_exists('target', $arr)) {
+            $re['target'] = $arr['target'];
+        } else {
+            $re['target'] = '';
+        }
+
+        return $this->format_return_data($result->result_array(), $re);
     }
 
     /*
      * 根据限制条件查询所有结果
      */
-    public function dbSelect($arr) {
+    public function dbSelect($arr, $con = "") {
         $this->db->from($this->tableName);
+
+        if ($con && is_array($con) && count($con)) {
+            $condition = $this->obj_to_array($con);
+            $this->db->where($condition);
+        }
         // 得到记录数量
-        $pages = $this->dbCountAllResult();
+        // $pages = $this->dbCountAllResult();
+        $pages = $this->db->count_all_results();
+
+        if ($con && is_array($con) && count($con)) {
+            $condition = $this->obj_to_array($con);
+            $this->db->where($condition);
+        }
 
         if (array_key_exists('order', $arr)) {
             $order = explode(' ', $arr['order']);
