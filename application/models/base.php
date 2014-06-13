@@ -105,18 +105,27 @@ class Base extends CI_Model {
         $pages = $result->num_rows();
         $limit = 50;
         $offset = 0;
+
         if (array_key_exists('limit', $arr)) {
             $limit = $arr['limit'] | 50;
-        }
+        } 
         if (array_key_exists('offset', $arr)) {
             $offset = $arr['offset'] | 0;
         }
 
-        return $this->format_return_data($result->result_array(), array(
+        $re = array(
             'pages' => $pages,
             'perNum' => $limit,
             'cur' => $offset + 1,
-        ));
+            );
+
+        if (array_key_exists('target', $arr)) {
+            $re['target'] = $arr['target'];
+        } else {
+            $re['target'] = '';
+        }
+
+        return $this->format_return_data($result->result_array(), $re);
     }
 
     /*

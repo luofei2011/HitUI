@@ -96,6 +96,21 @@ class Load extends CI_Controller {
                     ));
                 }
                 break;
+            case 'form':
+                $json['showFrame'] = true;
+                $json['groupName'] = '';
+                $json['items'] = array();
+                foreach($result as $f) {
+                    array_push($json['items'], array(
+                        'name' => $f['Field'],
+                        'label' => 'Name',
+                        'type' => 'text',
+                        'required' => true,
+                        'sizeLevel' => 2,
+                        'defaultValue' => array(),
+                        ));
+                }
+                break;
         }
         echo json_encode($json);
     }

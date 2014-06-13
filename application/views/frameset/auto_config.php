@@ -18,6 +18,7 @@
         <select id="" name="config_name">
             <option value="table">table</option>
             <option value="poup">poup</option>
+            <option value="form">form</option>
         </select>
         <input type="submit" value="提交">
     </form>

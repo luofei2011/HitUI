@@ -170,7 +170,7 @@ $(document).on('click', 'span.hit-button-icon', function() {
                 left: 100,
                 top: 10,
                 label: '添加'
-            }, config, $(this), "poup");
+            }, hit.CONFIG.form_test[0], $(this), "poup");
             break;
         case "add":
             var _fTr = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0),
@@ -603,7 +603,7 @@ $(document).on('click', '.query-btn', function() {
     // 更新数据
     hit.query('load/deal_data', _re, {
         op: 'like',
-        con: 'offset,'+ 0 +';limit,' + con.pageNum
+        con: 'offset,'+ 0 +';limit,' + con.pageNum + ';target,' + pNode.attr('id')
     }, function(data) {
         hit.reDrawTableContent(data, pNode);
         hit.COVER.removeNode();
@@ -854,6 +854,20 @@ $(document).on('select', '.icon-add_poup', function() {
         hit.COVER.removeNode();
     });
     hit.setDB(tmpDB.t, tmpDB.name);
+
+    return false;
+});
+
+// 控制查询区域的显示或者隐藏
+$(document).on('click', 'a.toggle-query-field', function() {
+    var tNode = $(this).closest('.gr-container').find('div.gr-query');
+    if ($(this).text() === '隐藏查询区域') {
+        tNode.hide();
+        $(this).text('展开查询区域');
+    } else {
+        tNode.show();
+        $(this).text('隐藏查询区域');
+    }
 
     return false;
 });
