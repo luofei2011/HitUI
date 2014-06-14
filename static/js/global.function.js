@@ -57,3 +57,36 @@
 	}
 
 })();
+
+//get the info of the line
+$(document).on('click', '.dept_define tr.table-row-has-event', function(e){
+	var _target = e.srcElement ? e.srcElement : e.target;
+	checkbox = $(this).find('td.gr-d-grid-cell.field-checkbox input');
+	cb = checkbox[0];
+
+	//鼠标正好点击checkbox时，会触发其他事件，因此不能重复check the checkbox
+    if (_target.nodeName.toLowerCase() !== 'input') {
+		$(this).toggleClass('gr-d-grid-row-selected');
+		cb.checked = cb.checked? false : true;
+	}
+
+	//only one column can be selected, we need to clear all the other selected status
+	if (cb.checked) { 
+		$(this).siblings('tr.table-row-has-event').each(function(){
+			$(this).removeClass('gr-d-grid-row-selected');
+			$(this).find('td.gr-d-grid-cell.field-checkbox input')[0].checked = false;
+		})
+	}
+
+	//return the 
+	nodes = $(this).find('td.gr-d-grid-cell').not('.field-checkbox')
+	, info = {};
+	nodes.each(function(index, element){
+		id = $(element).attr('id');
+		name = id.split('$')[2];
+		value = $(element).find('.grid-cell-show').html();
+		info[name] = value;
+		// console.log(index+': ' + name + ' = ' + value);
+	})
+	console.log(info);
+});
