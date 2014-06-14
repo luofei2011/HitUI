@@ -7,6 +7,10 @@
 				tabInfo.id = treeInfo.code;
 				hit.INTERFACES.tab.addTabs(tabID, [tabInfo]);
 			},
+			toTree_code: function(treeID, sourceInfo) {
+				var code = sourceInfo.id;
+				hit.INTERFACES.tree.focusNodeByCode(treeID, code);
+			}
 		},
 
 		send2Target: function( targetID, targetFun, info ) {
@@ -23,6 +27,9 @@
 			this.send2Target(targetID, targetFun, info);
 		},
 
+		/**
+		 * initLink 初始化时给树导航和表单进行绑定
+		 */
 		initLink: function(){
 		    var treeID = $('#nav-tree').find('.tree-area').first().attr('id');
 		    var tabID = $('#content').find('.tab-area').first().attr('id');
@@ -33,6 +40,7 @@
 		    	window.location.reload();
 		    }
 		    hit.INTERFACES.tree.setTarget(treeID, tabID, 'tree2Tab_link');
+		    hit.INTERFACES.tab.setTarget(tabID, treeID, 'toTree_code');
 		},
 
 	};

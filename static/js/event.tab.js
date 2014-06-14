@@ -12,6 +12,7 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 
 		thetab = $(this).closest('.tab-area');
 		info = hit.COMPONENT.tab.getTabInfo( $(this) );
+		hit.GLOBAL.function.offerInfo(thetab, info);
 		hit.PARAMETER.global.sendInfo(thetab, info);
 	}
 	//避免冒泡事件

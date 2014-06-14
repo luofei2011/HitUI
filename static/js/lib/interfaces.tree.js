@@ -55,6 +55,10 @@ var iTree = {
 
 		hit.COMPONENT.tree.setOpenNode( treeID, Treedata.open );
 	},
+	
+	focusNodeByCode: function( treeID, nodeCode ) {
+		hit.COMPONENT.tree.focusNodeByCode(treeID, nodeCode);
+	},
 
 	/*
 	 * TODO:根据传进来的参数更改树节点结构 

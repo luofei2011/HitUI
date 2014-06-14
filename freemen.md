@@ -87,11 +87,12 @@
 #### complete the interfaces
 * add tabs
 * checkbox required
-* tab num max? or drawer
 * open empty tab...default
+* ~~tab num max? or drawer~~
 
 ## DEMO
 #### combine the tree and the form
+* find how to get a line of the table
 
 ## structure
 #### `parameter.globle` is so ugly..

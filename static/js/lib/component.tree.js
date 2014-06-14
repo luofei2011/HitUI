@@ -91,6 +91,13 @@ var treeDef = {
 		console.log( node.css('background-color') );
 	},
 
+	focusNodeByCode: function( treeID, nodeCode ) {
+		var theTree = $('.tree-area#' + treeID )
+		, node = theTree.find('li.tree-node[code=' + nodeCode + ']');
+		thetree.find('[select="Y"]').removeAttr('select');//.css('background-color', '#FFF');
+		node.attr('select', 'Y');
+	},
+
 //RETURN DATA
 	
 	getSelectedInfo: function( treeID ) {
@@ -102,7 +109,7 @@ var treeDef = {
 	getInfoByCode: function( treeID, code ) {
 	//TODO:tree 的 type 就暂时不管了
 		var theTree = $('.tree-area#' + treeID );
-		var node = theTree.find('li[code=' + code + ']');
+		var node = theTree.find('li.tree-node[code=' + code + ']');
 		return this.getInfoByNode( node );
 	},
 
