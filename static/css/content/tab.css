@@ -13,6 +13,7 @@ div.tabtitle-area{
 	overflow: hidden;
 	margin: 0 0 0 0px;
 	//border-bottom: 1px solid #999;
+	white-space: nowrap;
 }
 div.tabtitle{
 	position: relative;
@@ -22,6 +23,25 @@ div.tabtitle{
 	border: 1px solid #999;
 	background: #EBEBEE url(../../img/tab.png) repeat-x 0 0;
 	top: 1px;
+	white-space: nowrap;
+}
+
+ul.tabtitle-area{
+	overflow-y:hidden;
+	overflow-x: auto;
+	margin: 0 0 0 0px;
+	//border-bottom: 1px solid #999;
+	white-space: nowrap;
+}
+li.tabtitle{
+	position: relative;
+	display: inline;
+	margin: 5px 0px 0px 3px;
+	padding: 3px 10px;
+	border: 1px solid #999;
+	background: #EBEBEE url(../../img/tab.png) repeat-x 0 0;
+	top: 1px;
+	white-space: nowrap;
 }
 
 .tabtitle:hover,.tabtitle+.tabtitle:hover {

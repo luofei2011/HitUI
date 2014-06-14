@@ -49,12 +49,11 @@
 			var tabtitles = theTab.children('.tabtitle-area');
 			if ( tabtitles.length <= 0 ) {
 				//do not have any tab titilarea in this tab-area before, then we create one
-				theTab.append('<div class=tabtitle-area></div><div class=tabcontent-area></div>');
-				var tabtitles = theTab.children('.tabtitle-area');
+				theTab.append('<ul class=tabtitle-area></ul><div class=tabcontent-area></div>'); var tabtitles = theTab.children('.tabtitle-area');
 			}
 			console.log(tabtitles);
 			for (var i=0, len=tabNames.length; i<len; i++) {
-				tabtitles.append('<div class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '<div class="littletabxx"></div></div>');
+				tabtitles.append('<li class=tabtitle tabId=' + tabNames[i].id + ' seq=' + tabNames[i].seq + '>' + tabNames[i].name + '<div class="littletabxx"></div></li>');
 			}
 			return true;
 		},
@@ -123,10 +122,10 @@
 						case 'success':
 							break;
 						case 'error':
-							alert('404!');
+							console.log('404!');
 							break;
 						default:
-							alert('err?');
+							console.log('err?');
 							break;
 					}
 				}); 

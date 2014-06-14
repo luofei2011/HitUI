@@ -27,6 +27,11 @@
 		    var treeID = $('#nav-tree').find('.tree-area').first().attr('id');
 		    var tabID = $('#content').find('.tab-area').first().attr('id');
 		    console.log('tree:' + treeID + "\ntab:" + tabID);
+		    if( treeID== null || typeof(treeID) == undefined || tabID== null || typeof(tabID) == undefined ){
+		    	//need to be reload
+		    	console.log("need to be reload");
+		    	window.location.reload();
+		    }
 		    hit.INTERFACES.tree.setTarget(treeID, tabID, 'tree2Tab_link');
 		},
 

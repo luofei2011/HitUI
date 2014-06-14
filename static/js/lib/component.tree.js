@@ -88,7 +88,7 @@ var treeDef = {
 	},
 	
 	dealWithNode: function( node ) {
-		alert( node.css('background-color') );
+		console.log( node.css('background-color') );
 	},
 
 //RETURN DATA
