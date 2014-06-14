@@ -14,15 +14,15 @@
 </div>
 
 </body>
-<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_bill_main.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_department.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/config/tree_test.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/config/form_test.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/config/tab_test.js');?>"></script>
 <script type="text/javascript">
 
-hit.CONFIG.table_inv_bill_main.funcArr = ['add_poup', 'edit', 'delete', 'save'];
-hit.CONFIG.table_inv_bill_main.condition = [];
-hit.load('table_inv_bill_main', $('.dept_define#dd-right'));
+// hit.CONFIG.table_inv_department.funcArr = ['add_poup', 'edit', 'delete', 'save'];
+hit.CONFIG.table_inv_department.condition = [];
+hit.load('table_inv_department', $('.dept_define#dd-right'));
 /*
 	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
 	$('div.dept_define#dd-left').prepend('<div class="form-area" id='+ formID + '></div>');

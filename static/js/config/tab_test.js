@@ -8,12 +8,6 @@ hit.CONFIG.tab_test = [
 		tabNum : 2,
 		tabs : [
 			{
-				tabName: 'TAB1', 
-				id: 'x6',
-				seq: 6,
-				type: 'page', 
-				content: '',
-			},{
 				tabName: 'TABLE', 
 				id: 'table',
 				seq: 2,
@@ -25,12 +19,6 @@ hit.CONFIG.tab_test = [
 				seq: 1,
 				type: 'page',
 				content: 'load/elements/index',
-			},{
-				tabName: 'TAB3',
-				id: '53',
-				seq: 5,
-				type: 'text',
-				content: '',
 			},{
 				tabName: 'delData',
 				id: '3',

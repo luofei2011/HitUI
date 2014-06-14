@@ -93,7 +93,11 @@
 
 ## DEMO
 #### combine the tree and the form
-* find how to get a line of the table
+* ~~find how to get a line of the table~~
+* write the data to the table
+* DB data
+* general form of the page with just different config
+
 
 ## structure
 #### `parameter.globle` is so ugly..
