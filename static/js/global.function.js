@@ -5,6 +5,9 @@
 				tabInfo = {};
 				tabInfo.tabName = treeInfo.name;
 				tabInfo.id = treeInfo.code;
+				tabInfo.type = 'page';
+				field = treeInfo.field;
+				tabInfo.content = hit.CONFIG.bind[field][treeInfo.code];
 				hit.INTERFACES.tab.addTabs(tabID, [tabInfo]);
 			},
 			toTree_code: function(treeID, sourceInfo) {

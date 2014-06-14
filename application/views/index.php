@@ -90,6 +90,7 @@
 <script type="text/javascript" src="<?=base_url('static/js/lib/component.theform.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.form.js');?>"></script>
 <!--global parameter-->
+<script type="text/javascript" src="<?=base_url('static/js/config/bind_config.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/parameter.global.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/global.function.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>

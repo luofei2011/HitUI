@@ -22,11 +22,13 @@ var iTree = {
 	 * }
 	 * */
 	makeFromDB: function( treeID, options ) {
+		var info = {};
 		hit.setDB( options.table, options.db );
 			console.time("js/lib/hit.INTERFACES.tree.makeFromDB query");
 		hit.query('load/deal_data', '', options.conf
 		,function( data ) {
-			hit.COMPONENT.tree.initTree(treeID);
+			info.field = options.table;
+			hit.COMPONENT.tree.initTree(treeID, info);
 			dealDBData( treeID, data );
 		});
 			console.timeEnd("js/lib/hit.INTERFACES.tree.makeFromDB query");		

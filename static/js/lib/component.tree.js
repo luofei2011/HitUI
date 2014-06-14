@@ -13,7 +13,8 @@ var treeDef = {
 	/*
 	 * TODO:treeType should be change into pageID/tabId
 	 */
-	initTree: function(treeID){
+	initTree: function(treeID, info){
+		$('.tree-area#' + treeID).attr('field', info.field);
 		$('.tree-area#' + treeID).append('<ul class=treeroot code=treeroot><li code=root level=0 class=tree-node ></li></ul>');
 	},
 
@@ -94,8 +95,9 @@ var treeDef = {
 	focusNodeByCode: function( treeID, nodeCode ) {
 		var theTree = $('.tree-area#' + treeID )
 		, node = theTree.find('li.tree-node[code=' + nodeCode + ']');
-		thetree.find('[select="Y"]').removeAttr('select');//.css('background-color', '#FFF');
+		theTree.find('[select="Y"]').removeAttr('select');//.css('background-color', '#FFF');
 		node.attr('select', 'Y');
+		node.trigger('click');
 	},
 
 //RETURN DATA
@@ -115,6 +117,8 @@ var treeDef = {
 
 	getInfoByNode: function( node ) {
 		var info = {};
+		theTree = node.closest('.tree-area');
+		info.field = theTree.attr('field');
 		info.name = node.find('p').text();
 		info.code = node.attr('code');
 		info.father = node.closest('ul').attr('code');

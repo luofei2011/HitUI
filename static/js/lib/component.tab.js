@@ -123,6 +123,8 @@
 							break;
 						case 'error':
 							console.log('404!');
+							targetNode.append("<h2>不存在"+targetNode.attr('url')+"页面！请重新检查地址！</h2>");
+							targetNode.append(hit.COMPONENT.tab._linkInput);
 							break;
 						default:
 							console.log('err?');
@@ -138,7 +140,12 @@
 		focusTab: function( tabareaID, id ) {
 			var theTab = $('.tab-area#'+tabareaID);
 			theTab.children('.tabtitle-area').children('.tabtitle').removeAttr('select');
-			theTab.children('.tabtitle-area').children('.tabtitle[tabid=' + id + ']').attr('select','Y');
+			node = theTab.children('.tabtitle-area').children('.tabtitle[tabid=' + id + ']');
+			node.attr('select','Y');
+
+			info = hit.COMPONENT.tab.getTabInfo( node );
+			hit.GLOBAL.function.offerInfo(theTab, info);
+			// node.trigger('click'); 			//TODO:why no response?
 			theTab.children('.tabcontent-area').children('.tabcontent').hide().end().children('.tabcontent[tabid=' + id + ']').show();
 			
 		},

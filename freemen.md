@@ -89,6 +89,7 @@
 * checkbox required
 * open empty tab...default
 * ~~tab num max? or drawer~~
+* open tabs will combine...
 
 ## DEMO
 #### combine the tree and the form
