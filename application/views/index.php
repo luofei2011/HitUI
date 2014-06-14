@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>管理系统</title>
     <link rel="stylesheet" href="<?php echo base_url('static/css/common.css');?>" />
+    <link rel="stylesheet" href="<?php echo base_url('static/css/common.addition.css');?>" />
     <link rel="stylesheet" href="<?=base_url('static/css/content/tab.css')?>" />
     <link rel="stylesheet" href="<?=base_url('static/css/content/tree.css')?>" />
     <link rel="stylesheet" href="<?php echo base_url('static/css/content/table.css');?>" />

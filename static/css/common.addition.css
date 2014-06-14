@@ -1,0 +1,10 @@
+.hit-2column-tree {
+	float: left;
+	width: 230px;
+	padding: 10px 0 0 30px;
+	border-right: 3px solid #777;
+}
+
+.hit-2column-tableform {
+	float: left;
+}

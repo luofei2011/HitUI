@@ -13,8 +13,12 @@ var treeDef = {
 	/*
 	 * TODO:treeType should be change into pageID/tabId
 	 */
-	initTree: function(treeID, info){
-		$('.tree-area#' + treeID).attr('field', info.field);
+	initTree: function(treeID, extraInfo){
+		if(extraInfo != null && typeof(extraInfo) != undefined) {
+			if(extraInfo.field) {
+				$('.tree-area#' + treeID).attr('field', extraInfo.field);
+			}
+		}
 		$('.tree-area#' + treeID).append('<ul class=treeroot code=treeroot><li code=root level=0 class=tree-node ></li></ul>');
 	},
 

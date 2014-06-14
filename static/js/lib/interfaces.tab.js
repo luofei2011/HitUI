@@ -89,6 +89,37 @@
 
 		},
 
+		addATab: function( tabareaID, tabInfo ) {
+			//judge if already have the tab
+			tabids = hit.COMPONENT.tab.getAllTabId( tabareaID );
+			if (tabids.indexOf(tabInfo.id) !== -1) {
+				hit.COMPONENT.tab.focusTab(tabareaID, tabInfo.id);
+			} else {
+				//formate the info to save
+				//get the max index of the tab
+				var maxSeq = tabids.length
+				, tabNames = [];
+				tabInfo.seq = maxSeq;
+			
+				// title
+				var temObj = { 
+					name: tabInfo.tabName, 
+					id: tabInfo.id,
+					seq: tabInfo.seq,
+				};
+				tabNames.push(temObj);
+
+				//create tab title & framework
+				hit.COMPONENT.tab.createTabNames(tabareaID, tabNames);
+
+				// content
+				hit.COMPONENT.tab.fillContent(tabareaID, tabInfo.seq, tabInfo.id, tabInfo.content, tabInfo.type);
+
+				//TODO:set focus
+				hit.COMPONENT.tab.focusTab(tabareaID, tabInfo.id);
+			}
+		},
+
 		/*
 		 * add tabs
 		 * [Array] tabInfos 标签页的信息（类似上面的options，但seq是自动分配的
