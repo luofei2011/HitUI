@@ -21,9 +21,9 @@
 			},
 			openNodes: []
 		};
-		options.openNodes.push('0103');
-		options.openNodes.push('0104');
-		options.openNodes.push('03');	
+		options.openNodes.push('root');
+		// options.openNodes.push('99');
+		// options.openNodes.push('03');	
 		
 		// hit.PARAMETER.global.setTreeOption(options);
 		console.log('load the tree setting from default');

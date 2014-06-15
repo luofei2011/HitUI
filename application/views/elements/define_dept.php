@@ -23,14 +23,20 @@
 // hit.CONFIG.table_inv_department.funcArr = ['add_poup', 'edit', 'delete', 'save'];
 hit.CONFIG.table_inv_department.condition = [];
 hit.load('table_inv_department', $('.dept_define#dd-right'));
-/*
-	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
-	$('div.dept_define#dd-left').prepend('<div class="form-area" id='+ formID + '></div>');
-	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
-	*/
-	var treeID = hit.PARAMETER.global.registerComponent('tree', 'tree');
-	$('div.dept_define#dd-left').append('<div class="tree-area" id='+ treeID + '></div>');
-	hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
+
+var treeID = hit.PARAMETER.global.registerComponent('tree', 'tree');
+$('div.dept_define#dd-left').append('<div class="tree-area" id='+ treeID + '></div>');
+	var options = {
+		table: 'inv_department',
+		db: 'inv',
+		conf: {
+			op: 'select',
+			con: 'limit, 50;pager,false'
+		},
+		openNodes: []
+	};
+	options.openNodes.push('root');
+	hit.INTERFACES.tree.makeFromDB(treeID, options);
 
 </script>
 </html>

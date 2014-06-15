@@ -90,3 +90,39 @@ $(document).on('click', '.dept_define tr.table-row-has-event', function(e){
 	})
 	console.log(info);
 });
+
+$(document).on('click', '.dept_define.hit-2column-tree .tree-area li', function(){
+	//select which tree node
+	info = hit.COMPONENT.tree.getInfoByNode( $(this) );
+
+	//find the same cell with the treenode
+	target = $('.dept_define tr.table-row-has-event .gr-d-grid-cell input[name=dept_id][value='+info.code +']');
+	//..and the row
+	row = target.closest('tr.table-row-has-event');
+	//check checkbox and select the row
+	row.find('td.gr-d-grid-cell.field-checkbox input')[0].checked = true ;
+	row.addClass('gr-d-grid-row-selected');
+	//discheck checkbox and disselect other rows
+		row.siblings('tr.table-row-has-event').each(function(){
+			$(this).removeClass('gr-d-grid-row-selected');
+			$(this).find('td.gr-d-grid-cell.field-checkbox input')[0].checked = false;
+		})
+
+});
+
+$(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pager-reload', function(){
+	thetree = $('.dept_define.hit-2column-tree .tree-area')
+	treeID = thetree.attr('id');
+	thetree.html('');
+	var options = {
+		table: 'inv_department',
+		db: 'inv',
+		conf: {
+			op: 'select',
+			con: 'limit, 50;pager,false'
+		},
+		openNodes: []
+	};
+	options.openNodes.push('root');
+	hit.INTERFACES.tree.makeFromDB(treeID, options);
+});
