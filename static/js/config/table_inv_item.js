@@ -14,7 +14,7 @@ hit.CONFIG.table_inv_item = {
     "pageNum": 50,
     "hasCheckBox": true,
     "condition": [],
-    "hasQuery": true,
+    "hasQuery": false,
     "qParam": [{
         "name": "Item_type",
         "label": "种类",

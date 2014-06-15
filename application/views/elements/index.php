@@ -72,14 +72,14 @@ hit.load('table_inv_bill_main', $('.abc'));
 // 		});
 
 
-// //Form test
-// /***********************************************/
+//Form test
+/***********************************************/
 
-// 	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
+	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
 
-// 	$('div.abc').prepend('<div class="form-area" id='+ formID + '></div>');
+	$('div.abc').prepend('<div class="form-area" id='+ formID + '></div>');
 
-// 	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
+	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
 
 /***********************************************/
 

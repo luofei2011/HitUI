@@ -12,7 +12,7 @@ hit.CONFIG.tab_test = [
 				id: 'index',
 				seq: 1,
 				type: 'text', 
-				content: '<h1>欢迎来到企业智能计算中心库存管理系统</h1>',
+				content: '<h1 style=\'text-align: center\'>欢迎来到<br/><br/><div style="font-size:larger"><div style="font-size:larger">企业智能计算中心</div><br/>物料入库管理系统</div></h1>',
 			},
 		],
 	},{

@@ -17,7 +17,7 @@
 			db: 'natservice',
 			conf: {
 				op: 'select',
-				con: 'limit, 51;pager,false'
+				con: 'limit, 951;pager,false'
 			},
 			openNodes: []
 		};

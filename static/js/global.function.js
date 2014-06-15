@@ -58,8 +58,8 @@
 
 })();
 
-//get the info of the line
-$(document).on('click', '.dept_define tr.table-row-has-event', function(e){
+//get the info of a row of the table
+$(document).on('click', '.get-form-info tr.table-row-has-event', function(e){
 	var _target = e.srcElement ? e.srcElement : e.target;
 	checkbox = $(this).find('td.gr-d-grid-cell.field-checkbox input');
 	cb = checkbox[0];
@@ -78,7 +78,7 @@ $(document).on('click', '.dept_define tr.table-row-has-event', function(e){
 		})
 	}
 
-	//return the 
+	//return the info
 	nodes = $(this).find('td.gr-d-grid-cell').not('.field-checkbox')
 	, info = {};
 	nodes.each(function(index, element){
@@ -91,6 +91,7 @@ $(document).on('click', '.dept_define tr.table-row-has-event', function(e){
 	console.log(info);
 });
 
+//select the table row when hitting the tree
 $(document).on('click', '.dept_define.hit-2column-tree .tree-area li', function(){
 	//select which tree node
 	info = hit.COMPONENT.tree.getInfoByNode( $(this) );
@@ -110,6 +111,7 @@ $(document).on('click', '.dept_define.hit-2column-tree .tree-area li', function(
 
 });
 
+//reload the tree when click the reload button of the table
 $(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pager-reload', function(){
 	thetree = $('.dept_define.hit-2column-tree .tree-area')
 	treeID = thetree.attr('id');
