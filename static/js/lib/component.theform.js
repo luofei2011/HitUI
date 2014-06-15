@@ -204,7 +204,7 @@ var temform= {
 
         date: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item Wdate" type="text" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
+            return '<input class="form-item Wdate" type="text" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + (item.selections? (' min=' + item.selections[0] + ' max=' + item.selections[1]):'') + req + ' />' ;
             // return '<input class="form-item" type="date" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
         },
 
