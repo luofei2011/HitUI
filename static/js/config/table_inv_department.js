@@ -16,9 +16,9 @@ hit.CONFIG.table_inv_department = {
     "condition": [],
     "hasQuery": true,
     "qParam": [{
-        "name": "",
-        "label": "",
-        "type": "",
+        "name": "dept_father",
+        "label": "父节点ID",
+        "type": "text",
         "required": false
     }],
     "hasFunc": true,
