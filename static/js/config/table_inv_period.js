@@ -16,38 +16,38 @@ hit.CONFIG.table_inv_period = {
     "condition": [],
     "hasQuery": true,
     "qParam": [{
-        "name": "",
-        "label": "",
-        "type": "",
+        "name": "Begin_date",
+        "label": "开始日期",
+        "type": "date",
         "required": false
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [120, 120, 120, 120],
+    "widthMsg": [200, 220, 220, 200],
     "headContent": [
         [{
-            "label": "",
+            "label": "核算期ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "开始日期",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "截至日期",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "状态标志",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -59,7 +59,7 @@ hit.CONFIG.table_inv_period = {
         "Period_id": {
             "isKey": true,
             "isShow": true,
-            "align": "left",
+            "align": "center",
             "canEdit": true,
             "type": "text",
             "valid": "required",
@@ -70,7 +70,7 @@ hit.CONFIG.table_inv_period = {
         "Begin_date": {
             "isKey": false,
             "isShow": true,
-            "align": "left",
+            "align": "center",
             "canEdit": true,
             "type": "date",
             "valid": "required",
@@ -81,7 +81,7 @@ hit.CONFIG.table_inv_period = {
         "End_date": {
             "isKey": false,
             "isShow": true,
-            "align": "left",
+            "align": "center",
             "canEdit": true,
             "type": "date",
             "valid": "required",
@@ -92,7 +92,7 @@ hit.CONFIG.table_inv_period = {
         "Flag": {
             "isKey": false,
             "isShow": true,
-            "align": "left",
+            "align": "center",
             "canEdit": true,
             "type": "text",
             "valid": "required",

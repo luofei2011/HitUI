@@ -1,4 +1,4 @@
-<div class="inv_supplier_main">
+<div class="inv_supplier_main" style="padding-top: 20px">
 </div>
 <script type="text/javascript">
 // 入库单查询功能

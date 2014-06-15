@@ -9,7 +9,7 @@
 
 	var tabDef = {
 		_contentInput : '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-content">输入显示内容</button>', 
-		_linkInput : '<input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-link">输入页面地址</button>', 
+		_linkInput : '<h1>找不到该页面！请重新输入地址</h1><input type="text" name="tabcontentin" class="tabcontentin"><button class="upload-link">输入页面地址</button>', 
 
 		/*
 		 * 用tabLayer初始化该层的tab-area

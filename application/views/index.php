@@ -106,4 +106,6 @@
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_supplier.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_period.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_ware.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_menu.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_sys_auth.js');?>"></script>
 </html>

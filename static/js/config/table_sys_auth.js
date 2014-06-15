@@ -3,10 +3,10 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
-hit.CONFIG.table_inv_item = {
+hit.CONFIG.table_sys_auth = {
     "db": {
-        "name": "inv",
-        "t": "inv_item"
+        "name": "natservice",
+        "t": "user_role_menu_v"
     },
     "url": "http:\/\/localhost\/webfreemen\/graduation-pro-2014\/load\/deal_data",
     "rows": 2,
@@ -16,66 +16,73 @@ hit.CONFIG.table_inv_item = {
     "condition": [],
     "hasQuery": true,
     "qParam": [{
-        "name": "Item_type",
-        "label": "种类",
-        "type": "text",
+        "name": "",
+        "label": "",
+        "type": "",
         "required": false
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [140, 120, 120, 80, 120, 120, 120, 120],
+    "widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120],
     "headContent": [
         [{
-            "label": "物料编号",
+            "label": "所在系统",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "物料名字",
+            "label": "菜单ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "种类",
+            "label": "父节点",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "计量单位",
+            "label": "菜单项层次",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "物料标准",
+            "label": "叶标记",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "材质",
+            "label": "菜单名称",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "抽检",
+            "label": "程序URL",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "预订价格",
+            "label": "菜单序号",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "用户ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -84,18 +91,18 @@ hit.CONFIG.table_inv_item = {
         }]
     ],
     "bodyContent": {
-        "Item_code": {
-            "isKey": true,
+        "sys_code": {
+            "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_name": {
+        "menu_code": {
             "isKey": false,
             "isShow": true,
             "align": "left",
@@ -106,68 +113,79 @@ hit.CONFIG.table_inv_item = {
             "minLen": "",
             "maxLen": ""
         },
-        "Item_type": {
+        "menu_father": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_unit": {
+        "menu_level": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_spec": {
+        "leaf_flag": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_texture": {
+        "menu_name": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_gb": {
+        "prog_url": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "Item_plan_price": {
+        "menu_index": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "user_id": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""

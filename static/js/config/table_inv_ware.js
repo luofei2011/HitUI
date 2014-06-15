@@ -14,7 +14,7 @@ hit.CONFIG.table_inv_ware = {
     "pageNum": 50,
     "hasCheckBox": true,
     "condition": [],
-    "hasQuery": true,
+    "hasQuery": false,
     "qParam": [{
         "name": "",
         "label": "",
@@ -23,80 +23,80 @@ hit.CONFIG.table_inv_ware = {
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
+    "widthMsg": [100, 120, 160, 60, 60, 60, 120, 50, 120, 120, 160],
     "headContent": [
         [{
-            "label": "",
+            "label": "仓库ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "仓库名",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "仓库地址",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "所含物料",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "管理者模式",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "定价状态",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "最近使用时间",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "成批标志",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "库存管理者",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "库存管理者ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "备注",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -176,7 +176,7 @@ hit.CONFIG.table_inv_ware = {
             "isShow": true,
             "align": "left",
             "canEdit": true,
-            "type": "text",
+            "type": "date",
             "valid": "required",
             "sureValue": "",
             "minLen": "",
