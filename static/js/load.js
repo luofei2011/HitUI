@@ -726,3 +726,18 @@ var hit = {
 
 
 });
+
+
+if (true) {
+    console.log = function() {
+        return false;
+    };
+
+    console.time = function() {
+        return false;
+    };
+
+    console.timeEnd = function() {
+        return false;
+    }
+}
