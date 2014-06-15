@@ -128,3 +128,8 @@ $(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pag
 	options.openNodes.push('root');
 	hit.INTERFACES.tree.makeFromDB(treeID, options);
 });
+
+$(document).on('click', '.get-form-info tr.table-row-has-event', function(e){
+
+});
+

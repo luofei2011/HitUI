@@ -728,7 +728,7 @@ var hit = {
 });
 
 
-if (true) {
+if (false) {
     console.log = function() {
         return false;
     };
