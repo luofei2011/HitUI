@@ -17,7 +17,7 @@ hit.CONFIG.table_role_auth = {
 		"required": false
 	}],
 	"hasFunc": true,
-	"funcArr": ["add", "edit", "delete", "save"],
+	"funcArr": ["add", "delete", "save", "multi_add"],
 	"widthMsg": [120, 120],
 	"headContent": [[{
 		"label": "角色编号",

@@ -17,7 +17,7 @@ hit.CONFIG.table_user_role = {
 		"required": false
 	}],
 	"hasFunc": true,
-	"funcArr": ["add", "edit", "delete", "save"],
+	"funcArr": ["add", "delete", "save", "multi_add2"],
 	"widthMsg": [120, 120],
 	"headContent": [[{
 		"label": "用户名",

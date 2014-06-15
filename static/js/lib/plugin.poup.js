@@ -28,7 +28,8 @@ hit.PLUGIN.poup = {
 	init: function(option, conf, pNode, type) {
 		var _html = "", _poup,
 			_id = "POUP_" + (+new Date()),
-			type = type || 'select';
+			type = type || 'select',
+			_this = this;
 
 		option = this.extend({}, this.default, option);
 
@@ -69,7 +70,123 @@ hit.PLUGIN.poup = {
 				tID: _id,
 				pNode: pNode
 			});
+		} else if (type === 'page') {
+			// $('#' + _id).find('div.hit-panel-body').load(conf.url, function() {
+			// 	$('#' + _id).find('div.hit-panel-body').append(_this.createBtn());
+			// });
+			this.multi_select({
+				conf: conf,
+				tNode: $('#' + _id).find('div.hit-panel-body'),
+				tID: _id,
+				pNode: pNode
+			});
 		}
+	},
+
+	multi_select: function(con) {
+		var _tmpDB = {
+                name: hit.conf.db.name,
+                t: hit.conf.db.t
+            }, _this = this,
+            conf = con.conf, exist = [],
+            _this = this;
+
+        hit.setDB(conf.target.t, conf.target.name);
+        hit.query('load/deal_data', [{name: conf.info.name, value: conf.info.value}], {
+        	op: 'select',
+        	con: 'offset,0;limit,50;fields,true;pager,false'
+        }, function(data) {
+        	var i = 0, len = data.length;
+
+        	for (; i < len; i++) {
+        		exist.push(data[i][conf.auth.name]);
+        	}
+
+        	 // 查询数据
+			hit.setDB(conf.list.t, conf.list.name);
+			hit.query('load/deal_data', '', {
+			    op: 'select',
+			    con: 'offset,0;limit,50;fields,true;pager,false'
+			}, function(data) {
+				var _table = $('<div class="poupWrapper"></div>'),
+					_html = "", i = 0,
+					len = data.length,
+					tmp;
+
+				for (; i < len; i++) {
+					tmp = data[i][conf.auth.name];
+					if (exist.indexOf(tmp) === -1) {
+						_html += '<div style="display:inline-block;"><input type="checkbox" value="' + tmp + '" name="' + conf.auth.name + '">';
+						_html += '<span>' + tmp + '</span></div>';
+					}
+				}
+
+				if (!_html)
+					_html = '<div>已没有更多的权限可用于分配！</div>';
+				_table.append(_html);
+				con.tNode.append(_table).append(_this.createBtn());
+
+				_this.pageEvent(con);
+			});
+        });
+
+		// 恢复之前的database配置
+		hit.setDB(_tmpDB.t, _tmpDB.name);
+	},
+
+	pageEvent: function(con) {
+		var panel = $('#' + con.tID),
+			conf = con.conf;
+
+		// 确定按钮事件
+		$('a.poup-sure', panel).on('click', function() {
+			var _tmpDB = {
+	                name: hit.conf.db.name,
+	                t: hit.conf.db.t
+            	}, q = [], _this = this;
+
+            hit.setDB(conf.target.t, conf.target.name);
+
+            $('input[type=checkbox]', con.tNode).each(function() {
+            	if (this.checked) {
+            		q.push([{
+            			name: $(this).attr('name'),
+            			value: this.value
+            		}, {
+            			name: conf.info.name,
+            			value: conf.info.value
+            		}]);
+            	}
+            });
+
+            if (q.length) {
+	            // 生成cover层
+			    hit.COVER.init({
+			        tNode: $(this).closest('div.hit-panel-body'),
+			        status: 'wait'
+			    });
+			   
+			    hit.query('load/deal_data',q, {
+			        op: 'insert',
+			        con: ''
+			    }, function() {
+			        hit.COVER.removeNode();
+					$(_this).next().trigger('click');
+			    });
+			} else {
+				$(_this).next().trigger('click');
+			}
+
+            // 触发原来的自定义事件
+            // con.pNode.trigger('select', data);
+            hit.setDB(_tmpDB.t, _tmpDB.name);
+			return false;
+		});
+
+		// 取消按钮事件绑定
+		$('a.poup-cancel', panel).on('click', function() {
+			$(this).closest('.hit-panel').find('span.close-btn').trigger('click');
+		});
 	},
 	/*
 	 * 合并用户自定义的参数和默认参数

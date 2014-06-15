@@ -179,6 +179,9 @@ var hit = {
                     return "入库单审核";
                 case 'order_deal':
                     return "入库单过账";
+                case 'multi_add':
+                case "multi_add2":
+                    return '批量添加'
                 default:
                     return "新功能，请到load.js中添加";
             };
