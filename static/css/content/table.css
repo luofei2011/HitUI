@@ -1,9 +1,14 @@
 ﻿.gr-container {
-    padding: 0 20px 0 20px;
+    /*padding: 0 20px 0 20px;*/
+    padding: 20px;
 }
 .gr-table {
     width: 900px;
     position: relative;
+}
+.table-header {
+    padding-left: 20px;
+    margin-bottom: 0;
 }
 .gr-toolbar {
     padding: 2px;

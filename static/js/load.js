@@ -152,7 +152,12 @@ var hit = {
         // TODO 是否需要添加表格的简单搜索功能
         //
         // 封装片段并渲染
-        html = '<table style="width: 100%;" class="auto-layout"><tr><td style="width: 100%;">' + html + '</td><td><a href="#" class="toggle-query-field">隐藏查询区域</a></tr></table>';
+        html = '<table style="width: 100%;" class="auto-layout"><tr><td style="width: 100%;">' + html + '</td>';
+
+        if (con.hasQuery)
+            html += '<td><a href="#" class="toggle-query-field">隐藏查询区域</a></td>';
+
+        html += '</tr></table>';
         tNode.append(html);
 
         console.timeEnd('createOp');

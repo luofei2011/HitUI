@@ -14,7 +14,7 @@
     <div class="header-wrap">
     </div>
     <header id="header">
-        <h3>XX管理系统V0.1</h3>
+        <h3>物料入库管理系统V-1.0</h3>
         <div class="nav clearfix">
             <ul class="list-unstyled pull-right gap-right pull-right">
                 <li>
@@ -106,4 +106,8 @@
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_supplier.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_period.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_ware.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_role.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_role_auth.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_sys_user.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_user_role.js');?>"></script>
 </html>
