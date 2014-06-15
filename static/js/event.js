@@ -234,9 +234,11 @@ $(document).on('click', 'span.hit-button-icon', function(e) {
                 $(this).find('div.edited-and-no-save').filter(function() {
                     return $(this).css('display') !== 'none';
                 }).each(function() {
-                    var _name = hit.filterID($(this).parent().attr('id'));
+                    var _name = hit.filterID($(this).parent().attr('id')),
+                        value = $(this).prev().hasClass('poup-select') ? $(this).prev().find('input').eq(0).val() : $(this).prev().val();
+
                     query[i].q.push({
-                        value: $(this).prev().val(),
+                        value: value,
                         name: _name
                     });
                 });

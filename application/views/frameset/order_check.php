@@ -1,4 +1,4 @@
-<div class="gr">
+<div class="order-check">
 </div>
 <script type="text/javascript">
 // 入库单审批功能
@@ -7,5 +7,5 @@ hit.CONFIG.table_inv_bill_main.condition = [{
 	value: 'E'
 }];
 hit.CONFIG.table_inv_bill_main.funcArr = ['edit', 'delete', 'save', 'order_check'];
-hit.load('table_inv_bill_main', $('.gr'));
+hit.load('table_inv_bill_main', $('.order-check'));
 </script>
