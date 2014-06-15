@@ -3,10 +3,10 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
-hit.CONFIG.table_inv_department = {
+hit.CONFIG.table_inv_item = {
     "db": {
         "name": "inv",
-        "t": "inv_department"
+        "t": "inv_item"
     },
     "url": "http:\/\/localhost\/webfreemen\/graduation-pro-2014\/load\/deal_data",
     "rows": 2,
@@ -23,52 +23,59 @@ hit.CONFIG.table_inv_department = {
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [120, 140, 120, 120, 120, 120, 140],
+    "widthMsg": [120, 120, 120, 120, 120, 120, 120, 120],
     "headContent": [
         [{
-            "label": "部门节点ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门名字",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门父节点ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "叶子标记",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门管理者ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门成员列表",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门创建日期",
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -77,7 +84,7 @@ hit.CONFIG.table_inv_department = {
         }]
     ],
     "bodyContent": {
-        "dept_id": {
+        "Item_code": {
             "isKey": true,
             "isShow": true,
             "align": "left",
@@ -88,7 +95,7 @@ hit.CONFIG.table_inv_department = {
             "minLen": "",
             "maxLen": ""
         },
-        "dept_name": {
+        "Item_name": {
             "isKey": false,
             "isShow": true,
             "align": "left",
@@ -99,56 +106,67 @@ hit.CONFIG.table_inv_department = {
             "minLen": "",
             "maxLen": ""
         },
-        "dept_father": {
+        "Item_type": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "",
+            "valid": "required",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "dept_flag": {
+        "Item_unit": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "",
+            "valid": "required",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "dept_admin_id": {
+        "Item_spec": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "",
+            "valid": "required",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "dept_stafflist_id": {
+        "Item_texture": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "",
+            "valid": "required",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""
         },
-        "dept_begin_date": {
+        "Item_gb": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
-            "type": "date",
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Item_plan_price": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
             "valid": "required",
             "sureValue": "",
             "minLen": "",

@@ -102,4 +102,8 @@
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_test.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_poup.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/insert_stroge.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_item.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_supplier.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_period.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_ware.js');?>"></script>
 </html>

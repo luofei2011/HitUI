@@ -3,10 +3,10 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
-hit.CONFIG.table_inv_department = {
+hit.CONFIG.table_inv_supplier = {
     "db": {
         "name": "inv",
-        "t": "inv_department"
+        "t": "inv_supplier"
     },
     "url": "http:\/\/localhost\/webfreemen\/graduation-pro-2014\/load\/deal_data",
     "rows": 2,
@@ -23,52 +23,87 @@ hit.CONFIG.table_inv_department = {
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [120, 140, 120, 120, 120, 120, 140],
+    "widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
     "headContent": [
         [{
-            "label": "部门节点ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门名字",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门父节点ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "叶子标记",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门管理者ID",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门成员列表",
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "部门创建日期",
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
+            "isFixed": false,
+            "isOrdered": false,
+            "align": "center",
+            "multiply": false,
+            "colspan": 2
+        }, {
+            "label": "",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -77,7 +112,7 @@ hit.CONFIG.table_inv_department = {
         }]
     ],
     "bodyContent": {
-        "dept_id": {
+        "Sup_code": {
             "isKey": true,
             "isShow": true,
             "align": "left",
@@ -88,7 +123,7 @@ hit.CONFIG.table_inv_department = {
             "minLen": "",
             "maxLen": ""
         },
-        "dept_name": {
+        "Sup_name": {
             "isKey": false,
             "isShow": true,
             "align": "left",
@@ -99,57 +134,112 @@ hit.CONFIG.table_inv_department = {
             "minLen": "",
             "maxLen": ""
         },
-        "dept_father": {
+        "Sup_address": {
             "isKey": false,
             "isShow": true,
             "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "dept_flag": {
-            "isKey": false,
-            "isShow": true,
-            "align": "left",
-            "canEdit": true,
-            "type": "text",
-            "valid": "",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "dept_admin_id": {
-            "isKey": false,
-            "isShow": true,
-            "align": "left",
-            "canEdit": true,
-            "type": "text",
-            "valid": "",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "dept_stafflist_id": {
-            "isKey": false,
-            "isShow": true,
-            "align": "left",
-            "canEdit": true,
-            "type": "text",
-            "valid": "",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "dept_begin_date": {
-            "isKey": false,
-            "isShow": true,
-            "align": "left",
-            "canEdit": true,
-            "type": "date",
             "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Post_code": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Linkman_name": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_tel": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_tax": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_type": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_legal_man": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_bank_name": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Sup_bank_account": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "required",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "Notes": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""

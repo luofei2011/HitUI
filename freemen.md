@@ -101,3 +101,13 @@
 
 ## structure
 #### `parameter.globle` is so ugly..
+
+## simple form config flow:
+1 create a table configuration table_xx.js under `js/config`
+2 make a page under `views/` using the config in the 1st step with the code before
+>
+	hit.CONFIG.table_inv_bill_main.funcArr = ['edit', 'delete', 'save'];
+	hit.CONFIG.table_inv_bill_main.condition = [];
+	hit.load('table_inv_bill_main', $('.gr'))
+3 refer the js config in the 1st step to `views/index.php`
+4 in `js/config/bind_config.js`, bind the tree nodes' id to with the page mentioned in 2nd step
