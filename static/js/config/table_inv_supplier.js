@@ -14,7 +14,7 @@ hit.CONFIG.table_inv_supplier = {
     "pageNum": 50,
     "hasCheckBox": true,
     "condition": [],
-    "hasQuery": true,
+    "hasQuery": false,
     "qParam": [{
         "name": "",
         "label": "",
@@ -23,87 +23,87 @@ hit.CONFIG.table_inv_supplier = {
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
+    "widthMsg": [80, 120, 160, 120, 120, 130, 130, 120, 120, 120, 130, 180],
     "headContent": [
         [{
-            "label": "",
+            "label": "供应商编号",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "供应商名字",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "地址",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "邮编",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "联系人",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "联系电话",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "传真",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "供应类型",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "公司法人",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "银行",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "银行帐号",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "",
+            "label": "备注",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",

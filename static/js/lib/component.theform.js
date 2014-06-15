@@ -63,7 +63,7 @@ var temform= {
             //set the submit(return) button
             for (i=0, len=config.buttons?config.buttons.length:0 ; i<len; i++) {
                 btn = config.buttons[i];
-                html += '<input type="' + btn.type + '" name="' + btn.name + '" btnid="' + btn.id + '" href="#" onclick="" /> '
+                html += '<input type="' + btn.type + '" value="' + btn.name + '" btnid="' + btn.id + '" href="#" onclick="" /> '
             }
 
             html += '</fieldset></form>';
@@ -204,7 +204,7 @@ var temform= {
 
         date: function( item ) {
             var req = item.required ? ' required aria-required="true" ' : '';
-            return '<input class="form-item Wdate" type="text" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
+            return '<input class="form-item Wdate" type="text" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + (item.selections? (' min=' + item.selections[0] + ' max=' + item.selections[1]):'') + req + ' />' ;
             // return '<input class="form-item" type="date" id=' + item.name + (item.key?' key=true':' ') + ' value="' + item.defaultValue + '" sizeLevel=' + item.sizeLevel + ' min=' + item.selections[0] + ' max=' + item.selections[1] + req + ' />' ;
         },
 
@@ -260,6 +260,18 @@ var temform= {
                 // data.push( { tname : itemdata } );
             });
             return data;
+        },
+
+        fillFormInfo: function(formareaID, data) {
+            console.log(data);
+            return;
+            fields = $(this).closest('form').find('input, textarea, select');
+
+            fields.each(function() {
+                var name = $(this).closest('div.form-item').attr('name');
+                if (map[name])
+                    $(this).val(map[name]);
+            });
         },
 
     };

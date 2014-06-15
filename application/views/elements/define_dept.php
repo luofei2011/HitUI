@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div id="dept_define_main">
+<div id="dept_define_main" class='get-form-info'>
 	<div id="dd-left" class="dept_define hit-2column-tree">
 	</div>
 	<div id="dd-right" class="dept_define hit-2column-tableform">
@@ -15,9 +15,6 @@
 
 </body>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_department.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/config/tree_test.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/config/form_test.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/config/tab_test.js');?>"></script>
 <script type="text/javascript">
 
 // hit.CONFIG.table_inv_department.funcArr = ['add_poup', 'edit', 'delete', 'save'];
@@ -36,7 +33,7 @@ $('div.dept_define#dd-left').append('<div class="tree-area" id='+ treeID + '></d
 		openNodes: []
 	};
 	options.openNodes.push('root');
-	hit.INTERFACES.tree.makeFromDB(treeID, options);
+hit.INTERFACES.tree.makeFromDB(treeID, options);
 
 </script>
 </html>

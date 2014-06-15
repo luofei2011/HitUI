@@ -3,10 +3,10 @@ if (typeof hit === 'undefined')
 if (typeof hit.CONFIG === 'undefined')
     hit.CONFIG = {};
 
-hit.CONFIG.table_inv_period = {
+hit.CONFIG.table_sys_auth = {
     "db": {
         "name": "inv",
-        "t": "inv_period"
+        "t": "user_auth_v"
     },
     "url": "http:\/\/localhost\/webfreemen\/graduation-pro-2014\/load\/deal_data",
     "rows": 2,
@@ -16,38 +16,38 @@ hit.CONFIG.table_inv_period = {
     "condition": [],
     "hasQuery": true,
     "qParam": [{
-        "name": "Begin_date",
-        "label": "开始日期",
-        "type": "date",
+        "name": "menu_code",
+        "label": "菜单系统ID",
+        "type": "text",
         "required": false
     }],
     "hasFunc": true,
     "funcArr": ["add", "edit", "delete", "save"],
-    "widthMsg": [200, 220, 220, 200],
+    "widthMsg": [100, 160, 120, 200],
     "headContent": [
         [{
-            "label": "核算期ID",
+            "label": "用户ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "开始日期",
+            "label": "用户名",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "截至日期",
+            "label": "菜单系统ID",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
             "multiply": false,
             "colspan": 2
         }, {
-            "label": "状态标志",
+            "label": "菜单权限名",
             "isFixed": false,
             "isOrdered": false,
             "align": "center",
@@ -56,10 +56,32 @@ hit.CONFIG.table_inv_period = {
         }]
     ],
     "bodyContent": {
-        "Period_id": {
-            "isKey": true,
+        "user_id": {
+            "isKey": false,
             "isShow": true,
-            "align": "center",
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "user_name": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
+            "canEdit": true,
+            "type": "text",
+            "valid": "",
+            "sureValue": "",
+            "minLen": "",
+            "maxLen": ""
+        },
+        "menu_code": {
+            "isKey": false,
+            "isShow": true,
+            "align": "left",
             "canEdit": true,
             "type": "text",
             "valid": "required",
@@ -67,35 +89,13 @@ hit.CONFIG.table_inv_period = {
             "minLen": "",
             "maxLen": ""
         },
-        "Begin_date": {
+        "menu_name": {
             "isKey": false,
             "isShow": true,
-            "align": "center",
-            "canEdit": true,
-            "type": "date",
-            "valid": "required",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "End_date": {
-            "isKey": false,
-            "isShow": true,
-            "align": "center",
-            "canEdit": true,
-            "type": "date",
-            "valid": "required",
-            "sureValue": "",
-            "minLen": "",
-            "maxLen": ""
-        },
-        "Flag": {
-            "isKey": false,
-            "isShow": true,
-            "align": "center",
+            "align": "left",
             "canEdit": true,
             "type": "text",
-            "valid": "required",
+            "valid": "",
             "sureValue": "",
             "minLen": "",
             "maxLen": ""

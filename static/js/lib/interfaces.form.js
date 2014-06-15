@@ -45,6 +45,55 @@ var iForm= {
 		return hit.COMPONENT.theform.createFromConfig( config, formareaID );
 	},
 
+	loadFromConfig: function( config, node ) {
+		var formareaID = hit.PARAMETER.global.registerComponent('form', 'formarea');
+		html = hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		node.append('<div class=form-area id=' + formareaID + '>' + html + '</div>');
+	},
+
+	loadFromDB: function( dbConf, node ) {
+		var treedata = {}, info = {}, temdata = [];
+		hit.setDB( dbConf.table, dbConf.db );
+			console.time("js/lib/hit.INTERFACES.form.loadFromDB query");
+		hit.query('load/deal_data', '', dbConf.conf
+		,function( data ) {
+
+		});
+			console.timeEnd("js/lib/hit.INTERFACES.form.loadFromDB query");
+
+	},
+
+	loadFromDefaultDB: function(table, node) {
+		var treedata = {}, info = {}, temdata = [];
+		hit.setDB( table, 'inv' );
+			console.time("js/lib/hit.INTERFACES.form.loadFromDefaultDB query");
+		hit.query('load/deal_data', ''
+		,{
+			op: 'select',
+			con: 'limit, 50;pager,false'
+		}
+		,function( data ) {
+			conf = hit.INTERFACES.form.dbData2Config(data);
+			// hit.INTERFACES.form.loadFromConfig( conf, node );
+		});
+			console.timeEnd("js/lib/hit.INTERFACES.form.loadFromDefaultDB query");
+
+	},
+
+	dbData2Config: function(data) {
+		console.log(data);
+/*		foreach($result as $f) {
+            array_push($json['groups'][0]['items'], array(
+                'name' => $f['Field'],
+                'label' => $f['Field'],
+                'type' => 'text',
+                'required' => true,
+                'sizeLevel' => 2,
+                'defaultValue' => array(),
+            ));
+        }*/
+	},
+
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数根据数据库内容生成
 	 * */
@@ -54,6 +103,10 @@ var iForm= {
 
 	getFormInfo: function( formareaID ) {
 		return hit.COMPONENT.theform.getFormInfo( formareaID );
+	},
+
+	fillFormInfo: function( formareaID, data ) {
+		return hit.COMPONENT.theform.fillFormInfo( formareaID, data );
 	},
 
 	setTarget: function( formID, targetID, targetFun ) {
