@@ -143,7 +143,37 @@ $(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pag
 
 //reflect to the form
 $(document).on('click', '.inv_ware_main tr.table-row-has-event', function(e){
+	theform = $('.inv_ware_main .form-area');
+	formID = theform.attr('id');
 	//return the info
-	hit.GLOBAL.function.getFormInfo($(this));
+	var info = hit.GLOBAL.function.getFormInfo($(this));
+	hit.COMPONENT.theform.fillFormInfo(formID, info);
 });
+
+$(document).on('click', '.inv_ware_main input[btnid="submit"]', function(){
+	theform = $(this).closest('.form-area');
+	formID = theform.attr('id');
+	var info = hit.COMPONENT.theform.getFormInfo(formID);
+
+	row = $('.inv_ware_main tr.table-row-has-event.gr-d-grid-row-selected');
+	var nodes = row.find('td.gr-d-grid-cell').not('.field-checkbox');
+	nodes.each(function(index, element){
+		id = $(element).attr('id');
+		name = id.split('$')[2];
+console.log(name);
+	console.log(info);
+console.log(info[name]);
+		if (info[name] != null && typeof(info[name]) != undefined) {
+			console.log($(element));
+			if (info[name] != $(element).find('input').val()) {
+				$(element).find('.grid-cell-show').html(info[name]);
+				$(element).find('input').val(info[name]);
+				$(element).find('.edited-and-no-save').attr('style', 'display: block');
+				row.attr('isEdited', 'true');
+			}
+		}
+	})
+
+	
+})
 

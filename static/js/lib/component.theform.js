@@ -225,7 +225,7 @@ var temform= {
 
         getFormInfo: function( formareaID ) {
             var items = $('.form-area#' + formareaID + ' div.form-item'),
-                data = [], itemdata;
+                data = {}, itemdata;
             //get all the items to read their value
             items.each(function(i) {
                 // different type of item need various operation
@@ -254,24 +254,46 @@ var temform= {
                         break;
                 }
                 //save the data
-                var obj = {};
-                obj[$(this).attr('name')] = itemdata;
-                data.push( obj );
+                data[$(this).attr('name')] = itemdata;
                 // data.push( { tname : itemdata } );
             });
             return data;
         },
 
         fillFormInfo: function(formareaID, data) {
+            theform = $('.form-area#' + formareaID );
             console.log(data);
-            return;
-            fields = $(this).closest('form').find('input, textarea, select');
+            $.each(data, function(n, v){
+                item = theform.find('div.form-item[name=' + n + ']');
+                    switch ( item.attr('item-type') ) {
+                        case 'checkbox':
+                            itemdata = [];
+                            item.find('input.form-item[type="checkbox"]').each(function(){
+                                if( $(this).nextAll('label').html() == v ) {
+                                    $(this)[0].checked = true;
+                                }
+                            });
+                            break;
+                        case 'radio':
+                            item.find('input.form-item[type="radio"]').each(function(){
+                                if( $(this).nextAll('label').html() == v ) {
+                                    $(this)[0].checked = true;
+                                }
+                            });
+                            break;
+                        case 'list':
+                            itemdata = item.find('input').val(v);
+                            break;
+                        case 'richtext':
+                        default:
+                            itemdata = item.find('input').val(v);
+                            console.log(item.find('input'));
+                            break;
+                    }
 
-            fields.each(function() {
-                var name = $(this).closest('div.form-item').attr('name');
-                if (map[name])
-                    $(this).val(map[name]);
             });
+            return;
+            
         },
 
     };
