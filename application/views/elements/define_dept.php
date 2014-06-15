@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>管理系统</title>
-</head>
-<body>
-
 <div id="dept_define_main" class='get-form-info'>
-	<div id="dd-left" class="dept_define hit-2column-tree">
-	</div>
-	<div id="dd-right" class="dept_define hit-2column-tableform">
-	</div>
+	<div id="dd-left" class="dept_define hit-2column-tree"></div>
+	<div id="dd-right" class="dept_define hit-2column-tableform"></div>
 </div>
 
-</body>
 <script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_department.js');?>"></script>
 <script type="text/javascript">
 
@@ -30,10 +19,8 @@ $('div.dept_define#dd-left').append('<div class="tree-area" id='+ treeID + '></d
 			op: 'select',
 			con: 'limit, 50;pager,false'
 		},
-		openNodes: []
+		openNodes: ['root']
 	};
-	options.openNodes.push('root');
 hit.INTERFACES.tree.makeFromDB(treeID, options);
 
 </script>
-</html>

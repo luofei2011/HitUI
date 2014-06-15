@@ -46,6 +46,21 @@
 		    hit.INTERFACES.tab.setTarget(tabID, treeID, 'toTree_code');
 		},
 
+			//return the info
+		getFormInfo: function( therow ){
+			nodes = therow.find('td.gr-d-grid-cell').not('.field-checkbox')
+			, info = {};
+			nodes.each(function(index, element){
+				id = $(element).attr('id');
+				name = id.split('$')[2];
+				value = $(element).find('.grid-cell-show').html();
+				info[name] = value;
+				// console.log(index+': ' + name + ' = ' + value);
+			})
+			console.log(info);
+			return info;
+		}
+
 	};
 
 	if ( hit.GLOBAL ){
@@ -77,18 +92,15 @@ $(document).on('click', '.get-form-info tr.table-row-has-event', function(e){
 			$(this).find('td.gr-d-grid-cell.field-checkbox input')[0].checked = false;
 		})
 	}
+});
 
-	//return the info
-	nodes = $(this).find('td.gr-d-grid-cell').not('.field-checkbox')
-	, info = {};
-	nodes.each(function(index, element){
-		id = $(element).attr('id');
-		name = id.split('$')[2];
-		value = $(element).find('.grid-cell-show').html();
-		info[name] = value;
-		// console.log(index+': ' + name + ' = ' + value);
-	})
-	console.log(info);
+//reflect to the tree
+$(document).on('click', '.dept_define tr.table-row-has-event', function(e){
+	thetree = $('.dept_define .tree-area');
+	treeID = thetree.attr('id');
+	//select the tree
+	var info = hit.GLOBAL.function.getFormInfo($(this));
+	hit.COMPONENT.tree.focusNodeByCode( treeID, info.dept_id);
 });
 
 //select the table row when hitting the tree
@@ -129,7 +141,9 @@ $(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pag
 	hit.INTERFACES.tree.makeFromDB(treeID, options);
 });
 
-$(document).on('click', '.get-form-info tr.table-row-has-event', function(e){
-
+//reflect to the form
+$(document).on('click', '.inv_ware_main tr.table-row-has-event', function(e){
+	//return the info
+	hit.GLOBAL.function.getFormInfo($(this));
 });
 
