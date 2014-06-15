@@ -124,7 +124,7 @@ a:hover.hit-button {
     vertical-align: top;
     display: inline-block;
 }
-.icon-add, .icon-add_poup {
+.icon-add, .icon-add_poup, .icon-multi_add, .icon-multi_add2 {
     background: url(../img/icons/add.gif) no-repeat;
 }
 .icon-edit {

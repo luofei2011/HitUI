@@ -172,6 +172,69 @@ $(document).on('click', 'span.hit-button-icon', function(e) {
                 label: '添加'
             }, hit.CONFIG.form_storage, $(this), "poup");
             break;
+        case "multi_add":
+            var f = get_checked_field();
+
+            if (!f.id.length) {
+                alert('为选中记录！');
+                return false;
+            }
+            var key = hit.findKeys(f.node[0]);
+
+            hit.PLUGIN.poup.init({
+                width: 600,
+                left: e.clientX - 200,
+                top: e.clientY - 50,
+                label: '添加'
+            }, {
+                target: {
+                    name: 'inv',
+                    t: 'role_auth'
+                },
+                list: {
+                    name: 'inv',
+                    t: 'menu'
+                },
+                info: key[0],
+                auth: key[1]
+            }, $(this), "page");
+            break;
+        case "multi_add2":
+        try{
+            var f = get_checked_field();
+
+            if (!f.id.length) {
+                alert('为选中记录！');
+                return false;
+            }
+            var key = hit.findKeys(f.node[0]);
+
+            hit.PLUGIN.poup.init({
+                width: 600,
+                left: e.clientX - 200,
+                top: e.clientY - 50,
+                label: '添加'
+            }, {
+                target: {
+                    name: 'inv',
+                    t: 'user_role'
+                },
+                list: {
+                    name: 'inv',
+                    t: 'role'
+                },
+                info: {
+                    name: 'role_code',
+                    value: get_value(f.node[0], 'role_code')
+                },
+                auth: {
+                    name: 'role_code'
+                }
+            }, $(this), "page");
+        } catch(e) {
+            console.log(e);
+        }
+            break;
         case "add":
             var _fTr = pNode.find('div.gr-d-grid-body tr.table-row-has-event').eq(0),
                 _fTds = _fTr.children(), i = 0,
@@ -391,6 +454,19 @@ $(document).on('click', 'span.hit-button-icon', function(e) {
                 label ++;
             }
         }
+    }
+
+    function get_value(node, name) {
+        var value;
+        $('input:not([type=hidden]):not([type=checkbox])', node).each(function() {
+            var div = $(this).closest('td');
+
+            if (div.attr('id').indexOf(name) !== -1) {
+                value = this.value;
+            }
+        });
+
+        return value;
     }
 
     function idInArray(arr, id) {
