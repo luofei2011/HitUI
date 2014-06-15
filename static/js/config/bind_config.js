@@ -13,6 +13,10 @@ hit.CONFIG.bind = {
 	 */
 	menu: {
 		'0105': 'load/elements/dept_define',	
+		'0301': 'load/frameset/insert_order',
+		'0302': 'load/frameset/order_check',
+		'0303': 'load/frameset/order_deal',
+		'0304': 'load/frameset/order_query'
 	},
 
 };

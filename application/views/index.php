@@ -96,4 +96,10 @@
 <script type="text/javascript" src="<?=base_url('static/js/global.function.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/event.parameter.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/event.js');?>"></script>
+
+<!-- 表格配置文件 -->
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_inv_bill_main.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_test.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/table_poup.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/config/insert_stroge.js');?>"></script>
 </html>
