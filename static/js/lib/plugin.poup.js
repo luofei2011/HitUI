@@ -99,7 +99,8 @@ hit.PLUGIN.poup = {
         	var i = 0, len = data.length;
 
         	for (; i < len; i++) {
-        		exist.push(data[i][conf.auth.name]);
+        		// 插入的数据有空格也会错误！！！！！！！！！
+        		exist.push(data[i][conf.auth.name].replace(/^\s*|\s*$/g, ''));
         	}
 
         	 // 查询数据
@@ -113,9 +114,12 @@ hit.PLUGIN.poup = {
 					len = data.length,
 					tmp;
 
+				// console.log(exist, data);
 				for (; i < len; i++) {
 					tmp = data[i][conf.auth.name];
+					// console.log(exist, tmp);
 					if (exist.indexOf(tmp) === -1) {
+						// console.log('1111111111111111');
 						_html += '<div style="display:inline-block;"><input type="checkbox" value="' + tmp + '" name="' + conf.auth.name + '">';
 						_html += '<span>' + tmp + '</span></div>';
 					}

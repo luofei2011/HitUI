@@ -14,7 +14,7 @@
     <div class="header-wrap">
     </div>
     <header id="header">
-        <h3>物料入库管理系统V-1.0</h3>
+        <h3>库存管理系统V-1.0</h3>
         <div class="nav clearfix">
             <ul class="list-unstyled pull-right gap-right pull-right">
                 <li>

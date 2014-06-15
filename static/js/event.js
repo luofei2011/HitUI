@@ -224,8 +224,8 @@ $(document).on('click', 'span.hit-button-icon', function(e) {
                     t: 'role'
                 },
                 info: {
-                    name: 'role_code',
-                    value: get_value(f.node[0], 'role_code')
+                    name: 'user_id',
+                    value: get_value(f.node[0], 'user_id')
                 },
                 auth: {
                     name: 'role_code'

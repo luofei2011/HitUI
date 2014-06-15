@@ -22,10 +22,11 @@ hit.CONFIG.form_storage = [
 		{
 			"name": "Make_date",
 			"label": "订单日期",
-			"type": "text",
+			"type": "date",
 			"required": true,
 			"sizeLevel": 2,
-			"defaultValue": []
+			"defaultValue": [],
+			selections: []
 		},
 		{
 			"name": "Ware_id",
