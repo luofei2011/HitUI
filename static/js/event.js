@@ -197,8 +197,8 @@ $(document).on('click', 'span.hit-button-icon', function(e) {
                             tmp.attr('value', '');
                             tmp.removeClass('grid-cell-edit').removeClass('ps-txt');
 
-                            if (tmp.attr('key') === 'true')
-                                tmp.hide();
+                            // if (tmp.attr('key') === 'true')
+                                // tmp.hide();
 
                             td.append(tmp);
                         } else {
