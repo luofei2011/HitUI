@@ -63,11 +63,14 @@ class Base extends CI_Model {
 
             if ($con) {
                 $k = $this->auto_create_key($tmp, $con);
-                $tmp[$k['name']] = $k['value'];
-                $key = array(
-                    'name' => $k['name'],
-                    'value' => $k['value']
-                    );
+
+                if ($k) {
+                    $tmp[$k['name']] = $k['value'];
+                    $key = array(
+                        'name' => $k['name'],
+                        'value' => $k['value']
+                        );
+                }
             }
             $this->db->insert($this->tableName, $tmp);
         }
@@ -93,7 +96,13 @@ class Base extends CI_Model {
                 $key .= $num;
                 $field = "Bill_num";
                 break;
+            default:
+                $key = false;
+                break;
         }
+
+        if (!$key) 
+            return false;
 
         return array(
             'name' => $field,

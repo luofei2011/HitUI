@@ -590,6 +590,7 @@ var hit = {
             pages = Math.ceil(pager.pages / pager.perNum),
             conf = pNode.attr('url');
 
+        console.log(pager, pNode, p_idx);
         conf = this.CONFIG[conf];
 
         // 重绘显示数量
