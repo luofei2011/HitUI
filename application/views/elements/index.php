@@ -72,22 +72,22 @@ hit.load('table_inv_bill_main', $('.abc'));
 // 		});
 
 
-//Form test
-/***********************************************/
-
-	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
-
-	$('div.abc').prepend('<div class="form-area" id='+ formID + '></div>');
-
-	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
-
+// //Form test
 // /***********************************************/
 
-// 		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+// 	var formID = hit.PARAMETER.global.registerComponent('form', 'form');
 
-// 		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
+// 	$('div.abc').prepend('<div class="form-area" id='+ formID + '></div>');
 
-// 		hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
+// 	hit.INTERFACES.form.createFromConfigNow(formID, hit.CONFIG.form_test[1]);
+
+/***********************************************/
+
+		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+
+		$('div.abc').append('<div class="tree-area" id='+ treeID + '></div>');
+
+		hit.INTERFACES.tree.makeFromData(treeID, hit.CONFIG.tree_test);
 
 // //Tab test
 // /***********************************************/

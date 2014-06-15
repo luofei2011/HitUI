@@ -1,8 +1,13 @@
 .hit-2column-tree {
 	float: left;
-	width: 230px;
-	padding: 10px 0 0 30px;
-	border-right: 3px solid #777;
+	height: 494px;
+	width: 150px;
+	max-width: 150px;
+	overflow-x: auto;
+	white-space: nowrap; 
+	margin: 10px 0 15px 0;
+	padding: 0 0 0 15px;
+	border-right: 3px dotted #999;
 }
 
 .hit-2column-tableform {

@@ -8,23 +8,11 @@ hit.CONFIG.tab_test = [
 		tabNum : 2,
 		tabs : [
 			{
-				tabName: 'TABLE', 
-				id: 'table',
-				seq: 2,
-				type: 'page', 
-				content: 'load/frameset/content',
-			},{
-				tabName: 'form',
-				id: 'form',
+				tabName: 'WELCOME', 
+				id: 'index',
 				seq: 1,
-				type: 'page',
-				content: 'load/elements/index',
-			},{
-				tabName: 'delData',
-				id: '3',
-				seq: 3,
-				type: 'text',
-				content: '<div class="clear-global-parameter">clearData</div>',
+				type: 'text', 
+				content: '<h1>欢迎来到企业智能计算中心库存管理系统</h1>',
 			},
 		],
 	},{

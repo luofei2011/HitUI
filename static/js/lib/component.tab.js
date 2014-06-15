@@ -211,8 +211,8 @@
 			, tabtitle = theTab.children('.tabtitle-area').children('.tabtitle')
 			, i = 0, len = tabtitle.length
 			, tabids = [];
-			console.log(tabtitle[1]);
-			console.log(len);
+			console.log('All the tabtitle');
+			console.log(tabtitle);
 			for(; i<len; i++) {
 				tabids.push(tabtitle.eq(i).attr('tabid'));
 			}

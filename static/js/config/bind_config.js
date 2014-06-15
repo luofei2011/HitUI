@@ -11,7 +11,7 @@ hit.CONFIG.bind = {
 	 * 		{Key} KeyId : {Value} Config Name
 	 * }
 	 */
-	menu: {
+	DB$natservice$menu: {
 		'0101': 'load/elements/define_period',	
 		'0102': 'load/elements/define_ware',	
 		'0103': 'load/elements/define_item',	
