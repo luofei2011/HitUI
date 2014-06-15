@@ -1,3 +1,5 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_auth_v` AS select distinct `b`.`user_id` AS `user_id`,`b`.`user_name` AS `user_name`,`c`.`menu_code` AS `menu_code`, `c`.`menu_name` AS `menu_name` from (`user_role` `a` join `sys_user` `b` join `role_auth` `d` join `menu` `c`) where ((`a`.`user_id` = `b`.`user_id`) AND (`a`.`role_code` = `d`.`role_code`) AND (`d`.`menu_code` = `c`.`menu_code`));
+
 #TODO-LIST:
 
 * add random id for all the component itself like the formate before
