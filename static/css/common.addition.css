@@ -1,15 +1,25 @@
 .hit-2column-tree {
 	float: left;
-	height: 494px;
-	width: 150px;
+	/*height: 536px;*/
+	height: 100%;
+	width: 160px;
 	max-width: 150px;
 	overflow-x: auto;
 	white-space: nowrap; 
-	margin: 10px 0 15px 0;
+	margin: 10px 10px 10px 0;
+	/*padding: 0 0 0 15px;*/
 	padding: 0 0 0 15px;
-	border-right: 3px dotted #999;
+	/*border-right: 20px double #ccc;*/
+	border: 1px solid #999999;
+}
+
+.hit-2column-tree .tree-area {
+	height: 494px;
+	padding: 20px;
 }
 
 .hit-2column-tableform {
 	float: left;
+	margin: 10px 0 10px 0;
+	border: 1px solid #999999;
 }
