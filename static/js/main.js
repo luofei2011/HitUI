@@ -5,7 +5,7 @@
  * */
 ;(function() {
     document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/event.js'></script>");
-    document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/lib/component.form.js'></script>");
+    document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/lib/component.formitem.js'></script>");
     document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/lib/form.rule.js'></script>");
     document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/lib/grid.cover.js'></script>");
     document.write("<script type='text/javascript' src='" + hit.baseURL + "static/js/plugin/My97DatePicker/WdatePicker.js'></script>");

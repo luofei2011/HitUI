@@ -72,7 +72,7 @@
     hit.baseURL = "<?=base_url()?>";
 </script>
 <script type="text/javascript" src="<?php echo base_url('static/js/jquery.resize.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('static/js/lib/component.form.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/js/lib/component.formitem.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/form.rule.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/grid.cover.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/lib/plugin.poup.js');?>"></script>
@@ -88,7 +88,7 @@
 <!--form-->
 <link rel="stylesheet" href="<?=base_url('static/css/content/theform.css')?>" />
 <script type="text/javascript" src="<?=base_url('static/js/event.form.js');?>"></script>
-<script type="text/javascript" src="<?=base_url('static/js/lib/component.theform.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('static/js/lib/component.form.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('static/js/lib/interfaces.form.js');?>"></script>
 <!--global parameter-->
 <script type="text/javascript" src="<?=base_url('static/js/config/bind_config.js');?>"></script>

@@ -460,23 +460,23 @@ var hit = {
     _createFormByType: function(type, o) {
         switch(type) {
             case "select":
-                return this.COMPONENT.form.select(o);
+                return this.COMPONENT.formitem.select(o);
             case "textarea":
-                return this.COMPONENT.form.textarea(o);
+                return this.COMPONENT.formitem.textarea(o);
             case "radio":
-                return this.COMPONENT.form.radio(o);
+                return this.COMPONENT.formitem.radio(o);
             case "checkbox":
-                return this.COMPONENT.form.checkbox(o);
+                return this.COMPONENT.formitem.checkbox(o);
             case "password":
-                return this.COMPONENT.form.password(o);
+                return this.COMPONENT.formitem.password(o);
             case "hidden":
-                return this.COMPONENT.form.hidden(o);
+                return this.COMPONENT.formitem.hidden(o);
             case "date":
-                return this.COMPONENT.form.date(o);
+                return this.COMPONENT.formitem.date(o);
             case "poup": // 弹出选择组件
-                return this.COMPONENT.form.poup(o);
+                return this.COMPONENT.formitem.poup(o);
             default: 
-                return this.COMPONENT.form.text(o);
+                return this.COMPONENT.formitem.text(o);
         }
     },
 

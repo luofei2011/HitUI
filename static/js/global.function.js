@@ -147,13 +147,13 @@ $(document).on('click', '.inv_ware_main tr.table-row-has-event', function(e){
 	formID = theform.attr('id');
 	//return the info
 	var info = hit.GLOBAL.function.getFormInfo($(this));
-	hit.COMPONENT.theform.fillFormInfo(formID, info);
+	hit.COMPONENT.form.fillFormInfo(formID, info);
 });
 
 $(document).on('click', '.inv_ware_main input[btnid="submit"]', function(){
 	theform = $(this).closest('.form-area');
 	formID = theform.attr('id');
-	var info = hit.COMPONENT.theform.getFormInfo(formID);
+	var info = hit.COMPONENT.form.getFormInfo(formID);
 
 	row = $('.inv_ware_main tr.table-row-has-event.gr-d-grid-row-selected');
 	var nodes = row.find('td.gr-d-grid-cell').not('.field-checkbox');

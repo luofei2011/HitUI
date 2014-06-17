@@ -30,24 +30,24 @@ var iForm= {
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
 	createFromConfigNow: function( formareaID, config ) {
-		html = hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		html = hit.COMPONENT.form.createFromConfig( config, formareaID );
 		$('.form-area#'+formareaID).empty().append(html);
 	},
 
 	appendForm2: function( node, config, formareaID ) {
-		node.append(hit.COMPONENT.theform.createFromConfig( config, formareaID ));
+		node.append(hit.COMPONENT.form.createFromConfig( config, formareaID ));
 	},
 
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
 	 * */
 	createFromConfig: function( formareaID, config ) {
-		return hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		return hit.COMPONENT.form.createFromConfig( config, formareaID );
 	},
 
 	loadFromConfig: function( config, node ) {
 		var formareaID = hit.PARAMETER.global.registerComponent('form', 'formarea');
-		html = hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		html = hit.COMPONENT.form.createFromConfig( config, formareaID );
 		node.append('<div class=form-area id=' + formareaID + '>' + html + '</div>');
 	},
 
@@ -98,15 +98,15 @@ var iForm= {
 	 * 建立与其他部件有链接的表单，部件设置参数根据数据库内容生成
 	 * */
 	createFromDB: function( dbConfig, formareaID ) {
-		//hit.COMPONENT.theform.createFromConfig( config, formareaID );
+		//hit.COMPONENT.form.createFromConfig( config, formareaID );
 	},
 
 	getFormInfo: function( formareaID ) {
-		return hit.COMPONENT.theform.getFormInfo( formareaID );
+		return hit.COMPONENT.form.getFormInfo( formareaID );
 	},
 
 	fillFormInfo: function( formareaID, data ) {
-		return hit.COMPONENT.theform.fillFormInfo( formareaID, data );
+		return hit.COMPONENT.form.fillFormInfo( formareaID, data );
 	},
 
 	setTarget: function( formID, targetID, targetFun ) {

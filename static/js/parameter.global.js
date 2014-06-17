@@ -126,9 +126,9 @@
 		//TODO:统一给每一个界面component增加comID做标识
 		//往global里注册组件，并分配comID
 		registerComponent: function( component, type ) {
-			id = type + '_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
+			id = component + '_' + (+new Date()) + '_' + Math.floor(Math.random() * 10);
 			var com = {
-				component: component,
+				type: type,
 				id: id,
 			};
 			this._saveRegInfo( com );
