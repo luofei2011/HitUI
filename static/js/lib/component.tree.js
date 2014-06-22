@@ -44,10 +44,10 @@ var treeDef = {
 		//--Children Node
 		var child_li = theTree.find('li[code=' + code + ']');
 		var prehtml = "";
-		for(var i=0; i<level; i++){
-			prehtml += "<div class='tree-indent'></div>";
-		}
-		prehtml += "<div class='tree-pre'></div>";
+		// for(var i=0; i<level; i++){
+		// 	prehtml += "<div class='tree-indent'></div>";
+		// }
+		// prehtml += "<div class='tree-pre'></div>";
 		//若存在此code，则更新内容
 		if ( child_li.length ) {
 			//TODO: here only root node will do it

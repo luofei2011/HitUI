@@ -13,6 +13,12 @@
 		 * */
 		config: {}, 
 
+		makeFromDataInNode : function( node, options ) {
+			tabID = hit.PARAMETER.global.registerComponent('tab','tab');
+			node.attr('id', tabID);
+			this.makeFromData( tabID , option );
+			return tabID;
+		},
 		/*
 		 * 根据设置配置tab
 		 * [Object] options { 

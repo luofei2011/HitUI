@@ -19,6 +19,7 @@ $(document).on('click', '.tabtitle-area>.tabtitle', function() {
 	return false;
 });
 
+// close the tab
 $(document).on('click', '.tabtitle .littletabxx', function() {
 	thetitle = $(this).parent('.tabtitle');
 	hit.COMPONENT.tab.removeTab(thetitle);

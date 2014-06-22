@@ -11,7 +11,12 @@ var iTree = {
 	 * */
 	config: {}, 
 
-
+	makeFromDBInNode : function( node, options ) {
+		var treeID = hit.PARAMETER.global.registerComponent('tree', 'treemenu');
+		node.attr('id', treeID);
+		this.makeFromDB( treeID, options );
+		return treeID;
+	},
 	/*
 	 * 构造树的数据 从数据库中获取
 	 * [Object] options 数据库的设置: {

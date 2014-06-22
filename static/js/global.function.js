@@ -1,16 +1,19 @@
 ;(function() {
-	var gFun = {
+	var globalFun = {
 		addition: {
 			tree2Tab_link:  function(tabID, treeInfo) {
+				//转换成tab组件的接口参数模式
 				tabInfo = {};
 				tabInfo.tabName = treeInfo.name;
 				tabInfo.id = treeInfo.code;
 				tabInfo.type = 'page';
 				field = treeInfo.field;
 				tabInfo.content = hit.CONFIG.bind[field][treeInfo.code];
+				//使用tab的添加tab接口
 				hit.INTERFACES.tab.addATab(tabID, tabInfo);
 			},
 			toTree_code: function(treeID, sourceInfo) {
+				//直接使用参数中的节点id
 				var code = sourceInfo.id;
 				hit.INTERFACES.tree.focusNodeByCode(treeID, code);
 			}
@@ -47,7 +50,7 @@
 		},
 
 			//return the info
-		getFormInfo: function( therow ){
+		getTableInfo: function( therow ){
 			nodes = therow.find('td.gr-d-grid-cell').not('.field-checkbox')
 			, info = {};
 			nodes.each(function(index, element){
@@ -59,15 +62,35 @@
 			})
 			console.log(info);
 			return info;
-		}
+		},
+
+		setTableInfo: function( row, info ) {
+			var nodes = row.find('td.gr-d-grid-cell').not('.field-checkbox');
+			nodes.each(function(index, element){
+				id = $(element).attr('id');
+				name = id.split('$')[2];
+		console.log(name);
+			console.log(info);
+		console.log(info[name]);
+				if (info[name] != null && typeof(info[name]) != undefined) {
+					console.log($(element));
+					if (info[name] != $(element).find('input').val()) {
+						$(element).find('.grid-cell-show').html(info[name]);
+						$(element).find('input').val(info[name]);
+						$(element).find('.edited-and-no-save').attr('style', 'display: block');
+						row.attr('isEdited', 'true');
+					}
+				}
+			})
+		},
 
 	};
 
 	if ( hit.GLOBAL ){
-		hit.GLOBAL.function = gFun;
+		hit.GLOBAL.function = globalFun;
 	} else {
 		hit.GLOBAL = {
-			function: gFun
+			function: globalFun
 		}
 	}
 
@@ -99,7 +122,7 @@ $(document).on('click', '.dept_define tr.table-row-has-event', function(e){
 	thetree = $('.dept_define .tree-area');
 	treeID = thetree.attr('id');
 	//select the tree
-	var info = hit.GLOBAL.function.getFormInfo($(this));
+	var info = hit.GLOBAL.function.getTableInfo($(this));
 	hit.COMPONENT.tree.focusNodeByCode( treeID, info.dept_id);
 });
 
@@ -135,45 +158,31 @@ $(document).on('click', '.dept_define span.hit-button-txt.gr-btn-iconOnly.gr-pag
 			op: 'select',
 			con: 'limit, 50;pager,false'
 		},
-		openNodes: []
+		openNodes: ['root']
 	};
-	options.openNodes.push('root');
 	hit.INTERFACES.tree.makeFromDB(treeID, options);
 });
 
+///////////// inv_warehouse 
 //reflect to the form
 $(document).on('click', '.inv_ware_main tr.table-row-has-event', function(e){
 	theform = $('.inv_ware_main .form-area');
 	formID = theform.attr('id');
 	//return the info
-	var info = hit.GLOBAL.function.getFormInfo($(this));
+	//获取表格数据
+	var info = hit.GLOBAL.function.getTableInfo($(this));
+	//加载到自由表单中
 	hit.COMPONENT.form.fillFormInfo(formID, info);
 });
 
+//click form's submit button to change the value of the table
 $(document).on('click', '.inv_ware_main input[btnid="submit"]', function(){
 	theform = $(this).closest('.form-area');
-	formID = theform.attr('id');
-	var info = hit.COMPONENT.form.getFormInfo(formID);
-
 	row = $('.inv_ware_main tr.table-row-has-event.gr-d-grid-row-selected');
-	var nodes = row.find('td.gr-d-grid-cell').not('.field-checkbox');
-	nodes.each(function(index, element){
-		id = $(element).attr('id');
-		name = id.split('$')[2];
-console.log(name);
-	console.log(info);
-console.log(info[name]);
-		if (info[name] != null && typeof(info[name]) != undefined) {
-			console.log($(element));
-			if (info[name] != $(element).find('input').val()) {
-				$(element).find('.grid-cell-show').html(info[name]);
-				$(element).find('input').val(info[name]);
-				$(element).find('.edited-and-no-save').attr('style', 'display: block');
-				row.attr('isEdited', 'true');
-			}
-		}
-	})
-
-	
+	formID = theform.attr('id');
+	//获取自由表单数据
+	var info = hit.COMPONENT.form.getFormInfo(formID);
+	//设置到表格中
+	hit.GLOBAL.function.setTableInfo(row, info);
 })
 

@@ -25,8 +25,8 @@ $(document).on('click', '.tree-area li', function() {
 				$(this).attr('select', 'Y');//.css('background-color', '#8ab');
 
 				info = hit.COMPONENT.tree.getInfoByNode( $(this) );
-				
 				hit.GLOBAL.function.offerInfo(thetree, info);
+				
 				hit.PARAMETER.global.sendInfo(thetree, info);
 			} else {								
 			//already been choosen

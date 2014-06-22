@@ -7,24 +7,24 @@
 //不乱加全局变量，嗯。
 var iForm= {
 
-	//create default form
-	create: function( formareaID ) {
-		html = "";
-		html += '<h1> Hi! It\'s me again! </h1>';
-		$('.form-area#'+formareaID).empty().append(html);
-	},
+	// //create default form
+	// create: function( formareaID ) {
+	// 	html = "";
+	// 	html += '<h1> Hi! It\'s me again! </h1>';
+	// 	$('.form-area#'+formareaID).empty().append(html);
+	// },
 
-	/*
-	 * create form by table configuration
-	 * */
-	createFromTable: function( con, formareaID ) {
-		html = "";
-		html += '<h1> Hi! me again! the table config is in the log</h1>';
-		console.log(formareaID);
-		console.log($('.form-area#'+formareaID).attr('id'));
-		console.log(con);
-		$('.form-area#'+formareaID).empty().append(html);
-	},
+	// /*
+	//  * create form by table configuration
+	//  * */
+	// createFromTable: function( con, formareaID ) {
+	// 	html = "";
+	// 	html += '<h1> Hi! me again! the table config is in the log</h1>';
+	// 	console.log(formareaID);
+	// 	console.log($('.form-area#'+formareaID).attr('id'));
+	// 	console.log(con);
+	// 	$('.form-area#'+formareaID).empty().append(html);
+	// },
 
 	/*
 	 * 建立与其他部件有链接的表单，部件设置参数放在config内
