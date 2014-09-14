@@ -2,6 +2,8 @@
 
 基于CI框架进行开发，类似MiniUI的组件系统。此项目为共同开发项目；参与者：luofei，freemen
 
+在线预览：http://mywebappdemo.sinaapp.com/graduation/
+
 #### 组件功能特点
 
 1. 基于配置的思想（主要）

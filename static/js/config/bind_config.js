@@ -21,10 +21,11 @@ hit.CONFIG.bind = {
 		'0302': 'load/frameset/order_check',
 		'0303': 'load/frameset/order_deal',
 		'0304': 'load/frameset/order_query',
-		'9901': 'load/elements/define_menu',
+		// '9901': 'load/elements/define_menu',
+				'9901': 'load/frameset/content',
 		'9904': 'load/elements/sys_auth',
 		'9902': 'load/frameset/role',
-		'9903': 'load/frameset/sys_user'
+		'9903': 'load/frameset/content'
 	},
 
 };

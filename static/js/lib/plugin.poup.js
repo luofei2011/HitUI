@@ -71,9 +71,6 @@ hit.PLUGIN.poup = {
 				pNode: pNode
 			});
 		} else if (type === 'page') {
-			// $('#' + _id).find('div.hit-panel-body').load(conf.url, function() {
-			// 	$('#' + _id).find('div.hit-panel-body').append(_this.createBtn());
-			// });
 			this.multi_select({
 				conf: conf,
 				tNode: $('#' + _id).find('div.hit-panel-body'),

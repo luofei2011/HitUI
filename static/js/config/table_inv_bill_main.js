@@ -66,7 +66,7 @@ hit.CONFIG.table_inv_bill_main = {
 	},
 	{
 		"label": "Bin_id",
-		"isFixed": false,
+		"isFixed": true,
 		"isOrdered": false,
 		"align": "center",
 		"multiply": false,
